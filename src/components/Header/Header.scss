@@ -1,0 +1,54 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+img {
+  width: 200px;
+  padding: 10px;
+}
+
+@media only screen and (min-width: 1200px) {
+  img {
+    width: 400px;
+    padding: 20px;
+  }
+}
+.login-buttons {
+  font-size: 5px;
+  button {
+    font-size: 15px;
+    margin: auto 2px;
+  }
+
+  @media only screen and (min-width: 600px) {
+    margin-left: auto;
+    margin-right: 10px;
+    button {
+      margin: 0 10px;
+      font-size: 20px;
+    }
+  }
+  @media only screen and (min-width: 1200px) {
+    button {
+      margin: 0 10px;
+      font-size: 30px;
+    }
+  }
+}
+
+button {
+  outline: none;
+  background-color: #8a0dff;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  @media only screen and (min-width: 1200px) {
+    font-size: 30px;
+    padding: 20px;
+    border-radius: 10px;
+  }
+}

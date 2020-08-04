@@ -1,21 +1,23 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAdjust } from '@fortawesome/free-solid-svg-icons';
+import logo from '../../images/logo.png';
+import './Header.scss';
 
 import Modal from 'react-modal';
 import LoginForm from '../LoginForm/LoginForm';
 import SignUpForm from '../SignUpForm/SignUpForm';
 
 export default function Header() {
-  const [loginIsOpen,setLoginOpen] = React.useState(false);
+  const [loginIsOpen, setLoginOpen] = React.useState(false);
   function openLogin() {
     setLoginOpen(true);
   }
-  function closeLogin(){
+  function closeLogin() {
     setLoginOpen(false);
   }
 
-  const [signUpIsOpen,setSignUpOpen] = React.useState(false);
+  const [signUpIsOpen, setSignUpOpen] = React.useState(false);
   function openSignUp() {
     setSignUpOpen(true);
   }
@@ -25,11 +27,10 @@ export default function Header() {
 
   return (
     <header>
-      <div className="logo">
-        <FontAwesomeIcon icon={faAdjust}></FontAwesomeIcon>
-        My Clientele
+      <div className='logo'>
+        <img src={logo} alt='my clientele logo'></img>
       </div>
-      <div>
+      <div className='login-buttons'>
         <button onClick={openLogin}>Login</button>
         <Modal isOpen={loginIsOpen} onRequestClose={closeLogin}>
           <LoginForm />
@@ -39,6 +40,7 @@ export default function Header() {
           <SignUpForm />
         </Modal>
       </div>
+      <div></div>
     </header>
   );
 }

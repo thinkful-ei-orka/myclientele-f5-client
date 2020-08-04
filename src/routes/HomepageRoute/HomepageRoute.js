@@ -1,11 +1,13 @@
 import React from 'react';
-
 import Header from '../../components/Header/Header';
 import Modal from 'react-modal';
+import './Homepage.scss';
+import map from '../../images/homepage/map.png';
+import counting from '../../images/homepage/counting-money.jpg';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
 
 export default function HomepageRoute() {
-  const [signUpIsOpen,setSignUpOpen] = React.useState(false);
+  const [signUpIsOpen, setSignUpOpen] = React.useState(false);
   function openSignUp() {
     setSignUpOpen(true);
   }
@@ -16,24 +18,37 @@ export default function HomepageRoute() {
   return (
     <>
       <Header />
-      <section>
-        <div className="wrapper">
+
+      <Modal isOpen={signUpIsOpen} onRequestClose={closeSignUp}>
+        <SignUpForm />
+      </Modal>
+      <section className='hero-banner'>
+        <div className='hero-text'>
           <button onClick={openSignUp}>Sign Up Now!</button>
-          <Modal isOpen={signUpIsOpen} onRequestClose={closeSignUp}>
-            <SignUpForm />
-          </Modal>
-          <p>Dolore Lorem incididunt dolore est sit aute consectetur cupidatat. Ex velit ipsum cillum tempor incididunt reprehenderit duis do occaecat minim mollit laboris consequat ad.</p>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae,
+            sequi, recusandae illo quo, nisi vel eveniet maxime deserunt
+            inventore totam esse? Porro molestiae recusandae consectetur quas
+            eaque voluptas ipsum totam.
+          </p>
         </div>
       </section>
+
       <section>
-        <div className="wrapper">
-          <div>
-            <img src="https://via.placeholder.com/200" alt="placeholder"></img>
-            <p>Tempor magna consectetur proident exercitation laboris. Incididunt mollit amet quis et reprehenderit. Ut eu est est ipsum do eiusmod cillum aliquip amet reprehenderit laboris laboris minim. In culpa quis elit reprehenderit et magna pariatur tempor anim elit excepteur laboris. Mollit aliqua ullamco consectetur eu nostrud magna reprehenderit dolore exercitation nisi tempor dolor.</p>
+        <div className='homepage-extrainfo'>
+          <div className='wrapper-left'>
+            <img src={counting}></img>
+            <p>
+              Start saving money by reducing missed leads and ensure correct
+              product ordering for all of your clients.
+            </p>
           </div>
-          <div>
-            <p>Tempor magna consectetur proident exercitation laboris. Incididunt mollit amet quis et reprehenderit. Ut eu est est ipsum do eiusmod cillum aliquip amet reprehenderit laboris laboris minim. In culpa quis elit reprehenderit et magna pariatur tempor anim elit excepteur laboris. Mollit aliqua ullamco consectetur eu nostrud magna reprehenderit dolore exercitation nisi tempor dolor.</p>
-            <img src="https://via.placeholder.com/200" alt="placeholder"></img>
+          <div className='wrapper-right'>
+            <p>
+              Integrated map and routing to ensure timely check-ins to each of
+              your clients.
+            </p>
+            <img src={map}></img>
           </div>
         </div>
       </section>
