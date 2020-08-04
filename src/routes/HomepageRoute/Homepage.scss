@@ -34,6 +34,58 @@ button {
   }
 }
 
-.wrapper {
+.wrapper-left {
+  width: 100%;
   display: flex;
+  text-align: center;
+  margin: 10px 0;
+  img {
+    width: 50%;
+  }
+}
+
+.wrapper-right {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  img {
+    width: 50%;
+  }
+}
+
+.homepage-extrainfo {
+  width: 100%;
+  margin: auto;
+}
+
+@media only screen and (min-width: 600px) {
+  .homepage-extrainfo {
+    width: 70%;
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .homepage-extrainfo {
+    font-size: 30px;
+  }
+}
+
+.wrapper-left {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  margin: 10px 0;
+  img {
+    width: 50%;
+  }
+}
+
+.wrapper-right {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  img {
+    width: 50%;
+  }
 }

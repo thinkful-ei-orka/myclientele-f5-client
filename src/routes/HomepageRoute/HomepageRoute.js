@@ -20,16 +20,13 @@ export default function HomepageRoute() {
       </section>
 
       <section>
-        <div className='wrapper'>
+        <div className='homepage-extrainfo'>
           <div className='wrapper-left'>
             <img src='https://via.placeholder.com/200'></img>
             <p>
               Tempor magna consectetur proident exercitation laboris. Incididunt
               mollit amet quis et reprehenderit. Ut eu est est ipsum do eiusmod
-              cillum aliquip amet reprehenderit laboris laboris minim. In culpa
-              quis elit reprehenderit et magna pariatur tempor anim elit
-              excepteur laboris. Mollit aliqua ullamco consectetur eu nostrud
-              magna reprehenderit dolore exercitation nisi tempor dolor.
+              cillum aliquip amet reprehenderit laboris
             </p>
           </div>
           <div className='wrapper-right'>
@@ -37,9 +34,6 @@ export default function HomepageRoute() {
               Tempor magna consectetur proident exercitation laboris. Incididunt
               mollit amet quis et reprehenderit. Ut eu est est ipsum do eiusmod
               cillum aliquip amet reprehenderit laboris laboris minim. In culpa
-              quis elit reprehenderit et magna pariatur tempor anim elit
-              excepteur laboris. Mollit aliqua ullamco consectetur eu nostrud
-              magna reprehenderit dolore exercitation nisi tempor dolor.
             </p>
             <img src='https://via.placeholder.com/200'></img>
           </div>
