@@ -21,16 +21,6 @@ export default function HomepageRoute() {
 
       <section>
         <div className='wrapper'>
-          <button>Sign Up Now!</button>
-          <p>
-            Dolore Lorem incididunt dolore est sit aute consectetur cupidatat.
-            Ex velit ipsum cillum tempor incididunt reprehenderit duis do
-            occaecat minim mollit laboris consequat ad.
-          </p>
-        </div>
-      </section>
-      <section>
-        <div className='wrapper'>
           <div>
             <img src='https://via.placeholder.com/200'></img>
             <p>
