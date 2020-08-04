@@ -10,14 +10,6 @@ export default function Header() {
         My Clientele
       </div>
       <div>
-        <button onClick={openModal}>Open Modal</button>
-        <Modal
-          isOpen={modalIsOpen}
-          onAfterOpen={afterOpenModal}
-          onRequestClose={closeModal}
-          style={customStyles}
-          contentLabel="Example Modal"
-        />
       </div>
     </header>
   );
