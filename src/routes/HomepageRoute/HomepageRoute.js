@@ -4,14 +4,27 @@ import Modal from 'react-modal';
 import './Homepage.scss';
 import map from '../../images/homepage/map.png';
 import counting from '../../images/homepage/counting-money.jpg';
+import SignUpForm from '../../components/SignUpForm/SignUpForm';
 
 export default function HomepageRoute() {
+  const [signUpIsOpen, setSignUpOpen] = React.useState(false);
+  function openSignUp() {
+    setSignUpOpen(true);
+  }
+  function closeSignUp() {
+    setSignUpOpen(true);
+  }
+
   return (
     <>
       <Header />
+
+      <Modal isOpen={signUpIsOpen} onRequestClose={closeSignUp}>
+        <SignUpForm />
+      </Modal>
       <section className='hero-banner'>
         <div className='hero-text'>
-          <button>Sign Up Now!</button>
+          <button onClick={openSignUp}>Sign Up Now!</button>
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae,
             sequi, recusandae illo quo, nisi vel eveniet maxime deserunt
