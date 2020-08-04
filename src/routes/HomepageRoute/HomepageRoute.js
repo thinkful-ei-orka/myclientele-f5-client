@@ -2,15 +2,15 @@ import React from 'react';
 
 import Header from '../../components/Header/Header';
 import Modal from 'react-modal';
-import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
+import SignUpForm from '../../components/SignUpForm/SignUpForm';
 
 export default function HomepageRoute() {
-  const [registrationIsOpen,setRegistrationOpen] = React.useState(false);
-  function openRegistration() {
-    setRegistrationOpen(true);
+  const [signUpIsOpen,setSignUpOpen] = React.useState(false);
+  function openSignUp() {
+    setSignUpOpen(true);
   }
-  function closeRegistration() {
-    setRegistrationOpen(true);
+  function closeSignUp() {
+    setSignUpOpen(true);
   }
 
   return (
@@ -18,9 +18,9 @@ export default function HomepageRoute() {
       <Header />
       <section>
         <div className="wrapper">
-          <button onClick={openRegistration}>Open Registration</button>
-          <Modal isOpen={registrationIsOpen} onRequestClose={closeRegistration}>
-            <RegistrationForm />
+          <button onClick={openSignUp}>Sign Up Now!</button>
+          <Modal isOpen={signUpIsOpen} onRequestClose={closeSignUp}>
+            <SignUpForm />
           </Modal>
           <p>Dolore Lorem incididunt dolore est sit aute consectetur cupidatat. Ex velit ipsum cillum tempor incididunt reprehenderit duis do occaecat minim mollit laboris consequat ad.</p>
         </div>

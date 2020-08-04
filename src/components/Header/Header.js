@@ -4,7 +4,7 @@ import { faAdjust } from '@fortawesome/free-solid-svg-icons';
 
 import Modal from 'react-modal';
 import LoginForm from '../LoginForm/LoginForm';
-import RegistrationForm from '../RegistrationForm/RegistrationForm';
+import SignUpForm from '../SignUpForm/SignUpForm';
 
 export default function Header() {
   const [loginIsOpen,setLoginOpen] = React.useState(false);
@@ -15,12 +15,12 @@ export default function Header() {
     setLoginOpen(false);
   }
 
-  const [registrationIsOpen,setRegistrationOpen] = React.useState(false);
-  function openRegistration() {
-    setRegistrationOpen(true);
+  const [signUpIsOpen,setSignUpOpen] = React.useState(false);
+  function openSignUp() {
+    setSignUpOpen(true);
   }
-  function closeRegistration() {
-    setRegistrationOpen(true);
+  function closeSignUp() {
+    setSignUpOpen(true);
   }
 
   return (
@@ -30,13 +30,13 @@ export default function Header() {
         My Clientele
       </div>
       <div>
-        <button onClick={openLogin}>Open Login</button>
+        <button onClick={openLogin}>Login</button>
         <Modal isOpen={loginIsOpen} onRequestClose={closeLogin}>
           <LoginForm />
         </Modal>
-        <button onClick={openRegistration}>Open Registration</button>
-        <Modal isOpen={registrationIsOpen} onRequestClose={closeRegistration}>
-          <RegistrationForm />
+        <button onClick={openSignUp}>Sign Up</button>
+        <Modal isOpen={signUpIsOpen} onRequestClose={closeSignUp}>
+          <SignUpForm />
         </Modal>
       </div>
     </header>
