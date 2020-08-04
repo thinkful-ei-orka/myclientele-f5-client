@@ -21,7 +21,7 @@ export default function HomepageRoute() {
 
       <section>
         <div className='wrapper'>
-          <div>
+          <div className='wrapper-left'>
             <img src='https://via.placeholder.com/200'></img>
             <p>
               Tempor magna consectetur proident exercitation laboris. Incididunt
@@ -32,7 +32,7 @@ export default function HomepageRoute() {
               magna reprehenderit dolore exercitation nisi tempor dolor.
             </p>
           </div>
-          <div>
+          <div className='wrapper-right'>
             <p>
               Tempor magna consectetur proident exercitation laboris. Incididunt
               mollit amet quis et reprehenderit. Ut eu est est ipsum do eiusmod
