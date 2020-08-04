@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import 'autoprefixer';
+import 'normalize.css';
+import './index.scss';
+import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter } from 'react-router-dom'
+import { UserProvider } from './contexts/UserContext'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <UserProvider>
+        <App />
+      </UserProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
