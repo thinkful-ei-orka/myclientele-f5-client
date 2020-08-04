@@ -15,14 +15,15 @@ export default class SignUpForm extends React.Component {
     this.setState({ loading: true })
     ev.preventDefault()
 
-    const { firstName, lastName, emailAddress, company, phoneNumber, username, password } = ev.target;
+    const { firstName, lastName, emailAddress, phoneNumber, companyName, companyAddress, username, password } = ev.target;
 
     AuthApiService.postUser({
       firstName: firstName.value,
       lastName: lastName.value,
       emailAddress: emailAddress.value,
-      company: company.value,
       phoneNumber: phoneNumber.value,
+      companyName: companyName.value,
+      companyAddress: companyAddress.value,
       username: username.value,
       password: password.value,
     })
@@ -30,8 +31,9 @@ export default class SignUpForm extends React.Component {
         firstName.value = '';
         lastName.value = '';
         emailAddress.value = '';
-        company.value = '';
         phoneNumber.value = '';
+        companyName.value = '';
+        companyAddress.value = '';
         username.value = '';
         password.value = '';
         // this.props.onRegistrationSuccess()
@@ -66,11 +68,14 @@ export default class SignUpForm extends React.Component {
           <label htmlFor="emailAddress">Email Address</label>
           <input type="text" id="emailAddress" name="emailAddress" required></input>
 
-          <label htmlFor="company">Company</label>
-          <input type="text" id="company" name="company" required></input>
-
           <label htmlFor="phoneNumber">Phone Number</label>
           <input type="text" id="phoneNumber" name="phoneNumber" required></input>
+
+          <label htmlFor="companyName">Company</label>
+          <input type="text" id="companyName" name="companyName" required></input>
+
+          <label htmlFor="companyAddress">Company Address</label>
+          <textarea id="companyAddress" name="companyAddress" required></textarea>
 
           <label htmlFor="username">Username</label>
           <input type="text" id="username" name="username" required></input>
