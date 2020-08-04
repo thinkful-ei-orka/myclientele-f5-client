@@ -2,6 +2,8 @@ import React from 'react';
 import Header from '../../components/Header/Header';
 import Modal from 'react-modal';
 import './Homepage.scss';
+import map from '../../images/homepage/map.png';
+import counting from '../../images/homepage/counting-money.jpg';
 
 export default function HomepageRoute() {
   return (
@@ -22,20 +24,18 @@ export default function HomepageRoute() {
       <section>
         <div className='homepage-extrainfo'>
           <div className='wrapper-left'>
-            <img src='https://via.placeholder.com/200'></img>
+            <img src={counting}></img>
             <p>
-              Tempor magna consectetur proident exercitation laboris. Incididunt
-              mollit amet quis et reprehenderit. Ut eu est est ipsum do eiusmod
-              cillum aliquip amet reprehenderit laboris
+              Start saving money by reducing missed leads and ensure correct
+              product ordering for all of your clients.
             </p>
           </div>
           <div className='wrapper-right'>
             <p>
-              Tempor magna consectetur proident exercitation laboris. Incididunt
-              mollit amet quis et reprehenderit. Ut eu est est ipsum do eiusmod
-              cillum aliquip amet reprehenderit laboris laboris minim. In culpa
+              Integrated map and routing to ensure timely check-ins to each of
+              your clients.
             </p>
-            <img src='https://via.placeholder.com/200'></img>
+            <img src={map}></img>
           </div>
         </div>
       </section>
