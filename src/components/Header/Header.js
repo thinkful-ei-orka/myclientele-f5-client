@@ -30,7 +30,7 @@ export default function Header() {
       <div className='logo'>
         <img src={logo} alt='my clientele logo'></img>
       </div>
-      <div>
+      <div className='login-buttons'>
         <button onClick={openLogin}>Login</button>
         <Modal isOpen={loginIsOpen} onRequestClose={closeLogin}>
           <LoginForm />
