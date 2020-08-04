@@ -15,7 +15,7 @@ export default class SignUpForm extends React.Component {
     this.setState({ loading: true })
     ev.preventDefault()
 
-    const { firstName, lastName, emailAddress, phoneNumber, companyName, companyAddress, username, password } = ev.target;
+    const { firstName, lastName, emailAddress, phoneNumber, companyName, companyAddress, user_name, password } = ev.target;
 
     AuthApiService.postUser({
       firstName: firstName.value,
@@ -24,7 +24,7 @@ export default class SignUpForm extends React.Component {
       phoneNumber: phoneNumber.value,
       companyName: companyName.value,
       companyAddress: companyAddress.value,
-      username: username.value,
+      user_name: user_name.value,
       password: password.value,
     })
       .then(user => {
@@ -34,7 +34,7 @@ export default class SignUpForm extends React.Component {
         phoneNumber.value = '';
         companyName.value = '';
         companyAddress.value = '';
-        username.value = '';
+        user_name.value = '';
         password.value = '';
         // this.props.onRegistrationSuccess()
         this.props.onSignUpSuccess()
@@ -77,8 +77,8 @@ export default class SignUpForm extends React.Component {
           <label htmlFor="companyAddress">Company Address</label>
           <textarea id="companyAddress" name="companyAddress" required></textarea>
 
-          <label htmlFor="username">Username</label>
-          <input type="text" id="username" name="username" required></input>
+          <label htmlFor="user_name">Username</label>
+          <input type="text" id="user_name" name="user_name" required></input>
 
           <label htmlFor="password">Password</label>
           <input type="password" id="password" name="password" required></input>
