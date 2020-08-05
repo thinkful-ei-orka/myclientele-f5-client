@@ -3,10 +3,11 @@ import logo from '../../images/logo.png';
 import './Header.scss';
 
 import Modal from 'react-modal';
+import { withRouter } from 'react-router-dom';
 import LoginForm from '../LoginForm/LoginForm';
 import SignUpForm from '../SignUpForm/SignUpForm';
 
-export default class Header extends React.Component {
+class Header extends React.Component {
   state = {
     loginIsOpen: false,
     signUpIsOpen: false,
@@ -18,6 +19,16 @@ export default class Header extends React.Component {
 
   setSignUpOpen = (bool) => {
     this.setState({signUpIsOpen: bool});
+  }
+
+  componentDidMount() {
+    Modal.setAppElement('.App');
+    if (this.props.location.pathname === '/login') {
+      this.setLoginOpen(true);
+    }
+    if (this.props.location.pathname === '/sign-up') {
+      this.setSignUpOpen(true);
+    }
   }
 
   render() {
@@ -41,3 +52,5 @@ export default class Header extends React.Component {
     );
   }
 }
+
+export default withRouter(Header);
