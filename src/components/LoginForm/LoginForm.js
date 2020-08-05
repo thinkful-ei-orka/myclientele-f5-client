@@ -12,9 +12,9 @@ class LoginForm extends React.Component {
 
   handleSubmit = ev => {
     ev.preventDefault()
-    const { user_name, password } = ev.target
-
     this.setState({ error: null, loading: true })
+
+    const { user_name, password } = ev.target
 
     AuthApiService.postLogin({
       user_name: user_name.value,

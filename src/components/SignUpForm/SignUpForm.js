@@ -1,43 +1,43 @@
 import React from 'react';
 import AuthApiService from '../../services/auth-api-service';
+import UserContext from '../../contexts/UserContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 export default class SignUpForm extends React.Component {
-  static defaultProps = {
-    // onRegistrationSuccess: () => { } // not sure what the naming convention will be
-    onSignUpSuccess: () => { }
-  }
+  static contextType = UserContext
 
   state = { error: null, loading: false }
 
   handleSubmit = ev => {
-    this.setState({ loading: true })
     ev.preventDefault()
+    this.setState({ error: null, loading: true })
 
-    const { firstName, lastName, emailAddress, phoneNumber, companyName, companyAddress, user_name, password } = ev.target;
+    const { first_name, last_name, user_name, password, company_name, company_location, email, phone_number } = ev.target;
+    const name = `${first_name.value} ${last_name.value}`;
 
     AuthApiService.postUser({
-      firstName: firstName.value,
-      lastName: lastName.value,
-      emailAddress: emailAddress.value,
-      phoneNumber: phoneNumber.value,
-      companyName: companyName.value,
-      companyAddress: companyAddress.value,
+      name: name,
       user_name: user_name.value,
       password: password.value,
+      company_name: company_name.value,
+      company_location: company_location.value,
+      // boss_id: ??,
+      admin: true,
+      email: email.value,
+      // phone_number: phone_number.value,
     })
       .then(user => {
-        firstName.value = '';
-        lastName.value = '';
-        emailAddress.value = '';
-        phoneNumber.value = '';
-        companyName.value = '';
-        companyAddress.value = '';
+        first_name.value = '';
+        last_name.value = '';
+        email.value = '';
+        phone_number.value = '';
+        company_name.value = '';
+        company_location.value = '';
         user_name.value = '';
         password.value = '';
-        // this.props.onRegistrationSuccess()
-        this.props.onSignUpSuccess()
+
+        console.log('signed up!')
       })
       .catch(res => {
         this.setState({ error: res.error, loading: false })
@@ -59,23 +59,23 @@ export default class SignUpForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <div role='alert'>{error && <p>{error}</p>}</div>
 
-          <label htmlFor="firstName">First Name</label>
-          <input type="text" ref={this.firstInput} id="firstName" name="firstName" required></input>
+          <label htmlFor="first_name">First Name</label>
+          <input type="text" ref={this.firstInput} id="first_name" name="first_name" required></input>
 
-          <label htmlFor="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" required></input>
+          <label htmlFor="last_name">Last Name</label>
+          <input type="text" id="last_name" name="last_name" required></input>
 
-          <label htmlFor="emailAddress">Email Address</label>
-          <input type="text" id="emailAddress" name="emailAddress" required></input>
+          <label htmlFor="email">Email Address</label>
+          <input type="text" id="email" name="email" required></input>
 
-          <label htmlFor="phoneNumber">Phone Number</label>
-          <input type="text" id="phoneNumber" name="phoneNumber" required></input>
+          <label htmlFor="phone_number">Phone Number</label>
+          <input type="text" id="phone_number" name="phone_number" required></input>
 
-          <label htmlFor="companyName">Company</label>
-          <input type="text" id="companyName" name="companyName" required></input>
+          <label htmlFor="company_name">Company</label>
+          <input type="text" id="company_name" name="company_name" required></input>
 
-          <label htmlFor="companyAddress">Company Address</label>
-          <textarea id="companyAddress" name="companyAddress" required></textarea>
+          <label htmlFor="company_location">Company Address</label>
+          <textarea id="company_location" name="company_location" required></textarea>
 
           <label htmlFor="user_name">Username</label>
           <input type="text" id="user_name" name="user_name" required></input>
