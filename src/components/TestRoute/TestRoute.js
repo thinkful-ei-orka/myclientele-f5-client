@@ -2,6 +2,9 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 import PrivateContext from '../../contexts/PrivateContext';
+import ClientApiService from '../../services/client-api-service';
+import ReportsApiService from '../../services/reports-api-service';
+import CompaniesApiService from '../../services/companies-api-service';
 
 export default class TestRoute extends React.Component {
   // This state is set to the private context
@@ -12,7 +15,25 @@ export default class TestRoute extends React.Component {
     // user: null, // should this be here? it would include things like name, username, company name, boss id, email
   }
 
+  fetchContext = () => {
+    this.fetchClients();
+    this.fetchReports();
+    // this.fetchCompanies();
+    // what else?
+  }
 
+  fetchClients = () => {
+    ClientApiService.getAllClients()
+      .then(result => {
+        this.setState({ clients: result });
+      })
+  }
+
+  fetchReports = () => {
+
+  }
+
+  // what other fetches?
 
   updateContext = (contextUpdate) => {
     let newContext = {...this.state, ...contextUpdate};
@@ -20,8 +41,15 @@ export default class TestRoute extends React.Component {
     this.setState(newContext);
   }
 
+  onComponentMount() {
+    // this.fetchContext();
+  }
+
   render() {
     let contextValue = this.state;
+    contextValue.fetchContext = this.fetchContext;
+    contextValue.fetchClients = this.fetchClients;
+    contextValue.fetchReports = this.fetchReports;
     contextValue.updateContext = this.updateContext;
 
     const Component = this.props.component;
