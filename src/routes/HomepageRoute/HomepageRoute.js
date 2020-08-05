@@ -6,52 +6,53 @@ import map from '../../images/homepage/map.png';
 import counting from '../../images/homepage/counting-money.jpg';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
 
-export default function HomepageRoute() {
-  const [signUpIsOpen, setSignUpOpen] = React.useState(false);
-  function openSignUp() {
-    setSignUpOpen(true);
-  }
-  function closeSignUp() {
-    setSignUpOpen(true);
+export default class HomepageRoute extends React.Component {
+  state = {
+    signUpIsOpen: false,
   }
 
-  return (
-    <>
-      <Header />
+  setSignUpOpen = (bool) => {
+    this.setState({signUpIsOpen: bool});
+  }
 
-      <Modal isOpen={signUpIsOpen} onRequestClose={closeSignUp}>
-        <SignUpForm />
-      </Modal>
-      <section className='hero-banner'>
-        <div className='hero-text'>
-          <button onClick={openSignUp}>Sign Up Now!</button>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae,
-            sequi, recusandae illo quo, nisi vel eveniet maxime deserunt
-            inventore totam esse? Porro molestiae recusandae consectetur quas
-            eaque voluptas ipsum totam.
-          </p>
-        </div>
-      </section>
-
-      <section>
-        <div className='homepage-extrainfo'>
-          <div className='wrapper-left'>
-            <img src={counting}></img>
+  render() {
+    return (
+      <>
+        <Header />
+        <Modal isOpen={this.state.signUpIsOpen} onRequestClose={e => this.setSignUpOpen(false)}>
+          <SignUpForm closeModal={e => this.setSignUpOpen(false)} />
+        </Modal>
+        <section className='hero-banner'>
+          <div className='hero-text'>
+            <button onClick={e => this.setSignUpOpen(true)}>Sign Up Now!</button>
             <p>
-              Start saving money by reducing missed leads and ensure correct
-              product ordering for all of your clients.
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae,
+              sequi, recusandae illo quo, nisi vel eveniet maxime deserunt
+              inventore totam esse? Porro molestiae recusandae consectetur quas
+              eaque voluptas ipsum totam.
             </p>
           </div>
-          <div className='wrapper-right'>
-            <p>
-              Integrated map and routing to ensure timely check-ins to each of
-              your clients.
-            </p>
-            <img src={map}></img>
+        </section>
+
+        <section>
+          <div className='homepage-extrainfo'>
+            <div className='wrapper-left'>
+              <img src={counting} alt="Saving money"></img>
+              <p>
+                Start saving money by reducing missed leads and ensure correct
+                product ordering for all of your clients.
+              </p>
+            </div>
+            <div className='wrapper-right'>
+              <p>
+                Integrated map and routing to ensure timely check-ins to each of
+                your clients.
+              </p>
+              <img src={map} alt="Map check-ins"></img>
+            </div>
           </div>
-        </div>
-      </section>
-    </>
-  );
+        </section>
+      </>
+    );
+  }
 }

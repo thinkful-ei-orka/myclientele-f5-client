@@ -1,6 +1,4 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAdjust } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../images/logo.png';
 import './Header.scss';
 
@@ -8,39 +6,38 @@ import Modal from 'react-modal';
 import LoginForm from '../LoginForm/LoginForm';
 import SignUpForm from '../SignUpForm/SignUpForm';
 
-export default function Header() {
-  const [loginIsOpen, setLoginOpen] = React.useState(false);
-  function openLogin() {
-    setLoginOpen(true);
-  }
-  function closeLogin() {
-    setLoginOpen(false);
+export default class Header extends React.Component {
+  state = {
+    loginIsOpen: false,
+    signUpIsOpen: false,
   }
 
-  const [signUpIsOpen, setSignUpOpen] = React.useState(false);
-  function openSignUp() {
-    setSignUpOpen(true);
-  }
-  function closeSignUp() {
-    setSignUpOpen(true);
+  setLoginOpen = (bool) => {
+    this.setState({loginIsOpen: bool});
   }
 
-  return (
-    <header>
-      <div className='logo'>
-        <img src={logo} alt='my clientele logo'></img>
-      </div>
-      <div className='login-buttons'>
-        <button onClick={openLogin}>Login</button>
-        <Modal isOpen={loginIsOpen} onRequestClose={closeLogin}>
-          <LoginForm />
-        </Modal>
-        <button onClick={openSignUp}>Sign Up</button>
-        <Modal isOpen={signUpIsOpen} onRequestClose={closeSignUp}>
-          <SignUpForm />
-        </Modal>
-      </div>
-      <div></div>
-    </header>
-  );
+  setSignUpOpen = (bool) => {
+    this.setState({signUpIsOpen: bool});
+  }
+
+  render() {
+    return (
+      <header>
+        <div className='logo'>
+          <img src={logo} alt='my clientele logo'></img>
+        </div>
+        <div className='login-buttons'>
+          <button onClick={e => this.setLoginOpen(true)}>Login</button>
+          <Modal isOpen={this.state.loginIsOpen} onRequestClose={e => this.setLoginOpen(false)}>
+            <LoginForm closeModal={e => this.setLoginOpen(false)} />
+          </Modal>
+          <button onClick={e => this.setSignUpOpen(true)}>Sign Up</button>
+          <Modal isOpen={this.state.signUpIsOpen} onRequestClose={e => this.setSignUpOpen(false)}>
+            <SignUpForm closeModal={e => this.setSignUpOpen(false)} />
+          </Modal>
+        </div>
+        <div></div>
+      </header>
+    );
+  }
 }

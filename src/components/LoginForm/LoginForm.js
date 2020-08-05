@@ -40,6 +40,8 @@ class LoginForm extends React.Component {
     const { error } = this.state
     const loading = this.state.loading;
 
+    console.log(this.props);
+
     return (
       <div>
         <h2>Login</h2>
@@ -54,6 +56,7 @@ class LoginForm extends React.Component {
 
           {!loading && <button type="submit">Login</button>}
           {loading && <button type="submit" disabled><FontAwesomeIcon icon={faSpinner}></FontAwesomeIcon></button>}
+          <button onClick={this.props.closeModal}>Cancel</button>
         </form>
       </div>
     );
