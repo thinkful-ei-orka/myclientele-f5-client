@@ -5,18 +5,20 @@ import './App.scss';
 import HomepageRoute from '../../routes/HomepageRoute/HomepageRoute';
 import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
 
+import TestRoute from '../TestRoute/TestRoute';
+
 export default function App() {
   return (
     <div className="App">
-      <Switch>
+      {/* <Switch>
         <Route path="/" exact component={HomepageRoute} />
         <Route path="/schedule" component={ClientsRoute} />
-      </Switch>
-
-      {/* <Switch>
-        <TestRoute path={'/'} component={HomepageRoute} />
-        <TestRoute path={'/schedule'} component={ClientsRoute} />
       </Switch> */}
+
+      <Switch>
+        <TestRoute path={'/'} exact component={HomepageRoute} />
+        <TestRoute path={'/schedule'} component={ClientsRoute} />
+      </Switch>
     </div>
   );
 }
