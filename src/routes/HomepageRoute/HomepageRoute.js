@@ -15,6 +15,10 @@ export default class HomepageRoute extends React.Component {
     this.setState({signUpIsOpen: bool});
   }
 
+  componentDidMount() {
+    Modal.setAppElement('.App');
+  }
+
   render() {
     return (
       <>

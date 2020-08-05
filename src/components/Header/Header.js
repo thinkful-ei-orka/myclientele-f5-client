@@ -22,6 +22,7 @@ class Header extends React.Component {
   }
 
   componentDidMount() {
+    Modal.setAppElement('.App');
     if (this.props.location.pathname === '/login') {
       this.setLoginOpen(true);
     }
