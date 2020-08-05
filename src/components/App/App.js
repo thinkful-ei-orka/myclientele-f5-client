@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import './App.scss';
 
 import { UserProvider } from '../../contexts/UserContext'
@@ -61,9 +61,10 @@ export default class App extends React.Component {
         <UserProvider>
           <Switch>
             <PublicRoute path="/" exact component={HomepageRoute} />
+            <PublicRoute path="/login" exact component={HomepageRoute} />
+            <PublicRoute path="/sign-up" exact component={HomepageRoute} />
             <PrivateContext.Provider value={contextValue}>
               <PrivateRoute path="/" exact component={ClientsRoute} />
-
               <PrivateRoute path="/schedule" component={ClientsRoute} />
             </PrivateContext.Provider>
           </Switch>

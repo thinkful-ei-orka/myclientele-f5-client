@@ -1,10 +1,11 @@
 import React from 'react';
 import AuthApiService from '../../services/auth-api-service';
 import UserContext from '../../contexts/UserContext'
+import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-export default class SignUpForm extends React.Component {
+class SignUpForm extends React.Component {
   static contextType = UserContext
 
   state = { error: null, loading: false }
@@ -27,7 +28,7 @@ export default class SignUpForm extends React.Component {
       email: email.value,
       // phone_number: phone_number.value,
     })
-      .then(user => {
+      .then(res => {
         first_name.value = '';
         last_name.value = '';
         email.value = '';
@@ -37,7 +38,8 @@ export default class SignUpForm extends React.Component {
         user_name.value = '';
         password.value = '';
 
-        console.log('signed up!')
+        this.context.processLogin(res.authToken)
+        this.props.history.push('/login')
       })
       .catch(res => {
         this.setState({ error: res.error, loading: false })
@@ -91,3 +93,5 @@ export default class SignUpForm extends React.Component {
     );
   }
 }
+
+export default withRouter(SignUpForm);
