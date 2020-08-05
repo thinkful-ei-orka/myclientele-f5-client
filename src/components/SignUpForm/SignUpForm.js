@@ -25,8 +25,9 @@ export default class SignUpForm extends React.Component {
       // boss_id: ??,
       admin: true,
       email: email.value,
-      // phone_number: phone_number.value,
+      phone_number: phone_number.value,
     })
+      
       .then(user => {
         first_name.value = '';
         last_name.value = '';
