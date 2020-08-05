@@ -2,8 +2,6 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.scss';
 
-import TestRoute from '../TestRoute/TestRoute';
-
 import HomepageRoute from '../../routes/HomepageRoute/HomepageRoute';
 import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
 
