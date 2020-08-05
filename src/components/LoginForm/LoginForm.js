@@ -56,7 +56,7 @@ class LoginForm extends React.Component {
 
           {!loading && <button type="submit">Login</button>}
           {loading && <button type="submit" disabled><FontAwesomeIcon icon={faSpinner}></FontAwesomeIcon></button>}
-          <button onClick={this.props.closeModal}>Cancel</button>
+          <button className="outline" onClick={this.props.closeModal}>Cancel</button>
         </form>
       </div>
     );
