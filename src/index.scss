@@ -53,11 +53,15 @@ button, .btn {
   border: 2px solid $purple;
   &:hover {
     background: $dark-purple;
+    border-color: $dark-purple;
   }
   &.outline {
     background: #fff;
     color: $purple;
     border: 2px solid $purple;
+    &:hover {
+      background: $lightest-gray;
+    }
   }
 
   &.secondary {
@@ -65,11 +69,32 @@ button, .btn {
     border: 2px solid $green;
     &:hover {
       background: $dark-green;
+      border-color: $dark-green;
     }
     &.outline {
       background: #fff;
       color: $green;
       border: 2px solid $green;
+      &:hover {
+        background: $lightest-gray;
+      }
+    }
+  }
+
+  &.tertiary {
+    background: $red;
+    border: 2px solid $red;
+    &:hover {
+      background: $dark-red;
+      border-color: $dark-red;
+    }
+    &.outline {
+      background: #fff;
+      color: $red;
+      border: 2px solid $red;
+      &:hover {
+        background: $lightest-gray;
+      }
     }
   }
 
