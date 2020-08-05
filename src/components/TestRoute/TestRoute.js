@@ -41,6 +41,9 @@ export default class TestRoute extends React.Component {
     this.setState(newContext);
   }
 
+  // do we want this here?
+  // if this is here, the app will fetch data on every private route reload
+  // otherwise, we can implement it on the individual routes
   onComponentMount() {
     // this.fetchContext();
   }
