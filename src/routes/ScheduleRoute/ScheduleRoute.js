@@ -2,6 +2,7 @@ import React from 'react';
 import ScheduleDropDown from '../../components/ScheduleView/ScheduleDropDown/ScheduleDropDown';
 import ClientCard from '../../components/ClientCard/ClientCard';
 import PrivateContext from '../../contexts/PrivateContext';
+import './scheduleroute.css';
 
 class Schedule extends React.Component {
   static contextType = PrivateContext;
@@ -28,12 +29,12 @@ class Schedule extends React.Component {
     }
 
     return (
-      <>
+      <div className='schedule-page'>
         <ScheduleDropDown />
         {this.context.clients.map((store) => (
           <ClientCard data={store} key={store.company_id} />
         ))}
-      </>
+      </div>
     );
   }
 }

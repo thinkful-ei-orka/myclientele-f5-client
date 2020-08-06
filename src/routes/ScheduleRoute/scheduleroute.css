@@ -1,0 +1,21 @@
+.schedule-drop-down {
+  width: 100%;
+  border: 1px solid grey;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.schedule-card {
+  display: flex;
+  flex-direction: row;
+}
+.logo img {
+  width: 70px;
+}
+.information-area {
+  text-transform: capitalize;
+}
+
+.is-closed-dot {
+  width: 10px;
+}
