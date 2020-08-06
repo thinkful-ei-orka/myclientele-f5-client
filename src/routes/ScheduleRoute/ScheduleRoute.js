@@ -2,7 +2,7 @@ import React from 'react';
 import ScheduleDropDown from '../../components/ScheduleView/ScheduleDropDown/ScheduleDropDown';
 import ClientCard from '../../components/ClientCard/ClientCard';
 import PrivateContext from '../../contexts/PrivateContext';
-import './scheduleroute.css';
+import './scheduleroute.scss';
 
 class Schedule extends React.Component {
   static contextType = PrivateContext;

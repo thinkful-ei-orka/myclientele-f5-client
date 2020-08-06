@@ -1,0 +1,82 @@
+@import '../../index.scss';
+
+.schedule-drop-down {
+  width: 100%;
+  border: 1px solid grey;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.schedule-card {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: auto;
+  border-top: 1px solid grey;
+  height: 150px;
+  justify-content: space-between;
+}
+.company-logo img {
+  width: 150px;
+}
+.information-area * {
+  padding: 5px;
+  margin: 0 auto;
+}
+
+.information-area {
+  height: 100%;
+  width: 100%;
+
+  text-transform: capitalize;
+
+  padding: 5px;
+}
+.location {
+  font-size: 1.2rem;
+}
+
+.button-area {
+  padding: none;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  height: 100%;
+  button {
+    padding: none;
+    height: 100%;
+    border: none;
+    background-color: $purple;
+  }
+  img {
+    padding: none;
+    width: 30px;
+    color: white;
+  }
+}
+
+.client-hours::before {
+  content: '●';
+  font-size: 2rem;
+}
+
+.open::before {
+  color: green;
+}
+
+.closed::before {
+  color: red;
+}
+.client-hours {
+  font-size: 20px;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

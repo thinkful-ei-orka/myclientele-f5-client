@@ -1,19 +1,28 @@
 import React from 'react';
 import AuthApiService from '../../services/auth-api-service';
-import UserContext from '../../contexts/UserContext'
+import UserContext from '../../contexts/UserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 export default class SignUpForm extends React.Component {
-  static contextType = UserContext
+  static contextType = UserContext;
 
-  state = { error: null, loading: false }
+  state = { error: null, loading: false };
 
-  handleSubmit = ev => {
-    ev.preventDefault()
-    this.setState({ error: null, loading: true })
+  handleSubmit = (ev) => {
+    ev.preventDefault();
+    this.setState({ error: null, loading: true });
 
-    const { first_name, last_name, user_name, password, company_name, company_location, email, phone_number } = ev.target;
+    const {
+      first_name,
+      last_name,
+      user_name,
+      password,
+      company_name,
+      company_location,
+      email,
+      phone_number,
+    } = ev.target;
     const name = `${first_name.value} ${last_name.value}`;
 
     AuthApiService.postUser({
@@ -27,7 +36,7 @@ export default class SignUpForm extends React.Component {
       email: email.value,
       // phone_number: phone_number.value,
     })
-      .then(user => {
+      .then((user) => {
         first_name.value = '';
         last_name.value = '';
         email.value = '';
@@ -37,20 +46,20 @@ export default class SignUpForm extends React.Component {
         user_name.value = '';
         password.value = '';
 
-        console.log('signed up!')
+        console.log('signed up!');
       })
-      .catch(res => {
-        this.setState({ error: res.error, loading: false })
-      })
-  }
+      .catch((res) => {
+        this.setState({ error: res.error, loading: false });
+      });
+  };
 
-  firstInput = React.createRef()
+  firstInput = React.createRef();
   componentDidMount() {
-    this.firstInput.current.focus()
+    this.firstInput.current.focus();
   }
 
   render() {
-    const { error } = this.state
+    const { error } = this.state;
     const loading = this.state.loading;
 
     return (
@@ -59,33 +68,59 @@ export default class SignUpForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <div role='alert'>{error && <p>{error}</p>}</div>
 
-          <label htmlFor="first_name">First Name</label>
-          <input type="text" ref={this.firstInput} id="first_name" name="first_name" required></input>
+          <label htmlFor='first_name'>First Name</label>
+          <input
+            type='text'
+            ref={this.firstInput}
+            id='first_name'
+            name='first_name'
+            required></input>
 
-          <label htmlFor="last_name">Last Name</label>
-          <input type="text" id="last_name" name="last_name" required></input>
+          <label htmlFor='last_name'>Last Name</label>
+          <input type='text' id='last_name' name='last_name' required></input>
 
-          <label htmlFor="email">Email Address</label>
-          <input type="text" id="email" name="email" required></input>
+          <label htmlFor='email'>Email Address</label>
+          <input type='text' id='email' name='email' required></input>
 
-          <label htmlFor="phone_number">Phone Number</label>
-          <input type="text" id="phone_number" name="phone_number" required></input>
+          <label htmlFor='phone_number'>Phone Number</label>
+          <input
+            type='text'
+            id='phone_number'
+            name='phone_number'
+            required></input>
 
-          <label htmlFor="company_name">Company</label>
-          <input type="text" id="company_name" name="company_name" required></input>
+          <label htmlFor='company_name'>Company</label>
+          <input
+            type='text'
+            id='company_name'
+            name='company_name'
+            required></input>
 
-          <label htmlFor="company_location">Company Address</label>
-          <textarea id="company_location" name="company_location" required></textarea>
+          <label htmlFor='company_location'>Company Address</label>
+          <textarea
+            id='company_location'
+            name='company_location'
+            required></textarea>
 
-          <label htmlFor="user_name">Username</label>
-          <input type="text" id="user_name" name="user_name" required></input>
+          <label htmlFor='user_name'>Username</label>
+          <input type='text' id='user_name' name='user_name' required></input>
 
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" name="password" required></input>
+          <label htmlFor='password'>Password</label>
+          <input type='password' id='password' name='password' required></input>
 
-          {!loading && <button type="submit">Sign Up</button>}
-          {loading && <button type="submit" disabled><FontAwesomeIcon icon={faSpinner}></FontAwesomeIcon></button>}
-          <button className="outline" onClick={this.props.closeModal}>Cancel</button>
+          {!loading && (
+            <button className='btn' type='submit'>
+              Sign Up
+            </button>
+          )}
+          {loading && (
+            <button className='btn' type='submit' disabled>
+              <FontAwesomeIcon icon={faSpinner}></FontAwesomeIcon>
+            </button>
+          )}
+          <button className='outline btn' onClick={this.props.closeModal}>
+            Cancel
+          </button>
         </form>
       </div>
     );
