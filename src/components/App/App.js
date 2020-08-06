@@ -13,6 +13,7 @@ import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 import HomepageRoute from '../../routes/HomepageRoute/HomepageRoute';
 import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
+import AddClientForm from '../AddClientForm/AddClientForm';
 
 export default class App extends React.Component {
   // This state is set to the private context
@@ -65,6 +66,7 @@ export default class App extends React.Component {
             <PublicRoute path="/sign-up" exact component={HomepageRoute} />
             <PrivateContext.Provider value={contextValue}>
               <PrivateRoute path="/" exact component={ClientsRoute} />
+            <PublicRoute exact path='/form' component={AddClientForm} />
               <PrivateRoute path="/schedule" component={ClientsRoute} />
             </PrivateContext.Provider>
           </Switch>
