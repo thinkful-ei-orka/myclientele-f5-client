@@ -25,6 +25,7 @@ export class UserProvider extends Component {
     if (jwtPayload)
       state.user = {
         id: jwtPayload.user_id,
+        company_id: jwtPayload.company_id,
         name: jwtPayload.name,
         username: jwtPayload.sub,
       }
@@ -65,6 +66,7 @@ export class UserProvider extends Component {
     const jwtPayload = TokenService.parseAuthToken()
     this.setUser({
       id: jwtPayload.user_id,
+      company_id: jwtPayload.company_id,
       name: jwtPayload.name,
       username: jwtPayload.sub,
     })
@@ -111,6 +113,7 @@ export class UserProvider extends Component {
       processLogin: this.processLogin,
       processLogout: this.processLogout,
     }
+
     return (
       <UserContext.Provider value={value}>
         {this.props.children}
