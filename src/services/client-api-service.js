@@ -14,7 +14,10 @@ const ClientApiService = {
         : res.json()
     )
   },
-  addClient(client) { // break this down into variables later
+  addClient(name, location, day_of_week, hours_of_operation, currently_closed, notes, general_manager) {
+    // note: sales_rep_id and company_id are not set by the user
+    const client = { name, location, day_of_week, hours_of_operation, currently_closed, notes, general_manager };
+
     return fetch(`${config.API_ENDPOINT}/clients`, {
       method: 'POST',
       headers: {
@@ -41,7 +44,10 @@ const ClientApiService = {
         : res.json()
     )
   },
-  patchClient(client_id, client) { // break this down into variables later
+  updateClient(client_id, name, location, day_of_week, hours_of_operation, currently_closed, notes, general_manager) {
+    // note: sales_rep_id and company_id will not be changed by the user
+    const client = { name, location, day_of_week, hours_of_operation, currently_closed, notes, general_manager };
+
     return fetch(`${config.API_ENDPOINT}/clients/${client_id}`, {
       method: 'PATCH',
       headers: {
