@@ -1,9 +1,9 @@
 import React from 'react';
 import AuthApiService from '../../services/auth-api-service'
 import UserContext from '../../contexts/UserContext'
+import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { withRouter } from 'react-router-dom';
 
 class LoginForm extends React.Component {
   static contextType = UserContext
@@ -23,8 +23,9 @@ class LoginForm extends React.Component {
       .then(res => {
         user_name.value = ''
         password.value = ''
+
         this.context.processLogin(res.authToken)
-        this.props.history.push('/schedule')
+        this.props.history.push('/')
       })
       .catch(res => {
         this.setState({ error: res.error, loading: false })
@@ -39,8 +40,6 @@ class LoginForm extends React.Component {
   render() {
     const { error } = this.state
     const loading = this.state.loading;
-
-    console.log(this.props);
 
     return (
       <div>
