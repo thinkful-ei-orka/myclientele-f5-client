@@ -1,8 +1,6 @@
 import TokenService from './token-service';
 import config from '../config';
 
-import UserContext from '../contexts/UserContext';
-
 const CompaniesApiService = {
   getCompany(company_id) {
     return fetch(`${config.API_ENDPOINT}/companies/${company_id}`, {
