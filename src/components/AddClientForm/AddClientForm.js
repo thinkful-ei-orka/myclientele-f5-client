@@ -1,5 +1,6 @@
 import React from "react";
 import './AddClientForm.scss';
+import ScheduleDropDown from "../Dropdown/Dropdown";
 
 export default class AddClientForm extends React.Component {
   state = {
@@ -8,13 +9,14 @@ export default class AddClientForm extends React.Component {
     hours_of_operation: "",
     currently_closed: false,
     general_manager: "",
+    day_of_week: 0,
     notes: ""
   };
 
   handleSubmit = e => {
       e.preventDefault();
-      const { name, location, hours_of_operation, currently_closed, general_manager, notes } = this.state;
-      console.log(name, location, hours_of_operation, currently_closed, general_manager, notes);
+      const { name, location, hours_of_operation, currently_closed, general_manager, day_of_week, notes } = this.state;
+      console.log(name, location, hours_of_operation, currently_closed, general_manager, day_of_week, notes);
   }
   setName = e => {
       this.setState({
@@ -46,6 +48,21 @@ export default class AddClientForm extends React.Component {
           notes: e.target.value
       })
   }
+  setDayOfWeek = e => {
+      this.setState({
+          day_of_week: e.target.value
+      })
+  }
+  renderSelectField = () => {
+    let daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'I dont visit this client weekly']
+    return (
+        <select className='day_dropdown' name='day_dropdown' value={this.state.day_of_week} onChange={this.setDayOfWeek}>
+            {daysOfWeek.map((day, index) => {
+                return <option value={index} key={day}>{day}</option>
+            })}
+        </select>
+    )
+  }
 
   
 
@@ -65,9 +82,15 @@ export default class AddClientForm extends React.Component {
         <input type="text" id="client_general_manager" name="general_manager" value={this.state.general_manager} onChange={this.setGM}/>
         <label htmlFor="notes">Additional Notes (optional)</label>
         <input type="textarea" id="client_notes" name="notes" value={this.state.notes} onChange={this.setNotes}/>
+        <p>What day of the week do you visit this client?</p>{this.renderSelectField()}
         <button type='submit' id='submit_button'>Add Client</button>
         
       </form>
     );
   }
+  static defaultProps = {
+    day_of_week: 0
+  }
 }
+
+
