@@ -46,13 +46,14 @@ class Reports extends React.Component {
     return (
       <section aria-label='Your reports'>
         <h1>Reports</h1>
+        <p>{reports[0].name}</p>
+        <p>{reports[0].location}</p>
         <ul>
           {reports.map(report => 
             <Link key={report.id} to={`/reports/${report.id}`} className='reportList-link'>
               <li className='report-li' id={report.id}>
                 <img src={report.photo_url} alt={report.name}/>
-                <p className='client-name'>{report.name}</p>
-                <p className='client-address'>{report.location}</p>
+                <p>{report.notes}</p>
               </li>
             </Link>
           )}

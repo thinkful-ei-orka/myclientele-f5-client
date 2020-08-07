@@ -12,6 +12,7 @@ class Report extends React.Component {
 
   componentDidMount() {
     console.log('compDidMount')
+    console.log('id', this.props.match.params.report_id)
     ReportsApiService.getReport(this.props.match.params.report_id)
       .then(res => this.setState({ report: res }))
   }
