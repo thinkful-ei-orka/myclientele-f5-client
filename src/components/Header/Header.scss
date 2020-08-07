@@ -4,13 +4,13 @@ header {
   justify-content: space-between;
 }
 
-img {
+header img {
   width: 200px;
   padding: 10px;
 }
 
 @media only screen and (min-width: 1200px) {
-  img {
+  header img {
     width: 400px;
     padding: 20px;
   }

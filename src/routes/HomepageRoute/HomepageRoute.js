@@ -9,11 +9,11 @@ import SignUpForm from '../../components/SignUpForm/SignUpForm';
 export default class HomepageRoute extends React.Component {
   state = {
     signUpIsOpen: false,
-  }
+  };
 
   setSignUpOpen = (bool) => {
-    this.setState({signUpIsOpen: bool});
-  }
+    this.setState({ signUpIsOpen: bool });
+  };
 
   componentDidMount() {
     Modal.setAppElement('.App');
@@ -23,12 +23,16 @@ export default class HomepageRoute extends React.Component {
     return (
       <>
         <Header />
-        <Modal isOpen={this.state.signUpIsOpen} onRequestClose={e => this.setSignUpOpen(false)}>
-          <SignUpForm closeModal={e => this.setSignUpOpen(false)} />
+        <Modal
+          isOpen={this.state.signUpIsOpen}
+          onRequestClose={(e) => this.setSignUpOpen(false)}>
+          <SignUpForm closeModal={(e) => this.setSignUpOpen(false)} />
         </Modal>
         <section className='hero-banner'>
           <div className='hero-text'>
-            <button onClick={e => this.setSignUpOpen(true)}>Sign Up Now!</button>
+            <button onClick={(e) => this.setSignUpOpen(true)}>
+              Sign Up Now!
+            </button>
             <p>
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae,
               sequi, recusandae illo quo, nisi vel eveniet maxime deserunt
@@ -41,7 +45,7 @@ export default class HomepageRoute extends React.Component {
         <section>
           <div className='homepage-extrainfo'>
             <div className='wrapper-left'>
-              <img src={counting} alt="Saving money"></img>
+              <img src={counting} alt='Saving money'></img>
               <p>
                 Start saving money by reducing missed leads and ensure correct
                 product ordering for all of your clients.
@@ -52,7 +56,7 @@ export default class HomepageRoute extends React.Component {
                 Integrated map and routing to ensure timely check-ins to each of
                 your clients.
               </p>
-              <img src={map} alt="Map check-ins"></img>
+              <img src={map} alt='Map check-ins'></img>
             </div>
           </div>
         </section>

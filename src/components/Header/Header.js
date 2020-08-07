@@ -11,15 +11,15 @@ class Header extends React.Component {
   state = {
     loginIsOpen: false,
     signUpIsOpen: false,
-  }
+  };
 
   setLoginOpen = (bool) => {
-    this.setState({loginIsOpen: bool});
-  }
+    this.setState({ loginIsOpen: bool });
+  };
 
   setSignUpOpen = (bool) => {
-    this.setState({signUpIsOpen: bool});
-  }
+    this.setState({ signUpIsOpen: bool });
+  };
 
   componentDidMount() {
     Modal.setAppElement('.App');
@@ -38,16 +38,23 @@ class Header extends React.Component {
           <img src={logo} alt='my clientele logo'></img>
         </div>
         <div className='login-buttons'>
-          <button onClick={e => this.setLoginOpen(true)}>Login</button>
-          <Modal isOpen={this.state.loginIsOpen} onRequestClose={e => this.setLoginOpen(false)}>
-            <LoginForm closeModal={e => this.setLoginOpen(false)} />
+          <button className='btn' onClick={(e) => this.setLoginOpen(true)}>
+            Login
+          </button>
+          <Modal
+            isOpen={this.state.loginIsOpen}
+            onRequestClose={(e) => this.setLoginOpen(false)}>
+            <LoginForm closeModal={(e) => this.setLoginOpen(false)} />
           </Modal>
-          <button onClick={e => this.setSignUpOpen(true)}>Sign Up</button>
-          <Modal isOpen={this.state.signUpIsOpen} onRequestClose={e => this.setSignUpOpen(false)}>
-            <SignUpForm closeModal={e => this.setSignUpOpen(false)} />
+          <button className='btn' onClick={(e) => this.setSignUpOpen(true)}>
+            Sign Up
+          </button>
+          <Modal
+            isOpen={this.state.signUpIsOpen}
+            onRequestClose={(e) => this.setSignUpOpen(false)}>
+            <SignUpForm closeModal={(e) => this.setSignUpOpen(false)} />
           </Modal>
         </div>
-        <div></div>
       </header>
     );
   }
