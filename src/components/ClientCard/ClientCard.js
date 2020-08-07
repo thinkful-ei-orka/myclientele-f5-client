@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import closedsvg from '../../images/clientcard/closed.svg';
 import opensvg from '../../images/clientcard/open.svg';
 import editsvg from '../../images/clientcard/edit.svg';
@@ -59,9 +60,18 @@ class ClientCard extends React.Component {
           />
         </div>
         <div className='button-area'>
-          <button className='edit-button  '>
-            <img src={editsvg} alt='edit button' />
-          </button>
+          <Link
+            to={{
+              pathname: '/take-report',
+              state: {
+                key: this.props.key,
+                data: this.props.data,
+              },
+            }}>
+            <button className='edit-button  '>
+              <img src={editsvg} alt='edit button' />
+            </button>
+          </Link>
           <button className='more-info  '>
             <img src={moreinfosvg} alt='more info button' />
           </button>

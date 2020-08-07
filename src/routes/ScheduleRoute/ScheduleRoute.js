@@ -32,7 +32,7 @@ class Schedule extends React.Component {
       <div className='schedule-page'>
         <ScheduleDropDown />
         {this.context.clients.map((store) => (
-          <ClientCard data={store} key={store.company_id} />
+          <ClientCard data={store} key={store.id} />
         ))}
       </div>
     );
