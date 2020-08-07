@@ -28,13 +28,13 @@ class Reports extends React.Component {
     console.log('ReaportsApiService', ReportsApiService)
     console.log('reports in state', this.state.reports)
     let reports = this.state.reports;
-    // if(reports) {
-    //   reports.map(report => {
-    //     if(report.photo_url === '') {
-    //       return report.photo_url = ''
-    //     }
-    //   })
-    // }
+    if(reports) {
+      reports.map(report => {
+        if(report.photo_url === '') {
+          return report.photo_url = 'https://via.placeholder.com/150'
+        }
+      })
+    }
     console.log('reports var', reports)
     if(this.state.reports.length === 0) {
       return (
@@ -50,7 +50,7 @@ class Reports extends React.Component {
           {reports.map(report => 
             <Link key={report.id} to={`/reports/${report.id}`} className='reportList-link'>
               <li className='report-li' id={report.id}>
-                {/* <img src={report.photo_url} alt='Client report photo'/> */}
+                <img src={report.photo_url} alt={report.name}/>
                 <p className='client-name'>{report.name}</p>
                 <p className='client-address'>{report.location}</p>
               </li>
