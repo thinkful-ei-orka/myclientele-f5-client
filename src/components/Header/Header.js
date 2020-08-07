@@ -55,7 +55,6 @@ class Header extends React.Component {
             <SignUpForm closeModal={(e) => this.setSignUpOpen(false)} />
           </Modal>
         </div>
-        <div></div>
       </header>
     );
   }
