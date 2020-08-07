@@ -10,10 +10,15 @@ class Report extends React.Component {
     }
   }
 
-
+  componentDidMount() {
+    console.log('compDidMount')
+    ReportsApiService.getReport(this.props.match.params.report_id)
+      .then(res => this.setState({ report: res }))
+  }
 
   render () {
     console.log('props', this.props)
+    console.log('report', this.state.report)
     return (
       <section>
         hey guys
