@@ -18,7 +18,8 @@ const ClientApiService = {
     hours_of_operation,
     currently_closed,
     notes,
-    general_manager
+    general_manager,
+    company_id
   ) {
     // note: sales_rep_id and company_id are not set by the user
     const client = {
@@ -29,6 +30,7 @@ const ClientApiService = {
       currently_closed,
       notes,
       general_manager,
+      company_id,
     };
 
     return fetch(`${config.API_ENDPOINT}/clients`, {

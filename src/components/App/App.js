@@ -85,17 +85,11 @@ export default class App extends React.Component {
           <PublicRoute path='/login' exact component={HomepageRoute} />
           <PublicRoute path='/sign-up' exact component={HomepageRoute} />
           <PrivateContext.Provider value={contextValue}>
-
-            <PrivateRoute path="/" exact component={ClientsRoute} />
-          <PublicRoute exact path='/form' component={AddClientForm} />
-            <PrivateRoute path="/schedule" component={ClientsRoute} />
-            <PrivateRoute path="/reports" component={ReportsView} />
             <Header />
             <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
-            <PublicRoute exact path='/form' component={AddClientForm} />
+            <PrivateRoute exact path='/form' component={AddClientForm} />
             <PrivateRoute exact path='/reports' component={ReportsView} />
             <PrivateRoute path='/reports/:report_id' component={Report} />
-
           </PrivateContext.Provider>
         </Switch>
       </div>
