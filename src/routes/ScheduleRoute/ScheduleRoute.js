@@ -24,7 +24,7 @@ class Schedule extends React.Component {
   render() {
     console.log(this.context.clients);
 
-    if (this.state.isLoading) {
+    if (this.context.clients == null) {
       return <div>Loading...</div>;
     }
 

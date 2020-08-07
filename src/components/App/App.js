@@ -85,7 +85,7 @@ export default class App extends React.Component {
           <PrivateContext.Provider value={contextValue}>
             <Header />
             <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
-            <PublicRoute exact path='/form' component={AddClientForm} />
+            <PrivateRoute exact path='/form' component={AddClientForm} />
           </PrivateContext.Provider>
         </Switch>
       </div>
