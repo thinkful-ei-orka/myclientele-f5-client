@@ -10,13 +10,32 @@ class Report extends React.Component {
     }
   }
 
-
+  componentDidMount() {
+    console.log('compDidMount')
+    console.log('id', this.props.match.params.report_id)
+    ReportsApiService.getReport(this.props.match.params.report_id)
+      .then(res => this.setState({ report: res }))
+  }
 
   render () {
     console.log('props', this.props)
+    console.log('report', this.state.report)
+    let photo_url = '';
+    if (this.state.report) {
+      if (this.state.report.photo_url === '') {
+        photo_url = 'https://via.placeholder.com/150'
+      } else {
+        photo_url = this.state.photo_url
+      }
+    }
+    console.log(photo_url)
     return (
       <section>
-        hey guys
+        <p>Client Name: {this.state.report.name}</p>
+        <p>Notes: {this.state.report.notes}</p>
+        <p><img src={photo_url} alt={this.state.report.name}></img></p>
+        <p>Report Date: {this.state.report.date}</p>
+        <p>Sales Rep Name: {this.state.report.sales_rep_name}</p>
       </section>
     )
   }
