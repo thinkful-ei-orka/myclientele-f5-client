@@ -42,7 +42,7 @@ export default class App extends React.Component {
   };
 
   fetchClients = () => {
-    ClientApiService.getAllClients().then((result) => {
+    return ClientApiService.getAllClients().then((result) => {
       console.log('got clients', result);
       this.setState({ clients: result });
     });
@@ -83,9 +83,9 @@ export default class App extends React.Component {
           <PublicRoute path='/login' exact component={HomepageRoute} />
           <PublicRoute path='/sign-up' exact component={HomepageRoute} />
           <PrivateContext.Provider value={contextValue}>
-            <PrivateRoute path='/' exact component={ClientsRoute} />
+            <Header />
+            <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
             <PublicRoute exact path='/form' component={AddClientForm} />
-            <PrivateRoute path='/schedule' component={ClientsRoute} />
           </PrivateContext.Provider>
         </Switch>
       </div>

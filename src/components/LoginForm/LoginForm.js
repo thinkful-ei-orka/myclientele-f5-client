@@ -4,7 +4,6 @@ import UserContext from '../../contexts/UserContext';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { withRouter } from 'react-router-dom';
 
 class LoginForm extends React.Component {
   static contextType = UserContext;
@@ -26,7 +25,7 @@ class LoginForm extends React.Component {
         password.value = '';
 
         this.context.processLogin(res.authToken);
-        this.props.history.push('/');
+        this.props.history.push('/schedule');
       })
       .catch((res) => {
         this.setState({ error: res.error, loading: false });
@@ -66,13 +65,17 @@ class LoginForm extends React.Component {
             name='password'
             required></input>
 
-          {!loading && <button type='submit'>Login</button>}
+          {!loading && (
+            <button className='btn' type='submit'>
+              Login
+            </button>
+          )}
           {loading && (
             <button type='submit' disabled>
               <FontAwesomeIcon icon={faSpinner}></FontAwesomeIcon>
             </button>
           )}
-          <button className='outline' onClick={this.props.closeModal}>
+          <button className='outline btn' onClick={this.props.closeModal}>
             Cancel
           </button>
         </form>

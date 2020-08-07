@@ -38,13 +38,17 @@ class Header extends React.Component {
           <img src={logo} alt='my clientele logo'></img>
         </div>
         <div className='login-buttons'>
-          <button onClick={(e) => this.setLoginOpen(true)}>Login</button>
+          <button className='btn' onClick={(e) => this.setLoginOpen(true)}>
+            Login
+          </button>
           <Modal
             isOpen={this.state.loginIsOpen}
             onRequestClose={(e) => this.setLoginOpen(false)}>
             <LoginForm closeModal={(e) => this.setLoginOpen(false)} />
           </Modal>
-          <button onClick={(e) => this.setSignUpOpen(true)}>Sign Up</button>
+          <button className='btn' onClick={(e) => this.setSignUpOpen(true)}>
+            Sign Up
+          </button>
           <Modal
             isOpen={this.state.signUpIsOpen}
             onRequestClose={(e) => this.setSignUpOpen(false)}>

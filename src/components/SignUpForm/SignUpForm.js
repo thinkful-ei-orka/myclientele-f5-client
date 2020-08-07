@@ -110,9 +110,13 @@ class SignUpForm extends React.Component {
           <label htmlFor='password'>Password</label>
           <input type='password' id='password' name='password' required></input>
 
-          {!loading && <button type='submit'>Sign Up</button>}
+          {!loading && (
+            <button className='btn' type='submit'>
+              Sign Up
+            </button>
+          )}
           {loading && (
-            <button type='submit' disabled>
+            <button type='submit' className='btn' disabled>
               <FontAwesomeIcon icon={faSpinner}></FontAwesomeIcon>
             </button>
           )}
