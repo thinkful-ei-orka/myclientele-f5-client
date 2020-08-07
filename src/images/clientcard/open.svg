@@ -1,0 +1,11 @@
+ <svg height='30' width='30' viewbox='0 0 30 30' >
+    <circle
+
+      cx='15'
+      cy='15'
+      r='10'
+      stroke='none'
+      strokeWidth='3'
+      fill='#64bf49'
+    />
+  </svg>
