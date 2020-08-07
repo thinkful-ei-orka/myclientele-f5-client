@@ -20,6 +20,7 @@ import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import HomepageRoute from '../../routes/HomepageRoute/HomepageRoute';
 import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
 import AddClientForm from '../AddClientForm/AddClientForm';
+import ReportsView from '../../components/ReportsView/ReportsView';
 
 export default class App extends React.Component {
   static contextType = UserContext;
@@ -86,6 +87,7 @@ export default class App extends React.Component {
             <Header />
             <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
             <PublicRoute exact path='/form' component={AddClientForm} />
+            <PrivateRoute path="/reports" component={ReportsView} />
           </PrivateContext.Provider>
         </Switch>
       </div>

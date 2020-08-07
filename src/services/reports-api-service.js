@@ -3,6 +3,7 @@ import config from '../config';
 
 const ReportsApiService = {
   getAllReports() {
+    console.log('getAllReports')
     return fetch(`${config.API_ENDPOINT}/reports`, {
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`,
