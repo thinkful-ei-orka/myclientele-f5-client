@@ -1,6 +1,6 @@
 ## My Clientele - client
 
-This project is a REACT app that allows you to log in and see your clients and reports you've made to maximize productivity and minimum potential loses from lost leads and inability to access previous reports on the go.
+This project REACT app allows you to log in and see your clients and reports you've made to maximize productivity and minimum potential loses from lost leads and inability to access previous reports on the go.
 
 With the app, you can keep all your client information in one place. This includes names, locations, hours of operations, if they are currently closed, and who the general manager is. Also included is your schedule of clients to see on a particular day, and the ability to see all of your reports. These reports can be filtered, and feature the date of your report, your notes, and pictures you have taken.
 
@@ -8,11 +8,11 @@ You can update the clients as things change.
 
 The Take Report feature allows you to seamlessly and effortlessly add notes to a client.
 
-MyClientele is ideal for the fast paced and busy lifestyle you lead, and allows you to keep up-to-date with what places are closed due to things like Covid-19 or rennovations with the currently closed feature. With a click of a button, you can keep up to date with your clients and their needs, all from one easy to use app!
+My Clientele is ideal for the fast paced and busy lifestyle you lead, and allows you to keep up-to-date with what places are closed due to things like Covid-19 or rennovations with the currently closed feature. With a click of a button, you can keep up to date with your clients and their needs, all from one easy to use app!
 
 ### Live Link and Demo Account
 
-The live site can be accessed at [https://my-clientele-f5.vercel.app/](https://my-clientele-f5.vercel.app/)
+The live site can be accessed at [https://myclientele-f5.vercel.app/](https://myclientele-f5.vercel.app/)
 
 To try the service, please use the credentials below to log in
 
@@ -21,7 +21,7 @@ Password:
 
 ### Screenshots
 
-NEED TO ADD SCREENSHOTS IN THIS FORMAT (if the imgs are in a doc folder on client)
+NEED TO ADD SCREENSHOTS IN THIS FORMAT (if the imgs are in a doc folder on client, otherwise it's the relative route)
 ![Image of Mobile View](docs/MobileView.png)
 
 ## Server
@@ -43,6 +43,14 @@ PUT THE API DOCUMENTATION HERE
 ## Tech Stack
 
 REACT, JavaScript, CSS3, HTML5, SCSS, NodeJS, ExpressJS, PostgreSQL
+
+## To Run A Clean Start 
+
+1. Clone this repository to your local machine
+2. cd into the cloned repository
+3. Remove the git history with rm -rf .get && git init
+4. Install dependencies with npm install
+5. Change project name in package.json to use whatever name you've given this project instead of "name": "myclientele-client"
 
 ## Available Scripts
 
