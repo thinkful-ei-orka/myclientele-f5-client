@@ -1,17 +1,7 @@
 {
   "version": 2,
   "routes": [
-    {
-      "src": "^/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
-      "src": "/([a-z]*\\.)(json|ico)$",
-      "dest": "/$1$2"
-    },
-    {
-      "src": ".*",
-      "dest": "/index.html"
-    }
+      { "handle": "filesystem" },
+      { "src": "/.*", "dest": "/index.html" }
   ]
 }
