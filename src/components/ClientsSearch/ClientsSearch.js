@@ -34,10 +34,10 @@ const MapWithASearchBox = compose(
           refs.map = ref;
         },
         onBoundsChanged: () => {
-          // this.setState({
-          //   bounds: refs.map.getBounds(),
-          //   center: refs.map.getCenter(),
-          // })
+          this.setState({
+            bounds: refs.map.getBounds(),
+            center: refs.map.getCenter(),
+          })
           // this.updateBoundsAndCenter();
         },
         // updateBoundsAndCenter: () => {
@@ -106,11 +106,11 @@ const MapWithASearchBox = compose(
     ref={props.onMapMounted}
     defaultZoom={13}
     center={props.center}
-    // onBoundsChanged={props.onBoundsChanged}
+    onBoundsChanged={props.onBoundsChanged}
   >
     <SearchBox
       ref={props.onSearchBoxMounted}
-      // bounds={props.bounds}
+      bounds={props.bounds}
       controlPosition={window.google.maps.ControlPosition.TOP_LEFT}
       onPlacesChanged={props.onPlacesChanged}
     >

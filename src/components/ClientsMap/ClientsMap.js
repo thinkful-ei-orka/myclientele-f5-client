@@ -16,10 +16,10 @@ const MapWithClients = withScriptjs(withGoogleMap(props =>
     defaultCenter={{ lat: 41.9, lng: -87.62 }}
   >
     {/* <InfoBox defaultPosition={{ lat: 41.91, lng: -87.63 }} ><h1>This is an info box</h1><p>Hello! hello!</p></InfoBox> */}
-    <MarkerWithLabel position={{ lat: 41.91, lng: -87.63 }} ><div><h1>This is a label</h1><p>Hello! hello!</p></div></MarkerWithLabel>
-    {/* <Marker position={{ lat: 41.91, lng: -87.63 }} clickable={true} label="Test Label" title="Test Title" />
+    {/* <MarkerWithLabel position={{ lat: 41.91, lng: -87.63 }} ><div><h1>This is a label</h1><p>Hello! hello!</p></div></MarkerWithLabel> */}
+    <Marker position={{ lat: 41.91, lng: -87.63 }} clickable={true} label="Test Label" title="Test Title" />
     <Marker position={{ lat: 41.90, lng: -87.62 }} />
-    <Marker position={{ lat: 41.89, lng: -87.63 }} /> */}
+    <Marker position={{ lat: 41.89, lng: -87.63 }} />
   </GoogleMap>
 ));
 
