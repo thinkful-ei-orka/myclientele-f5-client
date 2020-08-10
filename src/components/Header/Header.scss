@@ -8,18 +8,12 @@ header img {
   width: 200px;
   padding: 10px;
 }
-
-@media only screen and (min-width: 1200px) {
-  header img {
-    width: 400px;
-    padding: 20px;
-  }
-}
-.login-buttons {
-  font-size: 5px;
+.header-buttons {
+  margin: auto 10px auto auto;
   button {
     font-size: 15px;
-    margin: auto 2px;
+    padding: 5px;
+    margin: auto 3px;
   }
 
   @media only screen and (min-width: 600px) {
@@ -34,6 +28,10 @@ header img {
     button {
       margin: 0 10px;
       font-size: 30px;
+    }
+    header img {
+      width: 400px;
+      padding: 20px;
     }
   }
 }
