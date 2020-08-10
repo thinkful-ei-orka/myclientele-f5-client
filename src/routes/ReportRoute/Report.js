@@ -31,11 +31,11 @@ class Report extends React.Component {
     console.log(photo_url)
     return (
       <section>
-        <p>Client Name: {this.state.report.name}</p>
+        {/* <p>Client Name: {this.state.report.name}</p> */}
         <p>Notes: {this.state.report.notes}</p>
         <p><img src={photo_url} alt={this.state.report.name}></img></p>
         <p>Report Date: {this.state.report.date}</p>
-        <p>Sales Rep Name: {this.state.report.sales_rep_name}</p>
+        <p>Sales Rep Name: {this.state.report.name}</p>
       </section>
     )
   }

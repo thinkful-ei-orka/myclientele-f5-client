@@ -41,8 +41,6 @@ class Reports extends React.Component {
     return (
       <section aria-label='Your reports' className='report-list'>
         <h1>Reports</h1>
-        <p>{reports[0].name}</p>
-        <p>{reports[0].location}</p>
         <ul className='report-list-ul'>
           {reports.map((report) => (
             <Link
@@ -55,6 +53,8 @@ class Reports extends React.Component {
                   src={report.photo_url}
                   alt={report.name}
                 />
+                <p>{report.name}</p>
+                <p>{report.location}</p>
                 <p className='information-area'>{report.notes}</p>
               </li>
             </Link>
