@@ -12,7 +12,7 @@ MyClientele is ideal for the fast paced and busy lifestyle you lead, and allows 
 
 ### Live Link and Demo Account
 
-The live site can be accessed at [livesitelink](livesitelink)
+The live site can be accessed at [https://my-clientele-f5.vercel.app/](https://my-clientele-f5.vercel.app/)
 
 To try the service, please use the credentials below to log in
 
