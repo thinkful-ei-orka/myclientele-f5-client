@@ -106,7 +106,7 @@ const MapWithASearchBox = compose(
     ref={props.onMapMounted}
     defaultZoom={13}
     center={props.center}
-    onBoundsChanged={props.onBoundsChanged}
+    // onBoundsChanged={props.onBoundsChanged}
   >
     <SearchBox
       ref={props.onSearchBoxMounted}
@@ -123,7 +123,8 @@ const MapWithASearchBox = compose(
       />
     </SearchBox>
     {props.markers.map((marker, index) =>
-      <MarkerWithLabel key={index} position={marker.position}><div>Hello There!</div></MarkerWithLabel>
+      <Marker key={index} position={marker.position}></Marker>
+      // <MarkerWithLabel key={index} position={marker.position}><div>Hello There!</div></MarkerWithLabel>
     )}
   </GoogleMap>
 );
