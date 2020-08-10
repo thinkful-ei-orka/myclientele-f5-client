@@ -9,6 +9,9 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-map
 import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel';
 import { SearchBox } from 'react-google-maps/lib/components/places/SearchBox';
 
+// for @react-google-maps/api
+import { StandaloneSearchBox } from '@react-google-maps/api';
+
 // using react-google-maps
 const MapWithASearchBox = compose(
   withProps({
@@ -34,43 +37,14 @@ const MapWithASearchBox = compose(
           refs.map = ref;
         },
         onBoundsChanged: () => {
+          // used to set bounds here
+        },
+        onIdle: () => {
           this.setState({
             bounds: refs.map.getBounds(),
-            center: refs.map.getCenter(),
+            // center: refs.map.getCenter(),
           })
-          // this.updateBoundsAndCenter();
         },
-        // updateBoundsAndCenter: () => {
-        //   if (boundsTimer === null) {
-        //     // initiating timer
-        //     boundsTimer = window.setTimeout(() => {
-        //       // setting bounds
-        //       this.setState({
-        //         bounds: refs.map.getBounds(),
-        //         center: refs.map.getCenter(),
-        //       })
-        //       boundsChanging = false;
-        //       boundsTimer = null;
-        //     }, 500);
-        //     boundsChanging = true;
-        //   }
-
-        //   // if bounds are changing, reset the timer
-        //   if (boundsChanging) {
-        //     // resetting bounds
-        //     window.clearTimeout(boundsTimer);
-        //     boundsTimer = window.setTimeout(() => {
-        //       // setting bounds
-        //       this.setState({
-        //         bounds: refs.map.getBounds(),
-        //         center: refs.map.getCenter(),
-        //       })
-        //       boundsChanging = false;
-        //       boundsTimer = null;
-        //     }, 500);
-        //     boundsChanging = true;
-        //   }
-        // },
         onSearchBoxMounted: ref => {
           refs.searchBox = ref;
         },
@@ -88,10 +62,10 @@ const MapWithASearchBox = compose(
           const nextMarkers = places.map(place => ({
             position: place.geometry.location,
           }));
-          const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
+          // const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
 
           this.setState({
-            center: nextCenter,
+            // center: nextCenter,
             markers: nextMarkers,
           });
           // refs.map.fitBounds(bounds);
@@ -102,16 +76,18 @@ const MapWithASearchBox = compose(
   withScriptjs,
   withGoogleMap
 )(props =>
+  <>
   <GoogleMap
     ref={props.onMapMounted}
     defaultZoom={13}
     center={props.center}
-    onBoundsChanged={props.onBoundsChanged}
+    // onBoundsChanged={props.onBoundsChanged}
+    onIdle={props.onIdle}
   >
-    <SearchBox
+    {/* <SearchBox
       ref={props.onSearchBoxMounted}
       bounds={props.bounds}
-      controlPosition={window.google.maps.ControlPosition.TOP_LEFT}
+      controlPosition={window.google.maps.ControlPosition.BOTTOM_LEFT}
       onPlacesChanged={props.onPlacesChanged}
     >
       <input
@@ -121,12 +97,28 @@ const MapWithASearchBox = compose(
         style={{
         }}
       />
-    </SearchBox>
+    </SearchBox> */}
     {props.markers.map((marker, index) =>
       <Marker key={index} position={marker.position}></Marker>
       // <MarkerWithLabel key={index} position={marker.position}><div>Hello There!</div></MarkerWithLabel>
     )}
   </GoogleMap>
+  {/* <StandaloneSearchBox ref={props.onSearchBoxMounted} bounds={props.bounds} onPlacesChanged={props.onPlacesChanged} ><input type="text" className="searchBox"></input></StandaloneSearchBox> */}
+  <SearchBox
+    ref={props.onSearchBoxMounted}
+    bounds={props.bounds}
+    controlPosition={window.google.maps.ControlPosition.BOTTOM_LEFT}
+    onPlacesChanged={props.onPlacesChanged}
+  >
+    <input
+      type="text"
+      placeholder="Search"
+      className="searchBox"
+      style={{
+      }}
+    />
+  </SearchBox>
+  </>
 );
 
 export default class ClientsMap extends React.Component {
