@@ -1,6 +1,7 @@
 import React from 'react';
 import ReportsApiService from '../../services/reports-api-service';
 import { withRouter } from 'react-router-dom';
+import './takereport.scss';
 
 class TakeReport extends React.Component {
   data = this.props.location.state.data;
@@ -19,7 +20,7 @@ class TakeReport extends React.Component {
 
   render() {
     return (
-      <>
+      <div className='take-a-report'>
         <h1>Take a Report</h1>
         <div className='schedule-card'>
           <div className='company-logo'>
@@ -31,12 +32,14 @@ class TakeReport extends React.Component {
           </div>
         </div>
         <div className='report-input'>
-          <form onSubmit={(e) => this.onFormSubmit(e)}>
+          <form
+            className='take-a-report-form'
+            onSubmit={(e) => this.onFormSubmit(e)}>
             <label htmlFor='report-text-input'>Write your report:</label>
-            <input
+            <textarea
               type='text'
               id='report-text-input'
-              name='report-text-input'></input>
+              name='report-text-input'></textarea>
             <label htmlFor='report-photo-input'>Add a photo:</label>
             <input
               type='url'
@@ -49,7 +52,7 @@ class TakeReport extends React.Component {
             <button className='btn'>Submit</button>
           </form>
         </div>
-      </>
+      </div>
     );
   }
 }
