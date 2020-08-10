@@ -22,14 +22,14 @@
 
 .homepage-extrainfo {
   width: 100%;
-  margin: auto;
+  margin: 30px auto;
 }
 .wrapper-left {
   width: 100%;
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin: 10px 0;
+  margin: 30px 0;
   img {
     width: 100%;
   }
@@ -40,6 +40,7 @@
   display: flex;
   flex-direction: column-reverse;
   text-align: center;
+  margin: 30px 0;
 
   img {
     width: 100%;
@@ -48,8 +49,8 @@
 
 @media only screen and (min-width: 600px) {
   .homepage-extrainfo {
-    width: 70%;
-    font-size: 30px;
+    width: 90%;
+    font-size: 25px;
   }
 
   .wrapper-left {
@@ -59,8 +60,12 @@
     text-align: left;
     margin: 10px 0;
     align-items: center;
+    text-align: center;
     img {
-      width: 50%;
+      width: 55%;
+    }
+    * {
+      padding: 10px;
     }
   }
   .wrapper-right {
@@ -69,8 +74,12 @@
     flex-direction: row;
     text-align: right;
     align-items: center;
+    text-align: center;
     img {
-      width: 50%;
+      width: 55%;
+    }
+    * {
+      padding: 10px;
     }
   }
 }

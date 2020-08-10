@@ -30,7 +30,7 @@ export default class HomepageRoute extends React.Component {
         </Modal>
         <section className='hero-banner'>
           <div className='hero-text'>
-            <button onClick={(e) => this.setSignUpOpen(true)}>
+            <button className='btn' onClick={(e) => this.setSignUpOpen(true)}>
               Sign Up Now!
             </button>
             <p>

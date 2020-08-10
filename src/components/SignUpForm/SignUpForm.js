@@ -4,6 +4,7 @@ import UserContext from '../../contexts/UserContext';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import '../LoginForm/loginform.scss';
 
 class SignUpForm extends React.Component {
   static contextType = UserContext;
@@ -65,7 +66,7 @@ class SignUpForm extends React.Component {
     const loading = this.state.loading;
 
     return (
-      <div>
+      <div className='user-login'>
         <h2>Sign Up</h2>
         <form onSubmit={this.handleSubmit}>
           <div role='alert'>{error && <p>{error}</p>}</div>
@@ -110,19 +111,21 @@ class SignUpForm extends React.Component {
           <label htmlFor='password'>Password</label>
           <input type='password' id='password' name='password' required></input>
 
-          {!loading && (
-            <button className='btn' type='submit'>
-              Sign Up
+          <div className='buttons-on-login'>
+            {!loading && (
+              <button className='btn' type='submit'>
+                Sign Up
+              </button>
+            )}
+            {loading && (
+              <button type='submit' className='btn' disabled>
+                <FontAwesomeIcon icon={faSpinner}></FontAwesomeIcon>
+              </button>
+            )}
+            <button className='outline btn' onClick={this.props.closeModal}>
+              Cancel
             </button>
-          )}
-          {loading && (
-            <button type='submit' className='btn' disabled>
-              <FontAwesomeIcon icon={faSpinner}></FontAwesomeIcon>
-            </button>
-          )}
-          <button className='outline' onClick={this.props.closeModal}>
-            Cancel
-          </button>
+          </div>
         </form>
       </div>
     );

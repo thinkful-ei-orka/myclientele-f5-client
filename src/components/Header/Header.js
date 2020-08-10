@@ -46,7 +46,7 @@ class Header extends React.Component {
           <div className='logo'>
             <img src={logo} alt='my clientele logo'></img>
           </div>
-          <div className='login-buttons'>
+          <div className='header-buttons'>
             <button className='btn' onClick={(e) => this.setLoginOpen(true)}>
               Login
             </button>
@@ -71,22 +71,23 @@ class Header extends React.Component {
     return (
       <header>
         <div className='logo'>
-          <img src={logo} alt='my clientele logo'></img>
+          <Link to='/schedule'>
+            <img src={logo} alt='my clientele logo'></img>
+          </Link>
         </div>
-        <button
-          className='logout-button btn'
-          onClick={() => this.handleLogOut()}>
-          Logout
-        </button>
-        <Link to='/form'>
-          <button className='add-client btn'>Add Client</button>
-        </Link>
-        <Link to='/reports'>
-          <button className='reports btn'>Reports</button>
-        </Link>
-        <Link to='/schedule'>
-          <button className='schedule btn'>Home</button>
-        </Link>
+        <div className='header-buttons'>
+          <button
+            className='logout-button btn'
+            onClick={() => this.handleLogOut()}>
+            Logout
+          </button>
+          <Link to='/form'>
+            <button className='add-client btn'>Add Client</button>
+          </Link>
+          <Link to='/reports'>
+            <button className='reports btn'>Reports</button>
+          </Link>
+        </div>
       </header>
     );
   }

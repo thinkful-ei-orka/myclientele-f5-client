@@ -1,10 +1,8 @@
-.add_client_form {
+.user-login {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 50px;
-  margin-right: 25%;
-  margin-left: 25%;
+  align-items: center;
   label {
     font-weight: bold;
   }
@@ -14,10 +12,8 @@
   }
 }
 
-.day_dropdown {
-  margin-bottom: 25px;
-}
-
-#title {
-  text-align: center;
+.buttons-on-login {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }

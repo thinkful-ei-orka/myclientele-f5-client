@@ -1,0 +1,29 @@
+.take-a-report {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  label {
+    font-weight: bold;
+  }
+  input {
+    border: 1px solid lightgray;
+    border-radius: 7px;
+    width: 100%;
+  }
+
+  textarea {
+    border: 1px solid lightgray;
+    border-radius: 7px;
+    width: 100%;
+  }
+}
+#report-text-input {
+  height: 200px;
+}
+
+.take-a-report-form {
+  width: 100%;
+}
