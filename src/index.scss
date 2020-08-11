@@ -50,12 +50,14 @@ li {
 /*------------------
   Elements
 ------------------*/
-button, .btn, .header-button {
+button,
+.btn,
+.header-button {
   outline: none;
   color: white;
   padding: 10px;
   width: auto;
-  font-size: 20px;
+  font-size: 15px;
   border-radius: 5px;
   cursor: pointer;
 
@@ -110,7 +112,7 @@ button, .btn, .header-button {
   }
 
   @media only screen and (min-width: 1200px) {
-    font-size: 30px;
+    font-size: 20px;
     padding: 20px;
   }
 }

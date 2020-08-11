@@ -1,24 +1,42 @@
 import React from 'react';
 import ReportsApiService from '../../services/reports-api-service';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import './takereport.scss';
 
 class TakeReport extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      reports: [],
+      isLoading: true,
+    };
+  }
   data = this.props.location.state.data;
   // const { data } = this.props.location.state;
+  client_id = this.data.id;
 
   onFormSubmit = (e) => {
     e.preventDefault();
     const notes = e.target['report-text-input'].value;
     const photo_url = e.target['report-photo-input'].value;
-    const client_id = this.data.id;
 
-    ReportsApiService.addReport(client_id, notes, photo_url).then(() => {
+    ReportsApiService.addReport(this.client_id, notes, photo_url).then(() => {
       this.props.history.push('/schedule');
     });
   };
+  componentDidMount() {
+    if (this.state.reports.length === 0) {
+      ReportsApiService.getReportsByClientId(this.client_id).then((res) => {
+        console.log(res);
+        this.setState({ reports: res, isLoading: false });
+      });
+    }
+  }
 
   render() {
+    if (this.state.isLoading) {
+      return <div>Loading...</div>;
+    }
     return (
       <div className='take-a-report'>
         <h1>Take a Report</h1>
@@ -52,6 +70,27 @@ class TakeReport extends React.Component {
             <button className='btn'>Submit</button>
           </form>
         </div>
+        <section aria-label='Your reports' className='report-list'>
+          <h1>Previous Reports</h1>
+
+          <ul className='report-list-ul'>
+            {this.state.reports.map((report) => (
+              <Link
+                key={report.id}
+                to={`/reports/${report.id}`}
+                className='reportList-link'>
+                <li className='report-li' id={report.id}>
+                  <img
+                    className='company-logo'
+                    src={report.photo_url}
+                    alt={report.name}
+                  />
+                  <p className='information-area'>{report.notes}</p>
+                </li>
+              </Link>
+            ))}
+          </ul>
+        </section>
       </div>
     );
   }
