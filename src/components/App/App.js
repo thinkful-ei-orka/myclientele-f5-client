@@ -90,7 +90,7 @@ export default class App extends React.Component {
             <PublicRoute exact path='/form' component={AddClientForm} />
             <PrivateRoute path="/schedule" component={ClientsRoute} />
             <PublicRoute path="/add-client" component={ClientsRoute} />
-            <PublicRoute path="/clients-map" component={ClientsMap} />
+            <PrivateRoute path="/clients-map" component={ClientsMap} />
             <PublicRoute path="/clients-search" component={ClientsSearch} />
             <PublicRoute path="/google" component={SimpleMap} />
           </PrivateContext.Provider>

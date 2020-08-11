@@ -1,41 +1,99 @@
 import React from 'react';
-import './ClientsMap.scss';
+import Header from '../Header/Header';
 import PrivateContext from '../../contexts/PrivateContext';
+import TokenService from '../../services/token-service';
+import config from '../../config';
 
-// for react-google-maps
-import _ from 'lodash';
-import { compose, withProps, lifecycle } from 'recompose';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel';
-import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
+// for @react-google-maps/api
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
+const containerStyle = {
+  width: '400px',
+  height: '400px'
+};
 
-const MapWithClients = withScriptjs(withGoogleMap(props =>
-  <GoogleMap
-    defaultZoom={13}
-    defaultCenter={{ lat: 41.9, lng: -87.62 }}
-  >
-    <div position={{ lat: 41.91, lng: -87.63 }}><h1>HELLO</h1></div>
-    {/* <InfoBox defaultPosition={{ lat: 41.91, lng: -87.63 }} ><h1>This is an info box</h1><p>Hello! hello!</p></InfoBox> */}
-    {/* <MarkerWithLabel position={{ lat: 41.91, lng: -87.63 }} ><div><h1>This is a label</h1><p>Hello! hello!</p></div></MarkerWithLabel> */}
-    {/* <Marker position={{ lat: 41.91, lng: -87.63 }} clickable={true} label="Test Label" title="Test Title" /> */}
-    <Marker position={{ lat: 41.90, lng: -87.62 }} />
-    <Marker position={{ lat: 41.89, lng: -87.63 }} />
-  </GoogleMap>
-));
-
-export default class ClientsMap extends React.Component {
+export default class SimpleMap extends React.Component {
   static contextType = PrivateContext;
 
+  state = {
+    results: [],
+    map: null,
+    center: null,
+  }
+
+  handleClick = () => {
+    console.log('button clicked');
+
+    let searchTerm = 'walgreens';
+
+    return fetch(`${config.API_ENDPOINT}/places?searchTerm=walgreens&center=${this.state.center}`, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+    .then(res =>
+      (!res.ok)
+        ? res.json().then(e => Promise.reject(e))
+        : res.json()
+    )
+    .then(json => {
+      console.log(json);
+      this.setState({results: json})
+    })
+  }
+
+  onLoad = (map) => {
+    const bounds = new window.google.maps.LatLngBounds();
+    map.fitBounds(bounds);
+    this.setState({
+      map: map,
+    })
+  }
+
+  onIdle = () => {
+    // this.setState({center: this.state.map.getCenter()})
+    let lat = this.state.map.getCenter().lat();
+    let lng = this.state.map.getCenter().lng() - 360;
+
+    console.log(lat, lng);
+    this.setState({ center: [lat, lng] });
+  }
+
+  handleMarkerClick = (place_id) => {
+    console.log(place_id);
+    let thisPlace = this.state.results.find((result) => result.place_id === place_id);
+    console.log(thisPlace);
+  }
+
+  componentDidMount() {
+    this.context.fetchClients();
+  }
+
   render() {
+    let stores = [];
+    this.state.results.forEach((store) => {
+      stores.push(store.name);
+    });
+
+    console.log(this.context);
+
     return (
       <>
-        <MapWithClients
-          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyALTeDJY0y4Ui6Q8wtOE0hZooVKsPTapt0&v=3.exp&libraries=geometry,drawing,places"
-          loadingElement={<div style={{ height: `500px` }} />}
-          containerElement={<div style={{ height: `500px` }} />}
-          mapElement={<div style={{ height: `500px` }} />}
-        />
+        <Header />
+        <button onClick={this.handleClick}>Click me</button>
+        <LoadScript googleMapsApiKey="AIzaSyALTeDJY0y4Ui6Q8wtOE0hZooVKsPTapt0">
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            onLoad={this.onLoad}
+            onIdle={this.onIdle}
+          >
+            {this.state.results.map((result) => {
+              return <Marker position={result.geometry.location} onClick={() => this.handleMarkerClick(result.place_id)}></Marker>
+            })}
+          </GoogleMap>
+        </LoadScript>
+
+        <div>{stores}</div>
       </>
     )
   }
