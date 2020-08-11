@@ -18,11 +18,10 @@ export default class GoogleMapComponent extends React.Component {
     centerSet: false,
   }
 
-  handleClick = () => {
-    console.log('button clicked');
+  handleSearch = (searchTerm) => {
+    console.log('searching');
 
-
-    return fetch(`${config.API_ENDPOINT}/places?searchTerm=walgreens&center=${this.state.center}`, {
+    return fetch(`${config.API_ENDPOINT}/places?searchTerm=${searchTerm}&center=${this.state.center}`, {
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
@@ -49,7 +48,7 @@ export default class GoogleMapComponent extends React.Component {
   onIdle = () => {
     // this.setState({center: this.state.map.getCenter()})
     let lat = this.state.map.getCenter().lat();
-    let lng = this.state.map.getCenter().lng() - 360;
+    let lng = this.state.map.getCenter().lng();
 
     console.log(lat, lng);
     this.setState({ center: [lat, lng] });
@@ -61,8 +60,6 @@ export default class GoogleMapComponent extends React.Component {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          console.log('lat', position.coords.latitude)
-          console.log('lng', position.coords.longitude)
           lat = position.coords.latitude
           lng = position.coords.longitude
 
@@ -91,28 +88,44 @@ export default class GoogleMapComponent extends React.Component {
       }
     }
 
-    let stores = [];
-    this.state.results.forEach((store) => {
-      stores.push(store.name);
-    });
+    let markers = [];
+    // if passing in clients, populate the clients
+    if (this.props.clients !== null && this.state.results.length === 0) {
+      this.props.clients.forEach((client) => {
+        let clientPosition = {lat: Number(client.lat), lng: Number(client.lng)};
+        console.log(clientPosition)
+        markers.push(
+          <Marker position={clientPosition} key={client.id} onClick={() => this.handleMarkerClick(client.id)}></Marker>
+        );
+      });
+    }
+
+    // if searching results, populate the results
+    if (this.state.results) {
+      this.state.results.forEach((result) => {
+        console.log()
+        markers.push(
+          <Marker position={result.geometry.location} key={result.place_id} onClick={() => this.handleMarkerClick(result.place_id)}></Marker>
+        );
+      });
+    }
+
+
+
+    console.log(markers)
 
     return (
       <>
-        <button onClick={this.handleClick}>Click me</button>
+        <button onClick={(e) => this.handleSearch('walgreens')}>Click me</button>
         <LoadScript googleMapsApiKey="AIzaSyALTeDJY0y4Ui6Q8wtOE0hZooVKsPTapt0">
           <GoogleMap
             mapContainerStyle={containerStyle}
             onLoad={this.onLoad}
             onIdle={this.onIdle}
           >
-            {this.state.results.map((result) => {
-              console.log(result.geometry.location)
-              return <Marker position={result.geometry.location} onClick={() => this.handleMarkerClick(result.place_id)}></Marker>
-            })}
+            {markers}
           </GoogleMap>
         </LoadScript>
-
-        <div>{stores}</div>
       </>
     )
   }
