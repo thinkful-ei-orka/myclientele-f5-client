@@ -3,7 +3,7 @@ import config from '../config';
 
 const ReportsApiService = {
   getAllReports() {
-    console.log('getAllReports')
+    console.log('getAllReports');
     return fetch(`${config.API_ENDPOINT}/reports`, {
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`,
@@ -29,6 +29,15 @@ const ReportsApiService = {
   },
   getReport(report_id) {
     return fetch(`${config.API_ENDPOINT}/reports/${report_id}`, {
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).then((res) =>
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+    );
+  },
+  getReportsByClientId(client_id) {
+    return fetch(`${config.API_ENDPOINT}/reports/?client_id=${client_id}`, {
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },

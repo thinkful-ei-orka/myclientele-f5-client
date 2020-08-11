@@ -64,7 +64,6 @@ class ClientCard extends React.Component {
             to={{
               pathname: '/take-report',
               state: {
-                key: this.props.key,
                 data: this.props.data,
               },
             }}>

@@ -22,7 +22,7 @@ import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
 import AddClientForm from '../AddClientForm/AddClientForm';
 import ReportsView from '../../components/ReportsView/ReportsView';
 import Report from '../../routes/ReportRoute/Report';
-import TakeReport from '../../routes/TakeReport/TakeReport';
+import TakeReport from '../../components/TakeReport/TakeReport';
 
 export default class App extends React.Component {
   static contextType = UserContext;
@@ -86,7 +86,6 @@ export default class App extends React.Component {
           <PublicRoute path='/login' exact component={HomepageRoute} />
           <PublicRoute path='/sign-up' exact component={HomepageRoute} />
           <PrivateContext.Provider value={contextValue}>
-      
             <Header />
             <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
             <PrivateRoute exact path='/form' component={AddClientForm} />
