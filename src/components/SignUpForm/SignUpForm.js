@@ -1,7 +1,7 @@
 import React from 'react';
 import AuthApiService from '../../services/auth-api-service';
 import UserContext from '../../contexts/UserContext';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import '../LoginForm/loginform.scss';
@@ -11,9 +11,15 @@ class SignUpForm extends React.Component {
 
   state = { error: null, loading: false };
 
+  handleRegistrationSuccess = (user) => {
+    const { history } = this.props;
+    history.push("/login");
+    window.location.reload();
+
+  }
   handleSubmit = (ev) => {
     ev.preventDefault();
-    this.setState({ error: null, loading: true });
+    this.setState({ error: null, loading: true, login_success: false });
 
     const {
       first_name,
@@ -48,8 +54,8 @@ class SignUpForm extends React.Component {
         user_name.value = '';
         password.value = '';
 
-        this.context.processLogin(res.authToken);
-        this.props.history.push('/login');
+        // this.context.processLogin(res.authToken);
+        this.handleRegistrationSuccess();
       })
       .catch((res) => {
         this.setState({ error: res.error, loading: false });
@@ -64,7 +70,6 @@ class SignUpForm extends React.Component {
   render() {
     const { error } = this.state;
     const loading = this.state.loading;
-
     return (
       <div className='user-login'>
         <h2>Sign Up</h2>
