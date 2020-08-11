@@ -1,0 +1,22 @@
+.dropdown {
+    padding: 0px;
+    width: 135px;
+}
+
+.dropdown_item {
+    border: 1px solid black;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.dropdown_item:hover {
+    opacity: 0.5;
+}
+
+a {
+    text-decoration: none;
+}
+
+.confirm_remove_box {
+    border: 1px solid black;
+}
