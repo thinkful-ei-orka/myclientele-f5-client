@@ -3,11 +3,11 @@ import './ClientsMap.scss';
 import PrivateContext from '../../contexts/PrivateContext';
 
 // for react-google-maps
-import _ from 'lodash';
-import { compose, withProps, lifecycle } from 'recompose';
+// import _ from 'lodash';
+// import { compose, withProps, lifecycle } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel';
-import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
+// import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel';
+// import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 
 
 const MapWithClients = withScriptjs(withGoogleMap(props =>

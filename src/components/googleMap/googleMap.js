@@ -17,10 +17,28 @@ export default class SimpleMap extends React.Component {
     center: null,
   }
 
+  componentDidMount() {
+    let lat = 0;
+    let lng = 0;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          console.log('lat', position.coords.latitude)
+          console.log('lng', position.coords.longitude)
+          lat = position.coords.latitude
+          lng = position.coords.longitude
+          if (lat !== 0 && lng !== 0) {
+            this.state.map.setCenter({lat, lng})
+          }
+      })
+    }
+  }
+  
+
   handleClick = () => {
     console.log('button clicked');
 
-    let searchTerm = 'walgreens';
+    // let searchTerm = 'walgreens';
 
     return fetch(`${config.API_ENDPOINT}/places?searchTerm=walgreens&center=${this.state.center}`, {
       headers: {

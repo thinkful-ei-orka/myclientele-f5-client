@@ -18,8 +18,10 @@ import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
 import AddClientForm from '../AddClientForm/AddClientForm';
 import ClientsMap from '../ClientsMap/ClientsMap';
 import ClientsSearch from '../ClientsSearch/ClientsSearch';
-import GoogleExperiment from '../GoogleExperiment/GoogleExperiment';
+// import GoogleExperiment from '../GoogleExperiment/GoogleExperiment';
 import SimpleMap from '../SimpleMap/SimpleMap';
+import AddClient from '../../routes/AddClientRoute/AddClientRoute'
+import AddClientMap from '../AddClient/AddClient';
 
 export default class App extends React.Component {
   static contextType = UserContext;
@@ -89,10 +91,11 @@ export default class App extends React.Component {
             <PrivateRoute path="/" exact component={ClientsRoute} />
             <PublicRoute exact path='/form' component={AddClientForm} />
             <PrivateRoute path="/schedule" component={ClientsRoute} />
-            <PublicRoute path="/add-client" component={ClientsRoute} />
+            <PublicRoute path="/add-client" component={AddClient} />
             <PublicRoute path="/clients-map" component={ClientsMap} />
             <PublicRoute path="/clients-search" component={ClientsSearch} />
             <PublicRoute path="/google" component={SimpleMap} />
+            <PublicRoute path="/add-client-map" component={AddClientMap} />
           </PrivateContext.Provider>
         </Switch>
       </div>

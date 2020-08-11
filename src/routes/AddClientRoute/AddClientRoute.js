@@ -1,5 +1,10 @@
 import React from 'react';
+import AddClient from '../../components/AddClient/AddClient'
+import SimpleMap from '../../components/SimpleMap/SimpleMap'
 
 export default function AddClientRoute() {
-  return <h1>Hello</h1>;
+  return <section>
+    <AddClient />
+    <SimpleMap />
+  </section>
 }
