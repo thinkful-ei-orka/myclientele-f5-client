@@ -11,7 +11,7 @@
 // Style for mobile and desktop
 
 import React from 'react';
-import SimpleMap from '../SimpleMap/SimpleMap'
+import GoogleMap from '../GoogleMap/GoogleMap'
 
 class AddClient extends React.Component {
   constructor(props) {
@@ -42,10 +42,10 @@ class AddClient extends React.Component {
 
   render() {
     console.log('state', this.state)
-    
+
     return (
       <section>
-        <SimpleMap />
+        <GoogleMap />
       </section>
     )
   }
