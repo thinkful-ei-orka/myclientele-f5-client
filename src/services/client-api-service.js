@@ -1,5 +1,5 @@
-import TokenService from './token-service';
-import config from '../config';
+import TokenService from "./token-service";
+import config from "../config";
 
 const ClientApiService = {
   getAllClients() {
@@ -34,10 +34,10 @@ const ClientApiService = {
     };
 
     return fetch(`${config.API_ENDPOINT}/clients`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'authorization': `bearer ${TokenService.getAuthToken()}`,
-        'content-type': 'application/json',
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+        "content-type": "application/json",
       },
       body: JSON.stringify(client),
     }).then((res) =>
@@ -75,25 +75,21 @@ const ClientApiService = {
     };
 
     return fetch(`${config.API_ENDPOINT}/clients/${client_id}`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
-        'authorization': `bearer ${TokenService.getAuthToken()}`,
-        'content-type': 'application/json',
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+        "content-type": "application/json",
       },
       body: JSON.stringify(client),
-    }).then((res) =>
-      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
-    );
+    }).then((res) => (!res.ok ? res.json().then((e) => Promise.reject(e)) : 0));
   },
   deleteClient(client_id) {
     return fetch(`${config.API_ENDPOINT}/clients/${client_id}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-    }).then((res) =>
-      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
-    );
+    }).then((res) => (!res.ok ? res.json().then((e) => Promise.reject(e)) : 0));
   },
 };
 
