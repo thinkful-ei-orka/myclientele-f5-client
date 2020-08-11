@@ -24,24 +24,34 @@ class Schedule extends React.Component {
     let date = new Date();
       this.setState({todayOfWeek: date.getDay()})
 
-    if (this.context.scheduleFilter == null) {
-      this.context.setScheduleFilter(this.state.todayOfWeek)
-    }
+    // if (this.context.scheduleFilter == null) {
+    //   this.context.setScheduleFilter(this.state.todayOfWeek)
+    //   console.log(this.context.scheduleFilter)
+    //}
   }
 
   render() {
-    console.log(this.context.scheduleFilter)
-    let clientsFilter = this.context.clients
-    if (this.context.scheduleFilter !== null) {
-      clientsFilter = this.context.clients.filter(client => client.day_of_week === this.context.scheduleFilter)
-      }
-    
+console.log(this.context.scheduleFilter)
+
     if (this.context.clients == null) {
       return <div>Loading...</div>;
     }
 
+    let clientsFilter = this.context.clients.filter(client => 
+      client.day_of_week == this.state.todayOfWeek)
+
+    if (this.context.scheduleFilter) {
+      clientsFilter = this.context.clients.filter(client => 
+        client.day_of_week == this.context.scheduleFilter)
+      }
+
+    if (this.context.scheduleFilter == 7) {
+      clientsFilter = this.context.clients
+      }
+    
+
     return (
-      <div className='schedule-page'>
+      <div className='schedule-page' >
           <ScheduleDropDown today={this.state.todayOfWeek}/>
         {clientsFilter.map((store) => (
           <ClientCard data={store} key={store.id} />
