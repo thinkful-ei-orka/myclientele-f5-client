@@ -1,8 +1,6 @@
 import React from 'react';
 import Header from '../Header/Header';
 import PrivateContext from '../../contexts/PrivateContext';
-import TokenService from '../../services/token-service';
-import config from '../../config';
 
 // for @react-google-maps/api
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
@@ -12,7 +10,7 @@ const containerStyle = {
   height: '400px'
 };
 
-export default class SimpleMap extends React.Component {
+export default class ClientsMap extends React.Component {
   static contextType = PrivateContext;
 
   state = {

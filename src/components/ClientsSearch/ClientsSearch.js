@@ -3,14 +3,14 @@ import './ClientsSearch.scss';
 import PrivateContext from '../../contexts/PrivateContext';
 
 // for react-google-maps
-import _ from 'lodash';
+// import _ from 'lodash';
 import { compose, withProps, lifecycle } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel';
+// import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel';
 import { SearchBox } from 'react-google-maps/lib/components/places/SearchBox';
 
 // for @react-google-maps/api
-import { StandaloneSearchBox } from '@react-google-maps/api';
+// import { StandaloneSearchBox } from '@react-google-maps/api';
 
 // using react-google-maps
 const MapWithASearchBox = compose(
@@ -23,8 +23,8 @@ const MapWithASearchBox = compose(
   lifecycle({
     componentWillMount() {
       const refs = {}
-      let boundsTimer = null;
-      let boundsChanging = false;
+      // let boundsTimer = null;
+      // let boundsChanging = false;
 
       this.setState({
         bounds: null,
