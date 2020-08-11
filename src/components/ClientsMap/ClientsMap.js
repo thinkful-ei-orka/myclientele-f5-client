@@ -16,30 +16,8 @@ export default class SimpleMap extends React.Component {
   static contextType = PrivateContext;
 
   state = {
-    results: [],
     map: null,
     center: null,
-  }
-
-  handleClick = () => {
-    console.log('button clicked');
-
-    let searchTerm = 'walgreens';
-
-    return fetch(`${config.API_ENDPOINT}/places?searchTerm=walgreens&center=${this.state.center}`, {
-      headers: {
-        'authorization': `bearer ${TokenService.getAuthToken()}`,
-      },
-    })
-    .then(res =>
-      (!res.ok)
-        ? res.json().then(e => Promise.reject(e))
-        : res.json()
-    )
-    .then(json => {
-      console.log(json);
-      this.setState({results: json})
-    })
   }
 
   onLoad = (map) => {
@@ -61,8 +39,8 @@ export default class SimpleMap extends React.Component {
 
   handleMarkerClick = (place_id) => {
     console.log(place_id);
-    let thisPlace = this.state.results.find((result) => result.place_id === place_id);
-    console.log(thisPlace);
+    // let thisPlace = this.state.results.find((result) => result.place_id === place_id);
+    // console.log(thisPlace);
   }
 
   componentDidMount() {
@@ -70,30 +48,33 @@ export default class SimpleMap extends React.Component {
   }
 
   render() {
-    let stores = [];
-    this.state.results.forEach((store) => {
-      stores.push(store.name);
-    });
+    let clientMarkers = [];
 
-    console.log(this.context);
+    if (this.context.clients !== null) {
+      console.log(this.context);
+      this.context.clients.forEach((client) => {
+        let clientPosition = {lat: Number(client.lat), lng: Number(client.lng)};
+        clientMarkers.push(
+          <Marker position={clientPosition} onClick={() => this.handleMarkerClick(client.id)}></Marker>
+        );
+      });
+    }
+
+    console.log('clientMakers', clientMarkers);
 
     return (
       <>
         <Header />
-        <button onClick={this.handleClick}>Click me</button>
         <LoadScript googleMapsApiKey="AIzaSyALTeDJY0y4Ui6Q8wtOE0hZooVKsPTapt0">
           <GoogleMap
             mapContainerStyle={containerStyle}
             onLoad={this.onLoad}
             onIdle={this.onIdle}
           >
-            {this.state.results.map((result) => {
-              return <Marker position={result.geometry.location} onClick={() => this.handleMarkerClick(result.place_id)}></Marker>
-            })}
+            <Marker position={{lat: 151.235, lng: -33.74}}></Marker>
+            {clientMarkers}
           </GoogleMap>
         </LoadScript>
-
-        <div>{stores}</div>
       </>
     )
   }

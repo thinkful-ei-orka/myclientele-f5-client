@@ -77,6 +77,7 @@ export default class SimpleMap extends React.Component {
             onIdle={this.onIdle}
           >
             {this.state.results.map((result) => {
+              console.log(result.geometry.location)
               return <Marker position={result.geometry.location} onClick={() => this.handleMarkerClick(result.place_id)}></Marker>
             })}
           </GoogleMap>
