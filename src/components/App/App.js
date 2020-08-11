@@ -91,13 +91,8 @@ export default class App extends React.Component {
             <PrivateRoute path="/" exact component={ClientsRoute} />
             <PublicRoute exact path='/form' component={AddClientForm} />
             <PrivateRoute path="/schedule" component={ClientsRoute} />
-<<<<<<< HEAD
-            <PublicRoute path="/add-client" component={ClientsRoute} />
-            <PrivateRoute path="/clients-map" component={ClientsMap} />
-=======
             <PublicRoute path="/add-client" component={AddClient} />
-            <PublicRoute path="/clients-map" component={ClientsMap} />
->>>>>>> 835b08b2c6db083665765ae6036142e622963e01
+            <PrivateRoute path="/clients-map" component={ClientsMap} />
             <PublicRoute path="/clients-search" component={ClientsSearch} />
             <PublicRoute path="/google" component={SimpleMap} />
             <PublicRoute path="/add-client-map" component={AddClientMap} />
