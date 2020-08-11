@@ -1,6 +1,6 @@
 import React from "react";
 import './AddClientForm.scss';
-import ScheduleDropDown from "../Dropdown/Dropdown";
+// import ScheduleDropDown from "../Dropdown/Dropdown";
 
 export default class AddClientForm extends React.Component {
   state = {
