@@ -1,19 +1,20 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
-import './AddClientForm.scss';
-import ScheduleDropDown from '../Dropdown/Dropdown';
-import ClientApiService from '../../services/client-api-service';
-import PrivateContext from '../../contexts/PrivateContext';
+import React from "react";
+import { withRouter } from "react-router-dom";
+import "./AddClientForm.scss";
+import ScheduleDropDown from "../Dropdown/Dropdown";
+import ClientApiService from "../../services/client-api-service";
+import PrivateContext from "../../contexts/PrivateContext";
 
 class AddClientForm extends React.Component {
   state = {
-    name: '',
-    location: '',
-    hours_of_operation: '',
+    name: "",
+    location: "",
+    hours_of_operation: "",
     currently_closed: false,
-    general_manager: '',
+    general_manager: "",
     day_of_week: 0,
-    notes: '',
+    notes: "",
+    button_text: "Add Client",
   };
   static contextType = PrivateContext;
 
@@ -38,19 +39,36 @@ class AddClientForm extends React.Component {
       notes,
       general_manager
     );
-    ClientApiService.addClient(
-      name,
-      location,
-      day_of_week,
-      hours_of_operation,
-      currently_closed,
-      notes,
-      general_manager
-    )
-      .then(() => {
-        this.context.fetchClients();
-      })
-      .then(() => this.props.history.push('/schedule'));
+    if(this.props.location.state) {
+      ClientApiService.updateClient(
+        this.props.location.state.data.id,
+        name,
+        location,
+        day_of_week,
+        hours_of_operation,
+        currently_closed,
+        notes,
+        general_manager
+      )
+        .then(() => {
+          this.context.fetchClients();
+        })
+        .then(() => this.props.history.push("/schedule"));
+    } else {
+      ClientApiService.addClient(
+        name,
+        location,
+        day_of_week,
+        hours_of_operation,
+        currently_closed,
+        notes,
+        general_manager
+      )
+        .then(() => {
+          this.context.fetchClients();
+        })
+        .then(() => this.props.history.push("/schedule"));
+    }
   };
   setName = (e) => {
     this.setState({
@@ -90,21 +108,22 @@ class AddClientForm extends React.Component {
 
   renderSelectField = () => {
     let daysOfWeek = [
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday',
-      'I dont visit this client weekly',
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+      "I dont visit this client weekly",
     ];
     return (
       <select
-        className='day_dropdown'
-        name='day_dropdown'
+        className="day_dropdown"
+        name="day_dropdown"
         value={this.state.day_of_week}
-        onChange={this.setDayOfWeek}>
+        onChange={this.setDayOfWeek}
+      >
         {daysOfWeek.map((day, index) => {
           return (
             <option value={index} key={day}>
@@ -115,69 +134,92 @@ class AddClientForm extends React.Component {
       </select>
     );
   };
+  checkProps = () => {
+    if (this.props.location.state) {
+      const {
+        name,
+        location,
+        hours_of_operation,
+        general_manager,
+        notes,
+      } = this.props.location.state.data;
+      this.setState({
+        name,
+        location,
+        hours_of_operation,
+        general_manager,
+        notes,
+        button_text: 'Update Client'
+      });
+    }
+  };
+
+  componentDidMount() {
+    this.checkProps();
+  }
 
   render() {
     return (
-      <form className='add_client_form' onSubmit={(e) => this.handleSubmit(e)}>
-        <h2 id='title'>Add a client</h2>
-        <label htmlFor='name'>Name *</label>
+      <form className="add_client_form" onSubmit={(e) => this.handleSubmit(e)}>
+        <h2 id="title">Add a client</h2>
+        <label htmlFor="name">Name *</label>
         <input
-          type='text'
-          id='client_name'
-          name='name'
+          type="text"
+          id="client_name"
+          name="name"
           required
           value={this.state.name}
           onChange={this.setName}
         />
-        <label htmlFor='location'>Location *</label>
+        <label htmlFor="location">Location *</label>
         <input
-          type='text'
-          id='client_location'
-          name='location'
+          type="text"
+          id="client_location"
+          name="location"
           required
           value={this.state.location}
           onChange={this.setLocation}
         />
 
-        <label htmlFor='hours_of_operation'>Hours of Operation *</label>
+        <label htmlFor="hours_of_operation">Hours of Operation *</label>
         <input
-          type='text'
-          id='client_hours_of_operation'
-          name='hours_of_operation'
+          type="text"
+          id="client_hours_of_operation"
+          name="hours_of_operation"
           required
           value={this.state.hours_of_operation}
           onChange={this.setHours}
         />
-        <label htmlFor='currently_closed'>
+        <label htmlFor="currently_closed">
           Is this store currently closed? If yes, check box.
         </label>
         <input
-          type='checkbox'
-          id='client_currently_closed'
-          name='currently_closed'
+          type="checkbox"
+          id="client_currently_closed"
+          name="currently_closed"
           value={this.state.currently_closed}
           onChange={this.setCurrentlyClosed}
         />
-        <label htmlFor='general_manager'>General Manager (optional)</label>
+        <label htmlFor="general_manager">General Manager (optional)</label>
         <input
-          type='text'
-          id='client_general_manager'
-          name='general_manager'
+          type="text"
+          id="client_general_manager"
+          name="general_manager"
           value={this.state.general_manager}
           onChange={this.setGM}
         />
-        <label htmlFor='notes'>Additional Notes (optional)</label>
+        <label htmlFor="notes">Additional Notes (optional)</label>
         <input
-          type='textarea'
-          id='client_notes'
-          name='notes'
+          type="textarea"
+          id="client_notes"
+          name="notes"
           value={this.state.notes}
           onChange={this.setNotes}
         />
         <p>What day of the week do you visit this client?</p>
         {this.renderSelectField()}
-        <button className='btn' type='submit' id='submit_button'>
-          Add Client
+        <button className="btn" type="submit" id="submit_button">
+          {this.state.button_text}
         </button>
       </form>
     );
