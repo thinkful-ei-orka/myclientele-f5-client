@@ -10,6 +10,7 @@ class Schedule extends React.Component {
     super(props);
     this.state = {
       isLoading: true,
+      todayOfWeek: null,
     };
   }
 
@@ -19,19 +20,30 @@ class Schedule extends React.Component {
         .fetchClients()
         .then(() => this.setState({ isLoading: false }));
     }
+
+    let date = new Date();
+      this.setState({todayOfWeek: date.getDay()})
+
+    if (this.context.scheduleFilter == null) {
+      this.context.setScheduleFilter(this.state.todayOfWeek)
+    }
   }
 
   render() {
-    console.log(this.context.clients);
-
+    console.log(this.context.scheduleFilter)
+    let clientsFilter = this.context.clients
+    if (this.context.scheduleFilter !== null) {
+      clientsFilter = this.context.clients.filter(client => client.day_of_week === this.context.scheduleFilter)
+      }
+    
     if (this.context.clients == null) {
       return <div>Loading...</div>;
     }
 
     return (
       <div className='schedule-page'>
-        <ScheduleDropDown />
-        {this.context.clients.map((store) => (
+          <ScheduleDropDown today={this.state.todayOfWeek}/>
+        {clientsFilter.map((store) => (
           <ClientCard data={store} key={store.id} />
         ))}
       </div>

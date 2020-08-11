@@ -33,6 +33,7 @@ export default class App extends React.Component {
     reports: null,
     company: null,
     user: this.context.user,
+    scheduleFilter: null,
     // this is pulling the user from the user context at the moment
     // this has user_id, company_id, name, and username
     // user potentially has more information like email, phone_number, and admin
@@ -71,6 +72,10 @@ export default class App extends React.Component {
     this.setState(newContext);
   };
 
+  setScheduleFilter = (newFilter) => {
+    this.setState({scheduleFilter: newFilter})
+  }
+
   render() {
     let contextValue = this.state;
     contextValue.fetchContext = this.fetchContext;
@@ -78,6 +83,7 @@ export default class App extends React.Component {
     contextValue.fetchReports = this.fetchReports;
     contextValue.fetchCompany = this.fetchCompany;
     contextValue.updateContext = this.updateContext;
+    contextValue.setScheduleFilter = this.setScheduleFilter;
 
     return (
       <div className='App'>
