@@ -37,6 +37,10 @@ class ScheduleDropDown extends React.Component {
     this.context.setScheduleFilter(filterValue)
   };
 
+  handleSearchChange = (e) => {
+    this.context.setScheduleSearch(e.target.value)
+  }
+
   render() {
     // console.log(this.props.today)
     return (
@@ -45,13 +49,13 @@ class ScheduleDropDown extends React.Component {
           Filter:
           <img src={arrow} alt='drop down arrow' />
         </div>
-        <select className='filter-dropdown-list' defaultValue={this.props.today}onChange={this.handleFilterChange}>
+        <select className='filter-dropdown-list' defaultValue={this.props.today} onChange={this.handleFilterChange}>
           <option key={7} value={7}>No Filter</option>
           {Object.entries(this.dayOfWeekList).map(([key, value]) => (
             <option key={key} value={key}>{value}</option>
           ))}
         </select>
-        <input type='search'></input>
+        <input type='search' onChange={this.handleSearchChange}></input>
       </div>
     );
   }

@@ -31,7 +31,6 @@ class Schedule extends React.Component {
   }
 
   render() {
-console.log(this.context.scheduleFilter)
 
     if (this.context.clients == null) {
       return <div>Loading...</div>;
@@ -47,6 +46,14 @@ console.log(this.context.scheduleFilter)
 
     if (this.context.scheduleFilter == 7) {
       clientsFilter = this.context.clients
+      }
+
+    if (this.context.scheduleSearch) {
+      const searchTerm = this.context.scheduleSearch.toLowerCase()
+      console.log(clientsFilter)
+      clientsFilter = clientsFilter.filter(client => 
+        client.name.toLowerCase().includes(searchTerm))
+      console.log(clientsFilter)
       }
     
 
