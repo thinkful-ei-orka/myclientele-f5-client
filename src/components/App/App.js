@@ -18,7 +18,7 @@ import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
 import AddClientForm from '../AddClientForm/AddClientForm';
 import ClientsMap from '../ClientsMap/ClientsMap';
 import ClientsSearch from '../ClientsSearch/ClientsSearch';
-// import GoogleExperiment from '../GoogleExperiment/GoogleExperiment';
+import GoogleExperiment from '../GoogleExperiment/GoogleExperiment';
 import AddClientRoute from '../../routes/AddClientRoute/AddClientRoute'
 import AddClientMap from '../AddClient/AddClient';
 import GoogleMapComponent from '../GoogleMap/GoogleMap';
@@ -94,7 +94,7 @@ export default class App extends React.Component {
             <PublicRoute path="/add-client" component={AddClientRoute} />
             <PrivateRoute path="/clients-map" component={ClientsMap} />
             <PublicRoute path="/clients-search" component={ClientsSearch} />
-            <PublicRoute path="/google" component={GoogleMapComponent} />
+            <PrivateRoute path="/google" component={GoogleExperiment} />
             <PublicRoute path="/add-client-map" component={AddClientMap} />
           </PrivateContext.Provider>
         </Switch>

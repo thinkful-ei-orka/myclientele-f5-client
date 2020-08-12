@@ -6,17 +6,27 @@ import GoogleMapComponent from '../GoogleMap/GoogleMap';
 export default class ClientsMap extends React.Component {
   static contextType = PrivateContext;
 
+  state = {
+    center: null,
+  }
+
+  setCenter = (center) => {
+    this.setState({
+      center: center,
+    });
+  }
+
   componentDidMount() {
     this.context.fetchClients();
   }
 
   render() {
-    console.log(this.context.clients);
+    console.log('clients', this.context.clients);
 
     return (
       <>
         <Header />
-        <GoogleMapComponent clients={this.context.clients}></GoogleMapComponent>
+        <GoogleMapComponent markers={this.context.clients} setCenter={this.setCenter}></GoogleMapComponent>
       </>
     )
   }
