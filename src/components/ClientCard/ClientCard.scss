@@ -1,22 +1,154 @@
+@import '../../index.scss';
+
 .dropdown {
-    padding: 0px;
-    width: 135px;
+  padding: 0px;
+  width: 135px;
 }
 
 .dropdown_item {
-    border: 1px solid black;
-    text-align: right;
-    padding-right: 10px;
+  border: 1px solid black;
+  text-align: right;
+  padding-right: 10px;
 }
 
 .dropdown_item:hover {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .confirm_remove_box {
-    border: 1px solid black;
+  border: 1px solid black;
+}
+
+//Being client card scss
+.client-card {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: auto;
+  border-top: 1px solid grey;
+  height: 150px;
+  justify-content: space-between;
+}
+.company-logo img {
+  width: 80%;
+}
+.information-area * {
+  padding: 5px;
+  margin: 0 auto;
+}
+h2 {
+  text-transform: uppercase;
+}
+
+.information-area {
+  height: 100%;
+  width: 90%;
+
+  text-transform: capitalize;
+
+  padding: 0 5px;
+}
+.location {
+  font-size: 1.2rem;
+}
+
+.button-area {
+  padding: none;
+  display: flex;
+  flex-direction: column;
+  width: 50px;
+  height: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+
+  button {
+    width: 40px;
+    padding: none;
+    height: 40px;
+    border-radius: 100%;
+    border: none;
+    background-color: $purple;
+    padding: 0px;
+
+    img {
+      margin: 0;
+    }
+  }
+  //   img {
+  //     padding: none;
+  //     width: 70%;
+  //     color: white;
+  //     margin: auto;
+  //   }
+  .add-button {
+    background-color: $green;
+  }
+}
+#button-text {
+  color: white;
+}
+@media only screen and (min-width: 600px) {
+  .button-area {
+    width: 100%;
+    height: auto;
+
+    button {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+
+      margin: 5px;
+      border-radius: 5px;
+      font-size: 20px;
+      padding: 10px;
+
+      img {
+        width: 30px;
+      }
+    }
+  }
+  .client-card {
+    margin: 10px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    flex-direction: column;
+    width: 30%;
+    height: auto;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+  }
+}
+
+.client-hours::before {
+  content: '●';
+  font-size: 2rem;
+}
+
+.open::before {
+  color: green;
+}
+
+.closed::before {
+  color: red;
+}
+.client-hours {
+  font-size: 20px;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
