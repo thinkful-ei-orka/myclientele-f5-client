@@ -25,7 +25,7 @@ class Report extends React.Component {
       if (this.state.report.photo_url === '') {
         photo_url = 'https://via.placeholder.com/150'
       } else {
-        photo_url = this.state.photo_url
+        photo_url = this.state.report.photo_url
       }
     }
     console.log(photo_url)
