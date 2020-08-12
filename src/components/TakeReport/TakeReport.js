@@ -2,6 +2,7 @@ import React from 'react';
 import ReportsApiService from '../../services/reports-api-service';
 import { withRouter, Link } from 'react-router-dom';
 import './takereport.scss';
+import S3ApiService from '../../services/s3-api-service';
 
 class TakeReport extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class TakeReport extends React.Component {
         this.setState({ reports: res, isLoading: false });
       });
     }
+    S3ApiService.getUploadUrl().then((res) => console.log(res));
   }
 
   render() {
