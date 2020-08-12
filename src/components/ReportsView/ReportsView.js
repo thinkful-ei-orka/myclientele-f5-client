@@ -22,9 +22,6 @@ class Reports extends React.Component {
   }
 
   render() {
-    console.log('context', this.context);
-    console.log('props', this.props);
-    console.log('ReaportsApiService', ReportsApiService);
     console.log('reports in state', this.state.reports);
     let reports = this.state.reports;
     if (reports) {
@@ -34,7 +31,6 @@ class Reports extends React.Component {
         }
       });
     }
-    console.log('reports var', reports);
     if (this.state.reports.length === 0) {
       return <section>Fetching Reports</section>;
     }

@@ -31,16 +31,12 @@ class TakeReport extends React.Component {
         method: "PUT",
         body: file
       })
-    })
-      .then((data) => this.setState({
-        img_src: data.url
-      }))
-      .catch((error) => console.log(error))
-    
-
-    // ReportsApiService.addReport(this.client_id, notes, photo_url).then(() => {
-    //   this.props.history.push('/schedule');
-    // });
+    }).then((data) =>  
+          ReportsApiService.addReport(this.client_id, notes, data.url.split('?')[0])
+            .then(() => {
+              this.props.history.push('/schedule');
+            })
+      ).catch((error) => console.log(error))
   };
   componentDidMount() {
     if (this.state.reports.length === 0) {
@@ -52,6 +48,7 @@ class TakeReport extends React.Component {
   }
 
   render() {
+    console.log(this.state.img_src);
     if (this.state.isLoading) {
       return <div>Loading...</div>;
     }
@@ -90,10 +87,6 @@ class TakeReport extends React.Component {
             <button className="btn">Submit</button>
           </form>
         </div>
-        {this.state.img_src 
-        ? <img src={this.state.img_src}alt='img' />
-        : ""
-        }
         <section aria-label="Your reports" className="report-list">
           <h1>Previous Reports</h1>
 
