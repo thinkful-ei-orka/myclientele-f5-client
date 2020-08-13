@@ -26,41 +26,53 @@ class SignUpForm extends React.Component {
       last_name,
       user_name,
       password,
+      retype_password,
       company_name,
       company_location,
       email,
       phone_number,
     } = ev.target;
     const name = `${first_name.value} ${last_name.value}`;
-
-    AuthApiService.postUser({
-      name: name,
-      user_name: user_name.value,
-      password: password.value,
-      company_name: company_name.value,
-      company_location: company_location.value,
-      // boss_id: ??,
-      admin: true,
-      email: email.value,
-      phone_number: phone_number.value,
-    })
-      .then((res) => {
-        first_name.value = '';
-        last_name.value = '';
-        email.value = '';
-        phone_number.value = '';
-        company_name.value = '';
-        company_location.value = '';
-        user_name.value = '';
-        password.value = '';
-
-        // this.context.processLogin(res.authToken);
-        this.handleRegistrationSuccess();
+    const verifyMatchingPasswords = this.verifyPasswords(password.value, retype_password.value);
+    if(!verifyMatchingPasswords) {
+      this.setState({
+        loading: false,
+        error: "Passwords do not match.  Please try again"
       })
-      .catch((res) => {
-        this.setState({ error: res.error, loading: false });
-      });
+    } else {
+      AuthApiService.postUser({
+        name: name,
+        user_name: user_name.value,
+        password: password.value,
+        company_name: company_name.value,
+        company_location: company_location.value,
+        // boss_id: ??,
+        admin: true,
+        email: email.value,
+        phone_number: phone_number.value,
+      })
+        .then((res) => {
+          first_name.value = '';
+          last_name.value = '';
+          email.value = '';
+          phone_number.value = '';
+          company_name.value = '';
+          company_location.value = '';
+          user_name.value = '';
+          password.value = '';
+  
+          // this.context.processLogin(res.authToken);
+          this.handleRegistrationSuccess();
+        })
+        .catch((res) => {
+          this.setState({ error: res.error, loading: false });
+        });
+    }
   };
+
+  verifyPasswords(a, b) {
+    return a === b;
+  }
 
   firstInput = React.createRef();
   componentDidMount() {
@@ -115,6 +127,8 @@ class SignUpForm extends React.Component {
 
           <label htmlFor='password'>Password</label>
           <input type='password' id='password' name='password' required></input>
+          <label htmlFor='retype_password'>Retype Password</label>
+          <input type='password' id='retype_password' name='retype_password' required></input>
 
           <div className='buttons-on-login'>
             {!loading && (
