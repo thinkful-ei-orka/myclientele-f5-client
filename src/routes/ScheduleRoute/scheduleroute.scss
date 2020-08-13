@@ -5,7 +5,20 @@
   border: 1px solid grey;
   padding: 10px;
   font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
 }
+
+.schedule-drop-down > div {
+  margin: 5px;
+}
+
+.filter-dropdown-list {
+  margin: 5px;
+}
+
 .schedule-page {
   width: 90%;
   margin: auto;
@@ -89,4 +102,12 @@
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+@media screen and (min-width: 480px) {
+  .schedule-drop-down {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: baseline;
+  }
 }
