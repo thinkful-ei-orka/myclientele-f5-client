@@ -1,7 +1,8 @@
 import React from 'react';
+import './GoogleMap.scss';
 
 // for @react-google-maps/api
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
 const containerStyle = {
   width: '400px',
@@ -12,8 +13,8 @@ export default class GoogleMapComponent extends React.Component {
   state = {
     results: [],
     map: null,
-    center: null,
     centerSet: false,
+    infoWindow: null,
   }
 
   onLoad = (map) => {
@@ -22,6 +23,7 @@ export default class GoogleMapComponent extends React.Component {
     this.setState({
       map: map,
     })
+    this.setCenter();
   }
 
   onIdle = () => {
@@ -31,40 +33,51 @@ export default class GoogleMapComponent extends React.Component {
     this.props.setCenter([lat, lng]);
   }
 
+  onClick = () => {
+    this.setState({
+      infoWindow: null,
+    })
+  }
+
   setCenter = () => {
     let lat = 0;
     let lng = 0;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          lat = position.coords.latitude
-          lng = position.coords.longitude
+          lat = position.coords.latitude;
+          lng = position.coords.longitude;
 
           if (lat !== 0 && lng !== 0) {
+            console.log(lat, lng);
             this.state.map.setCenter({lat, lng})
+            console.log('center set', this.state.map.center.lat(), this.state.map.center.lng())
           }
       })
     }
-
-    this.setState({centerSet: true});
   }
 
-  handleMarkerClick = (id) => {
-    console.log(id);
+  handleMarkerClick = (id, lat, lng, content) => {
     // let thisPlace = this.state.results.find((result) => result.place_id === place_id);
     // console.log(thisPlace);
+    this.setState({
+      infoWindow: <InfoWindow
+          key={id}
+          onLoad={this.onInfoLoad}
+          position={{lat: lat, lng: lng}}
+        >
+          <div>
+            {content}
+          </div>
+        </InfoWindow>
+    })
+  }
+
+  onInfoLoad = (infoWindow) => {
+    // console.log('infoWindow: ', infoWindow)
   }
 
   render() {
-    // set the center of the map
-    if (this.state.map !== null) {
-      if (this.state.map.center !== undefined) {
-        if (this.state.centerSet === false) {
-          this.setCenter();
-        }
-      }
-    }
-
     let markers = [];
 
     // if searching results, populate the results
@@ -74,7 +87,13 @@ export default class GoogleMapComponent extends React.Component {
         let lng = Number(marker.lng);
 
         markers.push(
-          <Marker position={{lat: lat, lng: lng}} key={marker.id} onClick={() => this.handleMarkerClick(marker.id)}></Marker>
+          <Marker
+            key={marker.id}
+            position={{lat: lat, lng: lng}}
+            onClick={() => this.handleMarkerClick(marker.id, lat, lng, <div><p>This event is fired when the containing the InfoWindow's content is attached to the DOM. You may wish to monitor this event if you are building out your info window content dynamically.</p>
+            <button>button</button></div>)}
+          >
+          </Marker>
         );
       });
     }
@@ -86,6 +105,7 @@ export default class GoogleMapComponent extends React.Component {
             mapContainerStyle={containerStyle}
             onLoad={this.onLoad}
             onIdle={this.onIdle}
+            onClick={this.onClick}
             options={{
               fullscreenControl: false,
               streetViewControl: false,
@@ -93,6 +113,7 @@ export default class GoogleMapComponent extends React.Component {
             }}
           >
             {markers}
+            {this.state.infoWindow}
           </GoogleMap>
         </LoadScript>
       </>
