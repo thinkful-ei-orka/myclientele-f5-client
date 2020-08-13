@@ -30,15 +30,6 @@ class AddClientForm extends React.Component {
       general_manager,
     } = this.state;
 
-    console.log(
-      name,
-      location,
-      day_of_week,
-      hours_of_operation,
-      currently_closed,
-      notes,
-      general_manager
-    );
     if(this.props.location.state) {
       ClientApiService.updateClient(
         this.props.location.state.data.id,

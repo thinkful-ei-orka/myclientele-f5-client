@@ -18,7 +18,6 @@ class ClientCard extends React.Component {
   };
 
   renderThreeDotsButton = () => {
-    console.log("three dots called");
     return (
       <div className="dropdown_box">
         <ul className="dropdown">
@@ -115,7 +114,7 @@ class ClientCard extends React.Component {
       hours_of_operation,
       notes,
     } = this.props.data;
-    // console.log(this.props.data);
+
     //TODO: Create function to handle the visually hidden portion for screen readers
 
     return (

@@ -22,7 +22,6 @@ export default class ClientsMap extends React.Component {
   }
 
   handleSearch = (searchTerm) => {
-    e.preventDefault();
     console.log('searching');
 
     return fetch(`${config.API_ENDPOINT}/places?searchTerm=${this.state.searchTerm}&center=${this.state.center}`, {

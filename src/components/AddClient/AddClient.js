@@ -27,8 +27,6 @@ class AddClient extends React.Component {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          console.log('lat', position.coords.latitude)
-          console.log('lng', position.coords.longitude)
           lat = position.coords.latitude
           lng = position.coords.longitude
           if (lat !== 0 && lng !== 0) {
@@ -41,7 +39,6 @@ class AddClient extends React.Component {
   }
 
   render() {
-    console.log('state', this.state)
 
     return (
       <section>
