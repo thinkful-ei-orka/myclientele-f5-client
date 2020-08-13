@@ -1,8 +1,9 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+// import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import './App.scss';
 
-import { UserProvider } from '../../contexts/UserContext';
+// import { UserProvider } from '../../contexts/UserContext';
 import PrivateContext from '../../contexts/PrivateContext';
 import UserContext from '../../contexts/UserContext';
 
@@ -18,11 +19,13 @@ import PublicRoute from '../PublicRoute/PublicRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 import HomepageRoute from '../../routes/HomepageRoute/HomepageRoute';
-import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
+// import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
 import AddClientForm from '../AddClientForm/AddClientForm';
 import ReportsView from '../../components/ReportsView/ReportsView';
 import Report from '../../routes/ReportRoute/Report';
 import TakeReport from '../../components/TakeReport/TakeReport';
+import GoogleExperiment from '../../components/GoogleExperiment/GoogleExperiment'
+
 
 export default class App extends React.Component {
   static contextType = UserContext;
@@ -98,6 +101,8 @@ export default class App extends React.Component {
             <PrivateRoute exact path='/reports' component={ReportsView} />
             <PrivateRoute path='/reports/:report_id' component={Report} />
             <PrivateRoute path='/take-report' component={TakeReport} />
+            <PrivateRoute path="/google" component={GoogleExperiment} />
+            {/* <PublicRoute path="/add-client-map" component={AddClientMap} /> */}
           </PrivateContext.Provider>
         </Switch>
       </div>
