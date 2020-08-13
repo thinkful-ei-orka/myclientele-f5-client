@@ -17,7 +17,6 @@ class ClientCard extends React.Component {
   };
 
   renderThreeDotsButton = () => {
-    console.log('three dots called');
     return (
       <div className='dropdown_box'>
         <ul className='dropdown'>

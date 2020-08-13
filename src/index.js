@@ -7,10 +7,6 @@ import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom'
 import { UserProvider } from './contexts/UserContext'
-// import config from './config';
-
-// console.log('config', config)
-// console.log('process.env', process.env)
 
 ReactDOM.render(
   <React.StrictMode>
