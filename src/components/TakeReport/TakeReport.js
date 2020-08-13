@@ -42,7 +42,7 @@ class TakeReport extends React.Component {
     return (
       <div className='take-a-report'>
         <h1>Take a Report</h1>
-        <div className='schedule-card'>
+        <div className='basic-client-card'>
           <div className='company-logo'>
             <img src='https://via.placeholder.com/150' alt={this.data.name} />
           </div>

@@ -1,3 +1,5 @@
+@import '../../index.scss';
+
 .take-a-report {
   width: 80%;
   margin: auto;
@@ -5,6 +7,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .basic-client-card {
+    display: flex;
+    margin-bottom: 30px;
+  }
+
   label {
     font-weight: bold;
   }
