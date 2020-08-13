@@ -51,6 +51,7 @@ class Reports extends React.Component {
                 />
                 <p>{report.name}</p>
                 <p>{report.location}</p>
+                <p>{report.date}</p>
                 <p className='information-area'>{report.notes}</p>
               </li>
             </Link>
