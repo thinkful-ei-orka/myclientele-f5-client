@@ -4,7 +4,7 @@ import ClientCard from '../../components/ClientCard/ClientCard';
 import PrivateContext from '../../contexts/PrivateContext';
 import './scheduleroute.scss';
 
-class Schedule extends React.Component {
+export default class ScheduleRoute extends React.Component {
   static contextType = PrivateContext;
   constructor(props) {
     super(props);
@@ -36,11 +36,11 @@ class Schedule extends React.Component {
       return <div>Loading...</div>;
     }
 
-    let clientsFilter = this.context.clients.filter(client => 
+    let clientsFilter = this.context.clients.filter(client =>
       client.day_of_week == this.state.todayOfWeek)
 
     if (this.context.scheduleFilter) {
-      clientsFilter = this.context.clients.filter(client => 
+      clientsFilter = this.context.clients.filter(client =>
         client.day_of_week == this.context.scheduleFilter)
       }
 
@@ -51,11 +51,11 @@ class Schedule extends React.Component {
     if (this.context.scheduleSearch) {
       const searchTerm = this.context.scheduleSearch.toLowerCase()
       console.log(clientsFilter)
-      clientsFilter = clientsFilter.filter(client => 
+      clientsFilter = clientsFilter.filter(client =>
         client.name.toLowerCase().includes(searchTerm))
       console.log(clientsFilter)
       }
-    
+
 
     return (
       <div className='schedule-page' >
@@ -67,5 +67,3 @@ class Schedule extends React.Component {
     );
   }
 }
-
-export default Schedule;

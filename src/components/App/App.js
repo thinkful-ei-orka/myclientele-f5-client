@@ -13,7 +13,7 @@ import ReportsApiService from '../../services/reports-api-service';
 import CompaniesApiService from '../../services/companies-api-service';
 // This is a placeholder
 // import EventsApiService from '../../services/events-api-service';
-import ScheduleRoute from '../../routes/ScheduleRoute/ScheduleRoute';
+
 
 // Public and Private Routes
 import PublicRoute from '../PublicRoute/PublicRoute';
@@ -23,7 +23,8 @@ import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import HomepageRoute from '../../routes/HomepageRoute/HomepageRoute';
 import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
 import AddClientRoute from '../../routes/AddClientRoute/AddClientRoute'
-import Report from '../../routes/ReportRoute/Report';
+import ReportRoute from '../../routes/ReportRoute/ReportRoute';
+import ScheduleRoute from '../../routes/ScheduleRoute/ScheduleRoute';
 
 // Componentes
 import Header from '../Header/Header';
@@ -34,7 +35,6 @@ import ClientsMap from '../ClientsMap/ClientsMap';
 import ClientsSearch from '../ClientsSearch/ClientsSearch';
 import GoogleExperiment from '../GoogleExperiment/GoogleExperiment';
 import AddClientMap from '../AddClient/AddClient';
-import GoogleMapComponent from '../GoogleMap/GoogleMap';
 
 
 export default class App extends React.Component {
@@ -117,7 +117,7 @@ export default class App extends React.Component {
             <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
             <PrivateRoute exact path='/form' component={AddClientForm} />
             <PrivateRoute exact path='/reports' component={ReportsView} />
-            <PrivateRoute path='/reports/:report_id' component={Report} />
+            <PrivateRoute path='/reports/:report_id' component={ReportRoute} />
             <PrivateRoute path='/take-report' component={TakeReport} />
             {/* These were on another branch. */}
             <PublicRoute exact path='/form' component={AddClientForm} />

@@ -1,8 +1,8 @@
-import React from 'react';
+import React from './node_modules/react';
 import './GoogleMap.scss';
 
 // for @react-google-maps/api
-import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker, InfoWindow } from './node_modules/@react-google-maps/api';
 
 const containerStyle = {
   width: '400px',

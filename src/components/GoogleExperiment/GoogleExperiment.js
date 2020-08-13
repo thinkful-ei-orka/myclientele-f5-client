@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '../Header/Header';
 import PrivateContext from '../../contexts/PrivateContext';
 import GoogleMapComponent from '../GoogleMap/GoogleMap';
 import GoogleSearchBar from '../GoogleSearchBar/GoogleSearchBar';
