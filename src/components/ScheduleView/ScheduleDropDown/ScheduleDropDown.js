@@ -45,17 +45,20 @@ class ScheduleDropDown extends React.Component {
     // console.log(this.props.today)
     return (
       <div className='schedule-drop-down'>
-        <div className='dropdown-title' onClick={() => this.toggleList()}>
-          Filter:
-          <img src={arrow} alt='drop down arrow' />
+        <div className='dropdown-filter' onClick={() => this.toggleList()}>
+            Filter:
+          <select className='filter-dropdown-list' defaultValue={this.props.today} onChange={this.handleFilterChange}>
+            <option key={7} value={7}>No Filter</option>
+            {Object.entries(this.dayOfWeekList).map(([key, value]) => (
+              <option key={key} value={key}>{value}</option>
+            ))}
+          </select>
+          {/* <img src={arrow} alt='drop down arrow' /> */}
         </div>
-        <select className='filter-dropdown-list' defaultValue={this.props.today} onChange={this.handleFilterChange}>
-          <option key={7} value={7}>No Filter</option>
-          {Object.entries(this.dayOfWeekList).map(([key, value]) => (
-            <option key={key} value={key}>{value}</option>
-          ))}
-        </select>
-        <input type='search' onChange={this.handleSearchChange}></input>
+        <div className='dropdown-search'>
+          {/* Search: */}
+          <input type='search' placeholder='Search Here' onChange={this.handleSearchChange}></input>
+        </div>
       </div>
     );
   }
