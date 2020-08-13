@@ -1,6 +1,8 @@
 import React from 'react';
 import './GoogleMap.scss';
 
+// remove this comment
+
 // for @react-google-maps/api
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
