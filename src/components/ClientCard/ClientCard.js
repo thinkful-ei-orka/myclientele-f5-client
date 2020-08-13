@@ -30,10 +30,7 @@ class ClientCard extends React.Component {
                   data: this.props.data,
                 },
               }}
-            >Take a report</Link>
-          </li>
-          <li className="dropdown_item">
-            View reports
+            >View Client</Link>
           </li>
           <li className="dropdown_item">
             <Link
@@ -46,7 +43,7 @@ class ClientCard extends React.Component {
             >Edit client</Link>
           </li>
           <li className="dropdown_item" onClick={this.toggleRemove}>
-            Remove
+            Remove Client
           </li>
         </ul>
       </div>
