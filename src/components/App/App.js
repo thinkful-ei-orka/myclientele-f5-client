@@ -1,28 +1,38 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.scss';
-
 import { UserProvider } from '../../contexts/UserContext';
 import PrivateContext from '../../contexts/PrivateContext';
 import UserContext from '../../contexts/UserContext';
 
+// API Services
 import ClientApiService from '../../services/client-api-service';
 import ReportsApiService from '../../services/reports-api-service';
 import CompaniesApiService from '../../services/companies-api-service';
 // This is a placeholder
 // import EventsApiService from '../../services/events-api-service';
 import ScheduleRoute from '../../routes/ScheduleRoute/ScheduleRoute';
-import Header from '../Header/Header';
 
+// Public and Private Routes
 import PublicRoute from '../PublicRoute/PublicRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
+// Routes
 import HomepageRoute from '../../routes/HomepageRoute/HomepageRoute';
 import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
+import AddClientRoute from '../../routes/AddClientRoute/AddClientRoute'
+import Report from '../../routes/ReportRoute/Report';
+
+// Componentes
+import Header from '../Header/Header';
 import AddClientForm from '../AddClientForm/AddClientForm';
 import ReportsView from '../../components/ReportsView/ReportsView';
-import Report from '../../routes/ReportRoute/Report';
 import TakeReport from '../../components/TakeReport/TakeReport';
+import ClientsMap from '../ClientsMap/ClientsMap';
+import ClientsSearch from '../ClientsSearch/ClientsSearch';
+import GoogleExperiment from '../GoogleExperiment/GoogleExperiment';
+import AddClientMap from '../AddClient/AddClient';
+import GoogleMapComponent from '../GoogleMap/GoogleMap';
 
 export default class App extends React.Component {
   static contextType = UserContext;
@@ -99,11 +109,20 @@ export default class App extends React.Component {
           <PublicRoute path='/sign-up' exact component={HomepageRoute} />
           <PrivateContext.Provider value={contextValue}>
             <Header />
+            {/* We need to clean these up sometime. */}
+            <PrivateRoute path="/" exact component={ClientsRoute} />
             <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
             <PrivateRoute exact path='/form' component={AddClientForm} />
             <PrivateRoute exact path='/reports' component={ReportsView} />
             <PrivateRoute path='/reports/:report_id' component={Report} />
             <PrivateRoute path='/take-report' component={TakeReport} />
+            {/* These were on another branch. */}
+            <PublicRoute exact path='/form' component={AddClientForm} />
+            <PublicRoute path="/add-client" component={AddClientRoute} />
+            <PrivateRoute path="/clients-map" component={ClientsMap} />
+            <PublicRoute path="/clients-search" component={ClientsSearch} />
+            <PrivateRoute path="/google" component={GoogleExperiment} />
+            <PublicRoute path="/add-client-map" component={AddClientMap} />
           </PrivateContext.Provider>
         </Switch>
       </div>
