@@ -14,15 +14,14 @@ import CompaniesApiService from '../../services/companies-api-service';
 // This is a placeholder
 // import EventsApiService from '../../services/events-api-service';
 
-
 // Public and Private Routes
 import PublicRoute from '../PublicRoute/PublicRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 // Routes
 import HomepageRoute from '../../routes/HomepageRoute/HomepageRoute';
-import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
-import AddClientRoute from '../../routes/AddClientRoute/AddClientRoute'
+// import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
+import AddClientRoute from '../../routes/AddClientRoute/AddClientRoute';
 import ReportRoute from '../../routes/ReportRoute/ReportRoute';
 import ScheduleRoute from '../../routes/ScheduleRoute/ScheduleRoute';
 
@@ -32,10 +31,9 @@ import AddClientForm from '../AddClientForm/AddClientForm';
 import ReportsView from '../../components/ReportsView/ReportsView';
 import TakeReport from '../../components/TakeReport/TakeReport';
 import ClientsMap from '../ClientsMap/ClientsMap';
-import ClientsSearch from '../ClientsSearch/ClientsSearch';
-import GoogleExperiment from '../GoogleExperiment/GoogleExperiment';
-import AddClientMap from '../AddClient/AddClient';
-
+// import ClientsSearch from '../ClientsSearch/ClientsSearch';
+// import GoogleExperiment from '../GoogleExperiment/GoogleExperiment';
+// import AddClientMap from '../AddClient/AddClient';
 
 export default class App extends React.Component {
   static contextType = UserContext;
@@ -87,12 +85,12 @@ export default class App extends React.Component {
   };
 
   setScheduleFilter = (newFilter) => {
-    this.setState({scheduleFilter: newFilter})
-  }
+    this.setState({ scheduleFilter: newFilter });
+  };
 
   setScheduleSearch = (searchTerm) => {
-    this.setState({scheduleSearch: searchTerm})
-  }
+    this.setState({ scheduleSearch: searchTerm });
+  };
 
   render() {
     let contextValue = this.state;
@@ -113,13 +111,17 @@ export default class App extends React.Component {
           <PrivateContext.Provider value={contextValue}>
             <Header />
             <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
-            <PrivateRoute path="/add-client" component={AddClientRoute} />
-            <PrivateRoute path="/add-client-map" component={AddClientMap} />
-            <PrivateRoute exact path='/add-client-form' component={AddClientForm} />
+            {/* <PrivateRoute path='/add-client' component={AddClientRoute} /> Throws error when accessing */}
+            {/* <PrivateRoute path='/add-client-map' component={AddClientMap} /> */}
+            <PrivateRoute
+              exact
+              path='/add-client-form'
+              component={AddClientForm}
+            />
             <PrivateRoute exact path='/reports' component={ReportsView} />
             <PrivateRoute path='/reports/:report_id' component={ReportRoute} />
             <PrivateRoute path='/take-report' component={TakeReport} />
-            <PrivateRoute path="/clients-map" component={ClientsMap} />
+            <PrivateRoute path='/clients-map' component={ClientsMap} />
             {/*
             <PrivateRoute path="/clients-search" component={ClientsSearch} />
             <PrivateRoute path="/google" component={GoogleExperiment} />
