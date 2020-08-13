@@ -12,6 +12,7 @@ import CompaniesApiService from '../../services/companies-api-service';
 // This is a placeholder
 // import EventsApiService from '../../services/events-api-service';
 import ScheduleRoute from '../../routes/ScheduleRoute/ScheduleRoute';
+import UserInfoRoute from '../../routes/UserInfoRoute/UserInfoRoute';
 import Header from '../Header/Header';
 
 import PublicRoute from '../PublicRoute/PublicRoute';
@@ -33,6 +34,7 @@ export default class App extends React.Component {
     reports: null,
     company: null,
     user: this.context.user,
+    userContact: null,
     scheduleFilter: null,
     scheduleSearch: null,
     // this is pulling the user from the user context at the moment
@@ -44,6 +46,7 @@ export default class App extends React.Component {
     this.fetchClients();
     this.fetchReports();
     this.fetchCompany(this.context.user.company_id);
+    // this.fetchUserInfo();
   };
 
   fetchClients = () => {
@@ -66,6 +69,13 @@ export default class App extends React.Component {
       this.setState({ company: result });
     });
   };
+
+  // fetchUserInfo =() => {
+  //   return ___User wahtever.info_______().then((result) => {
+  //   console.log('got user contact', result)
+  //   this.setState({ userContact: result})
+  // });
+  // }
 
   updateContext = (contextUpdate) => {
     let newContext = { ...this.state, ...contextUpdate };
@@ -100,6 +110,7 @@ export default class App extends React.Component {
           <PrivateContext.Provider value={contextValue}>
             <Header />
             <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
+            <PrivateRoute path='/myaccount' exact component={UserInfoRoute} />
             <PrivateRoute exact path='/form' component={AddClientForm} />
             <PrivateRoute exact path='/reports' component={ReportsView} />
             <PrivateRoute path='/reports/:report_id' component={Report} />
