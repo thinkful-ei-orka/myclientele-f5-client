@@ -61,18 +61,21 @@ export default class App extends React.Component {
 
   fetchClients = () => {
     return ClientApiService.getAllClients().then((result) => {
+      console.log('got clients', result);
       this.setState({ clients: result });
     });
   };
 
   fetchReports = () => {
     ReportsApiService.getAllReports().then((result) => {
+      console.log('got reports', result);
       this.setState({ reports: result });
     });
   };
 
   fetchCompany = (company_id) => {
     CompaniesApiService.getCompany(company_id).then((result) => {
+      console.log('got company', result);
       this.setState({ company: result });
     });
   };
@@ -109,20 +112,18 @@ export default class App extends React.Component {
           <PublicRoute path='/sign-up' exact component={HomepageRoute} />
           <PrivateContext.Provider value={contextValue}>
             <Header />
-            {/* We need to clean these up sometime. */}
             <PrivateRoute path="/" exact component={ClientsRoute} />
             <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
             <PrivateRoute exact path='/form' component={AddClientForm} />
             <PrivateRoute exact path='/reports' component={ReportsView} />
             <PrivateRoute path='/reports/:report_id' component={ReportRoute} />
             <PrivateRoute path='/take-report' component={TakeReport} />
-            {/* These were on another branch. */}
-            <PublicRoute exact path='/form' component={AddClientForm} />
-            <PublicRoute path="/add-client" component={AddClientRoute} />
+            <PrivateRoute exact path='/form' component={AddClientForm} />
+            <PublicRoute path="/add-client-map" component={AddClientMap} />
+            {/* <PublicRoute path="/add-client" component={AddClientRoute} />
             <PrivateRoute path="/clients-map" component={ClientsMap} />
             <PublicRoute path="/clients-search" component={ClientsSearch} />
-            <PrivateRoute path="/google" component={GoogleExperiment} />
-            <PublicRoute path="/add-client-map" component={AddClientMap} />
+            <PrivateRoute path="/google" component={GoogleExperiment} /> */}
           </PrivateContext.Provider>
         </Switch>
       </div>
