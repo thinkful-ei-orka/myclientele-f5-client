@@ -30,7 +30,7 @@ class Buttons extends React.Component {
           <li className='dropdown_item'>
             <Link
               to={{
-                pathname: '/form',
+                pathname: '/add-client-form',
                 state: {
                   data: this.props.data,
                 },

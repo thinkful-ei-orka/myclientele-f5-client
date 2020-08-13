@@ -112,18 +112,18 @@ export default class App extends React.Component {
           <PublicRoute path='/sign-up' exact component={HomepageRoute} />
           <PrivateContext.Provider value={contextValue}>
             <Header />
-            <PrivateRoute path="/" exact component={ClientsRoute} />
             <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
-            <PrivateRoute exact path='/form' component={AddClientForm} />
+            <PrivateRoute path="/add-client" component={AddClientRoute} />
+            <PrivateRoute path="/add-client-map" component={AddClientMap} />
+            <PrivateRoute exact path='/add-client-form' component={AddClientForm} />
             <PrivateRoute exact path='/reports' component={ReportsView} />
             <PrivateRoute path='/reports/:report_id' component={ReportRoute} />
             <PrivateRoute path='/take-report' component={TakeReport} />
-            <PrivateRoute exact path='/form' component={AddClientForm} />
-            <PublicRoute path="/add-client-map" component={AddClientMap} />
-            {/* <PublicRoute path="/add-client" component={AddClientRoute} />
             <PrivateRoute path="/clients-map" component={ClientsMap} />
-            <PublicRoute path="/clients-search" component={ClientsSearch} />
-            <PrivateRoute path="/google" component={GoogleExperiment} /> */}
+            {/*
+            <PrivateRoute path="/clients-search" component={ClientsSearch} />
+            <PrivateRoute path="/google" component={GoogleExperiment} />
+            */}
           </PrivateContext.Provider>
         </Switch>
       </div>
