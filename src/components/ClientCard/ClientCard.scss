@@ -42,6 +42,7 @@ a {
 }
 h2 {
   text-transform: uppercase;
+  word-wrap: break-word;
 }
 
 .information-area {
@@ -66,16 +67,17 @@ h2 {
   align-items: center;
 
   button {
-    width: 40px;
-    padding: none;
-    height: 40px;
+    width: 50px;
+    padding: 10px;
+    height: 50px;
     border-radius: 100%;
     border: none;
     background-color: $purple;
     padding: 0px;
 
     img {
-      margin: 0;
+      margin: 5px 0 0 0;
+      width: 80%;
     }
   }
   //   img {
@@ -101,13 +103,22 @@ h2 {
       height: auto;
       display: flex;
       flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
-
-      margin: 5px;
       border-radius: 5px;
       font-size: 20px;
-      padding: 10px;
+      padding: 3px;
+      justify-content: center;
+      align-content: center;
+      margin: 5px;
+      font-weight: 500;
+
+      .inner-button {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        * {
+          margin: 5px;
+        }
+      }
 
       img {
         width: 30px;
@@ -119,7 +130,9 @@ h2 {
     border: 1px solid lightgray;
     border-radius: 10px;
     flex-direction: column;
-    width: 30%;
+    // width: 30%;
+    width: 288px;
+
     height: auto;
     align-items: center;
     text-align: center;

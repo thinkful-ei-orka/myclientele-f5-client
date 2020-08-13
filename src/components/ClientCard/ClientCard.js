@@ -127,14 +127,18 @@ class ClientCard extends React.Component {
                   data: this.props.data,
                 },
               }}>
-              <img src={addsvg} alt='add button' />
-              <span id='button-text'>Take Report</span>
+              <div className='inner-button'>
+                <img src={addsvg} alt='add button' />
+                <span id='button-text'>Take Report</span>
+              </div>
             </Link>
           </button>
 
           <button className='more-info  ' onClick={this.toggleThreeDots}>
-            <img src={moreinfosvg} alt='more info button' />{' '}
-            <span id='button-text'>More Info</span>
+            <div className='inner-button'>
+              <img src={moreinfosvg} alt='more info button' />{' '}
+              <span id='button-text'>More Info</span>
+            </div>
           </button>
         </div>
         {this.state.threeDotsActive ? this.renderThreeDotsButton() : ''}
