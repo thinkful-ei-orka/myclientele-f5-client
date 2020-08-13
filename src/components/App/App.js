@@ -1,7 +1,9 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+// import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import './App.scss';
-import { UserProvider } from '../../contexts/UserContext';
+
+// import { UserProvider } from '../../contexts/UserContext';
 import PrivateContext from '../../contexts/PrivateContext';
 import UserContext from '../../contexts/UserContext';
 
@@ -33,6 +35,7 @@ import ClientsSearch from '../ClientsSearch/ClientsSearch';
 import GoogleExperiment from '../GoogleExperiment/GoogleExperiment';
 import AddClientMap from '../AddClient/AddClient';
 import GoogleMapComponent from '../GoogleMap/GoogleMap';
+
 
 export default class App extends React.Component {
   static contextType = UserContext;
