@@ -4,6 +4,15 @@ import { withRouter, Link } from 'react-router-dom';
 import './takereport.scss';
 import S3ApiService from '../../services/s3-api-service';
 
+
+//What all operations do we want to give the user in terms of interacting with photos. After they do the initial upload, what all do we want to allow the user to do with photos.  
+
+//How do we want to handle gathering photos? Do we want to have a specific photo route that we make API calls to or do we just want to have all the requests to get photos be handled by the Reports router? If we do the latter then we will only have to make one request instead of two (one for reports and one for photos).
+
+//How do we want to display multiple images?  Do we want to add that feature to the client card?
+
+
+
 class TakeReport extends React.Component {
   constructor(props) {
     super(props);
@@ -19,31 +28,38 @@ class TakeReport extends React.Component {
   // const { data } = this.props.location.state;
   client_id = this.data.id;
 
-  onFormSubmit = (e) => {
+  onFormSubmit = async e => {
     e.preventDefault();
-    const notes = e.target['report-text-input'].value;
-    const photoInput = e.target['report-photo-input'];
-    const file = photoInput.files[0];
-    console.log('name ', file.name, '... type ', file.type);
-    S3ApiService.getUploadUrl(file.name, file.type)
-      .then((res) => {
-        console.log('response url', res);
-        return fetch(res.url, {
-          method: 'PUT',
-          body: file,
-        });
-      })
-      .then((data) =>
-        ReportsApiService.addReport(
-          this.client_id,
-          notes,
-          data.url.split('?')[0]
-        ).then(() => {
-          this.props.history.push('/schedule');
-        })
-      )
-      .catch((error) => console.log(error));
+
+    const notes = e.target["report-text-input"].value;
+    const photoInput = e.target["report-photo-input"];
+    const file = photoInput.files;
+    const photos = await this.getPhotoUrlList(file);
+    console.log(photos)
+    ReportsApiService.addReport(
+      this.client_id,
+      notes,
+      photos
+    ).then(() => this.props.history.push("/schedule")).catch((error) => console.log(error));
   };
+
+  getPhotoUrlList = async file => {
+    let photos = [];
+    
+    for (let key in file) {
+      if (!isNaN(Number(key))) {
+        console.log("name ", file[key].name, "... type ", file[key].type);
+        let res = await S3ApiService.getUploadUrl(file[key].name, file[key].type)
+            console.log("response url", res)
+        let data = await fetch(res.url, {
+              method: "PUT",
+              body: file[key],
+            })
+        photos.push(data.url.split("?")[0])     
+      }
+    }
+    return photos;
+  }
   componentDidMount() {
     if (this.state.reports.length === 0) {
       ReportsApiService.getReportsByClientId(this.client_id).then((res) => {
@@ -81,6 +97,17 @@ class TakeReport extends React.Component {
               name='report-text-input'></textarea>
             <label htmlFor='report-photo-input'>Add a photo:</label>
             <input
+<<<<<<< HEAD
+              type="file"
+              multiple="multiple"
+              accept="image/*"
+              name="report-photo-input"
+              id="report-photo-input"
+              alt="alt_text"
+              required
+            ></input>
+            <button className="btn">Submit</button>
+=======
               type='file'
               accept='image/*'
               name='report-photo-input'
@@ -88,6 +115,7 @@ class TakeReport extends React.Component {
               alt='alt_text'
               required></input>
             <button className='btn'>Submit</button>
+>>>>>>> 0556236ea5075cae81ad0fa3294513ee9bd4ce4e
           </form>
         </div>
         <section aria-label='Your reports' className='report-list'>
@@ -101,8 +129,13 @@ class TakeReport extends React.Component {
                 className='reportList-link'>
                 <li className='report-li' id={report.id}>
                   <img
+<<<<<<< HEAD
+                    className="company-logo"
+                    src={report.photos[0]}
+=======
                     className='company-logo'
                     src={report.photo_url}
+>>>>>>> 0556236ea5075cae81ad0fa3294513ee9bd4ce4e
                     alt={report.name}
                   />
                   <p className='information-area'>{report.notes}</p>

@@ -12,9 +12,9 @@ const ReportsApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
-  addReport(client_id, notes, photo_url) {
+  addReport(client_id, notes, photos) {
     // note: sales_rep_id is self and date is now (handled by the back end)
-    const report = { client_id, notes, photo_url };
+    const report = { client_id, notes, photos };
 
     return fetch(`${config.API_ENDPOINT}/reports`, {
       method: 'POST',

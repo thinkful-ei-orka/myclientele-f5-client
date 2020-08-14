@@ -1,6 +1,4 @@
 import React from 'react';
-
-import React from 'react';
 import PrivateContext from '../../contexts/PrivateContext'; //will need later?
 import ReportsApiService from '../../services/reports-api-service';
 import { Link } from 'react-router-dom';
