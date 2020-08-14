@@ -20,12 +20,15 @@ import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 // Routes
 import HomepageRoute from '../../routes/HomepageRoute/HomepageRoute';
-// import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
+import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
+import ClientRoute from '../../routes/ClientRoute/ClientRoute';
+import ClientReportsRoute from '../../routes/ClientReportsRoute/ClientReportsRoute.js';
 import AddClientRoute from '../../routes/AddClientRoute/AddClientRoute';
 import ReportRoute from '../../routes/ReportRoute/ReportRoute';
 import ScheduleRoute from '../../routes/ScheduleRoute/ScheduleRoute';
+import MyAccountRoute from '../../routes/MyAccountRoute/MyAccountRoute';
 
-// Componentes
+// Components
 import Header from '../Header/Header';
 import AddClientForm from '../AddClientForm/AddClientForm';
 import ReportsView from '../../components/ReportsView/ReportsView';
@@ -108,21 +111,23 @@ export default class App extends React.Component {
           <PrivateContext.Provider value={contextValue}>
             <Header />
             <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
-            {/* <PrivateRoute path='/add-client' component={AddClientRoute} /> Throws error when accessing */}
-            {/* <PrivateRoute path='/add-client-map' component={AddClientMap} /> */}
-            <PrivateRoute
-              exact
-              path='/add-client-form'
-              component={AddClientForm}
-            />
+            <PrivateRoute path='/clients' exact component={ClientsRoute} />
+            <PrivateRoute path='/clients/:id' exact component={ClientRoute} />
+            <PrivateRoute path='/clients/:id/reports' exact component={ClientReportsRoute} />
+            <PrivateRoute path='/clients/:id/add' exact component={TakeReport} />
+            <PrivateRoute path='/clients/:id/edit' exact component={AddClientForm} />
+
+            <PrivateRoute path='/add-client' component={AddClientRoute} />
+            <PrivateRoute exact path='/add-client-form' component={AddClientForm} />
             <PrivateRoute exact path='/reports' component={ReportsView} />
             <PrivateRoute path='/reports/:report_id' component={ReportRoute} />
-            <PrivateRoute path='/take-report' component={TakeReport} />
-            <PrivateRoute path='/clients-map' component={ClientsMap} />
-            
-            {/* <PrivateRoute path="/clients-search" component={ClientsSearch} /> */}
-            <PrivateRoute path="/google" component={GoogleExperiment} />
-           
+
+            <PrivateRoute path='/my-account' component={MyAccountRoute} />
+
+            {/* <PrivateRoute path='/add-client-map' component={AddClientMap} /> */}
+            {/* <PrivateRoute path='/clients-map' component={ClientsMap} /> */}
+            {/* <PrivateRoute path="/google" component={GoogleExperiment} /> */}
+            {/* <PrivateRoute path='/take-report' component={TakeReport} /> */}
           </PrivateContext.Provider>
         </Switch>
       </div>
