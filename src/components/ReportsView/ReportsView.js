@@ -46,7 +46,7 @@ class Reports extends React.Component {
               <li className='report-li' id={report.id}>
                 <img
                   className='company-logo'
-                  src={report.photo_url}
+                  src={report.photos[0]}
                   alt={report.name}
                 />
                 <p>{report.name}</p>
