@@ -37,6 +37,7 @@ import ClientsMap from '../ClientsMap/ClientsMap';
 // import ClientsSearch from '../ClientsSearch/ClientsSearch';
 import GoogleExperiment from '../GoogleExperiment/GoogleExperiment';
 // import AddClientMap from '../AddClient/AddClient';
+import MobileNav from '../MobileNav/MobileNav';
 
 export default class App extends React.Component {
   static contextType = UserContext;
@@ -128,6 +129,8 @@ export default class App extends React.Component {
             {/* <PrivateRoute path='/clients-map' component={ClientsMap} /> */}
             <PrivateRoute path="/google" component={GoogleExperiment} />
             {/* <PrivateRoute path='/take-report' component={TakeReport} /> */}
+
+            <MobileNav />
           </PrivateContext.Provider>
         </Switch>
       </div>

@@ -1,0 +1,45 @@
+@import '../../variables.scss';
+
+.mobile-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid $lighter-gray;
+  nav {
+    display: flex;
+    justify-content: space-around;
+  }
+  a {
+    display: inline-block;
+    text-align: center;
+    padding: 5px 5px;
+    text-decoration: none;
+    color: $darker-gray;
+    margin: 10px 0;
+    font-size: 14px;
+  }
+  svg {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    font-size: 18px;
+  }
+  a.active {
+    color: $purple;
+    border-bottom: 2px solid $purple;
+  }
+}
+.App {
+  margin-bottom: 72px;
+}
+
+@media (min-width: 600px) {
+  .mobile-nav {
+    display: none;
+  }
+  .App {
+    margin-bottom: 0;
+  }
+}
