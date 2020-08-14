@@ -1,28 +1,39 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+// import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import './App.scss';
 
-import { UserProvider } from '../../contexts/UserContext';
+// import { UserProvider } from '../../contexts/UserContext';
 import PrivateContext from '../../contexts/PrivateContext';
 import UserContext from '../../contexts/UserContext';
 
+// API Services
 import ClientApiService from '../../services/client-api-service';
 import ReportsApiService from '../../services/reports-api-service';
 import CompaniesApiService from '../../services/companies-api-service';
 // This is a placeholder
 // import EventsApiService from '../../services/events-api-service';
-import ScheduleRoute from '../../routes/ScheduleRoute/ScheduleRoute';
-import Header from '../Header/Header';
 
+// Public and Private Routes
 import PublicRoute from '../PublicRoute/PublicRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
+// Routes
 import HomepageRoute from '../../routes/HomepageRoute/HomepageRoute';
-import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
+// import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
+import AddClientRoute from '../../routes/AddClientRoute/AddClientRoute';
+import ReportRoute from '../../routes/ReportRoute/ReportRoute';
+import ScheduleRoute from '../../routes/ScheduleRoute/ScheduleRoute';
+
+// Componentes
+import Header from '../Header/Header';
 import AddClientForm from '../AddClientForm/AddClientForm';
 import ReportsView from '../../components/ReportsView/ReportsView';
-import Report from '../../routes/ReportRoute/Report';
 import TakeReport from '../../components/TakeReport/TakeReport';
+import ClientsMap from '../ClientsMap/ClientsMap';
+// import ClientsSearch from '../ClientsSearch/ClientsSearch';
+// import GoogleExperiment from '../GoogleExperiment/GoogleExperiment';
+// import AddClientMap from '../AddClient/AddClient';
 
 export default class App extends React.Component {
   static contextType = UserContext;
@@ -34,6 +45,7 @@ export default class App extends React.Component {
     company: null,
     user: this.context.user,
     scheduleFilter: null,
+    scheduleSearch: null,
     // this is pulling the user from the user context at the moment
     // this has user_id, company_id, name, and username
     // user potentially has more information like email, phone_number, and admin
@@ -73,8 +85,12 @@ export default class App extends React.Component {
   };
 
   setScheduleFilter = (newFilter) => {
-    this.setState({scheduleFilter: newFilter})
-  }
+    this.setState({ scheduleFilter: newFilter });
+  };
+
+  setScheduleSearch = (searchTerm) => {
+    this.setState({ scheduleSearch: searchTerm });
+  };
 
   render() {
     let contextValue = this.state;
@@ -84,6 +100,7 @@ export default class App extends React.Component {
     contextValue.fetchCompany = this.fetchCompany;
     contextValue.updateContext = this.updateContext;
     contextValue.setScheduleFilter = this.setScheduleFilter;
+    contextValue.setScheduleSearch = this.setScheduleSearch;
 
     return (
       <div className='App'>
@@ -94,10 +111,21 @@ export default class App extends React.Component {
           <PrivateContext.Provider value={contextValue}>
             <Header />
             <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
-            <PrivateRoute exact path='/form' component={AddClientForm} />
+            {/* <PrivateRoute path='/add-client' component={AddClientRoute} /> Throws error when accessing */}
+            {/* <PrivateRoute path='/add-client-map' component={AddClientMap} /> */}
+            <PrivateRoute
+              exact
+              path='/add-client-form'
+              component={AddClientForm}
+            />
             <PrivateRoute exact path='/reports' component={ReportsView} />
-            <PrivateRoute path='/reports/:report_id' component={Report} />
+            <PrivateRoute path='/reports/:report_id' component={ReportRoute} />
             <PrivateRoute path='/take-report' component={TakeReport} />
+            <PrivateRoute path='/clients-map' component={ClientsMap} />
+            {/*
+            <PrivateRoute path="/clients-search" component={ClientsSearch} />
+            <PrivateRoute path="/google" component={GoogleExperiment} />
+            */}
           </PrivateContext.Provider>
         </Switch>
       </div>

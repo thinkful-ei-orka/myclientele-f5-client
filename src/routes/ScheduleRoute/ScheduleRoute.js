@@ -4,7 +4,7 @@ import ClientCard from '../../components/ClientCard/ClientCard';
 import PrivateContext from '../../contexts/PrivateContext';
 import './scheduleroute.scss';
 
-class Schedule extends React.Component {
+export default class ScheduleRoute extends React.Component {
   static contextType = PrivateContext;
   constructor(props) {
     super(props);
@@ -22,7 +22,7 @@ class Schedule extends React.Component {
     }
 
     let date = new Date();
-      this.setState({todayOfWeek: date.getDay()})
+    this.setState({ todayOfWeek: date.getDay() });
 
     // if (this.context.scheduleFilter == null) {
     //   this.context.setScheduleFilter(this.state.todayOfWeek)
@@ -31,34 +31,44 @@ class Schedule extends React.Component {
   }
 
   render() {
-console.log(this.context.scheduleFilter)
+    console.log(this.context.scheduleFilter);
 
     if (this.context.clients == null) {
       return <div>Loading...</div>;
     }
 
-    let clientsFilter = this.context.clients.filter(client => 
-      client.day_of_week == this.state.todayOfWeek)
+    let clientsFilter = this.context.clients.filter(
+      (client) => client.day_of_week == this.state.todayOfWeek
+    );
 
     if (this.context.scheduleFilter) {
-      clientsFilter = this.context.clients.filter(client => 
-        client.day_of_week == this.context.scheduleFilter)
-      }
+      clientsFilter = this.context.clients.filter(
+        (client) => client.day_of_week == this.context.scheduleFilter
+      );
+    }
 
     if (this.context.scheduleFilter == 7) {
-      clientsFilter = this.context.clients
-      }
-    
+      clientsFilter = this.context.clients;
+    }
+
+    if (this.context.scheduleSearch) {
+      const searchTerm = this.context.scheduleSearch.toLowerCase();
+      console.log(clientsFilter);
+      clientsFilter = clientsFilter.filter((client) =>
+        client.name.toLowerCase().includes(searchTerm)
+      );
+      console.log(clientsFilter);
+    }
 
     return (
-      <div className='schedule-page' >
-          <ScheduleDropDown today={this.state.todayOfWeek}/>
-        {clientsFilter.map((store) => (
-          <ClientCard data={store} key={store.id} />
-        ))}
+      <div className='schedule-page'>
+        <ScheduleDropDown today={this.state.todayOfWeek} />
+        <div className='client-cards'>
+          {clientsFilter.map((store) => (
+            <ClientCard data={store} key={store.id} />
+          ))}
+        </div>
       </div>
     );
   }
 }
-
-export default Schedule;

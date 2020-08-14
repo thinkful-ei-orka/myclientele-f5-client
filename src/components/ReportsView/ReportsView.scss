@@ -9,10 +9,6 @@ h1 {
   margin: 0;
   padding: 0;
 }
-li {
-  list-style: none;
-  color: black;
-}
 
 .reportList-link {
   text-decoration: none;
@@ -23,30 +19,28 @@ li {
   line-height: 50%;
 }
 .report-li {
+  list-style: none;
+  color: black;
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin: auto;
-  border-top: 1px solid grey;
-  height: 150px;
+  margin: 10px auto;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 10px;
+  height: auto;
   justify-content: space-between;
 }
 .company-logo img {
   width: 80%;
 }
-.information-area * {
-  padding: 5px;
-  margin: 0 auto;
-}
-
 .information-area {
   height: 100%;
   width: 90%;
-
   text-transform: capitalize;
-
   padding: 0 5px;
 }
+
 .location {
   font-size: 1.2rem;
 }

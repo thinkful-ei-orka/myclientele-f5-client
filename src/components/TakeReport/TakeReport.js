@@ -1,8 +1,8 @@
-import React from "react";
-import ReportsApiService from "../../services/reports-api-service";
-import { withRouter, Link } from "react-router-dom";
-import "./takereport.scss";
-import S3ApiService from "../../services/s3-api-service";
+import React from 'react';
+import ReportsApiService from '../../services/reports-api-service';
+import { withRouter, Link } from 'react-router-dom';
+import './takereport.scss';
+import S3ApiService from '../../services/s3-api-service';
 
 
 //What all operations do we want to give the user in terms of interacting with photos. After they do the initial upload, what all do we want to allow the user to do with photos.  
@@ -18,8 +18,8 @@ class TakeReport extends React.Component {
     super(props);
     this.state = {
       reports: [],
-      signedUrl: "",
-      file_name: "",
+      signedUrl: '',
+      file_name: '',
       img_src: null,
       isLoading: true,
     };
@@ -30,6 +30,7 @@ class TakeReport extends React.Component {
 
   onFormSubmit = async e => {
     e.preventDefault();
+<<<<<<< HEAD
     const notes = e.target["report-text-input"].value;
     const photoInput = e.target["report-photo-input"];
     const file = photoInput.files;
@@ -74,30 +75,29 @@ class TakeReport extends React.Component {
       return <div>Loading...</div>;
     }
     return (
-      <div className="take-a-report">
+      <div className='take-a-report'>
         <h1>Take a Report</h1>
-        <div className="schedule-card">
-          <div className="company-logo">
-            <img src="https://via.placeholder.com/150" alt={this.data.name} />
+        <div className='basic-client-card'>
+          <div className='company-logo'>
+            <img src='https://via.placeholder.com/150' alt={this.data.name} />
           </div>
-          <div className="information-area">
+          <div className='information-area'>
             <h2>{this.data.name} </h2>
-            <div className="location">{this.data.location}</div>
+            <div className='location'>{this.data.location}</div>
           </div>
         </div>
-        <div className="report-input">
+        <div className='report-input'>
           <form
-            className="take-a-report-form"
-            onSubmit={(e) => this.onFormSubmit(e)}
-          >
-            <label htmlFor="report-text-input">Write your report:</label>
+            className='take-a-report-form'
+            onSubmit={(e) => this.onFormSubmit(e)}>
+            <label htmlFor='report-text-input'>Write your report:</label>
             <textarea
-              type="text"
-              id="report-text-input"
-              name="report-text-input"
-            ></textarea>
-            <label htmlFor="report-photo-input">Add a photo:</label>
+              type='text'
+              id='report-text-input'
+              name='report-text-input'></textarea>
+            <label htmlFor='report-photo-input'>Add a photo:</label>
             <input
+<<<<<<< HEAD
               type="file"
               multiple="multiple"
               accept="image/*"
@@ -107,25 +107,38 @@ class TakeReport extends React.Component {
               required
             ></input>
             <button className="btn">Submit</button>
+=======
+              type='file'
+              accept='image/*'
+              name='report-photo-input'
+              id='report-photo-input'
+              alt='alt_text'
+              required></input>
+            <button className='btn'>Submit</button>
+>>>>>>> 0556236ea5075cae81ad0fa3294513ee9bd4ce4e
           </form>
         </div>
-        <section aria-label="Your reports" className="report-list">
+        <section aria-label='Your reports' className='report-list'>
           <h1>Previous Reports</h1>
 
-          <ul className="report-list-ul">
+          <ul className='report-list-ul'>
             {this.state.reports.map((report) => (
               <Link
                 key={report.id}
                 to={`/reports/${report.id}`}
-                className="reportList-link"
-              >
-                <li className="report-li" id={report.id}>
+                className='reportList-link'>
+                <li className='report-li' id={report.id}>
                   <img
+<<<<<<< HEAD
                     className="company-logo"
                     src={report.photos[0]}
+=======
+                    className='company-logo'
+                    src={report.photo_url}
+>>>>>>> 0556236ea5075cae81ad0fa3294513ee9bd4ce4e
                     alt={report.name}
                   />
-                  <p className="information-area">{report.notes}</p>
+                  <p className='information-area'>{report.notes}</p>
                 </li>
               </Link>
             ))}

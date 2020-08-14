@@ -1,78 +1,81 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import closedsvg from "../../images/clientcard/closed.svg";
-import opensvg from "../../images/clientcard/open.svg";
-import editsvg from "../../images/clientcard/edit.svg";
-import moreinfosvg from "../../images/clientcard/moreinfo.svg";
-import edit2 from "../../images/clientcard/edit2.svg";
-import OpenOrClosed from "./OpenOrClosed";
-import "./ClientCard.scss";
-import ClientApiService from "../../services/client-api-service";
-import PrivateContext from "../../contexts/PrivateContext";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import moreinfosvg from '../../images/clientcard/moreinfo.svg';
+import addsvg from '../../images/clientcard/add.svg';
+import OpenOrClosed from './OpenOrClosed';
+import './ClientCard.scss';
+import ClientApiService from '../../services/client-api-service';
+import PrivateContext from '../../contexts/PrivateContext';
+import './ClientCard.scss';
+import Buttons from './Buttons';
 
 class ClientCard extends React.Component {
-  static contextType = PrivateContext;
+  // static contextType = PrivateContext;
   state = {
     threeDotsActive: false,
     confirmRemoveClient: false,
   };
 
   renderThreeDotsButton = () => {
-    console.log("three dots called");
     return (
-      <div className="dropdown_box">
-        <ul className="dropdown">
-          <li className="dropdown_item">
+      <div className='dropdown_box'>
+        <ul className='dropdown'>
+          <li className='dropdown_item'>
             <Link
               to={{
-                pathname: "/take-report",
+                pathname: '/take-report',
                 state: {
                   data: this.props.data,
                 },
-              }}
-            >View Client</Link>
+              }}>
+              Take a report
+            </Link>
           </li>
-          <li className="dropdown_item">
+          <li className='dropdown_item'>View reports</li>
+          <li className='dropdown_item'>
             <Link
-            to={{
-              pathname: "/form",
-              state: {
-                data: this.props.data
-              }
-            }}
-            >Edit client</Link>
+              to={{
+                pathname: '/add-client-form',
+                state: {
+                  data: this.props.data,
+                },
+              }}>
+              Edit client
+            </Link>
           </li>
-          <li className="dropdown_item" onClick={this.toggleRemove}>
-            Remove Client
+          <li className='dropdown_item' onClick={this.toggleRemove}>
+            Remove
           </li>
         </ul>
       </div>
     );
   };
-  
+
   toggleRemove = () => {
     this.setState({
-      confirmRemoveClient: !this.state.confirmRemoveClient
-    })
-  }
+      confirmRemoveClient: !this.state.confirmRemoveClient,
+    });
+  };
 
   removeClient = () => {
     const id = this.props.data.id;
-    ClientApiService.deleteClient(id)
-    .then(() => this.context.fetchClients());
-  }
+    ClientApiService.deleteClient(id).then(() => this.context.fetchClients());
+  };
 
   renderConfirmRemove = () => {
     return (
-      <div className="confirm_remove_box">
-        <p>Are you sure you want to remove this client? If you do so, all reports associated with this client will also be removed.</p>
-        <div className="button_box">
+      <div className='confirm_remove_box'>
+        <p>
+          Are you sure you want to remove this client? If you do so, all reports
+          associated with this client will also be removed.
+        </p>
+        <div className='button_box'>
           <button onClick={this.toggleRemove}>Cancel</button>
           <button onClick={this.removeClient}>Remove</button>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   toggleThreeDots = () => {
     this.setState({
@@ -81,30 +84,6 @@ class ClientCard extends React.Component {
   };
 
   render() {
-    const closed = (
-      <svg height="30" width="30">
-        <circle
-          cx="20"
-          cy="20"
-          r="10"
-          stroke="none"
-          strokeWidth="3"
-          fill="#cc3737"
-        />
-      </svg>
-    );
-    const open = (
-      <svg height="30" width="30">
-        <circle
-          cx="20"
-          cy="20"
-          r="10"
-          stroke="none"
-          strokeWidth="3"
-          fill="#64bf49"
-        />
-      </svg>
-    );
     const {
       name,
       id,
@@ -115,45 +94,53 @@ class ClientCard extends React.Component {
       hours_of_operation,
       notes,
     } = this.props.data;
-    // console.log(this.props.data);
-    //TODO: Create function to handle the visually hidden portion for screen readers
 
     return (
-      <div className="schedule-card">
-        {this.state.confirmRemoveClient
-        ? this.renderConfirmRemove()
-        : ""
-        }
-        <div className="company-logo">
-          <img src="https://via.placeholder.com/150" alt={name} />
+      <div className='client-card'>
+        {this.state.confirmRemoveClient ? this.renderConfirmRemove() : ''}
+        <div className='company-logo'>
+          <img src='https://via.placeholder.com/150' alt={name} />
         </div>
-        <div className="information-area">
+        <div className='information-area'>
           <h2>{name} </h2>
-          <div className="location">{location}</div>
+          <div className='location'>{location}</div>
 
           <OpenOrClosed
             currently_closed={currently_closed}
             hours_of_operation={hours_of_operation}
           />
         </div>
-        <div className="button-area">
-          <Link
-            to={{
-              pathname: "/take-report",
-              state: {
-                data: this.props.data,
-              },
-            }}
-          >
-            <button className="edit-button  ">
-              <img src={editsvg} alt="edit button" />
-            </button>
-          </Link>
-          <button className="more-info  " onClick={this.toggleThreeDots}>
-            <img src={moreinfosvg} alt="more info button" />
+        {/* <Buttons
+          threeDotsActive={this.state.threeDotsActive}
+          // renderThreeDotsButton={() => this.renderThreeDotsButton()}
+          data={this.props.data}
+          // state={this.state}
+          toggleThreeDots={() => this.toggleThreeDots()}
+        /> */}
+        <div className='button-area'>
+          <button className='add-button  '>
+            <Link
+              to={{
+                pathname: '/take-report',
+                state: {
+                  data: this.props.data,
+                },
+              }}>
+              <div className='inner-button'>
+                <img src={addsvg} alt='add button' />
+                <span id='button-text'>Take Report</span>
+              </div>
+            </Link>
+          </button>
+
+          <button className='more-info  ' onClick={this.toggleThreeDots}>
+            <div className='inner-button'>
+              <img src={moreinfosvg} alt='more info button' />{' '}
+              <span id='button-text'>More Info</span>
+            </div>
           </button>
         </div>
-        {this.state.threeDotsActive ? this.renderThreeDotsButton() : ""}
+        {this.state.threeDotsActive ? this.renderThreeDotsButton() : ''}
       </div>
     );
   }
