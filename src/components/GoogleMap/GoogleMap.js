@@ -1,13 +1,13 @@
 import React from 'react';
 import './GoogleMap.scss';
 
-// remove this comment
+import ClientCard from '../../components/ClientCard/ClientCard';
 
 // for @react-google-maps/api
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
 const containerStyle = {
-  width: '400px',
+  width: '100%',
   height: '400px'
 };
 
@@ -33,6 +33,7 @@ export default class GoogleMapComponent extends React.Component {
     let lng = this.state.map.getCenter().lng();
 
     this.props.setCenter([lat, lng]);
+    console.log(lat, lng);
   }
 
   onClick = () => {
@@ -82,19 +83,21 @@ export default class GoogleMapComponent extends React.Component {
 
   render() {
     let markers = [];
-    console.log('props in Map', this.props)
+    // console.log('props in Map', this.props)
     // if searching results, populate the results
     if (this.props.markers) {
       this.props.markers.forEach((marker) => {
         let lat = Number(marker.lat);
         let lng = Number(marker.lng);
 
+        console.log(marker);
+
         markers.push(
           <Marker
             key={marker.id}
             position={{lat: lat, lng: lng}}
-            onClick={() => this.handleMarkerClick(marker.id, lat, lng, <div><p>This event is fired when the containing the InfoWindow's content is attached to the DOM. You may wish to monitor this event if you are building out your info window content dynamically.</p>
-            <button>button</button></div>)}
+            onClick={() => this.handleMarkerClick(marker.id, lat, lng, <ClientCard className="map-card" data={marker} key={marker.id} />)}
+            // onClick={() => this.handleMarkerClick(marker.id, lat, lng, <div><p>This event is fired when the containing the InfoWindow's content is attached to the DOM. You may wish to monitor this event if you are building out your info window content dynamically.</p><button>button</button></div>)}
           >
           </Marker>
         );

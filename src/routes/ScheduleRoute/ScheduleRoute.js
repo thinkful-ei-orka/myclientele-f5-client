@@ -4,6 +4,12 @@ import ClientCard from '../../components/ClientCard/ClientCard';
 import PrivateContext from '../../contexts/PrivateContext';
 import './scheduleroute.scss';
 
+import GoogleMap from '../../components/GoogleMap/GoogleMap';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faList } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+
 export default class ScheduleRoute extends React.Component {
   static contextType = PrivateContext;
   constructor(props) {
@@ -11,7 +17,14 @@ export default class ScheduleRoute extends React.Component {
     this.state = {
       isLoading: true,
       todayOfWeek: null,
+      center: null,
     };
+  }
+
+  setCenter = (center) => {
+    this.setState({
+      center: center,
+    });
   }
 
   componentDidMount() {
@@ -58,14 +71,28 @@ export default class ScheduleRoute extends React.Component {
     }
 
     return (
-      <div className='schedule-page'>
-        <ScheduleDropDown today={this.state.todayOfWeek} />
-        <div className='client-cards'>
-          {clientsFilter.map((store) => (
-            <ClientCard data={store} key={store.id} />
-          ))}
+      <>
+        <GoogleMap markers={clientsFilter} setCenter={this.setCenter}></GoogleMap>
+        <div className='schedule-page'>
+          {/* <GoogleMap markers={sampleClients} setCenter={this.setCenter}></GoogleMap> */}
+          <ScheduleDropDown today={this.state.todayOfWeek} />
+          <div className='client-cards'>
+            {clientsFilter.map((store) => (
+              <ClientCard data={store} key={store.id} />
+            ))}
+          </div>
         </div>
-      </div>
+        <div className="list-map-buttons">
+          <button className="btn">
+            <FontAwesomeIcon icon={faList}></FontAwesomeIcon>
+            List view
+          </button>
+          <button className="btn">
+            <FontAwesomeIcon icon={faMapMarkerAlt}></FontAwesomeIcon>
+            Map view
+          </button>
+        </div>
+      </>
     );
   }
 }

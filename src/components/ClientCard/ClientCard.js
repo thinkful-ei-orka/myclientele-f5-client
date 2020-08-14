@@ -128,7 +128,7 @@ class ClientCard extends React.Component {
               }}>
               <div className='inner-button'>
                 <img src={addsvg} alt='add button' />
-                <span id='button-text'>Take Report</span>
+                <span className='button-text'>Take Report</span>
               </div>
             </Link>
           </button>
@@ -136,7 +136,7 @@ class ClientCard extends React.Component {
           <button className='more-info  ' onClick={this.toggleThreeDots}>
             <div className='inner-button'>
               <img src={moreinfosvg} alt='more info button' />{' '}
-              <span id='button-text'>More Info</span>
+              <span className='button-text'>More Info</span>
             </div>
           </button>
         </div>

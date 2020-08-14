@@ -90,7 +90,7 @@ h2 {
     background-color: $green;
   }
 }
-#button-text {
+.button-text {
   color: white;
 }
 @media only screen and (min-width: 600px) {
@@ -167,4 +167,34 @@ h2 {
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+// google maps card
+.gm-style .gm-style-iw-c {
+  max-width: 100% !important;
+}
+.gm-style .gm-style-iw-c .client-card {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-align: left;
+  flex-direction: row;
+  .company-logo img {
+    display: none;
+  }
+  .location, .client-hours {
+    // font-size: 16px;
+  }
+  .button-area {
+    width: auto;
+    button {
+      width: 50px;
+      height: 50px;
+    }
+    .button-text {
+      display: none;
+    }
+  }
+
+
 }

@@ -126,7 +126,7 @@ export default class App extends React.Component {
 
             {/* <PrivateRoute path='/add-client-map' component={AddClientMap} /> */}
             {/* <PrivateRoute path='/clients-map' component={ClientsMap} /> */}
-            {/* <PrivateRoute path="/google" component={GoogleExperiment} /> */}
+            <PrivateRoute path="/google" component={GoogleExperiment} />
             {/* <PrivateRoute path='/take-report' component={TakeReport} /> */}
           </PrivateContext.Provider>
         </Switch>
