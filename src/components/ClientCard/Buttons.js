@@ -11,7 +11,6 @@ class Buttons extends React.Component {
   screenWidth = window.innerWidth;
 
   renderThreeDotsButton = () => {
-    console.log('three dots called');
     return (
       <div className='dropdown_box'>
         <ul className='dropdown'>

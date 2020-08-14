@@ -1,7 +1,6 @@
 import React from 'react';
 
 const handleHoursOfOperation = (props) => {
-  // console.log(props);
   const { currently_closed, hours_of_operation } = props;
   if (currently_closed) {
     return (

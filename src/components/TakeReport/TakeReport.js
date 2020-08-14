@@ -35,7 +35,6 @@ class TakeReport extends React.Component {
     const photoInput = e.target["report-photo-input"];
     const file = photoInput.files;
     const photos = await this.getPhotoUrlList(file);
-    console.log(photos)
     ReportsApiService.addReport(
       this.client_id,
       notes,
@@ -48,9 +47,7 @@ class TakeReport extends React.Component {
     
     for (let key in file) {
       if (!isNaN(Number(key))) {
-        console.log("name ", file[key].name, "... type ", file[key].type);
         let res = await S3ApiService.getUploadUrl(file[key].name, file[key].type)
-            console.log("response url", res)
         let data = await fetch(res.url, {
               method: "PUT",
               body: file[key],
@@ -63,14 +60,12 @@ class TakeReport extends React.Component {
   componentDidMount() {
     if (this.state.reports.length === 0) {
       ReportsApiService.getReportsByClientId(this.client_id).then((res) => {
-        console.log(res);
         this.setState({ reports: res, isLoading: false });
       });
     }
   }
 
   render() {
-    console.log(this.state.img_src);
     if (this.state.isLoading) {
       return <div>Loading...</div>;
     }
@@ -97,7 +92,6 @@ class TakeReport extends React.Component {
               name='report-text-input'></textarea>
             <label htmlFor='report-photo-input'>Add a photo:</label>
             <input
-<<<<<<< HEAD
               type="file"
               multiple="multiple"
               accept="image/*"
@@ -107,15 +101,6 @@ class TakeReport extends React.Component {
               required
             ></input>
             <button className="btn">Submit</button>
-=======
-              type='file'
-              accept='image/*'
-              name='report-photo-input'
-              id='report-photo-input'
-              alt='alt_text'
-              required></input>
-            <button className='btn'>Submit</button>
->>>>>>> 0556236ea5075cae81ad0fa3294513ee9bd4ce4e
           </form>
         </div>
         <section aria-label='Your reports' className='report-list'>
@@ -129,13 +114,8 @@ class TakeReport extends React.Component {
                 className='reportList-link'>
                 <li className='report-li' id={report.id}>
                   <img
-<<<<<<< HEAD
                     className="company-logo"
                     src={report.photos[0]}
-=======
-                    className='company-logo'
-                    src={report.photo_url}
->>>>>>> 0556236ea5075cae81ad0fa3294513ee9bd4ce4e
                     alt={report.name}
                   />
                   <p className='information-area'>{report.notes}</p>

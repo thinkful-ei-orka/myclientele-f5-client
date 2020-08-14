@@ -31,7 +31,6 @@ export default class ScheduleRoute extends React.Component {
   }
 
   render() {
-    console.log(this.context.scheduleFilter);
 
     if (this.context.clients == null) {
       return <div>Loading...</div>;
@@ -53,11 +52,9 @@ export default class ScheduleRoute extends React.Component {
 
     if (this.context.scheduleSearch) {
       const searchTerm = this.context.scheduleSearch.toLowerCase();
-      console.log(clientsFilter);
       clientsFilter = clientsFilter.filter((client) =>
         client.name.toLowerCase().includes(searchTerm)
       );
-      console.log(clientsFilter);
     }
 
     return (

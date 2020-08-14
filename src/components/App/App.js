@@ -59,21 +59,18 @@ export default class App extends React.Component {
 
   fetchClients = () => {
     return ClientApiService.getAllClients().then((result) => {
-      console.log('got clients', result);
       this.setState({ clients: result });
     });
   };
 
   fetchReports = () => {
     ReportsApiService.getAllReports().then((result) => {
-      console.log('got reports', result);
       this.setState({ reports: result });
     });
   };
 
   fetchCompany = (company_id) => {
     CompaniesApiService.getCompany(company_id).then((result) => {
-      console.log('got company', result);
       this.setState({ company: result });
     });
   };

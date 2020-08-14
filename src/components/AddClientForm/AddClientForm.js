@@ -99,13 +99,13 @@ class AddClientForm extends React.Component {
 
   renderSelectField = () => {
     let daysOfWeek = [
+      "Sunday",
       "Monday",
       "Tuesday",
       "Wednesday",
       "Thursday",
       "Friday",
       "Saturday",
-      "Sunday",
       "I dont visit this client weekly",
     ];
     return (

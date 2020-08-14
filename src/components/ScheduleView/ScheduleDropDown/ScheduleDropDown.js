@@ -42,7 +42,6 @@ class ScheduleDropDown extends React.Component {
   }
 
   render() {
-    // console.log(this.props.today)
     return (
       <div className='schedule-drop-down'>
         <div className='dropdown-filter' onClick={() => this.toggleList()}>

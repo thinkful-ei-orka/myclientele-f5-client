@@ -22,7 +22,6 @@ class Reports extends React.Component {
   }
 
   render() {
-    console.log('reports in state', this.state.reports);
     let reports = this.state.reports;
     if (reports) {
       reports.map((report) => {

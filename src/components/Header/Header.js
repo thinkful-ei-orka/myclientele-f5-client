@@ -40,7 +40,6 @@ class Header extends React.Component {
 
   render() {
     if (this.context.user.id == null) {
-      console.log(this.context.user);
       return (
         <header>
           <div className='logo'>

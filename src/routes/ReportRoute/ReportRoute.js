@@ -10,7 +10,6 @@ class ReportRoute extends React.Component {
     }
   }
   renderPhotos = () => {
-    console.log(this.state.report)
     return (
       <div className="photo_list">
         {this.state.report.photos.map(photo => {
@@ -30,8 +29,6 @@ class ReportRoute extends React.Component {
   }
 
   render () {
-    console.log('props', this.props)
-    console.log('report', this.state.report)
     let photo_url = '';
     if (this.state.report) {
       if (this.state.report.photo_url === '') {
@@ -40,7 +37,6 @@ class ReportRoute extends React.Component {
         photo_url = this.state.report.photo_url
       }
     }
-    console.log(photo_url)
     return (
       <section>
         <p>Client Name: {this.state.report.name}</p>
