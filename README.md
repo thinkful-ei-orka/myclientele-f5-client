@@ -1,12 +1,12 @@
 ## My Clientele - client
 
-This project REACT app allows you to log in and see your clients and reports you've made to maximize productivity and minimum potential loses from lost leads and inability to access previous reports on the go.
+This project REACT app allows you to log in and see your clients and reports you've made to maximize productivity and minimum potential loses from lost leads and inability to easily access previous reports on the go.
 
-With the app, you can keep all your client information in one place. This includes names, locations, hours of operations, if they are currently closed, and who the general manager is. Also included is your schedule of clients to see on a particular day, and the ability to see all of your reports. These reports can be filtered, and feature the date of your report, your notes, and pictures you have taken.
+With My Clientele, you can keep all your client information in one place. This includes names, locations, hours of operations, if they are currently closed, and who the general manager is. Also included is your daily schedule of clients, and the ability to see all of your reports. These reports can be filtered, and feature the date of your report, your notes, and pictures you have taken.
 
-You can update the clients as things change.
+You can update the clients as they change.
 
-The Take Report feature allows you to seamlessly and effortlessly add notes to a client.
+The Take Report feature allows you to seamlessly and effortlessly add notes to a client, along with any photos you may need.
 
 My Clientele is ideal for the fast paced and busy lifestyle you lead, and allows you to keep up-to-date with what places are closed due to things like Covid-19 or rennovations with the currently closed feature. With a click of a button, you can keep up to date with your clients and their needs, all from one easy to use app!
 
@@ -16,8 +16,8 @@ The live site can be accessed at [https://myclientele-f5.vercel.app/](https://my
 
 To try the service, please use the credentials below to log in
 
-Username:
-Password:
+Username: User<br />
+Password: Password12#
 
 ### Screenshots
 
@@ -50,7 +50,8 @@ REACT, JavaScript, CSS3, HTML5, SCSS, NodeJS, ExpressJS, PostgreSQL
 2. cd into the cloned repository
 3. Remove the git history with rm -rf .get && git init
 4. Install dependencies with npm install
-5. Change project name in package.json to use whatever name you've given this project instead of "name": "myclientele-client"
+5. Move the example Environment file to .env that will be ignored by git and read by React with mv example.env .env
+6. Change project name in package.json to use whatever name you've given this project instead of "name": "myclientele-client"
 
 ## Available Scripts
 
