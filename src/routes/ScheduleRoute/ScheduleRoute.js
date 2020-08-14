@@ -5,10 +5,7 @@ import PrivateContext from '../../contexts/PrivateContext';
 import './scheduleroute.scss';
 
 import GoogleMap from '../../components/GoogleMap/GoogleMap';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faList } from '@fortawesome/free-solid-svg-icons';
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import ListMapToggle from '../../components/ListMapToggle/ListMapToggle';
 
 export default class ScheduleRoute extends React.Component {
   static contextType = PrivateContext;
@@ -18,6 +15,8 @@ export default class ScheduleRoute extends React.Component {
       isLoading: true,
       todayOfWeek: null,
       center: null,
+      listClass: '',
+      mapClass: 'mobile-hidden',
     };
   }
 
@@ -25,6 +24,20 @@ export default class ScheduleRoute extends React.Component {
     this.setState({
       center: center,
     });
+  }
+
+  listClick = () => {
+    this.setState({
+      listClass: '',
+      mapClass: 'mobile-hidden',
+    })
+  }
+
+  mapClick = () => {
+    this.setState({
+      listClass: 'mobile-hidden',
+      mapClass: '',
+    })
   }
 
   componentDidMount() {
@@ -72,9 +85,10 @@ export default class ScheduleRoute extends React.Component {
 
     return (
       <>
-        <GoogleMap markers={clientsFilter} setCenter={this.setCenter}></GoogleMap>
-        <div className='schedule-page'>
-          {/* <GoogleMap markers={sampleClients} setCenter={this.setCenter}></GoogleMap> */}
+        <div className={`map-container ${this.state.mapClass}`}>
+          <GoogleMap markers={clientsFilter} setCenter={this.setCenter}></GoogleMap>
+        </div>
+        <div className={`schedule-page ${this.state.listClass}`}>
           <ScheduleDropDown today={this.state.todayOfWeek} />
           <div className='client-cards'>
             {clientsFilter.map((store) => (
@@ -82,16 +96,7 @@ export default class ScheduleRoute extends React.Component {
             ))}
           </div>
         </div>
-        <div className="list-map-buttons">
-          <button className="btn">
-            <FontAwesomeIcon icon={faList}></FontAwesomeIcon>
-            List view
-          </button>
-          <button className="btn">
-            <FontAwesomeIcon icon={faMapMarkerAlt}></FontAwesomeIcon>
-            Map view
-          </button>
-        </div>
+        <ListMapToggle listClick={this.listClick} mapClick={this.mapClick}></ListMapToggle>
       </>
     );
   }

@@ -37,3 +37,17 @@
     flex-flow: row wrap;
   }
 }
+
+// map styles
+
+.map-container {
+  width: 100%;
+  height: calc(100vh - 185px);
+}
+
+@media (min-width: 600px) {
+  .map-container {
+    height: 400px;
+    display: block;
+  }
+}
