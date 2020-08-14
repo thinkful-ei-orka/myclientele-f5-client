@@ -130,7 +130,7 @@ export default class ClientsMap extends React.Component {
         <>
           <h2>Add Client</h2>
           <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
-          <Link to="/add-client-form">Manually add a client</Link>
+          <Link className='link' to="/add-client-form">Manually add a client</Link>
           <div className='hidden'>{<GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>}</div>
           {/* <GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent> */}
         </>
