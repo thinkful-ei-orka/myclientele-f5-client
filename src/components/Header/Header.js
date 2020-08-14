@@ -81,9 +81,9 @@ class Header extends React.Component {
             onClick={() => this.handleLogOut()}>
             Logout
           </button>
-          {/* <Link to='/user'>
+          <Link to='/myaccount'>
             <button className='user-info btn'>My Account</button>
-          </Link> */}
+          </Link>
           <Link to='/form'>
             <button className='add-client btn'>Add Client</button>
           </Link>
