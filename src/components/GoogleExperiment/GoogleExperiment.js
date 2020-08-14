@@ -21,10 +21,11 @@ export default class ClientsMap extends React.Component {
     mapView: true,
   }
 
-  handleSearch = (searchTerm) => {
-    console.log('searching');
-    console.log('center', this.state.center)
-    console.log('searchterm', this.state.searchTerm)
+  handleSearch = (e) => {
+    e.preventDefault();
+    // console.log('searching');
+    // console.log('center', this.state.center)
+    // console.log('searchterm', this.state.searchTerm)
     return fetch(`${config.API_ENDPOINT}/places?searchTerm=${this.state.searchTerm}&center=${this.state.center}`, {
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
@@ -73,12 +74,13 @@ export default class ClientsMap extends React.Component {
   }
 
   render() {
-    console.log('searchterm', this.state.searchTerm)
+    // console.log('searchterm', this.state.searchTerm)
+    // console.log('results', this.state.formattedResults)
 
     //defaults to listView if neither is selected for mobile
     if (this.state.formattedResults !== null) {
       let resultList = this.state.formattedResults;
-      console.log('resultList', resultList)
+      // console.log('resultList', resultList)
       resultList = resultList.map(result =>
         <li id={result.id} key={result.id}>
           <span>{result.name}</span>
