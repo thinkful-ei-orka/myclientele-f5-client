@@ -53,6 +53,7 @@ export default class GoogleMapComponent extends React.Component {
           if (lat !== 0 && lng !== 0) {
             console.log(lat, lng);
             this.state.map.setCenter({lat, lng})
+            this.props.setCenter({lat, lng})
             console.log('center set', this.state.map.center.lat(), this.state.map.center.lng())
           }
       })
@@ -81,7 +82,7 @@ export default class GoogleMapComponent extends React.Component {
 
   render() {
     let markers = [];
-
+    console.log('props in Map', this.props)
     // if searching results, populate the results
     if (this.props.markers) {
       this.props.markers.forEach((marker) => {

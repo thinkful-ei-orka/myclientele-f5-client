@@ -18,12 +18,13 @@ export default class ClientsMap extends React.Component {
     formattedResults: null,
     searchTerm: '',
     listView: false,
-    mapView: false,
+    mapView: true,
   }
 
   handleSearch = (searchTerm) => {
     console.log('searching');
-
+    console.log('center', this.state.center)
+    console.log('searchterm', this.state.searchTerm)
     return fetch(`${config.API_ENDPOINT}/places?searchTerm=${this.state.searchTerm}&center=${this.state.center}`, {
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
@@ -54,6 +55,7 @@ export default class ClientsMap extends React.Component {
   }
 
   setCenter = (center) => {
+    console.log('setCenter in GE', center)
     this.setState({
       center: center,
     });
@@ -73,7 +75,7 @@ export default class ClientsMap extends React.Component {
   render() {
     console.log('searchterm', this.state.searchTerm)
 
-    //defaults to listView is neither is selected for mobile
+    //defaults to listView if neither is selected for mobile
     if (this.state.formattedResults !== null) {
       let resultList = this.state.formattedResults;
       console.log('resultList', resultList)
@@ -114,7 +116,8 @@ export default class ClientsMap extends React.Component {
           <h2>Add Client</h2>
           <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
           <Link to="/add-client-form">Manually add a client</Link>
-          <div className='hidden'>{<GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>}</div>
+          {/* <div className='hidden'>{<GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>}</div> */}
+          <GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>
         </>
       )
 

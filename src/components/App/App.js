@@ -32,7 +32,7 @@ import ReportsView from '../../components/ReportsView/ReportsView';
 import TakeReport from '../../components/TakeReport/TakeReport';
 import ClientsMap from '../ClientsMap/ClientsMap';
 // import ClientsSearch from '../ClientsSearch/ClientsSearch';
-// import GoogleExperiment from '../GoogleExperiment/GoogleExperiment';
+import GoogleExperiment from '../GoogleExperiment/GoogleExperiment';
 // import AddClientMap from '../AddClient/AddClient';
 
 export default class App extends React.Component {
@@ -122,10 +122,10 @@ export default class App extends React.Component {
             <PrivateRoute path='/reports/:report_id' component={ReportRoute} />
             <PrivateRoute path='/take-report' component={TakeReport} />
             <PrivateRoute path='/clients-map' component={ClientsMap} />
-            {/*
-            <PrivateRoute path="/clients-search" component={ClientsSearch} />
+            
+            {/* <PrivateRoute path="/clients-search" component={ClientsSearch} /> */}
             <PrivateRoute path="/google" component={GoogleExperiment} />
-            */}
+           
           </PrivateContext.Provider>
         </Switch>
       </div>
