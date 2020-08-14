@@ -24,14 +24,18 @@ export default class GoogleMapComponent extends React.Component {
     map.fitBounds(bounds);
     this.setState({
       map: map,
+    }, () => {
+      this.setCenter()
     })
-    this.setCenter();
+    // console.log('start mississippiing')
+    //mapSetCenter does not work necessarily when onLoad is called
+    // map.setCenter({lat: 27, lng: -81})
   }
 
   onIdle = () => {
     let lat = this.state.map.getCenter().lat();
     let lng = this.state.map.getCenter().lng();
-
+    console.log('idle')
     this.props.setCenter([lat, lng]);
   }
 
@@ -45,18 +49,23 @@ export default class GoogleMapComponent extends React.Component {
     let lat = 0;
     let lng = 0;
     if (navigator.geolocation) {
+      console.log('gelocation allowed!')
       navigator.geolocation.getCurrentPosition(
         (position) => {
           lat = position.coords.latitude;
           lng = position.coords.longitude;
-
+          console.log(lat, lng);
           if (lat !== 0 && lng !== 0) {
-            console.log(lat, lng);
-            this.state.map.setCenter({lat, lng})
-            this.props.setCenter({lat, lng})
-            console.log('center set', this.state.map.center.lat(), this.state.map.center.lng())
+
+            // console.log('setting the center!')
+            //map.setCenter does not work necessarily when map is called to load
+            setTimeout(() => this.state.map.setCenter({lat, lng}), 1000)
+            // this.props.setCenter({lat, lng})
+            // console.log('center set', this.state.map.center.lat(), this.state.map.center.lng())
           }
-      })
+      },
+      err => console.log(err),
+      {maximumAge: Infinity})
     }
   }
 
@@ -82,7 +91,7 @@ export default class GoogleMapComponent extends React.Component {
 
   render() {
     let markers = [];
-    console.log('props in Map', this.props)
+    // console.log('props in Map', this.props)
     // if searching results, populate the results
     if (this.props.markers) {
       this.props.markers.forEach((marker) => {
@@ -114,6 +123,7 @@ export default class GoogleMapComponent extends React.Component {
               streetViewControl: false,
               mapTypeControl: false,
             }}
+            // center={{lat: 41, lng: -87}}
           >
             {markers}
             {this.state.infoWindow}
