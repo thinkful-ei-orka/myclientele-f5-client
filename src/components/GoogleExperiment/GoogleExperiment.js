@@ -22,6 +22,7 @@ export default class ClientsMap extends React.Component {
   }
 
   handleSearch = (e) => {
+    console.log('e', e)
     e.preventDefault();
     // console.log('searching');
     // console.log('center', this.state.center)
@@ -93,7 +94,7 @@ export default class ClientsMap extends React.Component {
           }}><button type='button'>Select</button></Link>
         </li>
       )
-    if (!this.state.mapView) {
+    if (!this.state.listView) {
       return (
         <>
           <h2>Add Client</h2>
