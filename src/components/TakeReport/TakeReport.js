@@ -30,7 +30,7 @@ class TakeReport extends React.Component {
 
   onFormSubmit = async e => {
     e.preventDefault();
-<<<<<<< HEAD
+
     const notes = e.target["report-text-input"].value;
     const photoInput = e.target["report-photo-input"];
     const file = photoInput.files;
