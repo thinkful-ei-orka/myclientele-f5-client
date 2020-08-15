@@ -1,0 +1,15 @@
+.account-title, .save-edit-buttons {
+    text-align: center;
+}
+
+.account-area {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100px 100px 100px 100px 100px 100px;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.account-area > * {
+    border: 1px solid grey;
+}
