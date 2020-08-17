@@ -114,12 +114,28 @@ export default class App extends React.Component {
             <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
             <PrivateRoute path='/clients' exact component={ClientsRoute} />
             <PrivateRoute path='/clients/:id' exact component={ClientRoute} />
-            <PrivateRoute path='/clients/:id/reports' exact component={ClientReportsRoute} />
-            <PrivateRoute path='/clients/:id/add' exact component={TakeReport} />
-            <PrivateRoute path='/clients/:id/edit' exact component={AddClientForm} />
+            <PrivateRoute
+              path='/clients/:id/reports'
+              exact
+              component={ClientReportsRoute}
+            />
+            <PrivateRoute
+              path='/clients/:id/add'
+              exact
+              component={TakeReport}
+            />
+            <PrivateRoute
+              path='/clients/:id/edit'
+              exact
+              component={AddClientForm}
+            />
 
             <PrivateRoute path='/add-client' component={AddClientRoute} />
-            <PrivateRoute exact path='/add-client-form' component={AddClientForm} />
+            <PrivateRoute
+              exact
+              path='/add-client-form'
+              component={AddClientForm}
+            />
             <PrivateRoute exact path='/reports' component={ReportsView} />
             <PrivateRoute path='/reports/:report_id' component={ReportRoute} />
 
@@ -127,7 +143,7 @@ export default class App extends React.Component {
 
             {/* <PrivateRoute path='/add-client-map' component={AddClientMap} /> */}
             {/* <PrivateRoute path='/clients-map' component={ClientsMap} /> */}
-            <PrivateRoute path="/google" component={GoogleExperiment} />
+            <PrivateRoute path='/google' component={GoogleExperiment} />
             {/* <PrivateRoute path='/take-report' component={TakeReport} /> */}
 
             <MobileNav />

@@ -3,6 +3,7 @@ import PrivateContext from '../../contexts/PrivateContext'; //will need later?
 import ReportsApiService from '../../services/reports-api-service';
 import { Link } from 'react-router-dom';
 import './ReportsView.scss';
+import ClientApiService from '../../services/client-api-service';
 
 class Reports extends React.Component {
   static contextType = PrivateContext; //is needed?
@@ -10,6 +11,7 @@ class Reports extends React.Component {
     super(props);
     this.state = {
       reports: [],
+      clients: [],
     };
   }
 
@@ -19,14 +21,28 @@ class Reports extends React.Component {
         this.setState({ reports: res })
       );
     }
+    if (this.context.clients.length === 0) {
+      ClientApiService.getAllClients().then((res) =>
+        this.context.updateContext({ clients: res })
+      );
+    }
   }
+  matchReportToClient = (reportId) => {
+    const clientData = this.context.clients.find(
+      (client) => client.id === reportId
+    );
+    if (!clientData) {
+      return `No matched client`;
+    }
+    return clientData;
+  };
 
   render() {
     let reports = this.state.reports;
     if (reports) {
       reports.map((report) => {
-        if (report.photo_url === '') {
-          return (report.photo_url = 'https://via.placeholder.com/150');
+        if (report.photos === '') {
+          return (report.photos = ['https://via.placeholder.com/150']);
         }
       });
     }
@@ -37,24 +53,39 @@ class Reports extends React.Component {
       <section aria-label='Your reports' className='report-list'>
         <h1>Reports</h1>
         <ul className='report-list-ul'>
-          {reports.map((report) => (
-            <Link
-              key={report.id}
-              to={`/reports/${report.id}`}
-              className='reportList-link'>
+          {reports.map((report) => {
+            const newDate = new Date(report.date);
+            const clientData = this.matchReportToClient(report.id);
+            return (
               <li className='report-li' id={report.id}>
-                <img
-                  className='company-logo'
-                  src={report.photos[0]}
-                  alt={report.name}
-                />
-                <p>{report.name}</p>
-                <p>{report.location}</p>
-                <p>{report.date}</p>
-                <p className='information-area'>{report.notes}</p>
+                <Link
+                  key={report.id}
+                  to={`/reports/${report.id}`}
+                  className='reportList-link'>
+                  <div className='main-info-area'>
+                    <div className='company-logo'>
+                      <img
+                        id='reports-img'
+                        src='https://via.placeholder.com/150'
+                        alt={report.name}
+                      />
+                    </div>
+
+                    <div className='information-area'>
+                      <h2>{clientData.name || `Not assigned`}</h2>
+                      <p>{clientData.location}</p>
+                      <p>{report.name}</p>
+
+                      {console.log(clientData)}
+                    </div>
+                  </div>
+                  <div className='submitted-area'>
+                    <p>Submitted: {newDate.toLocaleDateString()}</p>
+                  </div>
+                </Link>
               </li>
-            </Link>
-          ))}
+            );
+          })}
         </ul>
       </section>
     );
