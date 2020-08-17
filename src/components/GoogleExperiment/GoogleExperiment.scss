@@ -2,10 +2,24 @@
   position: relative;
 }
 
-.li {
+ul {
+  list-style: none;
+}
+
+li {
   text-decoration: none;
+
 }
 
 .hidden {
   display: none;
+}
+
+h2 {
+  text-align: center;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
 }
