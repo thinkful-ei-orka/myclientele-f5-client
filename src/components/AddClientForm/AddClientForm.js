@@ -29,32 +29,26 @@ class AddClientForm extends React.Component {
       notes,
       general_manager,
     } = this.state;
-
-    if(this.props.location.state) {
+    let newClient = {
+      name,
+      location,
+      day_of_week,
+      hours_of_operation,
+      currently_closed,
+      notes,
+      general_manager,
+    };
+    if (this.props.location.state) {
       ClientApiService.updateClient(
         this.props.location.state.data.id,
-        name,
-        location,
-        day_of_week,
-        hours_of_operation,
-        currently_closed,
-        notes,
-        general_manager
+        newClient
       )
         .then(() => {
           this.context.fetchClients();
         })
         .then(() => this.props.history.push("/schedule"));
     } else {
-      ClientApiService.addClient(
-        name,
-        location,
-        day_of_week,
-        hours_of_operation,
-        currently_closed,
-        notes,
-        general_manager
-      )
+      ClientApiService.addClient(newClient)
         .then(() => {
           this.context.fetchClients();
         })
@@ -140,7 +134,7 @@ class AddClientForm extends React.Component {
         hours_of_operation,
         general_manager,
         notes,
-        button_text: 'Update Client'
+        button_text: "Update Client",
       });
     }
   };
