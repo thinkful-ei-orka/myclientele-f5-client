@@ -1,6 +1,8 @@
 import React from 'react';
 import './GoogleMap.scss';
 
+import { Link } from 'react-router-dom'
+
 import ClientCard from '../../components/ClientCard/ClientCard';
 
 // for @react-google-maps/api
@@ -35,9 +37,9 @@ export default class GoogleMapComponent extends React.Component {
   onIdle = () => {
     let lat = this.state.map.getCenter().lat();
     let lng = this.state.map.getCenter().lng();
-    console.log('idle')
+    // console.log('idle')
     this.props.setCenter([lat, lng]);
-    console.log(lat, lng);
+    // console.log(lat, lng);
   }
 
   onClick = () => {
@@ -50,12 +52,12 @@ export default class GoogleMapComponent extends React.Component {
     let lat = 0;
     let lng = 0;
     if (navigator.geolocation) {
-      console.log('gelocation allowed!')
+      // console.log('gelocation allowed!')
       navigator.geolocation.getCurrentPosition(
         (position) => {
           lat = position.coords.latitude;
           lng = position.coords.longitude;
-          console.log(lat, lng);
+          // console.log(lat, lng);
           if (lat !== 0 && lng !== 0) {
 
             // console.log('setting the center!')
@@ -86,11 +88,28 @@ export default class GoogleMapComponent extends React.Component {
     })
   }
 
+  handleSearchMarkerClick = (id, lat, lng, content) => {
+    this.props.onMarkerClick(id)
+    this.setState({
+      infoWindow: <InfoWindow
+          key={id}
+          onLoad={this.onInfoLoad}
+          position={{lat: lat, lng: lng}}
+        >
+          <div>
+            {content}
+          </div>
+        </InfoWindow>
+    })
+  }
+
+
   onInfoLoad = (infoWindow) => {
     // console.log('infoWindow: ', infoWindow)
   }
 
   render() {
+    console.log('props in GM', this.props)
     let markers = [];
     // console.log('props in Map', this.props)
     // if searching results, populate the results
@@ -99,7 +118,7 @@ export default class GoogleMapComponent extends React.Component {
         let lat = Number(marker.lat);
         let lng = Number(marker.lng);
 
-        console.log(marker);
+        // console.log(marker);
 
         markers.push(
           <Marker
@@ -107,6 +126,29 @@ export default class GoogleMapComponent extends React.Component {
             position={{lat: lat, lng: lng}}
             onClick={() => this.handleMarkerClick(marker.id, lat, lng, <ClientCard className="map-card" data={marker} key={marker.id} />)}
             // onClick={() => this.handleMarkerClick(marker.id, lat, lng, <div><p>This event is fired when the containing the InfoWindow's content is attached to the DOM. You may wish to monitor this event if you are building out your info window content dynamically.</p><button>button</button></div>)}
+          >
+          </Marker>
+        );
+      });
+    } else if (this.props.searchMarkers) {
+      this.props.searchMarkers.forEach((marker) => {
+        let lat = Number(marker.lat);
+        let lng = Number(marker.lng);
+
+        markers.push(
+          <Marker
+            key={marker.id}
+            position={{lat: lat, lng: lng}}
+            onClick={() => this.handleSearchMarkerClick(marker.id, lat, lng, <li className='result-box' id={marker.id} key={marker.id}>
+            <p className='result-box-name'>{marker.name}</p>
+            <p className='result-box-location'>{marker.location}</p>
+            <Link to={{
+              pathname: "/add-client-form",
+              state: {
+                data: marker
+              }
+            }}><button className='box-select-button btn' type='button'>Select</button></Link>
+          </li> )}
           >
           </Marker>
         );

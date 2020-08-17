@@ -7,7 +7,7 @@ class GoogleSearchBar extends React.Component {
    return (
      <form onSubmit={e => this.props.handleSearch(e)}>
        <input type="search" name='search' placeholder='Search' aria-label='Search for clients' onChange={e => this.props.handleChange(e)} />
-       <button className='search-button' type='submit'>Search</button>
+       <button className='search-button btn' type='submit'>Search</button>
      </form>
    )
  }

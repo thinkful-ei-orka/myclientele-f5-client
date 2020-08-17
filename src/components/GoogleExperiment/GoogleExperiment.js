@@ -3,8 +3,10 @@ import PrivateContext from '../../contexts/PrivateContext';
 import GoogleMapComponent from '../GoogleMap/GoogleMap';
 import GoogleSearchBar from '../GoogleSearchBar/GoogleSearchBar';
 import { Link } from 'react-router-dom';
-// import AddClientForm from '../AddClientForm/AddClientForm';
+import AddClientForm from '../AddClientForm/AddClientForm';
+import ListMapToggle from '../ListMapToggle/ListMapToggle'
 import './GoogleExperiment.scss';
+
 
 import TokenService from '../../services/token-service';
 import config from '../../config';
@@ -17,16 +19,15 @@ export default class ClientsMap extends React.Component {
     results: null,
     formattedResults: null,
     searchTerm: '',
-    listView: false,
-    mapView: false,
+    listClass: '',
+    mapClass: 'mobile-hidden',
+    isSearched: 'mobile-hidden',
   }
 
   handleSearch = (e) => {
     console.log('e', e)
     e.preventDefault();
-    // console.log('searching');
-    // console.log('center', this.state.center)
-    // console.log('searchterm', this.state.searchTerm)
+    this.setState({ isSearched: '' })
     return fetch(`${config.API_ENDPOINT}/places?searchTerm=${this.state.searchTerm}&center=${this.state.center}`, {
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
@@ -70,8 +71,31 @@ export default class ClientsMap extends React.Component {
     })
   }
 
+  listClick = () => {
+    this.setState({
+      listClass: '',
+      mapClass: 'mobile-hidden',
+    })
+  }
+
+  mapClick = () => {
+    this.setState({
+      listClass: 'mobile-hidden',
+      mapClass: '',
+    })
+  }
+
+  onMarkerClick = (id) => {
+    console.log('resultList go in?', this.resultList)
+    console.log('id in onMC', id)
+  }
+
   componentDidMount() {
     this.context.fetchClients();
+    this.setState({
+      listClass: '',
+      mapClass: 'mobile-hidden'
+    })
   }
 
   render() {
@@ -83,58 +107,73 @@ export default class ClientsMap extends React.Component {
       let resultList = this.state.formattedResults;
       // console.log('resultList', resultList)
       resultList = resultList.map(result =>
-        <li id={result.id} key={result.id}>
-          <span>{result.name}</span>
-          <p>{result.location}</p>
+        <li className='result' id={result.id} key={result.id}>
+          <p className='result-name'>{result.name}</p>
+          <p className='result-location'>{result.location}</p>
           <Link to={{
             pathname: "/add-client-form",
             state: {
               data: result
             }
-          }}><button className='btn' type='button'>Select</button></Link>
+          }}><button className='select-button btn' type='button'>Select</button></Link>
+
         </li>
       )
-    if (this.state.listView) {
       return (
         <>
-          <h2>Add Client</h2>
+          {/* <h2>Add Client</h2> */}
           <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
-          <ul>
+          <div className={`${this.state.mapClass} search-map-container`}>{<GoogleMapComponent searchMarkers={this.state.formattedResults} setCenter={this.setCenter} onMarkerClick={this.onMarkerClick}></GoogleMapComponent>}</div>
+          <div className={`${this.state.listClass} search-results`}>
             {resultList}
-          </ul>
-          <div className='hidden'>{<GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>}</div>
+          </div>
+          <ListMapToggle listClick={this.listClick} mapClick={this.mapClick}></ListMapToggle>
         </>
-      )}
-      else if (this.state.mapView) {
-        return (
-          <>
-            <h2>Add Client</h2>
-            <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
-            <GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>
-          </>
-        )}
-      else {
-        return (
-          <>
-            <h2>Add Client</h2>
-            <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
-            <ul>
-            {resultList}
-          </ul>
-            <GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>
-          </>
-        )
-      }
+      )
+
+
     }
       return (
         <>
-          <h2>Add Client</h2>
           <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
           <Link className='link' to="/add-client-form">Manually add a client</Link>
-          <div className='hidden'>{<GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>}</div>
-          {/* <GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent> */}
+          <div className={`${this.state.isSearched} ${this.state.mapClass}`}>{<GoogleMapComponent searchMarkers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>}</div>
+          <ListMapToggle listClick={this.listClick} mapClick={this.mapClick}></ListMapToggle>
         </>
       )
 
   }
 }
+
+
+// if (this.state.listView) {
+//   return (
+//     <>
+//       <h2>Add Client</h2>
+//       <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
+//       <ul>
+//         {resultList}
+//       </ul>
+//       <div className='hidden'>{<GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>}</div>
+//     </>
+//   )}
+//   else if (this.state.mapView) {
+//     return (
+//       <>
+//         <h2>Add Client</h2>
+//         <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
+//         <GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>
+//       </>
+//     )}
+//   else {
+//     return (
+//       <>
+//         <h2>Add Client</h2>
+//         <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
+//         <ul>
+//         {resultList}
+//       </ul>
+//         <GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>
+//       </>
+//     )
+//   }

@@ -4,15 +4,38 @@
 
 ul {
   list-style: none;
+  padding-bottom: 100px;
 }
 
 li {
   text-decoration: none;
-
+  // display: flex;
+  // justify-content: space-between;
+  padding-right: 10px;
 }
 
-.hidden {
-  display: none;
+.result {
+  border-top: 1px solid gray;
+  display: inline-block;
+  margin: 3px;
+  width: 100%;
+}
+
+.result-name, .result-location {
+  display: block;
+  width: 60%;
+  padding-left: 20px;
+}
+
+.select-button {
+  float: right;
+  width: auto;
+  margin-top: -15%;
+  padding: 5px;
+}
+
+li > span {
+  margin: 5px;
 }
 
 h2 {
@@ -22,4 +45,98 @@ h2 {
 .link {
   display: flex;
   justify-content: center;
+}
+
+.search-map-container {
+  width: 100%;
+  height: calc(100vh - 185px)
+}
+
+.result-box {
+  display: block;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 200px;
+  // display: fixed;
+  // right: 0px;
+  // left: 0px;
+  // bottom: 300px;
+}
+
+.result-box-name, .result-box-location {
+  display: block;
+  width: 60%;
+  // padding-left: 20px;
+}
+
+.box-select-button {
+  // display: flex;
+  // justify-content: flex-end;
+  float: right;
+  margin-top: -38%;
+  // margin: 10px;
+  // display: block;
+}
+
+@media only screen and (min-width: 600px) {
+
+  .search-results {
+    position: absolute;
+    top: 150px;
+    left: 0px;
+    max-width: 300px;
+    z-index: 1000;
+    padding-left: 10px;
+    max-height: 100vh;
+    background-color: white;
+    overflow: scroll;
+  }
+
+  // .result {
+  //   display: flex;
+  //   margin: 3px;
+  // }
+
+  // .result {
+  //   display: inline;
+  // }
+
+  .select-button {
+    display: inline;
+    justify-content: flex-end;
+  }
+
+  .search-map-container {
+    position: absolute;
+    top: 150px;
+    left: 50px;
+    min-height: 100vh;
+  }
+
+  .result-box {
+    display: inline;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .result-box > button {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+}
+
+@media only screen and (min-width: 1200px) {
+  .search-results {
+    top: 175px;
+    max-width: 450px;
+    height: 100vh;
+  }
+
+  .search-map-container {
+    position: absolute;
+    top: 175px;
+    left: 100px;
+    min-height: 100vh;
+  }
 }
