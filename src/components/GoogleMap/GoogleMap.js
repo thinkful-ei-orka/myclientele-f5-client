@@ -43,9 +43,8 @@ export default class GoogleMapComponent extends React.Component {
   onIdle = () => {
     let lat = this.state.map.getCenter().lat();
     let lng = this.state.map.getCenter().lng();
-    console.log('idle');
+    console.log('idling', lat, lng);
     this.props.setCenter([lat, lng]);
-    console.log(lat, lng);
   };
 
   onClick = () => {
@@ -58,12 +57,12 @@ export default class GoogleMapComponent extends React.Component {
     let lat = 0;
     let lng = 0;
     if (navigator.geolocation) {
-      console.log('gelocation allowed!');
+      console.log('geolocation allowed!');
       navigator.geolocation.getCurrentPosition(
         (position) => {
           lat = position.coords.latitude;
           lng = position.coords.longitude;
-          console.log(lat, lng);
+          console.log('current lat, lng', lat, lng);
           if (lat !== 0 && lng !== 0) {
             // console.log('setting the center!')
             //map.setCenter does not work necessarily when map is called to load

@@ -33,7 +33,6 @@ import Header from '../Header/Header';
 import AddClientForm from '../AddClientForm/AddClientForm';
 import ReportsView from '../../components/ReportsView/ReportsView';
 import TakeReport from '../../components/TakeReport/TakeReport';
-import ClientsMap from '../ClientsMap/ClientsMap';
 // import ClientsSearch from '../ClientsSearch/ClientsSearch';
 import GoogleExperiment from '../GoogleExperiment/GoogleExperiment';
 // import AddClientMap from '../AddClient/AddClient';
