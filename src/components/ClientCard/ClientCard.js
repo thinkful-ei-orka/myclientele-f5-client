@@ -6,7 +6,6 @@ import OpenOrClosed from './OpenOrClosed';
 import './ClientCard.scss';
 import ClientApiService from '../../services/client-api-service';
 // import PrivateContext from '../../contexts/PrivateContext';
-import './ClientCard.scss';
 // import Buttons from './Buttons';
 
 class ClientCard extends React.Component {
