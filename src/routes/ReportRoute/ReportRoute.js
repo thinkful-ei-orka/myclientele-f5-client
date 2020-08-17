@@ -1,6 +1,6 @@
 import React from 'react';
 import ReportsApiService from '../../services/reports-api-service';
-import { prototype } from 'react-modal';
+// import { prototype } from 'react-modal';
 
 class ReportRoute extends React.Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class ReportRoute extends React.Component {
   componentDidMount() {
     ReportsApiService.getReport(this.props.match.params.report_id)
       .then(res =>  {
-        this.setState({ 
+        this.setState({
           report: res[0]
          })
       })

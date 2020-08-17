@@ -43,6 +43,8 @@ class Reports extends React.Component {
       reports.map((report) => {
         if (report.photos === '') {
           return (report.photos = ['https://via.placeholder.com/150']);
+        } else {
+          return '';
         }
       });
     }

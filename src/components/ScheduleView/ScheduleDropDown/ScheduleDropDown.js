@@ -1,5 +1,5 @@
 import React from 'react';
-import arrow from '../../../images/arrow.svg';
+// import arrow from '../../../images/arrow.svg';
 import PrivateContext from '../../../contexts/PrivateContext';
 import ScheduleSearch from '../ScheduleSearch/ScheduleSearch';
 
