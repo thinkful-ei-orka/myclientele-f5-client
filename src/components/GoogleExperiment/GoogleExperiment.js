@@ -18,7 +18,7 @@ export default class ClientsMap extends React.Component {
     formattedResults: null,
     searchTerm: '',
     listView: false,
-    mapView: true,
+    mapView: false,
   }
 
   handleSearch = (e) => {
@@ -91,10 +91,10 @@ export default class ClientsMap extends React.Component {
             state: {
               data: result
             }
-          }}><button type='button'>Select</button></Link>
+          }}><button className='btn' type='button'>Select</button></Link>
         </li>
       )
-    if (!this.state.listView) {
+    if (this.state.listView) {
       return (
         <>
           <h2>Add Client</h2>
@@ -113,14 +113,26 @@ export default class ClientsMap extends React.Component {
             <GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>
           </>
         )}
+      else {
+        return (
+          <>
+            <h2>Add Client</h2>
+            <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
+            <ul>
+            {resultList}
+          </ul>
+            <GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>
+          </>
+        )
+      }
     }
       return (
         <>
           <h2>Add Client</h2>
           <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
-          <Link to="/add-client-form">Manually add a client</Link>
-          {/* <div className='hidden'>{<GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>}</div> */}
-          <GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>
+          <Link className='link' to="/add-client-form">Manually add a client</Link>
+          <div className='hidden'>{<GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>}</div>
+          {/* <GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent> */}
         </>
       )
 
