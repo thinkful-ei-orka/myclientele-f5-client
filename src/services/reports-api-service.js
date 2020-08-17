@@ -57,7 +57,7 @@ const ReportsApiService = {
       },
       body: JSON.stringify(report),
     }).then((res) =>
-      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : 0
     );
   },
   deleteReport(report_id) {
@@ -67,7 +67,7 @@ const ReportsApiService = {
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
     }).then((res) =>
-      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : 0
     );
   },
 };
