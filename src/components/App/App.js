@@ -101,7 +101,7 @@ export default class App extends React.Component {
     contextValue.updateContext = this.updateContext;
     contextValue.setScheduleFilter = this.setScheduleFilter;
     contextValue.setScheduleSearch = this.setScheduleSearch;
-
+    console.log('context value', contextValue);
     return (
       <div className='App'>
         <Switch>
@@ -143,7 +143,7 @@ export default class App extends React.Component {
             {/* <PrivateRoute path='/add-client-map' component={AddClientMap} /> */}
             {/* <PrivateRoute path='/clients-map' component={ClientsMap} /> */}
             <PrivateRoute path='/google' component={GoogleExperiment} />
-            {/* <PrivateRoute path='/take-report' component={TakeReport} /> */}
+             <PrivateRoute path='/take-report' component={TakeReport} />
 
             <MobileNav />
           </PrivateContext.Provider>
