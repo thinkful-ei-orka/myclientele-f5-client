@@ -2,8 +2,13 @@
   position: relative;
 }
 
-.li {
+ul {
+  list-style: none;
+}
+
+li {
   text-decoration: none;
+
 }
 
 .hidden {
@@ -15,5 +20,6 @@ h2 {
 }
 
 .link {
-  align-self: center;
+  display: flex;
+  justify-content: center;
 }

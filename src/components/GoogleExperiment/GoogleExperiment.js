@@ -91,7 +91,7 @@ export default class ClientsMap extends React.Component {
             state: {
               data: result
             }
-          }}><button type='button'>Select</button></Link>
+          }}><button className='btn' type='button'>Select</button></Link>
         </li>
       )
     if (this.state.listView) {
