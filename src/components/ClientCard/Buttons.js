@@ -14,7 +14,7 @@ class Buttons extends React.Component {
     return (
       <div className='dropdown_box'>
         <ul className='dropdown'>
-          <li className='dropdown_item'>
+          {/* <li className='dropdown_item'>
             <Link
               to={{
                 pathname: '/take-report',
@@ -24,7 +24,7 @@ class Buttons extends React.Component {
               }}>
               Take a report
             </Link>
-          </li>
+          </li> */}
           <li className='dropdown_item'>View reports</li>
           <li className='dropdown_item'>
             <Link

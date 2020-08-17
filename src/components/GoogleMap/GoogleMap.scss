@@ -7,3 +7,24 @@
 .gm-style img {
   padding: 0;
 }
+
+
+@media (max-width: 599px) {
+  .gm-style-pbc + div > div {
+    // left: 0 !important;
+    // top: unset !important;
+    // bottom: 0;
+    .gm-style-iw-a {
+
+    }
+  }
+  .gm-style {
+    .gm-style-iw-a {
+      // left: 0 !important;
+      // top: unset !important;
+    }
+    .gm-style-iw-t {
+
+    }
+  }
+}
