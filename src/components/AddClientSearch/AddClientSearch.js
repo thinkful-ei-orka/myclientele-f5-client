@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import ListMapToggle from '../ListMapToggle/ListMapToggle'
 import './AddClientSearch.scss';
 
-
 import TokenService from '../../services/token-service';
 import config from '../../config';
 
@@ -42,7 +41,6 @@ export default class ClientsMap extends React.Component {
         !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
       )
       .then((json) => {
-        console.log('search results', json);
         let formattedResults = [];
         json.forEach((result) => {
           formattedResults.push({
