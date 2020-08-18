@@ -2,17 +2,18 @@
 
 .schedule-drop-down {
   width: 100%;
-  border: 1px solid grey;
   padding: 10px;
   font-size: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   justify-content: center;
-  align-items: baseline;
+  align-items: center;
 }
 
-.schedule-drop-down > div {
-  margin: 5px;
+.dropdown-search {
+  width: 50%;
+  margin: 10px 0 0 0;
+  padding: 0;
 }
 
 .filter-dropdown-list {
