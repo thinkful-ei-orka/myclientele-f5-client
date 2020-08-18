@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import "./AddClientForm.scss";
-import ScheduleDropDown from "../Dropdown/Dropdown";
+// import ScheduleDropDown from "../Dropdown/Dropdown";
 import ClientApiService from "../../services/client-api-service";
 import PrivateContext from "../../contexts/PrivateContext";
 
@@ -14,6 +14,7 @@ class AddClientForm extends React.Component {
     general_manager: "",
     day_of_week: 0,
     notes: "",
+    header_text: 'Add a Client',
     button_text: "Add Client",
   };
   static contextType = PrivateContext;
@@ -29,32 +30,26 @@ class AddClientForm extends React.Component {
       notes,
       general_manager,
     } = this.state;
-
-    if(this.props.location.state) {
+    let newClient = {
+      name,
+      location,
+      day_of_week,
+      hours_of_operation,
+      currently_closed,
+      notes,
+      general_manager,
+    };
+    if (this.props.location.state) {
       ClientApiService.updateClient(
         this.props.location.state.data.id,
-        name,
-        location,
-        day_of_week,
-        hours_of_operation,
-        currently_closed,
-        notes,
-        general_manager
+        newClient
       )
         .then(() => {
           this.context.fetchClients();
         })
         .then(() => this.props.history.push("/schedule"));
     } else {
-      ClientApiService.addClient(
-        name,
-        location,
-        day_of_week,
-        hours_of_operation,
-        currently_closed,
-        notes,
-        general_manager
-      )
+      ClientApiService.addClient(newClient)
         .then(() => {
           this.context.fetchClients();
         })
@@ -140,7 +135,18 @@ class AddClientForm extends React.Component {
         hours_of_operation,
         general_manager,
         notes,
+        header_text: 'Edit Client',
         button_text: 'Update Client'
+      });
+    }
+    if (this.props.client) {
+      const {
+        name,
+        location,
+      } = this.props.client;
+      this.setState({
+        name,
+        location,
       });
     }
   };
@@ -150,9 +156,10 @@ class AddClientForm extends React.Component {
   }
 
   render() {
+    console.log('props', this.props)
     return (
       <form className="add_client_form" onSubmit={(e) => this.handleSubmit(e)}>
-        <h2 id="title">Add a client</h2>
+        <h2 id="title">{this.state.header_text}</h2>
         <label htmlFor="name">Name *</label>
         <input
           type="text"

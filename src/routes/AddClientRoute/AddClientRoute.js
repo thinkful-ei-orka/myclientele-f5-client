@@ -1,11 +1,10 @@
 import React from 'react';
-// import GoogleMap from '../../components/GoogleMap/GoogleMap';
-import GoogleExperiment from '../../components/GoogleExperiment/GoogleExperiment';
+import AddClientSearch from '../../components/AddClientSearch/AddClientSearch';
 
 export default function AddClientRoute() {
   return (
     <section>
-      <GoogleExperiment />
+      <AddClientSearch />
     </section>
   );
 }

@@ -1,12 +1,12 @@
 ## My Clientele - client
 
-This project REACT app allows you to log in and see your clients and reports you've made to maximize productivity and minimum potential loses from lost leads and inability to easily access previous reports on the go.
+This REACT app allows you to access your daily schedule, clients, previous reports, and even take reports on the go, maximizing your daily productivity.  
 
-With My Clientele, you can keep all your client information in one place. This includes names, locations, hours of operations, if they are currently closed, and who the general manager is. Also included is your daily schedule of clients, and the ability to see all of your reports. These reports can be filtered, and feature the date of your report, your notes, and pictures you have taken.
+With My Clientele, you can keep all your client information in one place. This includes names, locations, hours of operations, if they are currently closed, and the current general manager.  You can even update the clients as this information changes.
 
-You can update the clients as they change.
+Also included is your daily schedule of clients, and the ability to see all of your reports. These reports can be filtered, and feature the date of your report, your notes, and pictures you have taken.
 
-The Take Report feature allows you to seamlessly and effortlessly add notes to a client, along with any photos you may need.
+The Take Report feature allows you to seamlessly and effortlessly take notes for each client visit, along with any photos you may need.
 
 My Clientele is ideal for the fast paced and busy lifestyle you lead, and allows you to keep up-to-date with what places are closed due to things like Covid-19 or rennovations with the currently closed feature. With a click of a button, you can keep up to date with your clients and their needs, all from one easy to use app!
 

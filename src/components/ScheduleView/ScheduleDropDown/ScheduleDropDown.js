@@ -1,6 +1,7 @@
 import React from 'react';
-import arrow from '../../../images/arrow.svg';
+// import arrow from '../../../images/arrow.svg';
 import PrivateContext from '../../../contexts/PrivateContext';
+import ScheduleSearch from '../ScheduleSearch/ScheduleSearch';
 
 class ScheduleDropDown extends React.Component {
   static contextType = PrivateContext;
@@ -54,10 +55,7 @@ class ScheduleDropDown extends React.Component {
           </select>
           {/* <img src={arrow} alt='drop down arrow' /> */}
         </div>
-        <div className='dropdown-search'>
-          {/* Search: */}
-          <input type='search' placeholder='Search Here' onChange={this.handleSearchChange}></input>
-        </div>
+        <ScheduleSearch />
       </div>
     );
   }

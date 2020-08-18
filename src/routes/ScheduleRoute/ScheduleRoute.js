@@ -41,7 +41,7 @@ export default class ScheduleRoute extends React.Component {
   };
 
   componentDidMount() {
-    if (this.context.clients == null) {
+    if (this.context.clients === null) {
       this.context
         .fetchClients()
         .then(() => this.setState({ isLoading: false }));
@@ -57,21 +57,23 @@ export default class ScheduleRoute extends React.Component {
   }
 
   render() {
-    if (this.context.clients == null) {
+    if (this.context.clients === null) {
       return <div>Loading...</div>;
     }
 
     let clientsFilter = this.context.clients.filter(
-      (client) => client.day_of_week == this.state.todayOfWeek
-    );
+      (client) => {
+        return client.day_of_week === Number(this.state.todayOfWeek)
+      });
 
-    if (this.context.scheduleFilter) {
+    if (this.context.scheduleFilter ) {
       clientsFilter = this.context.clients.filter(
-        (client) => client.day_of_week == this.context.scheduleFilter
-      );
+        (client) => {
+          return client.day_of_week === Number(this.context.scheduleFilter)
+        });
     }
 
-    if (this.context.scheduleFilter == 7) {
+    if (Number(this.context.scheduleFilter) === 7) {
       clientsFilter = this.context.clients;
     }
 

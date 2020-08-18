@@ -33,9 +33,14 @@ class TakeReport extends React.Component {
     const photoInput = e.target['report-photo-input'];
     const file = photoInput.files;
     const photos = await this.getPhotoUrlList(file);
-    ReportsApiService.addReport(this.client_id, notes, photos)
-      .then(() => this.props.history.push('/schedule'))
-      .catch((error) => console.log(error));
+
+    console.log(photos)
+    ReportsApiService.addReport(
+      this.client_id,
+      notes,
+      photos
+    ).then(() => this.props.history.push("/schedule")).catch((error) => console.log(error));
+
   };
 
   getPhotoUrlList = async (file) => {
@@ -43,10 +48,11 @@ class TakeReport extends React.Component {
 
     for (let key in file) {
       if (!isNaN(Number(key))) {
-        let res = await S3ApiService.getUploadUrl(
-          file[key].name,
-          file[key].type
-        );
+
+        console.log("name ", file[key].name, "... type ", file[key].type);
+        let res = await S3ApiService.getUploadUrl(file[key].name, file[key].type)
+            console.log("response url", res)
+
         let data = await fetch(res.url, {
           method: 'PUT',
           body: file[key],
@@ -59,12 +65,14 @@ class TakeReport extends React.Component {
   componentDidMount() {
     if (this.state.reports.length === 0) {
       ReportsApiService.getReportsByClientId(this.client_id).then((res) => {
+        console.log(res);
         this.setState({ reports: res, isLoading: false });
       });
     }
   }
 
   render() {
+    console.log(this.state.img_src);
     if (this.state.isLoading) {
       return <div>Loading...</div>;
     }

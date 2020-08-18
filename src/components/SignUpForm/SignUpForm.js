@@ -1,7 +1,7 @@
 import React from 'react';
 import AuthApiService from '../../services/auth-api-service';
 import UserContext from '../../contexts/UserContext';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import '../LoginForm/loginform.scss';
@@ -60,7 +60,7 @@ class SignUpForm extends React.Component {
           company_location.value = '';
           user_name.value = '';
           password.value = '';
-  
+
           // this.context.processLogin(res.authToken);
           this.handleRegistrationSuccess();
         })

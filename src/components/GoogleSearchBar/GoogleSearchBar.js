@@ -1,6 +1,9 @@
 import React from 'react';
 import './GoogleSearchBar.scss';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
 class GoogleSearchBar extends React.Component {
   render() {
     return (
@@ -13,7 +16,7 @@ class GoogleSearchBar extends React.Component {
           onChange={(e) => this.props.handleChange(e)}
         />
         <button className='search-button' type='submit'>
-          Search
+          <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
         </button>
       </form>
     );
