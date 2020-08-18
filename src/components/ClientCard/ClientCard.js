@@ -5,9 +5,8 @@ import addsvg from '../../images/clientcard/add.svg';
 import OpenOrClosed from './OpenOrClosed';
 import './ClientCard.scss';
 import ClientApiService from '../../services/client-api-service';
-import PrivateContext from '../../contexts/PrivateContext';
-import './ClientCard.scss';
-import Buttons from './Buttons';
+// import PrivateContext from '../../contexts/PrivateContext';
+// import Buttons from './Buttons';
 
 class ClientCard extends React.Component {
   // static contextType = PrivateContext;
@@ -20,7 +19,7 @@ class ClientCard extends React.Component {
     return (
       <div className='dropdown_box'>
         <ul className='dropdown'>
-          <li className='dropdown_item'>
+          {/* <li className='dropdown_item'>
             <Link
               to={{
                 pathname: '/take-report',
@@ -30,7 +29,7 @@ class ClientCard extends React.Component {
               }}>
               Take a report
             </Link>
-          </li>
+          </li> */}
           <li className='dropdown_item'>View reports</li>
           <li className='dropdown_item'>
             <Link
@@ -86,13 +85,13 @@ class ClientCard extends React.Component {
   render() {
     const {
       name,
-      id,
+      // id,
       location,
       currently_closed,
-      day_of_week,
-      general_manager,
+      // day_of_week,
+      // general_manager,
       hours_of_operation,
-      notes,
+      // notes,
     } = this.props.data;
 
     return (

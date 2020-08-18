@@ -24,21 +24,21 @@ export default class ScheduleRoute extends React.Component {
     this.setState({
       center: center,
     });
-  }
+  };
 
   listClick = () => {
     this.setState({
       listClass: '',
       mapClass: 'mobile-hidden',
-    })
-  }
+    });
+  };
 
   mapClick = () => {
     this.setState({
       listClass: 'mobile-hidden',
       mapClass: '',
-    })
-  }
+    });
+  };
 
   componentDidMount() {
     if (this.context.clients == null) {
@@ -57,23 +57,20 @@ export default class ScheduleRoute extends React.Component {
   }
 
   render() {
-
     if (this.context.clients == null) {
       return <div>Loading...</div>;
     }
 
     let clientsFilter = this.context.clients.filter(
-      (client) => client.day_of_week == this.state.todayOfWeek
-    );
+      (client) => {
+        return client.day_of_week === Number(this.state.todayOfWeek)
+      });
 
     if (this.context.scheduleFilter) {
       clientsFilter = this.context.clients.filter(
-        (client) => client.day_of_week == this.context.scheduleFilter
-      );
-    }
-
-    if (this.context.scheduleFilter == 7) {
-      clientsFilter = this.context.clients;
+        (client) => {
+          return client.day_of_week === Number(this.context.scheduleFilter)
+        });
     }
 
     if (this.context.scheduleSearch) {
@@ -86,7 +83,9 @@ export default class ScheduleRoute extends React.Component {
     return (
       <>
         <div className={`map-container ${this.state.mapClass}`}>
-          <GoogleMap markers={clientsFilter} setCenter={this.setCenter}></GoogleMap>
+          <GoogleMap
+            markers={clientsFilter}
+            setCenter={this.setCenter}></GoogleMap>
         </div>
         <div className={`schedule-page ${this.state.listClass}`}>
           <ScheduleDropDown today={this.state.todayOfWeek} />
@@ -96,7 +95,9 @@ export default class ScheduleRoute extends React.Component {
             ))}
           </div>
         </div>
-        <ListMapToggle listClick={this.listClick} mapClick={this.mapClick}></ListMapToggle>
+        <ListMapToggle
+          listClick={this.listClick}
+          mapClick={this.mapClick}></ListMapToggle>
       </>
     );
   }

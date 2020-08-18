@@ -3,7 +3,7 @@ import PrivateContext from '../../contexts/PrivateContext';
 import GoogleMapComponent from '../GoogleMap/GoogleMap';
 import GoogleSearchBar from '../GoogleSearchBar/GoogleSearchBar';
 import { Link } from 'react-router-dom';
-import AddClientForm from '../AddClientForm/AddClientForm';
+// import AddClientForm from '../AddClientForm/AddClientForm';
 import ListMapToggle from '../ListMapToggle/ListMapToggle'
 import './GoogleExperiment.scss';
 
@@ -25,7 +25,7 @@ export default class ClientsMap extends React.Component {
   }
 
   handleSearch = (e) => {
-    console.log('e', e)
+    console.log('e', e);
     e.preventDefault();
     this.setState({ isSearched: '' })
     return fetch(`${config.API_ENDPOINT}/places?searchTerm=${this.state.searchTerm}&center=${this.state.center}`, {
@@ -33,43 +33,41 @@ export default class ClientsMap extends React.Component {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
     })
-    .then(res =>
-      (!res.ok)
-        ? res.json().then(e => Promise.reject(e))
-        : res.json()
-    )
-    .then(json => {
-      console.log('search results', json);
-      let formattedResults = [];
-      json.forEach((result) => {
-        formattedResults.push({
-          id: result.reference,
-          name: result.name,
-          location: result.formatted_address,
-          lat: result.geometry.location.lat,
-          lng: result.geometry.location.lng,
-        })
-      })
-      this.setState({
-        results: json,
-        formattedResults: formattedResults
-      })
-    })
-  }
+      .then((res) =>
+        !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+      )
+      .then((json) => {
+        console.log('search results', json);
+        let formattedResults = [];
+        json.forEach((result) => {
+          formattedResults.push({
+            id: result.reference,
+            name: result.name,
+            location: result.formatted_address,
+            lat: result.geometry.location.lat,
+            lng: result.geometry.location.lng,
+          });
+        });
+        this.setState({
+          results: json,
+          formattedResults: formattedResults,
+        });
+      });
+  };
 
   setCenter = (center) => {
-    console.log('setCenter in GE', center)
+    console.log('setCenter in GE', center);
     this.setState({
       center: center,
     });
-  }
+  };
 
   handleChange = (e) => {
     e.preventDefault();
     this.setState({
-      searchTerm: e.currentTarget.value
-    })
-  }
+      searchTerm: e.currentTarget.value,
+    });
+  };
 
   listClick = () => {
     this.setState({
@@ -99,7 +97,7 @@ export default class ClientsMap extends React.Component {
   }
 
   render() {
-    // console.log('searchterm', this.state.searchTerm)
+    console.log('searchterm', this.state.searchTerm)
     // console.log('results', this.state.formattedResults)
 
     //defaults to listView if neither is selected for mobile
@@ -141,7 +139,6 @@ export default class ClientsMap extends React.Component {
           <ListMapToggle listClick={this.listClick} mapClick={this.mapClick}></ListMapToggle>
         </>
       )
-
   }
 }
 

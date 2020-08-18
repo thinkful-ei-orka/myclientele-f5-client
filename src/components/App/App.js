@@ -33,7 +33,6 @@ import Header from '../Header/Header';
 import AddClientForm from '../AddClientForm/AddClientForm';
 import ReportsView from '../../components/ReportsView/ReportsView';
 import TakeReport from '../../components/TakeReport/TakeReport';
-import ClientsMap from '../ClientsMap/ClientsMap';
 // import ClientsSearch from '../ClientsSearch/ClientsSearch';
 import GoogleExperiment from '../GoogleExperiment/GoogleExperiment';
 // import AddClientMap from '../AddClient/AddClient';
@@ -102,7 +101,7 @@ export default class App extends React.Component {
     contextValue.updateContext = this.updateContext;
     contextValue.setScheduleFilter = this.setScheduleFilter;
     contextValue.setScheduleSearch = this.setScheduleSearch;
-
+    console.log('context value', contextValue);
     return (
       <div className='App'>
         <Switch>
@@ -114,12 +113,28 @@ export default class App extends React.Component {
             <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
             <PrivateRoute path='/clients' exact component={ClientsRoute} />
             <PrivateRoute path='/clients/:id' exact component={ClientRoute} />
-            <PrivateRoute path='/clients/:id/reports' exact component={ClientReportsRoute} />
-            <PrivateRoute path='/clients/:id/add' exact component={TakeReport} />
-            <PrivateRoute path='/clients/:id/edit' exact component={AddClientForm} />
+            <PrivateRoute
+              path='/clients/:id/reports'
+              exact
+              component={ClientReportsRoute}
+            />
+            <PrivateRoute
+              path='/clients/:id/add'
+              exact
+              component={TakeReport}
+            />
+            <PrivateRoute
+              path='/clients/:id/edit'
+              exact
+              component={AddClientForm}
+            />
 
             <PrivateRoute path='/add-client' component={AddClientRoute} />
-            <PrivateRoute exact path='/add-client-form' component={AddClientForm} />
+            <PrivateRoute
+              exact
+              path='/add-client-form'
+              component={AddClientForm}
+            />
             <PrivateRoute exact path='/reports' component={ReportsView} />
             <PrivateRoute path='/reports/:report_id' component={ReportRoute} />
 
@@ -127,8 +142,8 @@ export default class App extends React.Component {
 
             {/* <PrivateRoute path='/add-client-map' component={AddClientMap} /> */}
             {/* <PrivateRoute path='/clients-map' component={ClientsMap} /> */}
-            <PrivateRoute path="/google" component={GoogleExperiment} />
-            {/* <PrivateRoute path='/take-report' component={TakeReport} /> */}
+            <PrivateRoute path='/google' component={GoogleExperiment} />
+             <PrivateRoute path='/take-report' component={TakeReport} />
 
             <MobileNav />
           </PrivateContext.Provider>
