@@ -89,8 +89,6 @@ export default class ClientsMap extends React.Component {
   }
 
   onSelectClick = (e, result) => {
-    console.log('into oSC')
-    console.log('resulte', result)
     return this.setState({
       selectClicked: true,
       selectedResult: result,
@@ -107,7 +105,6 @@ export default class ClientsMap extends React.Component {
   }
 
   render() {
-    console.log('selectedClick or whatever', this.state.selectedResult)
 
     if (this.state.formattedResults !== null) {
       let display = null;
@@ -116,12 +113,6 @@ export default class ClientsMap extends React.Component {
         <li className='result' id={result.id} key={result.id}>
           <p className='result-name'>{result.name}</p>
           <p className='result-location'>{result.location}</p>
-          {/* <Link to={{
-            pathname: "/add-client-form",
-            state: {
-              data: result
-            }
-          }}><button className='select-button btn' type='button'>Select</button></Link> */}
           <button className='select-button btn' type='button' onClick={(e) => this.onSelectClick(e, result)}>Select</button>
         </li>
       )
