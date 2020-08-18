@@ -162,13 +162,15 @@ export default class GoogleMapComponent extends React.Component {
             onClick={() => this.handleSearchMarkerClick(marker.id, lat, lng, <li className='result-box' id={marker.id} key={marker.id}>
             <p className='result-box-name'>{marker.name}</p>
             <p className='result-box-location'>{marker.location}</p>
-            <Link to={{
+            {/* <Link to={{
               pathname: "/add-client-form",
               state: {
                 data: marker
               }
-            }}><button className='box-select-button btn' type='button'>Select</button></Link>
-          </li> )}
+            }}><button className='box-select-button btn' type='button'>Select</button></Link> */}
+            <button className='select-button btn' type='button' onClick={(e) => this.props.onSelectClick(e, marker)}>Select</button>
+          </li> 
+          )}
           >
           </Marker>
         );

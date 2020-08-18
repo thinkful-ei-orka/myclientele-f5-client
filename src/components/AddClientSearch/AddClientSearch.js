@@ -2,6 +2,7 @@ import React from 'react';
 import PrivateContext from '../../contexts/PrivateContext';
 import GoogleMapComponent from '../GoogleMap/GoogleMap';
 import GoogleSearchBar from '../GoogleSearchBar/GoogleSearchBar';
+import AddClientForm from '../AddClientForm/AddClientForm';
 import { Link } from 'react-router-dom';
 
 import ListMapToggle from '../ListMapToggle/ListMapToggle'
@@ -22,12 +23,16 @@ export default class ClientsMap extends React.Component {
     listClass: '',
     mapClass: 'mobile-hidden',
     isSearched: 'mobile-hidden',
+    selectClicked: false,
+    selectedResult: null,
   }
 
   handleSearch = (e) => {
-    console.log('e', e);
     e.preventDefault();
-    this.setState({ isSearched: '' })
+    this.setState({ 
+      isSearched: '', 
+      selectClicked: false,
+    })
     return fetch(`${config.API_ENDPOINT}/places?searchTerm=${this.state.searchTerm}&center=${this.state.center}`, {
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
@@ -83,38 +88,60 @@ export default class ClientsMap extends React.Component {
     })
   }
 
+  onSelectClick = (e, result) => {
+    console.log('into oSC')
+    console.log('resulte', result)
+    return this.setState({
+      selectClicked: true,
+      selectedResult: result,
+    })
+  }
+
   componentDidMount() {
-    console.log('compDidMount')
     this.context.fetchClients();
     this.setState({
       listClass: '',
-      mapClass: 'mobile-hidden'
+      mapClass: 'mobile-hidden',
+      selectClicked: false,
     })
   }
 
   render() {
+    console.log('selectedClick or whatever', this.state.selectedResult)
+
     if (this.state.formattedResults !== null) {
+      let display = null;
       let resultList = this.state.formattedResults;
       resultList = resultList.map(result =>
         <li className='result' id={result.id} key={result.id}>
           <p className='result-name'>{result.name}</p>
           <p className='result-location'>{result.location}</p>
-          <Link to={{
+          {/* <Link to={{
             pathname: "/add-client-form",
             state: {
               data: result
             }
-          }}><button className='select-button btn' type='button'>Select</button></Link>
-
+          }}><button className='select-button btn' type='button'>Select</button></Link> */}
+          <button className='select-button btn' type='button' onClick={(e) => this.onSelectClick(e, result)}>Select</button>
         </li>
       )
+      if(this.state.selectClicked && this.state.selectedResult !== null) {
+        let result = this.state.selectedResult
+        display = 
+          <div className='search-results'>
+            <AddClientForm client={result}/>
+          </div>
+      } else {
+        display =
+        <div className={`${this.state.listClass} search-results`}>
+          {resultList}
+        </div>
+      }
       return (
         <>
           <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
-          <div className={`${this.state.mapClass} search-map-container`}>{<GoogleMapComponent searchMarkers={this.state.formattedResults} setCenter={this.setCenter} onSearchMarkerClick={this.onSearchMarkerClick}></GoogleMapComponent>}</div>
-          <div className={`${this.state.listClass} search-results`}>
-            {resultList}
-          </div>
+          <div className={`${this.state.mapClass} search-map-container`}>{<GoogleMapComponent searchMarkers={this.state.formattedResults} setCenter={this.setCenter} onSelectClick={this.onSelectClick}></GoogleMapComponent>}</div>
+          {display}
           <ListMapToggle listClick={this.listClick} mapClick={this.mapClick}></ListMapToggle>
         </>
       )

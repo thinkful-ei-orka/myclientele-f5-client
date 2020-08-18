@@ -139,6 +139,16 @@ class AddClientForm extends React.Component {
         button_text: 'Update Client'
       });
     }
+    if (this.props.client) {
+      const {
+        name,
+        location,
+      } = this.props.client;
+      this.setState({
+        name,
+        location,
+      });
+    }
   };
 
   componentDidMount() {
@@ -146,6 +156,7 @@ class AddClientForm extends React.Component {
   }
 
   render() {
+    console.log('props', this.props)
     return (
       <form className="add_client_form" onSubmit={(e) => this.handleSubmit(e)}>
         <h2 id="title">{this.state.header_text}</h2>
