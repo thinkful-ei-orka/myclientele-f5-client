@@ -34,7 +34,7 @@ export default class HomepageRoute extends React.Component {
               Sign Up Now!
             </button>
             <p>
-              With MyClientele, you can keep track of your clients, write reports, and organize your weekly schedule all in one place!  
+            Keep track of clients, write reports, and organize your weekly schedule, all in one place! With MyClientele, you have access to all your information no matter where you are.
             </p>
           </div>
         </section>
