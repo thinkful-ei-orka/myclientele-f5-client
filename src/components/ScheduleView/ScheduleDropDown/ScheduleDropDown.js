@@ -48,7 +48,7 @@ class ScheduleDropDown extends React.Component {
         <div className='dropdown-filter' onClick={() => this.toggleList()}>
             Filter:
           <select className='filter-dropdown-list' defaultValue={this.props.today} onChange={this.handleFilterChange}>
-            {/* <option key={7} value={7}>No Filter</option> */}
+            <option key={7} value={7}>No Filter</option>
             {Object.entries(this.dayOfWeekList).map(([key, value]) => (
               <option key={key} value={key}>{value}</option>
             ))}

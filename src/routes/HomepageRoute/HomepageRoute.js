@@ -34,10 +34,7 @@ export default class HomepageRoute extends React.Component {
               Sign Up Now!
             </button>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae,
-              sequi, recusandae illo quo, nisi vel eveniet maxime deserunt
-              inventore totam esse? Porro molestiae recusandae consectetur quas
-              eaque voluptas ipsum totam.
+              With MyClientele, you can keep track of your clients, write reports, and organize your weekly schedule all in one place!  
             </p>
           </div>
         </section>
