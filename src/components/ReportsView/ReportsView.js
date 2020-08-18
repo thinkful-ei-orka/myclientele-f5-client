@@ -16,19 +16,23 @@ class Reports extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.reports.length === 0) {
+    if (this.context.reports === null || this.state.reports.length === 0) {
       ReportsApiService.getAllReports().then((res) =>
         this.setState({ reports: res })
       );
     }
-    if (this.context.clients === null || this.context.clients.length === 0) {
-      ClientApiService.getAllClients().then((res) =>
+    if (this.context.clients === null || this.state.clients.length === 0) {
+      ClientApiService.getAllClients().then((res) => {
         this.context.updateContext({ clients: res })
+        this.setState({
+          clients: res
+        })
+      } 
       );
     }
   }
   matchReportToClient = (reportId) => {
-    const clientData = this.context.clients.find(
+    const clientData = this.state.clients.find(
       (client) => client.id === reportId
     );
     if (!clientData) {
@@ -51,13 +55,14 @@ class Reports extends React.Component {
     if (this.state.reports.length === 0) {
       return <section>Fetching Reports</section>;
     }
+    
     return (
       <section aria-label='Your reports' className='report-list'>
         <h1>Reports</h1>
         <ul className='report-list-ul'>
           {reports.map((report) => {
             const newDate = new Date(report.date);
-            const clientData = this.matchReportToClient(report.id);
+            const clientData = this.matchReportToClient(report.client_id);
             return (
               <li className='report-li' id={report.id}>
                 <Link
