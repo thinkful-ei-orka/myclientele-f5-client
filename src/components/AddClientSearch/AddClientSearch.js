@@ -84,6 +84,7 @@ export default class ClientsMap extends React.Component {
   }
 
   componentDidMount() {
+    console.log('compDidMount')
     this.context.fetchClients();
     this.setState({
       listClass: '',
@@ -110,7 +111,7 @@ export default class ClientsMap extends React.Component {
       return (
         <>
           <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
-          <div className={`${this.state.mapClass} search-map-container`}>{<GoogleMapComponent searchMarkers={this.state.formattedResults} setCenter={this.setCenter} onMarkerClick={this.onMarkerClick}></GoogleMapComponent>}</div>
+          <div className={`${this.state.mapClass} search-map-container`}>{<GoogleMapComponent searchMarkers={this.state.formattedResults} setCenter={this.setCenter} onSearchMarkerClick={this.onSearchMarkerClick}></GoogleMapComponent>}</div>
           <div className={`${this.state.listClass} search-results`}>
             {resultList}
           </div>

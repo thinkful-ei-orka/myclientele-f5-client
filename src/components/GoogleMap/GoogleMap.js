@@ -100,7 +100,6 @@ export default class GoogleMapComponent extends React.Component {
   };
 
   handleSearchMarkerClick = (id, lat, lng, content) => {
-    this.props.onMarkerClick(id)
     this.setState({
       infoWindow: <InfoWindow
           key={id}
