@@ -14,6 +14,7 @@ class AddClientForm extends React.Component {
     general_manager: "",
     day_of_week: 0,
     notes: "",
+    header_text: 'Add a Client',
     button_text: "Add Client",
   };
   static contextType = PrivateContext;
@@ -134,7 +135,12 @@ class AddClientForm extends React.Component {
         hours_of_operation,
         general_manager,
         notes,
+<<<<<<< HEAD
+        header_text: 'Edit Client',
+        button_text: 'Update Client'
+=======
         button_text: "Update Client",
+>>>>>>> 013ed0b3b112a037ba6576bcf21f53d74f8ffd83
       });
     }
   };
@@ -146,7 +152,7 @@ class AddClientForm extends React.Component {
   render() {
     return (
       <form className="add_client_form" onSubmit={(e) => this.handleSubmit(e)}>
-        <h2 id="title">Add a client</h2>
+        <h2 id="title">{this.state.header_text}</h2>
         <label htmlFor="name">Name *</label>
         <input
           type="text"
