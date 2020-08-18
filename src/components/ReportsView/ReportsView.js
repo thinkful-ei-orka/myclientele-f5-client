@@ -21,7 +21,7 @@ class Reports extends React.Component {
         this.setState({ reports: res })
       );
     }
-    if (this.context.clients.length === 0) {
+    if (this.context.clients === null || this.context.clients.length === 0) {
       ClientApiService.getAllClients().then((res) =>
         this.context.updateContext({ clients: res })
       );
