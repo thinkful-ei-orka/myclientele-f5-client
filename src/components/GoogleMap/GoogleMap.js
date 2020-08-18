@@ -1,8 +1,6 @@
 import React from 'react';
 import './GoogleMap.scss';
 
-import { Link } from 'react-router-dom'
-
 import ClientCard from '../../components/ClientCard/ClientCard';
 
 // for @react-google-maps/api
@@ -37,7 +35,7 @@ export default class GoogleMapComponent extends React.Component {
         this.setCenter();
       }
     );
-    // console.log('start mississippiing')
+
     //mapSetCenter does not work necessarily when onLoad is called
     // map.setCenter({lat: 27, lng: -81})
   };
@@ -46,7 +44,6 @@ export default class GoogleMapComponent extends React.Component {
     let lat = this.state.map.getCenter().lat();
     let lng = this.state.map.getCenter().lng();
 
-    console.log('idling', lat, lng);
     this.props.setCenter([lat, lng]);
   };
 
@@ -61,17 +58,13 @@ export default class GoogleMapComponent extends React.Component {
     let lng = 0;
     if (navigator.geolocation) {
 
-      // console.log('gelocation allowed!')
-
       navigator.geolocation.getCurrentPosition(
         (position) => {
           lat = position.coords.latitude;
           lng = position.coords.longitude;
 
-          // console.log(lat, lng);
-
           if (lat !== 0 && lng !== 0) {
-            // console.log('setting the center!')
+            
             //map.setCenter does not work necessarily when map is called to load
             setTimeout(() => this.state.map.setCenter({ lat, lng }), 1000);
             // this.props.setCenter({lat, lng})
@@ -85,8 +78,6 @@ export default class GoogleMapComponent extends React.Component {
   };
 
   handleMarkerClick = (id, lat, lng, content) => {
-    // let thisPlace = this.state.results.find((result) => result.place_id === place_id);
-    // console.log(thisPlace);
     this.setState({
       infoWindow: (
         <InfoWindow
@@ -119,7 +110,7 @@ export default class GoogleMapComponent extends React.Component {
   };
 
   render() {
-    // console.log('props in GM', this.props)
+    console.log('props in GM', this.props)
     let markers = [];
 
     // if searching results, populate the results
@@ -127,8 +118,6 @@ export default class GoogleMapComponent extends React.Component {
       this.props.markers.forEach((marker) => {
         let lat = Number(marker.lat);
         let lng = Number(marker.lng);
-
-        // console.log(marker);
 
         markers.push(
           <Marker
@@ -146,7 +135,6 @@ export default class GoogleMapComponent extends React.Component {
                 />
               )
             }
-            // onClick={() => this.handleMarkerClick(marker.id, lat, lng, <div><p>This event is fired when the containing the InfoWindow's content is attached to the DOM. You may wish to monitor this event if you are building out your info window content dynamically.</p><button>button</button></div>)}
           ></Marker>
         );
       });
@@ -193,7 +181,6 @@ export default class GoogleMapComponent extends React.Component {
               streetViewControl: false,
               mapTypeControl: false,
             }}
-            // center={{lat: 41, lng: -87}}
           >
             {markers}
             {this.state.infoWindow}

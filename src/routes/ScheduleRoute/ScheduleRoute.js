@@ -66,11 +66,15 @@ export default class ScheduleRoute extends React.Component {
         return client.day_of_week === Number(this.state.todayOfWeek)
       });
 
-    if (this.context.scheduleFilter) {
+    if (this.context.scheduleFilter ) {
       clientsFilter = this.context.clients.filter(
         (client) => {
           return client.day_of_week === Number(this.context.scheduleFilter)
         });
+    }
+
+    if (this.context.scheduleFilter == 7) {
+      clientsFilter = this.context.clients;
     }
 
     if (this.context.scheduleSearch) {

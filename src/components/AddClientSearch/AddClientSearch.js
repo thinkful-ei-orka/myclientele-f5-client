@@ -2,6 +2,7 @@ import React from 'react';
 import PrivateContext from '../../contexts/PrivateContext';
 import GoogleMapComponent from '../GoogleMap/GoogleMap';
 import GoogleSearchBar from '../GoogleSearchBar/GoogleSearchBar';
+import AddClientForm from '../AddClientForm/AddClientForm';
 import { Link } from 'react-router-dom';
 
 import ListMapToggle from '../ListMapToggle/ListMapToggle'
@@ -21,11 +22,16 @@ export default class ClientsMap extends React.Component {
     listClass: '',
     mapClass: 'mobile-hidden',
     isSearched: 'mobile-hidden',
+    selectClicked: false,
+    selectedResult: null,
   }
 
   handleSearch = (e) => {
     e.preventDefault();
-    this.setState({ isSearched: '' })
+    this.setState({ 
+      isSearched: '', 
+      selectClicked: false,
+    })
     return fetch(`${config.API_ENDPOINT}/places?searchTerm=${this.state.searchTerm}&center=${this.state.center}`, {
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
@@ -35,7 +41,6 @@ export default class ClientsMap extends React.Component {
         !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
       )
       .then((json) => {
-        console.log('search results', json);
         let formattedResults = [];
         json.forEach((result) => {
           formattedResults.push({
@@ -80,11 +85,19 @@ export default class ClientsMap extends React.Component {
     })
   }
 
+  onSelectClick = (e, result) => {
+    return this.setState({
+      selectClicked: true,
+      selectedResult: result,
+    })
+  }
+
   componentDidMount() {
     this.context.fetchClients();
     this.setState({
       listClass: '',
-      mapClass: 'mobile-hidden'
+      mapClass: 'mobile-hidden',
+      selectClicked: false,
     })
   }
 
@@ -92,6 +105,7 @@ export default class ClientsMap extends React.Component {
     let resultList;
     if (this.state.formattedResults !== null) {
       resultList = this.state.formattedResults;
+      let display = null;
       resultList = resultList.map(result =>
         <li className='result' id={result.id} key={result.id}>
           <div className='result-name-location'>
@@ -99,15 +113,23 @@ export default class ClientsMap extends React.Component {
             <p className='result-location'>{result.location}</p>
           </div>
           <div className="btn-container">
-            <Link className='btn select-button' to={{
-              pathname: "/add-client-form",
-              state: {
-                data: result
-              }
-          }}>Select</Link>
+            <button className='select-button btn' type='button' onClick={(e) => this.onSelectClick(e, result)}>Select</button>
           </div>
+          
         </li>
       )
+      if(this.state.selectClicked && this.state.selectedResult !== null) {
+        let result = this.state.selectedResult
+        display = 
+          <div className='search-results'>
+            <AddClientForm client={result}/>
+          </div>
+      } else {
+        display =
+        <div className={`${this.state.listClass} search-results`}>
+          {resultList}
+        </div>
+      }
     }
 
     return (
@@ -115,6 +137,7 @@ export default class ClientsMap extends React.Component {
         <div className="results-map-container">
           <div className={`search-results ${this.state.listClass}`}>
             <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
+            {display}
             <Link className='link' to="/add-client-form">Manually add a client</Link>
             <ul className='search-results-list'>{resultList}</ul>
           </div>
