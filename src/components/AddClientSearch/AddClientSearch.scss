@@ -9,6 +9,9 @@
   display: flex;
   justify-content: center;
 }
+.search-results.is-searched .link {
+  display: none;
+}
 
 .search-results-list, .gm-style .gm-style-iw-d {
   list-style: none;
@@ -17,6 +20,7 @@
     border-top: 1px solid $lighter-gray;
     display: flex;
     padding: 15px 15px;
+    justify-content: space-between;
     .result-name-location {
       padding-right: 15px;
     }
@@ -35,6 +39,7 @@
 .gm-style .gm-style-iw-d .result {
   border-top: 0;
   padding: 0;
+  max-width: 250px;
 }
 .gm-style .gm-style-iw {
   font-size: 16px;
@@ -43,8 +48,6 @@
 h2 {
   text-align: center;
 }
-
-
 
 
 .result-box {

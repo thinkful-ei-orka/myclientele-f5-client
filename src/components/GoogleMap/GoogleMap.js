@@ -2,6 +2,7 @@ import React from 'react';
 import './GoogleMap.scss';
 
 import ClientCard from '../../components/ClientCard/ClientCard';
+import { Link } from 'react-router-dom';
 
 // for @react-google-maps/api
 import {
@@ -64,7 +65,7 @@ export default class GoogleMapComponent extends React.Component {
           lng = position.coords.longitude;
 
           if (lat !== 0 && lng !== 0) {
-            
+
             //map.setCenter does not work necessarily when map is called to load
             setTimeout(() => this.state.map.setCenter({ lat, lng }), 1000);
             // this.props.setCenter({lat, lng})
