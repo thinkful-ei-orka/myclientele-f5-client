@@ -44,11 +44,29 @@
 .map-container {
   width: 100%;
   height: calc(100vh - 185px);
+  position: relative;
+  .schedule-drop-down {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    width: auto;
+    .dropdown-filter .filter-dropdown-list {
+      display: inline-block;
+      width: auto;
+    }
+    .dropdown-search {
+      display: none;
+    }
+  }
 }
 
 @media (min-width: 600px) {
   .map-container {
     height: 400px;
     display: block;
+    .schedule-drop-down {
+      display: none;
+    }
   }
 }

@@ -87,6 +87,7 @@ export default class ScheduleRoute extends React.Component {
     return (
       <>
         <div className={`map-container ${this.state.mapClass}`}>
+          <ScheduleDropDown today={this.state.todayOfWeek} />
           <GoogleMap
             markers={clientsFilter}
             setCenter={this.setCenter}></GoogleMap>
