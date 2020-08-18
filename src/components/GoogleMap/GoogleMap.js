@@ -46,7 +46,6 @@ export default class GoogleMapComponent extends React.Component {
     let lat = this.state.map.getCenter().lat();
     let lng = this.state.map.getCenter().lng();
 
-    console.log('idling', lat, lng);
     this.props.setCenter([lat, lng]);
   };
 

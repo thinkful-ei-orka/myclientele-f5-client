@@ -61,7 +61,6 @@ export default class ClientsMap extends React.Component {
   };
 
   setCenter = (center) => {
-    console.log('setCenter in GE', center);
     this.setState({
       center: center,
     });
