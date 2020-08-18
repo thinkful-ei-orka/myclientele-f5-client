@@ -70,7 +70,9 @@ class ClientCard extends React.Component {
           associated with this client will also be removed.
         </p>
         <div className='button_box'>
-          <button onClick={this.toggleRemove}>Cancel</button>
+          <button id='cancel-client-remove-button' onClick={this.toggleRemove}>
+            Cancel
+          </button>
           <button onClick={this.removeClient}>Remove</button>
         </div>
       </div>
@@ -111,12 +113,12 @@ class ClientCard extends React.Component {
           />
         </div>
         {/* <Buttons
-          threeDotsActive={this.state.threeDotsActive}
-          // renderThreeDotsButton={() => this.renderThreeDotsButton()}
-          data={this.props.data}
-          // state={this.state}
-          toggleThreeDots={() => this.toggleThreeDots()}
-        /> */}
+            threeDotsActive={this.state.threeDotsActive}
+            // renderThreeDotsButton={() => this.renderThreeDotsButton()}
+            data={this.props.data}
+            // state={this.state}
+            toggleThreeDots={() => this.toggleThreeDots()}
+          /> */}
         <div className='button-area'>
           <button className='add-button  '>
             <Link
@@ -139,8 +141,8 @@ class ClientCard extends React.Component {
               <span className='button-text'>More Info</span>
             </div>
           </button>
+          {this.state.threeDotsActive ? this.renderThreeDotsButton() : ''}
         </div>
-        {this.state.threeDotsActive ? this.renderThreeDotsButton() : ''}
       </div>
     );
   }
