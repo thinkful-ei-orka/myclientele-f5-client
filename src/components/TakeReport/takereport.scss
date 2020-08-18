@@ -11,6 +11,10 @@
   .basic-client-card {
     display: flex;
     margin-bottom: 30px;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
   }
 
   label {
@@ -32,6 +36,25 @@
   height: 200px;
 }
 
-.take-a-report-form {
+.report-input {
   width: 100%;
+}
+.take-a-report-form {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: auto;
+}
+#previous-report-title {
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+#store-name {
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+#take-a-report-btn {
+  text-align: center;
+  align-self: center;
+  width: 30%;
 }
