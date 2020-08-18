@@ -1,55 +1,51 @@
+@import '../../variables.scss';
+
 .autocomplete,
 .searchBox {
   position: relative;
 }
 
-ul {
+.search-results .link {
+  display: flex;
+  justify-content: center;
+}
+
+.search-results-list, .gm-style .gm-style-iw-d {
   list-style: none;
-  padding-bottom: 100px;
+  padding-left: 0;
+  .result {
+    border-top: 1px solid $lighter-gray;
+    display: flex;
+    padding: 15px 15px;
+    .result-name-location {
+      padding-right: 15px;
+    }
+    h3 {
+      font-weight: 400;
+      margin-bottom: 0;
+    }
+    p {
+      margin-bottom: 0;
+    }
+    .btn-container .btn {
+      display: inline-block;
+    }
+  }
 }
-
-li {
-  text-decoration: none;
-  padding-right: 10px;
+.gm-style .gm-style-iw-d .result {
+  border-top: 0;
+  padding: 0;
 }
-
-.result {
-  border-top: 1px solid gray;
-  display: inline-block;
-  margin: 3px;
-  width: 100%;
-}
-
-.result-name, .result-location {
-  display: block;
-  width: 60%;
-  padding-left: 20px;
-}
-
-.select-button {
-  float: right;
-  width: auto;
-  margin-top: -15%;
-  padding: 5px;
-}
-
-li > span {
-  margin: 5px;
+.gm-style .gm-style-iw {
+  font-size: 16px;
 }
 
 h2 {
   text-align: center;
 }
 
-.link {
-  display: flex;
-  justify-content: center;
-}
 
-.search-map-container {
-  width: 100%;
-  height: calc(100vh - 185px)
-}
+
 
 .result-box {
   display: block;
@@ -60,40 +56,22 @@ h2 {
 
 .result-box-name, .result-box-location {
   display: block;
-  width: 60%;
 }
 
-.box-select-button {
-  float: right;
-  margin-top: -15%;
+// .box-select-button {
+//   float: right;
+//   margin-top: -15%;
+// }
+
+.results-map-container {
+  display: flex;
 }
 
 @media only screen and (min-width: 600px) {
-
-  .search-results {
-    position: absolute;
-    top: 150px;
-    left: 0px;
-    max-width: 300px;
-    z-index: 1000;
-    padding-left: 10px;
-    max-height: 100vh;
-    background-color: white;
-    overflow: scroll;
-  }
-
   .select-button {
     display: inline;
     justify-content: flex-end;
   }
-
-  .search-map-container {
-    position: absolute;
-    top: 150px;
-    left: 50px;
-    min-height: 100vh;
-  }
-
   .result-box {
     display: inline;
     flex-direction: row;
@@ -105,19 +83,4 @@ h2 {
     justify-content: flex-end;
   }
 
-}
-
-@media only screen and (min-width: 1200px) {
-  .search-results {
-    top: 175px;
-    max-width: 450px;
-    height: 100vh;
-  }
-
-  .search-map-container {
-    position: absolute;
-    top: 175px;
-    left: 100px;
-    min-height: 100vh;
-  }
 }

@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import ListMapToggle from '../ListMapToggle/ListMapToggle'
 import './AddClientSearch.scss';
 
-
 import TokenService from '../../services/token-service';
 import config from '../../config';
 
@@ -25,7 +24,6 @@ export default class ClientsMap extends React.Component {
   }
 
   handleSearch = (e) => {
-    console.log('e', e);
     e.preventDefault();
     this.setState({ isSearched: '' })
     return fetch(`${config.API_ENDPOINT}/places?searchTerm=${this.state.searchTerm}&center=${this.state.center}`, {
@@ -56,7 +54,6 @@ export default class ClientsMap extends React.Component {
   };
 
   setCenter = (center) => {
-    console.log('setCenter in GE', center);
     this.setState({
       center: center,
     });
@@ -84,7 +81,6 @@ export default class ClientsMap extends React.Component {
   }
 
   componentDidMount() {
-    console.log('compDidMount')
     this.context.fetchClients();
     this.setState({
       listClass: '',
@@ -93,41 +89,39 @@ export default class ClientsMap extends React.Component {
   }
 
   render() {
+    let resultList;
     if (this.state.formattedResults !== null) {
-      let resultList = this.state.formattedResults;
+      resultList = this.state.formattedResults;
       resultList = resultList.map(result =>
         <li className='result' id={result.id} key={result.id}>
-          <p className='result-name'>{result.name}</p>
-          <p className='result-location'>{result.location}</p>
-          <Link to={{
-            pathname: "/add-client-form",
-            state: {
-              data: result
-            }
-          }}><button className='select-button btn' type='button'>Select</button></Link>
-
+          <div className='result-name-location'>
+            <h3 className='result-name'>{result.name}</h3>
+            <p className='result-location'>{result.location}</p>
+          </div>
+          <div className="btn-container">
+            <Link className='btn select-button' to={{
+              pathname: "/add-client-form",
+              state: {
+                data: result
+              }
+          }}>Select</Link>
+          </div>
         </li>
       )
-      return (
-        <>
-          <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
-          <div className={`${this.state.mapClass} search-map-container`}>{<GoogleMapComponent searchMarkers={this.state.formattedResults} setCenter={this.setCenter} onSearchMarkerClick={this.onSearchMarkerClick}></GoogleMapComponent>}</div>
-          <div className={`${this.state.listClass} search-results`}>
-            {resultList}
-          </div>
-          <ListMapToggle listClick={this.listClick} mapClick={this.mapClick}></ListMapToggle>
-        </>
-      )
-
-
     }
-      return (
-        <>
-          <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
-          <Link className='link' to="/add-client-form">Manually add a client</Link>
-          <div className={`${this.state.isSearched} ${this.state.mapClass}`}>{<GoogleMapComponent searchMarkers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>}</div>
-          <ListMapToggle listClick={this.listClick} mapClick={this.mapClick}></ListMapToggle>
-        </>
-      )
+
+    return (
+      <>
+        <div className="results-map-container">
+          <div className={`search-results ${this.state.listClass}`}>
+            <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
+            <Link className='link' to="/add-client-form">Manually add a client</Link>
+            <ul className='search-results-list'>{resultList}</ul>
+          </div>
+          <div className={`search-map-container ${this.state.isSearched} ${this.state.mapClass} search-map-container`}>{<GoogleMapComponent searchMarkers={this.state.formattedResults} setCenter={this.setCenter} onSearchMarkerClick={this.onSearchMarkerClick}></GoogleMapComponent>}</div>
+        </div>
+        <ListMapToggle listClick={this.listClick} mapClick={this.mapClick}></ListMapToggle>
+      </>
+    )
   }
 }

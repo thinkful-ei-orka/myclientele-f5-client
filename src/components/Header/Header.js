@@ -75,7 +75,7 @@ class Header extends React.Component {
           </Link>
         </div>
         <div className='header-buttons'>
-          <Link to='/add-client-form'>
+          <Link to='/add-client'>
             <button className='add-client btn'>Add Client</button>
           </Link>
           <Link to='/clients'>

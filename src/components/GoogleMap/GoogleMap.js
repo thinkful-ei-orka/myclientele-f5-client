@@ -119,9 +119,9 @@ export default class GoogleMapComponent extends React.Component {
   };
 
   render() {
-    console.log('props in GM', this.props)
+    // console.log('props in GM', this.props)
     let markers = [];
-    // console.log('props in Map', this.props)
+
     // if searching results, populate the results
     if (this.props.markers) {
       this.props.markers.forEach((marker) => {
@@ -159,16 +159,21 @@ export default class GoogleMapComponent extends React.Component {
           <Marker
             key={marker.id}
             position={{lat: lat, lng: lng}}
-            onClick={() => this.handleSearchMarkerClick(marker.id, lat, lng, <li className='result-box' id={marker.id} key={marker.id}>
-            <p className='result-box-name'>{marker.name}</p>
-            <p className='result-box-location'>{marker.location}</p>
-            <Link to={{
-              pathname: "/add-client-form",
-              state: {
-                data: marker
-              }
-            }}><button className='box-select-button btn' type='button'>Select</button></Link>
-          </li> )}
+            onClick={() => this.handleSearchMarkerClick(marker.id, lat, lng,
+              <li className='result' id={marker.id} key={marker.id}>
+                <div className='result-name-location'>
+                  <h3 className='result-box-name'>{marker.name}</h3>
+                  <p className='result-box-location'>{marker.location}</p>
+                </div>
+                <div className='btn-container'>
+                  <Link className='btn select-button' to={{
+                    pathname: "/add-client-form",
+                    state: {
+                      data: marker
+                    }
+                  }}>Select</Link>
+                </div>
+              </li> )}
           >
           </Marker>
         );
