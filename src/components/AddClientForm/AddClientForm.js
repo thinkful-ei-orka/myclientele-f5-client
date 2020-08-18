@@ -135,12 +135,8 @@ class AddClientForm extends React.Component {
         hours_of_operation,
         general_manager,
         notes,
-<<<<<<< HEAD
         header_text: 'Edit Client',
         button_text: 'Update Client'
-=======
-        button_text: "Update Client",
->>>>>>> 013ed0b3b112a037ba6576bcf21f53d74f8ffd83
       });
     }
   };

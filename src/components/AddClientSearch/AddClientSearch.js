@@ -3,9 +3,9 @@ import PrivateContext from '../../contexts/PrivateContext';
 import GoogleMapComponent from '../GoogleMap/GoogleMap';
 import GoogleSearchBar from '../GoogleSearchBar/GoogleSearchBar';
 import { Link } from 'react-router-dom';
-// import AddClientForm from '../AddClientForm/AddClientForm';
+
 import ListMapToggle from '../ListMapToggle/ListMapToggle'
-import './GoogleExperiment.scss';
+import './AddClientSearch.scss';
 
 
 import TokenService from '../../services/token-service';
@@ -83,11 +83,6 @@ export default class ClientsMap extends React.Component {
     })
   }
 
-  onMarkerClick = (id) => {
-    console.log('resultList go in?', this.resultList)
-    console.log('id in onMC', id)
-  }
-
   componentDidMount() {
     this.context.fetchClients();
     this.setState({
@@ -97,13 +92,8 @@ export default class ClientsMap extends React.Component {
   }
 
   render() {
-    console.log('searchterm', this.state.searchTerm)
-    // console.log('results', this.state.formattedResults)
-
-    //defaults to listView if neither is selected for mobile
     if (this.state.formattedResults !== null) {
       let resultList = this.state.formattedResults;
-      // console.log('resultList', resultList)
       resultList = resultList.map(result =>
         <li className='result' id={result.id} key={result.id}>
           <p className='result-name'>{result.name}</p>
@@ -119,7 +109,6 @@ export default class ClientsMap extends React.Component {
       )
       return (
         <>
-          {/* <h2>Add Client</h2> */}
           <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
           <div className={`${this.state.mapClass} search-map-container`}>{<GoogleMapComponent searchMarkers={this.state.formattedResults} setCenter={this.setCenter} onMarkerClick={this.onMarkerClick}></GoogleMapComponent>}</div>
           <div className={`${this.state.listClass} search-results`}>
@@ -141,36 +130,3 @@ export default class ClientsMap extends React.Component {
       )
   }
 }
-
-
-// if (this.state.listView) {
-//   return (
-//     <>
-//       <h2>Add Client</h2>
-//       <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
-//       <ul>
-//         {resultList}
-//       </ul>
-//       <div className='hidden'>{<GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>}</div>
-//     </>
-//   )}
-//   else if (this.state.mapView) {
-//     return (
-//       <>
-//         <h2>Add Client</h2>
-//         <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
-//         <GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>
-//       </>
-//     )}
-//   else {
-//     return (
-//       <>
-//         <h2>Add Client</h2>
-//         <GoogleSearchBar handleChange={this.handleChange} handleSearch={this.handleSearch}/>
-//         <ul>
-//         {resultList}
-//       </ul>
-//         <GoogleMapComponent markers={this.state.formattedResults} setCenter={this.setCenter}></GoogleMapComponent>
-//       </>
-//     )
-//   }

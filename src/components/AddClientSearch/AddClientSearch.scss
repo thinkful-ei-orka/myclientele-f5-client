@@ -10,8 +10,6 @@ ul {
 
 li {
   text-decoration: none;
-  // display: flex;
-  // justify-content: space-between;
   padding-right: 10px;
 }
 
@@ -58,25 +56,16 @@ h2 {
   flex-direction: column;
   justify-content: space-between;
   max-width: 200px;
-  // display: fixed;
-  // right: 0px;
-  // left: 0px;
-  // bottom: 300px;
 }
 
 .result-box-name, .result-box-location {
   display: block;
   width: 60%;
-  // padding-left: 20px;
 }
 
 .box-select-button {
-  // display: flex;
-  // justify-content: flex-end;
   float: right;
-  margin-top: -38%;
-  // margin: 10px;
-  // display: block;
+  margin-top: -15%;
 }
 
 @media only screen and (min-width: 600px) {
@@ -92,15 +81,6 @@ h2 {
     background-color: white;
     overflow: scroll;
   }
-
-  // .result {
-  //   display: flex;
-  //   margin: 3px;
-  // }
-
-  // .result {
-  //   display: inline;
-  // }
 
   .select-button {
     display: inline;
