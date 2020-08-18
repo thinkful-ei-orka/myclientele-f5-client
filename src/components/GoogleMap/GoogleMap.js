@@ -1,8 +1,6 @@
 import React from 'react';
 import './GoogleMap.scss';
 
-import { Link } from 'react-router-dom'
-
 import ClientCard from '../../components/ClientCard/ClientCard';
 
 // for @react-google-maps/api
