@@ -41,7 +41,7 @@ export default class ScheduleRoute extends React.Component {
   };
 
   componentDidMount() {
-    if (this.context.clients == null) {
+    if (this.context.clients === null) {
       this.context
         .fetchClients()
         .then(() => this.setState({ isLoading: false }));
@@ -57,7 +57,7 @@ export default class ScheduleRoute extends React.Component {
   }
 
   render() {
-    if (this.context.clients == null) {
+    if (this.context.clients === null) {
       return <div>Loading...</div>;
     }
 
@@ -73,7 +73,7 @@ export default class ScheduleRoute extends React.Component {
         });
     }
 
-    if (this.context.scheduleFilter == 7) {
+    if (Number(this.context.scheduleFilter) === 7) {
       clientsFilter = this.context.clients;
     }
 

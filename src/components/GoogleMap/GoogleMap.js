@@ -2,6 +2,7 @@ import React from 'react';
 import './GoogleMap.scss';
 
 import ClientCard from '../../components/ClientCard/ClientCard';
+import { Link } from 'react-router-dom';
 
 // for @react-google-maps/api
 import {
@@ -64,7 +65,7 @@ export default class GoogleMapComponent extends React.Component {
           lng = position.coords.longitude;
 
           if (lat !== 0 && lng !== 0) {
-            
+
             //map.setCenter does not work necessarily when map is called to load
             setTimeout(() => this.state.map.setCenter({ lat, lng }), 1000);
             // this.props.setCenter({lat, lng})
@@ -110,7 +111,9 @@ export default class GoogleMapComponent extends React.Component {
   };
 
   render() {
+    console.log('props in GM', this.props)
     let markers = [];
+
     // if searching results, populate the results
     if (this.props.markers) {
       this.props.markers.forEach((marker) => {
@@ -145,12 +148,21 @@ export default class GoogleMapComponent extends React.Component {
           <Marker
             key={marker.id}
             position={{lat: lat, lng: lng}}
-            onClick={() => this.handleSearchMarkerClick(marker.id, lat, lng, <li className='result-box' id={marker.id} key={marker.id}>
-            <p className='result-box-name'>{marker.name}</p>
-            <p className='result-box-location'>{marker.location}</p>
-            <button className='select-button btn' type='button' onClick={(e) => this.props.onSelectClick(e, marker)}>Select</button>
-          </li> 
-          )}
+            onClick={() => this.handleSearchMarkerClick(marker.id, lat, lng,
+              <li className='result' id={marker.id} key={marker.id}>
+                <div className='result-name-location'>
+                  <h3 className='result-box-name'>{marker.name}</h3>
+                  <p className='result-box-location'>{marker.location}</p>
+                </div>
+                <div className='btn-container'>
+                  <Link className='btn select-button' to={{
+                    pathname: "/add-client-form",
+                    state: {
+                      data: marker
+                    }
+                  }}>Select</Link>
+                </div>
+              </li> )}
           >
           </Marker>
         );
