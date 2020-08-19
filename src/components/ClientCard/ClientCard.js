@@ -30,7 +30,15 @@ class ClientCard extends React.Component {
               Take a report
             </Link>
           </li> */}
-          <li className='dropdown_item'>View reports</li>
+          {window.outerWidth < 600 && <li className='dropdown_item'><Link
+          to={{
+            pathname: `/clients/${this.props.data.id}/reports`,
+            state: {
+              data: this.props.data
+            }
+          }}>
+            View reports
+          </Link></li>}
           <li className='dropdown_item'>
             <Link
               to={{
@@ -95,8 +103,14 @@ class ClientCard extends React.Component {
       hours_of_operation,
       // notes,
     } = this.props.data;
-
+    let reportPath;
+    if(window.outerWidth < 600) {
+      reportPath = `/clients/${this.props.data.id}/add`
+    } else {
+      reportPath = '/take-report'
+    }
     return (
+      
       <div className='client-card'>
         {this.state.confirmRemoveClient ? this.renderConfirmRemove() : ''}
         <div className='company-logo'>
@@ -122,7 +136,7 @@ class ClientCard extends React.Component {
           <button className='add-button  '>
             <Link
               to={{
-                pathname: '/take-report',
+                pathname: reportPath,
                 state: {
                   data: this.props.data,
                 },
@@ -137,7 +151,7 @@ class ClientCard extends React.Component {
           <button className='more-info  ' onClick={this.toggleThreeDots}>
             <div className='inner-button'>
               <img src={moreinfosvg} alt='more info button' />{' '}
-              <span className='button-text'>More Info</span>
+              <span className='button-text' >More Info</span>
             </div>
           </button>
           {this.state.threeDotsActive ? this.renderThreeDotsButton() : ''}

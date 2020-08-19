@@ -20,6 +20,8 @@ class TakeReport extends React.Component {
       file_name: '',
       img_src: null,
       isLoading: true,
+      submitting: false,
+      mobile: false
     };
   }
   data = this.props.location.state.data;
@@ -28,31 +30,30 @@ class TakeReport extends React.Component {
 
   onFormSubmit = async (e) => {
     e.preventDefault();
-
-    const notes = e.target['report-text-input'].value;
-    const photoInput = e.target['report-photo-input'];
+    this.setState({
+      submitting: true
+    })
+    const notes = e.target["report-text-input"].value;
+    const photoInput = e.target["report-photo-input"];
     const file = photoInput.files;
     const photos = await this.getPhotoUrlList(file);
-
-    console.log(photos)
     ReportsApiService.addReport(
       this.client_id,
       notes,
       photos
-    ).then(() => this.props.history.push("/schedule")).catch((error) => console.log(error));
-
+    ).then(() => {
+      this.setState({
+        submitting: false
+      })
+      this.props.history.push("/schedule")
+    }).catch((error) => console.log(error));
   };
 
   getPhotoUrlList = async (file) => {
     let photos = [];
-
     for (let key in file) {
       if (!isNaN(Number(key))) {
-
-        console.log("name ", file[key].name, "... type ", file[key].type);
         let res = await S3ApiService.getUploadUrl(file[key].name, file[key].type)
-            console.log("response url", res)
-
         let data = await fetch(res.url, {
           method: 'PUT',
           body: file[key],
@@ -63,16 +64,45 @@ class TakeReport extends React.Component {
     return photos;
   };
   componentDidMount() {
+    if(window.location.pathname.includes('/clients')) {
+      this.setState({
+        mobile: true
+      })
+    }
     if (this.state.reports.length === 0) {
       ReportsApiService.getReportsByClientId(this.client_id).then((res) => {
-        console.log(res);
         this.setState({ reports: res, isLoading: false });
       });
     }
   }
 
+  renderPreviousReports = () => {
+    return (
+      <section aria-label='Your reports' className='report-list'>
+          <h1>Previous Reports</h1>
+          <ul className='report-list-ul'>
+            {this.state.reports.map((report) => (
+              <Link
+                key={report.id}
+                to={`/reports/${report.id}`}
+                className='reportList-link'>
+                <li className='report-li' id={report.id}>
+                  <img
+                    className="company-logo"
+                    src={report.photos[0]}
+                    alt={report.name}
+                  />
+                  <p className='information-area'>{report.notes}</p>
+                </li>
+              </Link>
+            ))}
+          </ul>
+        </section>
+    )
+  }
+
   render() {
-    console.log(this.state.img_src);
+    console.log(this.state.mobile);
     if (this.state.isLoading) {
       return <div>Loading...</div>;
     }
@@ -100,54 +130,26 @@ class TakeReport extends React.Component {
               name='report-text-input'></textarea>
             <label htmlFor='report-photo-input'>Add a photo:</label>
             <input
-              type='file'
-              multiple='multiple'
-              accept='image/*'
-              name='report-photo-input'
-              id='report-photo-input'
-              alt='alt_text'
-              required></input>
-            <button className='btn' id='take-a-report-btn'>
-              Submit
-            </button>
+              type="file"
+              multiple="multiple"
+              accept="image/*"
+              name="report-photo-input"
+              id="report-photo-input"
+              alt="alt_text"
+              required
+            ></input>
+            <button className="btn" disabled={this.state.submitting}>Submit</button>
           </form>
+          {this.state.submitting 
+          ? <p>submitting report...</p>
+          : ""
+           }
         </div>
-        <section aria-label='Your reports' className='report-list'>
-          <h1 id='previous-report-title'>Previous Reports</h1>
-          <ul className='report-list-ul'>
-            {this.state.reports.map((report) => (
-              <Link
-                key={report.id}
-                to={`/reports/${report.id}`}
-                className='reportList-link'>
-                <li className='report-li' id={report.id}>
-                  <div className='main-info-area'>
-                    <div className='company-logo'>
-                      <img
-                        id='reports-img'
-                        src='https://via.placeholder.com/150'
-                        alt={report.name}
-                      />
-                    </div>
 
-                    <div className='information-area'>
-                      <h2>{this.data.name || `Not assigned`}</h2>
-                      <p>{this.data.location}</p>
-                      <p>{report.name}</p>
-
-                      {console.log(this.data)}
-                    </div>
-                  </div>
-                  <div className='submitted-area'>
-                    <p>
-                      Submitted: {new Date(report.date).toLocaleDateString()}
-                    </p>
-                  </div>
-                </li>
-              </Link>
-            ))}
-          </ul>
-        </section>
+        {!this.state.mobile 
+        ? this.renderPreviousReports()
+        : ""
+        }
       </div>
     );
   }

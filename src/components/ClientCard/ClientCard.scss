@@ -33,6 +33,7 @@ a {
 //Begin client card scss
 .client-card {
   display: flex;
+  position: relative;
   flex-direction: row;
   width: 100%;
   margin: 10px auto;
