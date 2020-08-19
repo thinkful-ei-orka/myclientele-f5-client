@@ -9,6 +9,7 @@ import UserContext from '../../contexts/UserContext';
 import ClientApiService from '../../services/client-api-service';
 import ReportsApiService from '../../services/reports-api-service';
 import CompaniesApiService from '../../services/companies-api-service';
+import UserApiService from '../../services/user-api-service'
 // This is a placeholder
 // import EventsApiService from '../../services/events-api-service';
 import ScheduleRoute from '../../routes/ScheduleRoute/ScheduleRoute';
@@ -24,6 +25,7 @@ import AddClientForm from '../AddClientForm/AddClientForm';
 import ReportsView from '../../components/ReportsView/ReportsView';
 import Report from '../../routes/ReportRoute/Report';
 import TakeReport from '../../components/TakeReport/TakeReport';
+import { contextType } from 'react-modal';
 
 export default class App extends React.Component {
   static contextType = UserContext;
@@ -34,7 +36,7 @@ export default class App extends React.Component {
     reports: null,
     company: null,
     user: this.context.user,
-    userContact: null,
+    userContact: {},
     scheduleFilter: null,
     scheduleSearch: null,
     // this is pulling the user from the user context at the moment
@@ -46,7 +48,7 @@ export default class App extends React.Component {
     this.fetchClients();
     this.fetchReports();
     this.fetchCompany(this.context.user.company_id);
-    // this.fetchUserInfo();
+    this.fetchUserInfo();
   };
 
   fetchClients = () => {
@@ -70,12 +72,12 @@ export default class App extends React.Component {
     });
   };
 
-  // fetchUserInfo =() => {
-  //   return ___User wahtever.info_______().then((result) => {
-  //   console.log('got user contact', result)
-  //   this.setState({ userContact: result})
-  // });
-  // }
+  fetchUserInfo = () => {
+    UserApiService.getUserContactInfo().then((result) => {
+    console.log('got user contact', result)
+    this.setState({ userContact: result})
+  });
+  }
 
   updateContext = (contextUpdate) => {
     let newContext = { ...this.state, ...contextUpdate };
@@ -97,6 +99,7 @@ export default class App extends React.Component {
     contextValue.fetchClients = this.fetchClients;
     contextValue.fetchReports = this.fetchReports;
     contextValue.fetchCompany = this.fetchCompany;
+    contextValue.fetchUserInfo = this.fetchUserInfo;
     contextValue.updateContext = this.updateContext;
     contextValue.setScheduleFilter = this.setScheduleFilter;
     contextValue.setScheduleSearch = this.setScheduleSearch;
