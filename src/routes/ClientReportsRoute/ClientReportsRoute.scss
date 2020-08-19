@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 .client_report_li {
     list-style-type: none;
     border-top: 1px solid grey;
@@ -24,10 +26,23 @@
     width: 40%;
     max-width: 150px;
     height: auto;
+    background: $lighter_gray;
+    line-height: 0;
+    display: flex;
+    justify-content: center;
+    img {
+        max-width: 100%;
+    }
+    svg {
+        color: $gray;
+        align-self: center;
+        justify-self: center;
+        font-size: 24px;
+    }
 }
 
 .reports_box {
-    padding: 0px;  
+    padding: 0px;
 }
 
 @media only screen and (min-width: 600px) {
@@ -37,4 +52,4 @@
     .report_info {
         margin-right: 15%;
     }
-} 
+}
