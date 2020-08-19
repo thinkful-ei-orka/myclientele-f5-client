@@ -11,6 +11,7 @@ import UserContext from '../../contexts/UserContext';
 import ClientApiService from '../../services/client-api-service';
 import ReportsApiService from '../../services/reports-api-service';
 import CompaniesApiService from '../../services/companies-api-service';
+import UserApiService from '../../services/user-api-service'
 // This is a placeholder
 // import EventsApiService from '../../services/events-api-service';
 
@@ -45,6 +46,7 @@ export default class App extends React.Component {
     reports: null,
     company: null,
     user: this.context.user,
+    userContact: {},
     scheduleFilter: null,
     scheduleSearch: null,
     // this is pulling the user from the user context at the moment
@@ -56,6 +58,7 @@ export default class App extends React.Component {
     this.fetchClients();
     this.fetchReports();
     this.fetchCompany(this.context.user.company_id);
+    this.fetchUserInfo();
   };
 
   fetchClients = () => {
@@ -75,6 +78,13 @@ export default class App extends React.Component {
       this.setState({ company: result });
     });
   };
+
+  fetchUserInfo = () => {
+    UserApiService.getUserContactInfo().then((result) => {
+    console.log('got user contact', result)
+    this.setState({ userContact: result})
+  });
+  }
 
   updateContext = (contextUpdate) => {
     let newContext = { ...this.state, ...contextUpdate };
@@ -96,6 +106,7 @@ export default class App extends React.Component {
     contextValue.fetchClients = this.fetchClients;
     contextValue.fetchReports = this.fetchReports;
     contextValue.fetchCompany = this.fetchCompany;
+    contextValue.fetchUserInfo = this.fetchUserInfo;
     contextValue.updateContext = this.updateContext;
     contextValue.setScheduleFilter = this.setScheduleFilter;
     contextValue.setScheduleSearch = this.setScheduleSearch;
@@ -109,6 +120,10 @@ export default class App extends React.Component {
           <PrivateContext.Provider value={contextValue}>
             <Header />
             <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
+            <PrivateRoute path='/form' exact component={AddClientForm} />
+            <PrivateRoute path='/reports' exact component={ReportsView} />
+            <PrivateRoute path='/take-report' component={TakeReport} />
+            <PrivateRoute path='/clients' exact component={ClientsRoute} />
             <PrivateRoute path='/clients/:id' exact component={ClientRoute} />
             <PrivateRoute
               path='/clients/:id/reports'

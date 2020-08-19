@@ -44,6 +44,7 @@ export default class ScheduleRoute extends React.Component {
     if (this.context.clients === null) {
       this.context
         .fetchClients()
+        .then(this.context.fetchUserInfo())
         .then(() => this.setState({ isLoading: false }));
     }
 

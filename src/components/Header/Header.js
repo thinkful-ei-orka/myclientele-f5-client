@@ -81,6 +81,9 @@ class Header extends React.Component {
           <Link to='/reports'>
             <button className='reports btn'>Reports</button>
           </Link>
+          <Link to='/my-account'>
+            <button className='user-info btn'>My Account</button>
+          </Link>
           <button
             className='logout-button btn'
             onClick={() => this.handleLogOut()}>
