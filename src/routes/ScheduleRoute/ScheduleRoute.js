@@ -44,6 +44,7 @@ export default class ScheduleRoute extends React.Component {
     if (this.context.clients === null) {
       this.context
         .fetchClients()
+        .then(this.context.fetchUserInfo())
         .then(() => this.setState({ isLoading: false }));
     }
 
@@ -87,6 +88,7 @@ export default class ScheduleRoute extends React.Component {
     return (
       <>
         <div className={`map-container ${this.state.mapClass}`}>
+          <ScheduleDropDown today={this.state.todayOfWeek} />
           <GoogleMap
             markers={clientsFilter}
             syncCenter={this.syncCenter}

@@ -4,6 +4,9 @@ import "./AddClientForm.scss";
 // import ScheduleDropDown from "../Dropdown/Dropdown";
 import ClientApiService from "../../services/client-api-service";
 import PrivateContext from "../../contexts/PrivateContext";
+import TokenService from '../../services/token-service';
+import config from '../../config';
+import S3ApiService from "../../services/s3-api-service";
 
 class AddClientForm extends React.Component {
   state = {
@@ -11,17 +14,18 @@ class AddClientForm extends React.Component {
     location: "",
     lat: 0,
     lng: 0,
+    googlePhoto: '',
     hours_of_operation: "",
     currently_closed: false,
     general_manager: "",
     day_of_week: 0,
     notes: "",
-    header_text: 'Add a Client',
+    header_text: "Add a Client",
     button_text: "Add Client",
   };
   static contextType = PrivateContext;
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     const {
       name,
@@ -34,6 +38,15 @@ class AddClientForm extends React.Component {
       notes,
       general_manager,
     } = this.state;
+    const photoInput = e.target["client-photo-input"];
+    const file = photoInput.files[0];
+    console.log(file);
+    let res = await S3ApiService.getUploadUrl(file.name, file.type)
+    let data = await fetch(res.url, {
+          method: 'PUT',
+          body: file,
+        });
+    let photo = data.url.split('?')[0];
     let newClient = {
       name,
       location,
@@ -43,6 +56,7 @@ class AddClientForm extends React.Component {
       hours_of_operation,
       currently_closed,
       notes,
+      photo,
       general_manager,
     };
     if (this.props.location.state) {
@@ -136,45 +150,71 @@ class AddClientForm extends React.Component {
       </select>
     );
   };
+
   checkProps = () => {
-    if (this.props.location.state) {
-      if(this.props.location.state.data) {
-        const {
-          name,
-          location,
-          lat,
-          lng,
-          hours_of_operation,
-          general_manager,
-          notes,
-        } = this.props.location.state.data;
-        this.setState({
-          name,
-          location,
-          lat,
-          lng,
-          hours_of_operation,
-          general_manager,
-          notes,
-          header_text: 'Edit Client',
-          button_text: 'Update Client'
-        });
-      } else if (this.props.location.state.client) {
-        const {
-          name,
-          location,
-          lat,
-          lng
-        } = this.props.location.state.client;
-        this.setState({
-          name,
-          location,
-          lat,
-          lng
-        });
+    if(this.props.location.state.data) {
+      const {
+        name,
+        location,
+        lat,
+        lng,
+        hours_of_operation,
+        general_manager,
+        notes,
+        photo_reference,
+      } = this.props.location.state.data;
+
+      if (photo_reference) {
+        this.getGoogleImage(photo_reference);
       }
+
+      this.setState({
+        name,
+        location,
+        lat,
+        lng,
+        hours_of_operation,
+        general_manager,
+        notes,
+        header_text: 'Edit Client',
+        button_text: 'Update Client'
+      });
+    } else if (this.props.location.state.client) {
+      const {
+        name,
+        location,
+        lat,
+        lng,
+        photo_reference,
+      } = this.props.location.state.client;
+
+      if (photo_reference) {
+        this.getGoogleImage(photo_reference);
+      }
+
+      this.setState({
+        name,
+        location,
+        lat,
+        lng
+      });
     }
   };
+
+  getGoogleImage = (photo_reference) => {
+    return fetch(`${config.API_ENDPOINT}/places/photo_reference?photo_reference=${photo_reference}&max_width=600`, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+      .then((res) =>
+        !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+      )
+      .then((json) => {
+        this.setState({googlePhoto: json});
+        console.log('this.state.googlePhoto should be:', json);
+      });
+  }
 
   componentDidMount() {
     this.checkProps();
@@ -202,7 +242,6 @@ class AddClientForm extends React.Component {
           value={this.state.location}
           onChange={this.setLocation}
         />
-
         <label htmlFor="hours_of_operation">Hours of Operation *</label>
         <input
           type="text"
@@ -222,6 +261,15 @@ class AddClientForm extends React.Component {
           value={this.state.currently_closed}
           onChange={this.setCurrentlyClosed}
         />
+        <label htmlFor="client-photo-input">Add a photo:</label>
+        <input
+          type="file"
+          accept="image/*"
+          name="client-photo-input"
+          id="client-photo-input"
+          alt="alt_text"
+          required
+        ></input>
         <label htmlFor="general_manager">General Manager (optional)</label>
         <input
           type="text"

@@ -1,0 +1,40 @@
+.client_report_li {
+    list-style-type: none;
+    border-top: 1px solid grey;
+    padding: 4%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#client_reports_header {
+    margin-top: 25px;
+}
+
+.report_info {
+    margin-left: 2%;
+}
+
+.client_header {
+    border-top: 1px solid grey;
+    padding-left: 4%;
+    padding-top: 4%;
+}
+
+.client_report_photo {
+    width: 40%;
+    max-width: 150px;
+    height: auto;
+}
+
+.reports_box {
+    padding: 0px;  
+}
+
+@media only screen and (min-width: 600px) {
+    .client_header {
+        padding-left: 10%;
+    }
+    .report_info {
+        margin-right: 15%;
+    }
+} 
