@@ -121,10 +121,8 @@ export default class App extends React.Component {
           <PrivateContext.Provider value={contextValue}>
             <Header />
             <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
-            <PrivateRoute path='/myaccount' exact component={UserInfoRoute} />
             <PrivateRoute path='/form' exact component={AddClientForm} />
             <PrivateRoute path='/reports' exact component={ReportsView} />
-            <PrivateRoute path='/reports/:report_id' component={Report} />
             <PrivateRoute path='/take-report' component={TakeReport} />
             <PrivateRoute path='/clients' exact component={ClientsRoute} />
             <PrivateRoute path='/clients/:id' exact component={ClientRoute} />
