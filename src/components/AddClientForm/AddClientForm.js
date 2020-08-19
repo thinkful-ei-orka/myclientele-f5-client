@@ -4,8 +4,8 @@ import "./AddClientForm.scss";
 // import ScheduleDropDown from "../Dropdown/Dropdown";
 import ClientApiService from "../../services/client-api-service";
 import PrivateContext from "../../contexts/PrivateContext";
-import TokenService from '../../services/token-service';
-import config from '../../config';
+import TokenService from "../../services/token-service";
+import config from "../../config";
 import S3ApiService from "../../services/s3-api-service";
 
 class AddClientForm extends React.Component {
@@ -14,14 +14,18 @@ class AddClientForm extends React.Component {
     location: "",
     lat: 0,
     lng: 0,
-    googlePhoto: '',
+    hasSelectedGooglePhoto: false,
+    googlePhoto: "",
     hours_of_operation: "",
     currently_closed: false,
     general_manager: "",
     day_of_week: 0,
+    photo_reference: null,
     notes: "",
+    photo: null,
     header_text: "Add a Client",
     button_text: "Add Client",
+    submitting: false
   };
   static contextType = PrivateContext;
 
@@ -35,18 +39,22 @@ class AddClientForm extends React.Component {
       day_of_week,
       hours_of_operation,
       currently_closed,
+      photo,
       notes,
       general_manager,
     } = this.state;
-    const photoInput = e.target["client-photo-input"];
-    const file = photoInput.files[0];
-    console.log(file);
-    let res = await S3ApiService.getUploadUrl(file.name, file.type)
-    let data = await fetch(res.url, {
-          method: 'PUT',
-          body: file,
-        });
-    let photo = data.url.split('?')[0];
+    let photo_url = null;
+    if (photo && typeof photo === "object") {
+      let res = await S3ApiService.getUploadUrl(photo.name, photo.type);
+      let data = await fetch(res.url, {
+        method: "PUT",
+        body: photo,
+      });
+      photo_url = data.url.split("?")[0];
+    } else if (typeof photo === "string") {
+      photo_url = photo;
+    }
+    console.log(photo_url)
     let newClient = {
       name,
       location,
@@ -56,7 +64,7 @@ class AddClientForm extends React.Component {
       hours_of_operation,
       currently_closed,
       notes,
-      photo,
+      photo: photo_url,
       general_manager,
     };
     if (this.props.location.state) {
@@ -70,13 +78,13 @@ class AddClientForm extends React.Component {
           })
           .then(() => this.props.history.push("/schedule"));
       } else {
-        console.log('went into the else in the if props exists part')
-        console.log('newClient', newClient)
+        console.log("went into the else in the if props exists part");
+        console.log("newClient", newClient);
         ClientApiService.addClient(newClient)
-        .then(() => {
-          this.context.fetchClients();
-        })
-        .then(() => this.props.history.push("/schedule"));
+          .then(() => {
+            this.context.fetchClients();
+          })
+          .then(() => this.props.history.push("/schedule"));
       }
     } else {
       ClientApiService.addClient(newClient)
@@ -122,6 +130,12 @@ class AddClientForm extends React.Component {
     });
   };
 
+  setPhoto = (e) => {
+    this.setState({
+      photo: e.target.files[0],
+    });
+  };
+
   renderSelectField = () => {
     let daysOfWeek = [
       "Sunday",
@@ -152,7 +166,10 @@ class AddClientForm extends React.Component {
   };
 
   checkProps = () => {
-    if(this.props.location.state.data) {
+    if(!this.props.location.state) {
+      return;
+    }
+    if (this.props.location.state.data) {
       const {
         name,
         location,
@@ -161,6 +178,8 @@ class AddClientForm extends React.Component {
         hours_of_operation,
         general_manager,
         notes,
+        photo,
+        day_of_week,
         photo_reference,
       } = this.props.location.state.data;
 
@@ -176,8 +195,10 @@ class AddClientForm extends React.Component {
         hours_of_operation,
         general_manager,
         notes,
-        header_text: 'Edit Client',
-        button_text: 'Update Client'
+        day_of_week,
+        photo,
+        header_text: "Edit Client",
+        button_text: "Update Client",
       });
     } else if (this.props.location.state.client) {
       const {
@@ -196,31 +217,77 @@ class AddClientForm extends React.Component {
         name,
         location,
         lat,
-        lng
+        lng,
       });
     }
   };
 
   getGoogleImage = (photo_reference) => {
-    return fetch(`${config.API_ENDPOINT}/places/photo_reference?photo_reference=${photo_reference}&max_width=600`, {
-      headers: {
-        'authorization': `bearer ${TokenService.getAuthToken()}`,
-      },
-    })
+    return fetch(
+      `${config.API_ENDPOINT}/places/photo_reference?photo_reference=${photo_reference}&max_width=600`,
+      {
+        headers: {
+          authorization: `bearer ${TokenService.getAuthToken()}`,
+        },
+      }
+    )
       .then((res) =>
         !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
       )
       .then((json) => {
-        this.setState({googlePhoto: json});
-        console.log('this.state.googlePhoto should be:', json);
+        this.setState({ googlePhoto: json });
+        console.log("this.state.googlePhoto should be:", json);
       });
-  }
+  };
+  confirmGoogleImage = () => {
+    this.setState({
+      hasSelectedGooglePhoto: true,
+      photo: this.state.googlePhoto,
+    });
+  };
+
+  confirmManualImage = () => {
+    this.setState({
+      googlePhoto: null,
+    });
+  };
+
+  renderRecommendedPhoto = () => {
+    return (
+      <div className="recommended_photo_box">
+        <p>
+          We found this picture for your new client. Would you like to use this
+          picture?
+        </p>
+        <div className="image_and_choices">
+          <img
+            src={this.state.googlePhoto}
+            alt="recommended client"
+            id="recommended_photo"
+          />
+          {!this.state.hasSelectedGooglePhoto ? (
+            <div className="choices">
+              <button type="button" onClick={this.confirmGoogleImage}>
+                Yes
+              </button>
+              <button type="button" onClick={this.confirmManualImage}>
+                No
+              </button>
+            </div>
+          ) : (
+            <p id="google_photo_confirmation">Confirmed!</p>
+          )}
+        </div>
+      </div>
+    );
+  };
 
   componentDidMount() {
     this.checkProps();
   }
 
   render() {
+    console.log(this.state.photo)
     return (
       <form className="add_client_form" onSubmit={(e) => this.handleSubmit(e)}>
         <h2 id="title">{this.state.header_text}</h2>
@@ -261,15 +328,35 @@ class AddClientForm extends React.Component {
           value={this.state.currently_closed}
           onChange={this.setCurrentlyClosed}
         />
-        <label htmlFor="client-photo-input">Add a photo:</label>
-        <input
-          type="file"
-          accept="image/*"
-          name="client-photo-input"
-          id="client-photo-input"
-          alt="alt_text"
-          required
-        ></input>
+        {(this.state.header_text === 'Edit Client' && this.state.photo)
+        ? <div className="current_image_box">
+            <p>Current photo:  </p>
+            <img src={this.state.photo} alt="client" id="current_photo"/>
+          </div>
+        : this.state.header_text === 'Edit Client'
+        ? <p>No photo for this client.  Please upload an image below!</p>
+        : ""}
+        {this.state.googlePhoto ? (
+          this.renderRecommendedPhoto()
+        ) : (
+          <>
+            <label htmlFor="client-photo-input">
+              {this.state.header_text === 'Edit Client'
+              ? 'Change current photo: '
+              : 'Add a photo: '
+              }
+              </label>
+            <input
+              type="file"
+              accept="image/*"
+              name="client-photo-input"
+              id="client-photo-input"
+              alt="alt_text"
+              onChange={this.setPhoto}
+            ></input>
+          </>
+        )}
+
         <label htmlFor="general_manager">General Manager (optional)</label>
         <input
           type="text"
@@ -288,9 +375,10 @@ class AddClientForm extends React.Component {
         />
         <p>What day of the week do you visit this client?</p>
         {this.renderSelectField()}
-        <button className="btn" type="submit" id="submit_button">
+        <button className="btn" type="submit" id="submit_button" disabled={this.state.submitting}>
           {this.state.button_text}
         </button>
+        {this.state.submitting && <p>Submitting...</p>}
       </form>
     );
   }

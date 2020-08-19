@@ -60,7 +60,6 @@ export default class ScheduleRoute extends React.Component {
     if (this.context.clients === null) {
       return <div>Loading...</div>;
     }
-
     let clientsFilter = this.context.clients.filter(
       (client) => {
         return client.day_of_week === Number(this.state.todayOfWeek)

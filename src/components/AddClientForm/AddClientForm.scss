@@ -10,6 +10,31 @@
   }
 }
 
+.recommended_photo_box {
+  margin-bottom: 25px;
+}
+
+#recommended_photo, #current_photo {
+  max-width: 150px;
+  height: auto;
+}
+
+.image_and_choices {
+  display: flex;
+}
+
+#google_photo_confirmation {
+  margin-left: 5%;
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-left: 15%;
+}
+
 .day_dropdown {
   margin-bottom: 25px;
 }

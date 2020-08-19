@@ -39,6 +39,10 @@ export default class ClientsMap extends React.Component {
       .then((json) => {
         let formattedResults = [];
         json.forEach((result) => {
+          let photo_reference = null;
+          if(result.photos) {
+            photo_reference = result.photos[0].photo_reference
+          }
           formattedResults.push({
             id: result.reference,
             name: result.name,
@@ -46,7 +50,7 @@ export default class ClientsMap extends React.Component {
             photos: result.photos,
             lat: result.geometry.location.lat,
             lng: result.geometry.location.lng,
-            photo_reference: result.photos[0].photo_reference,
+            photo_reference,
           });
         });
         this.setState({
