@@ -56,6 +56,8 @@ class AddClientForm extends React.Component {
           })
           .then(() => this.props.history.push("/schedule"));
       } else {
+        console.log('went into the else in the if props exists part')
+        console.log('newClient', newClient)
         ClientApiService.addClient(newClient)
         .then(() => {
           this.context.fetchClients();
@@ -179,6 +181,7 @@ class AddClientForm extends React.Component {
   }
 
   render() {
+    console.log('state in ACF', this.state)
     return (
       <form className="add_client_form" onSubmit={(e) => this.handleSubmit(e)}>
         <h2 id="title">{this.state.header_text}</h2>
