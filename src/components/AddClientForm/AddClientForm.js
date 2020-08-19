@@ -56,6 +56,8 @@ class AddClientForm extends React.Component {
           })
           .then(() => this.props.history.push("/schedule"));
       } else {
+        console.log('went into the else in the if props exists part')
+        console.log('newClient', newClient)
         ClientApiService.addClient(newClient)
         .then(() => {
           this.context.fetchClients();
