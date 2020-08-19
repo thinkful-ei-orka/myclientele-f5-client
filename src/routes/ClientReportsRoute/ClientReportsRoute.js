@@ -5,6 +5,9 @@ import ClientApiService from '../../services/client-api-service';
 import ReportsApiService from '../../services/reports-api-service';
 import "./ClientReportsRoute.scss";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
+
 export default class ClientReportsRoute extends React.Component {
   static contextType = PrivateContext;
   state = {
@@ -21,9 +24,10 @@ export default class ClientReportsRoute extends React.Component {
            reports: reports
          })
        })
-  } 
+  }
   render() {
     console.log(this.state.client, this.state.reports)
+
     if(this.state.client === []) {
       return <h1>loading...</h1>;
     } else {
@@ -37,10 +41,15 @@ export default class ClientReportsRoute extends React.Component {
           <ul className='reports_box'>
             {this.state.reports.map(report => {
               let date = new Date(report.date);
+              let report_photo;
+              if (report.photos.length) {
+                report_photo = <img src={report.photos[0]} alt={report.name} />
+              } else {
+                report_photo = <FontAwesomeIcon icon={faImage}></FontAwesomeIcon>
+              }
+
               return <li className="client_report_li" key={report.id}>
-                {report.photos
-                 && <img src={report.photos[0]} alt={report.name} className="client_report_photo"/>
-                }
+                <div className="client_report_photo">{report_photo}</div>
                 <div className="report_info">
                   <p className="report_notes">{report.notes}</p>
                   <p className="report_date">{date.toLocaleString()}</p>
