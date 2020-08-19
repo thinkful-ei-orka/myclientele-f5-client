@@ -4,52 +4,82 @@ import "./AddClientForm.scss";
 // import ScheduleDropDown from "../Dropdown/Dropdown";
 import ClientApiService from "../../services/client-api-service";
 import PrivateContext from "../../contexts/PrivateContext";
+<<<<<<< HEAD
 import TokenService from '../../services/token-service';
 import config from '../../config';
+=======
+import S3ApiService from "../../services/s3-api-service";
+>>>>>>> 2d01fde3ddac937ba1e4141f229cc9b2f48e1ff9
 
 class AddClientForm extends React.Component {
   state = {
     name: "",
     location: "",
+    lat: 0,
+    lng: 0,
     hours_of_operation: "",
     currently_closed: false,
     general_manager: "",
     day_of_week: 0,
     notes: "",
-    header_text: 'Add a Client',
+    header_text: "Add a Client",
     button_text: "Add Client",
   };
   static contextType = PrivateContext;
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     const {
       name,
       location,
+      lat,
+      lng,
       day_of_week,
       hours_of_operation,
       currently_closed,
       notes,
       general_manager,
     } = this.state;
+    const photoInput = e.target["client-photo-input"];
+    const file = photoInput.files[0];
+    console.log(file);
+    let res = await S3ApiService.getUploadUrl(file.name, file.type)
+    let data = await fetch(res.url, {
+          method: 'PUT',
+          body: file,
+        });
+    let photo = data.url.split('?')[0];
     let newClient = {
       name,
       location,
+      lat,
+      lng,
       day_of_week,
       hours_of_operation,
       currently_closed,
       notes,
+      photo,
       general_manager,
     };
     if (this.props.location.state) {
-      ClientApiService.updateClient(
-        this.props.location.state.data.id,
-        newClient
-      )
+      if (this.props.location.state.data) {
+        ClientApiService.updateClient(
+          this.props.location.state.data.id,
+          newClient
+        )
+          .then(() => {
+            this.context.fetchClients();
+          })
+          .then(() => this.props.history.push("/schedule"));
+      } else {
+        console.log('went into the else in the if props exists part')
+        console.log('newClient', newClient)
+        ClientApiService.addClient(newClient)
         .then(() => {
           this.context.fetchClients();
         })
         .then(() => this.props.history.push("/schedule"));
+      }
     } else {
       ClientApiService.addClient(newClient)
         .then(() => {
@@ -124,10 +154,12 @@ class AddClientForm extends React.Component {
   };
 
   checkProps = () => {
-    if (this.props.location.state) {
+    if(this.props.location.state.data) {
       const {
         name,
         location,
+        lat,
+        lng,
         hours_of_operation,
         general_manager,
         notes,
@@ -141,21 +173,26 @@ class AddClientForm extends React.Component {
       this.setState({
         name,
         location,
+        lat,
+        lng,
         hours_of_operation,
         general_manager,
         notes,
         header_text: 'Edit Client',
         button_text: 'Update Client'
       });
-    }
-    if (this.props.client) {
+    } else if (this.props.location.state.client) {
       const {
         name,
         location,
-      } = this.props.client;
+        lat,
+        lng
+      } = this.props.location.state.client;
       this.setState({
         name,
         location,
+        lat,
+        lng
       });
     }
   };
@@ -179,7 +216,6 @@ class AddClientForm extends React.Component {
   }
 
   render() {
-    console.log('props', this.props)
     return (
       <form className="add_client_form" onSubmit={(e) => this.handleSubmit(e)}>
         <h2 id="title">{this.state.header_text}</h2>
@@ -201,7 +237,6 @@ class AddClientForm extends React.Component {
           value={this.state.location}
           onChange={this.setLocation}
         />
-
         <label htmlFor="hours_of_operation">Hours of Operation *</label>
         <input
           type="text"
@@ -221,6 +256,15 @@ class AddClientForm extends React.Component {
           value={this.state.currently_closed}
           onChange={this.setCurrentlyClosed}
         />
+        <label htmlFor="client-photo-input">Add a photo:</label>
+        <input
+          type="file"
+          accept="image/*"
+          name="client-photo-input"
+          id="client-photo-input"
+          alt="alt_text"
+          required
+        ></input>
         <label htmlFor="general_manager">General Manager (optional)</label>
         <input
           type="text"
