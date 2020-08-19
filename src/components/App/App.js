@@ -1,31 +1,42 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+// import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import './App.scss';
 
-import { UserProvider } from '../../contexts/UserContext';
+// import { UserProvider } from '../../contexts/UserContext';
 import PrivateContext from '../../contexts/PrivateContext';
 import UserContext from '../../contexts/UserContext';
 
+// API Services
 import ClientApiService from '../../services/client-api-service';
 import ReportsApiService from '../../services/reports-api-service';
 import CompaniesApiService from '../../services/companies-api-service';
 import UserApiService from '../../services/user-api-service'
 // This is a placeholder
 // import EventsApiService from '../../services/events-api-service';
-import ScheduleRoute from '../../routes/ScheduleRoute/ScheduleRoute';
-import UserInfoRoute from '../../routes/UserInfoRoute/UserInfoRoute';
-import Header from '../Header/Header';
 
+// Public and Private Routes
 import PublicRoute from '../PublicRoute/PublicRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
+// Routes
 import HomepageRoute from '../../routes/HomepageRoute/HomepageRoute';
 import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
+import ClientRoute from '../../routes/ClientRoute/ClientRoute';
+import ClientReportsRoute from '../../routes/ClientReportsRoute/ClientReportsRoute.js';
+import AddClientRoute from '../../routes/AddClientRoute/AddClientRoute';
+import ReportRoute from '../../routes/ReportRoute/ReportRoute';
+import ScheduleRoute from '../../routes/ScheduleRoute/ScheduleRoute';
+import MyAccountRoute from '../../routes/MyAccountRoute/MyAccountRoute';
+
+// Components
+import Header from '../Header/Header';
 import AddClientForm from '../AddClientForm/AddClientForm';
 import ReportsView from '../../components/ReportsView/ReportsView';
-import Report from '../../routes/ReportRoute/Report';
 import TakeReport from '../../components/TakeReport/TakeReport';
-import { contextType } from 'react-modal';
+// import ClientsSearch from '../ClientsSearch/ClientsSearch';
+// import AddClientMap from '../AddClient/AddClient';
+import MobileNav from '../MobileNav/MobileNav';
 
 export default class App extends React.Component {
   static contextType = UserContext;
@@ -53,21 +64,18 @@ export default class App extends React.Component {
 
   fetchClients = () => {
     return ClientApiService.getAllClients().then((result) => {
-      console.log('got clients', result);
       this.setState({ clients: result });
     });
   };
 
   fetchReports = () => {
     ReportsApiService.getAllReports().then((result) => {
-      console.log('got reports', result);
       this.setState({ reports: result });
     });
   };
 
   fetchCompany = (company_id) => {
     CompaniesApiService.getCompany(company_id).then((result) => {
-      console.log('got company', result);
       this.setState({ company: result });
     });
   };
@@ -86,12 +94,12 @@ export default class App extends React.Component {
   };
 
   setScheduleFilter = (newFilter) => {
-    this.setState({scheduleFilter: newFilter})
-  }
+    this.setState({ scheduleFilter: newFilter });
+  };
 
   setScheduleSearch = (searchTerm) => {
-    this.setState({scheduleSearch: searchTerm})
-  }
+    this.setState({ scheduleSearch: searchTerm });
+  };
 
   render() {
     let contextValue = this.state;
@@ -103,7 +111,7 @@ export default class App extends React.Component {
     contextValue.updateContext = this.updateContext;
     contextValue.setScheduleFilter = this.setScheduleFilter;
     contextValue.setScheduleSearch = this.setScheduleSearch;
-
+    console.log('context value', contextValue);
     return (
       <div className='App'>
         <Switch>
@@ -118,6 +126,41 @@ export default class App extends React.Component {
             <PrivateRoute path='/reports' exact component={ReportsView} />
             <PrivateRoute path='/reports/:report_id' component={Report} />
             <PrivateRoute path='/take-report' component={TakeReport} />
+            <PrivateRoute path='/clients' exact component={ClientsRoute} />
+            <PrivateRoute path='/clients/:id' exact component={ClientRoute} />
+            <PrivateRoute
+              path='/clients/:id/reports'
+              exact
+              component={ClientReportsRoute}
+            />
+            <PrivateRoute
+              path='/clients/:id/add'
+              exact
+              component={TakeReport}
+            />
+            <PrivateRoute
+              path='/clients/:id/edit'
+              exact
+              component={AddClientForm}
+            />
+
+            <PrivateRoute path='/add-client' component={AddClientRoute} />
+            <PrivateRoute
+              exact
+              path='/add-client-form'
+              component={AddClientForm}
+            />
+            <PrivateRoute exact path='/reports' component={ReportsView} />
+            <PrivateRoute path='/reports/:report_id' component={ReportRoute} />
+
+            <PrivateRoute path='/my-account' component={MyAccountRoute} />
+
+            {/* <PrivateRoute path='/add-client-map' component={AddClientMap} /> */}
+
+             <PrivateRoute path='/take-report' component={TakeReport} />
+
+
+            <MobileNav />
           </PrivateContext.Provider>
         </Switch>
       </div>

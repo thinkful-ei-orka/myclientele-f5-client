@@ -1,69 +1,85 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import "./AddClientForm.scss";
-import ScheduleDropDown from "../Dropdown/Dropdown";
+// import ScheduleDropDown from "../Dropdown/Dropdown";
 import ClientApiService from "../../services/client-api-service";
 import PrivateContext from "../../contexts/PrivateContext";
+import TokenService from '../../services/token-service';
+import config from '../../config';
+import S3ApiService from "../../services/s3-api-service";
 
 class AddClientForm extends React.Component {
   state = {
     name: "",
     location: "",
+    lat: 0,
+    lng: 0,
+    googlePhoto: '',
     hours_of_operation: "",
     currently_closed: false,
     general_manager: "",
     day_of_week: 0,
     notes: "",
+    header_text: "Add a Client",
     button_text: "Add Client",
   };
   static contextType = PrivateContext;
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     const {
       name,
       location,
+      lat,
+      lng,
       day_of_week,
       hours_of_operation,
       currently_closed,
       notes,
       general_manager,
     } = this.state;
-
-    console.log(
+    const photoInput = e.target["client-photo-input"];
+    const file = photoInput.files[0];
+    console.log(file);
+    let res = await S3ApiService.getUploadUrl(file.name, file.type)
+    let data = await fetch(res.url, {
+          method: 'PUT',
+          body: file,
+        });
+    let photo = data.url.split('?')[0];
+    let newClient = {
       name,
       location,
+      lat,
+      lng,
       day_of_week,
       hours_of_operation,
       currently_closed,
       notes,
-      general_manager
-    );
-    if(this.props.location.state) {
-      ClientApiService.updateClient(
-        this.props.location.state.data.id,
-        name,
-        location,
-        day_of_week,
-        hours_of_operation,
-        currently_closed,
-        notes,
-        general_manager
-      )
+      photo,
+      general_manager,
+    };
+    if (this.props.location.state) {
+      if (this.props.location.state.data) {
+        ClientApiService.updateClient(
+          this.props.location.state.data.id,
+          newClient
+        )
+          .then(() => {
+            this.context.fetchClients();
+          })
+          .then(() => this.props.history.push("/schedule"));
+      } else {
+        console.log('went into the else in the if props exists part')
+        console.log('newClient', newClient)
+        ClientApiService.addClient(newClient)
         .then(() => {
           this.context.fetchClients();
         })
         .then(() => this.props.history.push("/schedule"));
+      }
     } else {
-      ClientApiService.addClient(
-        name,
-        location,
-        day_of_week,
-        hours_of_operation,
-        currently_closed,
-        notes,
-        general_manager
-      )
+      ClientApiService.addClient(newClient)
         .then(() => {
           this.context.fetchClients();
         })
@@ -108,13 +124,13 @@ class AddClientForm extends React.Component {
 
   renderSelectField = () => {
     let daysOfWeek = [
+      "Sunday",
       "Monday",
       "Tuesday",
       "Wednesday",
       "Thursday",
       "Friday",
       "Saturday",
-      "Sunday",
       "I dont visit this client weekly",
     ];
     return (
@@ -134,25 +150,71 @@ class AddClientForm extends React.Component {
       </select>
     );
   };
+
   checkProps = () => {
-    if (this.props.location.state) {
+    if(this.props.location.state.data) {
       const {
         name,
         location,
+        lat,
+        lng,
         hours_of_operation,
         general_manager,
         notes,
+        photo_reference,
       } = this.props.location.state.data;
+
+      if (photo_reference) {
+        this.getGoogleImage(photo_reference);
+      }
+
       this.setState({
         name,
         location,
+        lat,
+        lng,
         hours_of_operation,
         general_manager,
         notes,
+        header_text: 'Edit Client',
         button_text: 'Update Client'
+      });
+    } else if (this.props.location.state.client) {
+      const {
+        name,
+        location,
+        lat,
+        lng,
+        photo_reference,
+      } = this.props.location.state.client;
+
+      if (photo_reference) {
+        this.getGoogleImage(photo_reference);
+      }
+
+      this.setState({
+        name,
+        location,
+        lat,
+        lng
       });
     }
   };
+
+  getGoogleImage = (photo_reference) => {
+    return fetch(`${config.API_ENDPOINT}/places/photo_reference?photo_reference=${photo_reference}&max_width=600`, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+      .then((res) =>
+        !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+      )
+      .then((json) => {
+        this.setState({googlePhoto: json});
+        console.log('this.state.googlePhoto should be:', json);
+      });
+  }
 
   componentDidMount() {
     this.checkProps();
@@ -161,7 +223,7 @@ class AddClientForm extends React.Component {
   render() {
     return (
       <form className="add_client_form" onSubmit={(e) => this.handleSubmit(e)}>
-        <h2 id="title">Add a client</h2>
+        <h2 id="title">{this.state.header_text}</h2>
         <label htmlFor="name">Name *</label>
         <input
           type="text"
@@ -180,7 +242,6 @@ class AddClientForm extends React.Component {
           value={this.state.location}
           onChange={this.setLocation}
         />
-
         <label htmlFor="hours_of_operation">Hours of Operation *</label>
         <input
           type="text"
@@ -200,6 +261,15 @@ class AddClientForm extends React.Component {
           value={this.state.currently_closed}
           onChange={this.setCurrentlyClosed}
         />
+        <label htmlFor="client-photo-input">Add a photo:</label>
+        <input
+          type="file"
+          accept="image/*"
+          name="client-photo-input"
+          id="client-photo-input"
+          alt="alt_text"
+          required
+        ></input>
         <label htmlFor="general_manager">General Manager (optional)</label>
         <input
           type="text"

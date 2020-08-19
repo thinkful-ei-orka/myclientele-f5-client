@@ -42,8 +42,6 @@ class LoginForm extends React.Component {
     const { error } = this.state;
     const loading = this.state.loading;
 
-    console.log(this.props);
-
     return (
       <div className='user-login'>
         <h2>Login</h2>
@@ -61,7 +59,6 @@ class LoginForm extends React.Component {
           <label htmlFor='password'>Password</label>
           <input
             type='password'
-            ref={this.firstInput}
             id='password'
             name='password'
             required></input>

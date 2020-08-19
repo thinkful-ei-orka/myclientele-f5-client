@@ -1,6 +1,7 @@
 import React from 'react';
-import arrow from '../../../images/arrow.svg';
+// import arrow from '../../../images/arrow.svg';
 import PrivateContext from '../../../contexts/PrivateContext';
+import ScheduleSearch from '../ScheduleSearch/ScheduleSearch';
 
 class ScheduleDropDown extends React.Component {
   static contextType = PrivateContext;
@@ -42,23 +43,19 @@ class ScheduleDropDown extends React.Component {
   }
 
   render() {
-    // console.log(this.props.today)
     return (
       <div className='schedule-drop-down'>
         <div className='dropdown-filter' onClick={() => this.toggleList()}>
             Filter:
           <select className='filter-dropdown-list' defaultValue={this.props.today} onChange={this.handleFilterChange}>
-            <option key={7} value={7}>No Filter</option>
             {Object.entries(this.dayOfWeekList).map(([key, value]) => (
               <option key={key} value={key}>{value}</option>
             ))}
+            <option key={7} value={7}>All Clients</option>
           </select>
           {/* <img src={arrow} alt='drop down arrow' /> */}
         </div>
-        <div className='dropdown-search'>
-          {/* Search: */}
-          <input type='search' placeholder='Search Here' onChange={this.handleSearchChange}></input>
-        </div>
+        <ScheduleSearch />
       </div>
     );
   }

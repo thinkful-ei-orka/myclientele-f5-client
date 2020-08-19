@@ -2,17 +2,18 @@
 
 .schedule-drop-down {
   width: 100%;
-  border: 1px solid grey;
   padding: 10px;
   font-size: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   justify-content: center;
-  align-items: baseline;
+  align-items: center;
 }
 
-.schedule-drop-down > div {
-  margin: 5px;
+.dropdown-search {
+  width: 50%;
+  margin: 10px 0 0 0;
+  padding: 0;
 }
 
 .filter-dropdown-list {
@@ -22,92 +23,50 @@
 .schedule-page {
   width: 90%;
   margin: auto;
-}
-
-.schedule-card {
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  margin: auto;
-  border-top: 1px solid grey;
-  height: 150px;
-  justify-content: space-between;
-}
-.company-logo img {
-  width: 80%;
-}
-.information-area * {
-  padding: 5px;
-  margin: 0 auto;
-}
-
-.information-area {
-  height: 100%;
-  width: 90%;
-
-  text-transform: capitalize;
-
-  padding: 0 5px;
-}
-.location {
-  font-size: 1.2rem;
-}
-
-.button-area {
-  padding: none;
-  display: flex;
+  justify-content: center;
   flex-direction: column;
-  width: 100px;
-  height: 100%;
-  justify-content: space-evenly;
-  align-items: center;
+}
 
-  button {
-    width: 60px;
-    padding: none;
-    height: 60px;
-    border-radius: 100%;
-    border: none;
-    background-color: $purple;
-    padding: 10px;
+@media only screen and (min-width: 600px) {
+  .schedule-page {
+    width: 80%;
   }
-  img {
-    padding: none;
-    width: 30px;
-    color: white;
+  .client-cards {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
   }
 }
 
-.client-hours::before {
-  content: '●';
-  font-size: 2rem;
-}
+// map styles
 
-.open::before {
-  color: green;
-}
-
-.closed::before {
-  color: red;
-}
-.client-hours {
-  font-size: 20px;
-}
-
-.visually-hidden {
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
-}
-
-@media screen and (min-width: 480px) {
+.map-container {
+  width: 100%;
+  height: calc(100vh - 185px);
+  position: relative;
   .schedule-drop-down {
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: baseline;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    width: auto;
+    .dropdown-filter .filter-dropdown-list {
+      display: inline-block;
+      width: auto;
+    }
+    .dropdown-search {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: 600px) {
+  .map-container {
+    height: 400px;
+    display: block;
+    .schedule-drop-down {
+      display: none;
+    }
   }
 }

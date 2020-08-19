@@ -1,6 +1,4 @@
 import React from 'react';
-
-import React from 'react';
 import PrivateContext from '../../contexts/PrivateContext'; //will need later?
 import ReportsApiService from '../../services/reports-api-service';
 import { Link } from 'react-router-dom';
@@ -24,10 +22,6 @@ class Reports extends React.Component {
   }
 
   render() {
-    console.log('context', this.context);
-    console.log('props', this.props);
-    console.log('ReaportsApiService', ReportsApiService);
-    console.log('reports in state', this.state.reports);
     let reports = this.state.reports;
     if (reports) {
       reports.map((report) => {
@@ -36,7 +30,6 @@ class Reports extends React.Component {
         }
       });
     }
-    console.log('reports var', reports);
     if (this.state.reports.length === 0) {
       return <section>Fetching Reports</section>;
     }

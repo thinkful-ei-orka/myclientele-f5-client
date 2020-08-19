@@ -4,18 +4,44 @@ import ClientCard from '../../components/ClientCard/ClientCard';
 import PrivateContext from '../../contexts/PrivateContext';
 import './scheduleroute.scss';
 
-class Schedule extends React.Component {
+import GoogleMap from '../../components/GoogleMap/GoogleMap';
+import ListMapToggle from '../../components/ListMapToggle/ListMapToggle';
+
+export default class ScheduleRoute extends React.Component {
   static contextType = PrivateContext;
   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
       todayOfWeek: null,
+      center: null,
+      listClass: '',
+      mapClass: 'mobile-hidden',
     };
   }
 
+  setCenter = (center) => {
+    this.setState({
+      center: center,
+    });
+  };
+
+  listClick = () => {
+    this.setState({
+      listClass: '',
+      mapClass: 'mobile-hidden',
+    });
+  };
+
+  mapClick = () => {
+    this.setState({
+      listClass: 'mobile-hidden',
+      mapClass: '',
+    });
+  };
+
   componentDidMount() {
-    if (this.context.clients == null) {
+    if (this.context.clients === null) {
       this.context
         .fetchClients()
         .then(this.context.fetchUserInfo())
@@ -23,7 +49,7 @@ class Schedule extends React.Component {
     }
 
     let date = new Date();
-      this.setState({todayOfWeek: date.getDay()})
+    this.setState({ todayOfWeek: date.getDay() });
 
     // if (this.context.scheduleFilter == null) {
     //   this.context.setScheduleFilter(this.state.todayOfWeek)
@@ -32,41 +58,53 @@ class Schedule extends React.Component {
   }
 
   render() {
-
-    if (this.context.clients == null) {
+    if (this.context.clients === null) {
       return <div>Loading...</div>;
     }
 
-    let clientsFilter = this.context.clients.filter(client => 
-      client.day_of_week == this.state.todayOfWeek)
+    let clientsFilter = this.context.clients.filter(
+      (client) => {
+        return client.day_of_week === Number(this.state.todayOfWeek)
+      });
 
-    if (this.context.scheduleFilter) {
-      clientsFilter = this.context.clients.filter(client => 
-        client.day_of_week == this.context.scheduleFilter)
-      }
+    if (this.context.scheduleFilter ) {
+      clientsFilter = this.context.clients.filter(
+        (client) => {
+          return client.day_of_week === Number(this.context.scheduleFilter)
+        });
+    }
 
-    if (this.context.scheduleFilter == 7) {
-      clientsFilter = this.context.clients
-      }
+    if (Number(this.context.scheduleFilter) === 7) {
+      clientsFilter = this.context.clients;
+    }
 
     if (this.context.scheduleSearch) {
-      const searchTerm = this.context.scheduleSearch.toLowerCase()
-      console.log(clientsFilter)
-      clientsFilter = clientsFilter.filter(client => 
-        client.name.toLowerCase().includes(searchTerm))
-      console.log(clientsFilter)
-      }
-    
+      const searchTerm = this.context.scheduleSearch.toLowerCase();
+      clientsFilter = clientsFilter.filter((client) =>
+        client.name.toLowerCase().includes(searchTerm)
+      );
+    }
 
     return (
-      <div className='schedule-page' >
-          <ScheduleDropDown today={this.state.todayOfWeek}/>
-        {clientsFilter.map((store) => (
-          <ClientCard data={store} key={store.id} />
-        ))}
-      </div>
+      <>
+        <div className={`map-container ${this.state.mapClass}`}>
+          <ScheduleDropDown today={this.state.todayOfWeek} />
+          <GoogleMap
+            markers={clientsFilter}
+            setCenter={this.setCenter}></GoogleMap>
+        </div>
+        <div className={`schedule-page ${this.state.listClass}`}>
+          <ScheduleDropDown today={this.state.todayOfWeek} />
+          <div className='client-cards'>
+            {clientsFilter.map((store) => (
+              <ClientCard data={store} key={store.id} />
+            ))}
+          </div>
+        </div>
+        <ListMapToggle
+          listClick={this.listClick}
+          mapClick={this.mapClick}></ListMapToggle>
+      </>
     );
   }
 }
-
-export default Schedule;

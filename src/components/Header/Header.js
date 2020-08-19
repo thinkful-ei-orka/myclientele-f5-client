@@ -40,7 +40,6 @@ class Header extends React.Component {
 
   render() {
     if (this.context.user.id == null) {
-      console.log(this.context.user);
       return (
         <header>
           <div className='logo'>
@@ -76,20 +75,23 @@ class Header extends React.Component {
           </Link>
         </div>
         <div className='header-buttons'>
+          <Link to='/add-client'>
+            <button className='add-client btn'>Add Client</button>
+          </Link>
+          <Link to='/clients'>
+            <button className='clients btn'>All Clients</button>
+          </Link>
+          <Link to='/reports'>
+            <button className='reports btn'>Reports</button>
+          </Link>
+          <Link to='/myaccount'>
+            <button className='user-info btn'>My Account</button>
+          </Link>
           <button
             className='logout-button btn'
             onClick={() => this.handleLogOut()}>
             Logout
           </button>
-          <Link to='/myaccount'>
-            <button className='user-info btn'>My Account</button>
-          </Link>
-          <Link to='/form'>
-            <button className='add-client btn'>Add Client</button>
-          </Link>
-          <Link to='/reports'>
-            <button className='reports btn'>Reports</button>
-          </Link>
         </div>
       </header>
     );

@@ -3,7 +3,6 @@ import config from '../config';
 
 const ReportsApiService = {
   getAllReports() {
-    console.log('getAllReports');
     return fetch(`${config.API_ENDPOINT}/reports`, {
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`,
@@ -12,9 +11,9 @@ const ReportsApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
-  addReport(client_id, notes, photo_url) {
+  addReport(client_id, notes, photos) {
     // note: sales_rep_id is self and date is now (handled by the back end)
-    const report = { client_id, notes, photo_url };
+    const report = { client_id, notes, photos };
 
     return fetch(`${config.API_ENDPOINT}/reports`, {
       method: 'POST',
@@ -58,7 +57,7 @@ const ReportsApiService = {
       },
       body: JSON.stringify(report),
     }).then((res) =>
-      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : 0
     );
   },
   deleteReport(report_id) {
@@ -68,7 +67,7 @@ const ReportsApiService = {
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
     }).then((res) =>
-      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : 0
     );
   },
 };

@@ -1,52 +1,76 @@
-h1 {
-  text-align: center;
-}
+@import '../../index.scss';
+
 .report-list {
   width: 80%;
   margin: auto;
 }
-.report-list-ul {
-  margin: 0;
-  padding: 0;
-}
-li {
-  list-style: none;
-  color: black;
-}
 
-.reportList-link {
+a {
+  color: black;
   text-decoration: none;
 }
 
-.client-name {
-  font-size: 110%;
-  line-height: 50%;
+.report-list-ul {
+  list-style: none;
+  margin: auto;
+  padding: 0;
+  justify-content: center;
 }
+h1 {
+  text-align: center;
+}
+.information-area {
+  padding: 10px;
+  height: auto;
+  h2 {
+    font-size: 26px;
+    text-transform: uppercase;
+  }
+  p {
+    font-size: 18px;
+  }
+}
+
 .report-li {
   display: flex;
+  flex-direction: column;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  margin: 10px;
+  .company-logo {
+    line-height: 0;
+  }
+}
+.main-info-area {
+  display: flex;
   flex-direction: row;
-  width: 100%;
-  margin: auto;
-  border-top: 1px solid grey;
-  height: 150px;
-  justify-content: space-between;
 }
-.company-logo img {
-  width: 80%;
+#reports-img {
+  border-top-left-radius: 10px;
 }
-.information-area * {
-  padding: 5px;
-  margin: 0 auto;
-}
+.submitted-area {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: $green;
+  color: white;
+  text-align: center;
+  display: flex;
+  align-content: center;
 
-.information-area {
-  height: 100%;
-  width: 90%;
-
-  text-transform: capitalize;
-
-  padding: 0 5px;
+  height: 40px;
+  p {
+    margin: auto;
+    padding: 0;
+    font-size: 20px;
+    font-weight: bold;
+  }
 }
-.location {
-  font-size: 1.2rem;
+@media only screen and (min-width: 600px) {
+  .report-li {
+    width: 460px;
+  }
+  .report-list-ul {
+    display: flex;
+    flex-flow: row wrap;
+  }
 }

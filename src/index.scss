@@ -25,6 +25,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.hidden {
+  display: none;
+}
+.mobile-hidden {
+  display: none;
+}
+@media (min-width: 600px) {
+  .mobile-hidden {
+    display: block;
+  }
+}
 
 /*------------------
   Typography
@@ -50,7 +61,10 @@ li {
 /*------------------
   Elements
 ------------------*/
-button,
+
+a.link {
+  color: $purple;
+}
 .btn,
 .header-button {
   outline: none;
@@ -59,6 +73,7 @@ button,
   width: auto;
   font-size: 15px;
   border-radius: 5px;
+  font-weight: 500;
   cursor: pointer;
 
   // primary
@@ -112,8 +127,8 @@ button,
   }
 
   @media only screen and (min-width: 1200px) {
-    font-size: 20px;
-    padding: 20px;
+    font-size: 30px;
+    padding: 10px;
   }
 }
 
@@ -125,11 +140,20 @@ label {
   margin-bottom: 7px;
 }
 input,
+select,
 textarea {
   display: block;
+  width: 100%;
   padding: 5px 8px;
   margin-bottom: 1em;
-  border: 1px solid $gray;
+  border: 1px solid $lighter-gray;
+  border-radius: 7px;
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance:none;
 }
 
 /*------------------

@@ -1,0 +1,25 @@
+.list-map-buttons {
+  position: fixed;
+  bottom: 72px;
+  width: 100%;
+  .btn {
+    border-radius: 0;
+    width: 50%;
+    padding: 12px;
+  }
+  svg {
+    margin-right: 5px;
+  }
+}
+.App {
+  margin-bottom: 117px;
+}
+
+@media (min-width: 600px) {
+  .list-map-buttons {
+    display: none;
+  }
+  .App {
+    margin-bottom: 0;
+  }
+}
