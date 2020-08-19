@@ -64,11 +64,11 @@ class Reports extends React.Component {
             const newDate = new Date(report.date);
             const clientData = this.matchReportToClient(report.client_id);
             return (
-              <li className='report-li' id={report.id}>
-                <Link
-                  key={report.id}
-                  to={`/reports/${report.id}`}
-                  className='reportList-link'>
+              <Link
+                key={report.id}
+                to={`/reports/${report.id}`}
+                className='reportList-link'>
+                <li className='report-li' id={report.id}>
                   <div className='main-info-area'>
                     <div className='company-logo'>
                       <img
@@ -89,8 +89,8 @@ class Reports extends React.Component {
                   <div className='submitted-area'>
                     <p>Submitted: {newDate.toLocaleDateString()}</p>
                   </div>
-                </Link>
-              </li>
+                </li>
+              </Link>
             );
           })}
         </ul>

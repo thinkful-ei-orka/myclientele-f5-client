@@ -3,15 +3,13 @@ import ReportsApiService from '../../services/reports-api-service';
 import { withRouter, Link } from 'react-router-dom';
 import './takereport.scss';
 import S3ApiService from '../../services/s3-api-service';
+import ReportsView from '../../components/ReportsView/ReportsView';
 
-
-//What all operations do we want to give the user in terms of interacting with photos. After they do the initial upload, what all do we want to allow the user to do with photos.  
+//What all operations do we want to give the user in terms of interacting with photos. After they do the initial upload, what all do we want to allow the user to do with photos.
 
 //How do we want to handle gathering photos? Do we want to have a specific photo route that we make API calls to or do we just want to have all the requests to get photos be handled by the Reports router? If we do the latter then we will only have to make one request instead of two (one for reports and one for photos).
 
 //How do we want to display multiple images?  Do we want to add that feature to the client card?
-
-
 
 class TakeReport extends React.Component {
   constructor(props) {
@@ -30,7 +28,7 @@ class TakeReport extends React.Component {
   // const { data } = this.props.location.state;
   client_id = this.data.id;
 
-  onFormSubmit = async e => {
+  onFormSubmit = async (e) => {
     e.preventDefault();
     this.setState({
       submitting: true
@@ -51,21 +49,20 @@ class TakeReport extends React.Component {
     }).catch((error) => console.log(error));
   };
 
-  getPhotoUrlList = async file => {
+  getPhotoUrlList = async (file) => {
     let photos = [];
     for (let key in file) {
       if (!isNaN(Number(key))) {
-        console.log("name ", file[key].name, "... type ", file[key].type);
         let res = await S3ApiService.getUploadUrl(file[key].name, file[key].type)
         let data = await fetch(res.url, {
-              method: "PUT",
-              body: file[key],
-            })
-        photos.push(data.url.split("?")[0])     
+          method: 'PUT',
+          body: file[key],
+        });
+        photos.push(data.url.split('?')[0]);
       }
     }
     return photos;
-  }
+  };
   componentDidMount() {
     if(window.location.pathname.includes('/clients')) {
       this.setState({
@@ -74,7 +71,6 @@ class TakeReport extends React.Component {
     }
     if (this.state.reports.length === 0) {
       ReportsApiService.getReportsByClientId(this.client_id).then((res) => {
-        console.log(res);
         this.setState({ reports: res, isLoading: false });
       });
     }
@@ -110,6 +106,7 @@ class TakeReport extends React.Component {
     if (this.state.isLoading) {
       return <div>Loading...</div>;
     }
+
     return (
       <div className='take-a-report'>
         <h1>Take a Report</h1>
@@ -118,7 +115,7 @@ class TakeReport extends React.Component {
             <img src='https://via.placeholder.com/150' alt={this.data.name} />
           </div>
           <div className='information-area'>
-            <h2>{this.data.name} </h2>
+            <h2 id='store-name'>{this.data.name} </h2>
             <div className='location'>{this.data.location}</div>
           </div>
         </div>
@@ -148,6 +145,7 @@ class TakeReport extends React.Component {
           : ""
            }
         </div>
+
         {!this.state.mobile 
         ? this.renderPreviousReports()
         : ""
