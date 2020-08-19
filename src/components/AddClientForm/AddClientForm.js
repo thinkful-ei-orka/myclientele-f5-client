@@ -9,6 +9,8 @@ class AddClientForm extends React.Component {
   state = {
     name: "",
     location: "",
+    lat,
+    lng,
     hours_of_operation: "",
     currently_closed: false,
     general_manager: "",
@@ -24,6 +26,8 @@ class AddClientForm extends React.Component {
     const {
       name,
       location,
+      lat,
+      lng,
       day_of_week,
       hours_of_operation,
       currently_closed,
@@ -33,6 +37,8 @@ class AddClientForm extends React.Component {
     let newClient = {
       name,
       location,
+      lat,
+      lng,
       day_of_week,
       hours_of_operation,
       currently_closed,
