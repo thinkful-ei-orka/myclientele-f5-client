@@ -10,12 +10,13 @@ class AddClientForm extends React.Component {
   state = {
     name: "",
     location: "",
+    lat: 0,
+    lng: 0,
     hours_of_operation: "",
     currently_closed: false,
     general_manager: "",
     day_of_week: 0,
     notes: "",
-    recommended_photo: null,
     header_text: "Add a Client",
     button_text: "Add Client",
   };
@@ -26,6 +27,8 @@ class AddClientForm extends React.Component {
     const {
       name,
       location,
+      lat,
+      lng,
       day_of_week,
       hours_of_operation,
       currently_closed,
@@ -44,6 +47,8 @@ class AddClientForm extends React.Component {
     let newClient = {
       name,
       location,
+      lat,
+      lng,
       day_of_week,
       hours_of_operation,
       currently_closed,
@@ -52,14 +57,24 @@ class AddClientForm extends React.Component {
       general_manager,
     };
     if (this.props.location.state) {
-      ClientApiService.updateClient(
-        this.props.location.state.data.id,
-        newClient
-      )
+      if (this.props.location.state.data) {
+        ClientApiService.updateClient(
+          this.props.location.state.data.id,
+          newClient
+        )
+          .then(() => {
+            this.context.fetchClients();
+          })
+          .then(() => this.props.history.push("/schedule"));
+      } else {
+        console.log('went into the else in the if props exists part')
+        console.log('newClient', newClient)
+        ClientApiService.addClient(newClient)
         .then(() => {
           this.context.fetchClients();
         })
         .then(() => this.props.history.push("/schedule"));
+      }
     } else {
       ClientApiService.addClient(newClient)
         .then(() => {
@@ -133,10 +148,12 @@ class AddClientForm extends React.Component {
     );
   };
   checkProps = () => {
-    if (this.props.location.state) {
+    if(this.props.location.state.data) {
       const {
         name,
         location,
+        lat,
+        lng,
         hours_of_operation,
         general_manager,
         notes,
@@ -144,18 +161,26 @@ class AddClientForm extends React.Component {
       this.setState({
         name,
         location,
+        lat,
+        lng,
         hours_of_operation,
         general_manager,
         notes,
-        header_text: "Edit Client",
-        button_text: "Update Client",
+        header_text: 'Edit Client',
+        button_text: 'Update Client'
       });
-    }
-    if (this.props.client) {
-      const { name, location, } = this.props.client;
+    } else if (this.props.location.state.client) {
+      const {
+        name,
+        location,
+        lat,
+        lng
+      } = this.props.location.state.client;
       this.setState({
         name,
         location,
+        lat,
+        lng
       });
     }
   };
@@ -165,8 +190,6 @@ class AddClientForm extends React.Component {
   }
 
   render() {
-    console.log("props", this.props);
-    console.log(this.state.recommended_photo);
     return (
       <form className="add_client_form" onSubmit={(e) => this.handleSubmit(e)}>
         <h2 id="title">{this.state.header_text}</h2>

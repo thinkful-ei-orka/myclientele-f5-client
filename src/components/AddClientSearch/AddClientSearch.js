@@ -101,7 +101,7 @@ export default class ClientsMap extends React.Component {
             <Link className='btn select-button' to={{
               pathname: "/add-client-form",
               state: {
-                data: result
+                client: result
               }
             }}>Select</Link>
           </div>
