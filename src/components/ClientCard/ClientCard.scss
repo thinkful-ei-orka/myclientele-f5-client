@@ -3,10 +3,27 @@
 .dropdown {
   padding: 0px;
   width: 135px;
+
+}
+
+@media only screen and (min-width: 400px)  {
+  .dropdown_box {
+    margin-top: 0px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .dropdown_box {
+    height: 75px;
+    position: absolute;
+    top: 75px;
+    left: 51%;
+  }  
 }
 
 .dropdown_item {
   border: 1px solid black;
+  list-style-type: none;
   text-align: right;
   padding-right: 10px;
 }
@@ -26,6 +43,7 @@ a {
 //Begin client card scss
 .client-card {
   display: flex;
+  position: relative;
   flex-direction: row;
   width: 100%;
   margin: 10px auto;

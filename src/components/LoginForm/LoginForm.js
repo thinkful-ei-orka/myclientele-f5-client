@@ -50,7 +50,6 @@ class LoginForm extends React.Component {
 
           <label htmlFor='user_name'>Username</label>
           <input
-          autofocus
             type='text'
             ref={this.firstInput}
             id='user_name'
