@@ -5,14 +5,16 @@ import addsvg from '../../images/clientcard/add.svg';
 import OpenOrClosed from './OpenOrClosed';
 import './ClientCard.scss';
 import ClientApiService from '../../services/client-api-service';
-// import PrivateContext from '../../contexts/PrivateContext';
+import PrivateContext from '../../contexts/PrivateContext';
 // import Buttons from './Buttons';
+import Modal from 'react-modal';
 
 class ClientCard extends React.Component {
-  // static contextType = PrivateContext;
+  static contextType = PrivateContext;
+
   state = {
     threeDotsActive: false,
-    confirmRemoveClient: false,
+    modalIsOpen: false,
   };
 
   renderThreeDotsButton = () => {
@@ -50,18 +52,16 @@ class ClientCard extends React.Component {
               Edit client
             </Link>
           </li>
-          <li className='dropdown_item' onClick={this.toggleRemove}>
-            Remove
+          <li className='dropdown_item' onClick={(e) => this.setModalOpen(true)}>
+            <span>Remove</span>
           </li>
         </ul>
       </div>
     );
   };
 
-  toggleRemove = () => {
-    this.setState({
-      confirmRemoveClient: !this.state.confirmRemoveClient,
-    });
+  setModalOpen = (bool) => {
+    this.setState({ modalIsOpen: bool });
   };
 
   removeClient = () => {
@@ -70,20 +70,7 @@ class ClientCard extends React.Component {
   };
 
   renderConfirmRemove = () => {
-    return (
-      <div className='confirm_remove_box'>
-        <p>
-          Are you sure you want to remove this client? If you do so, all reports
-          associated with this client will also be removed.
-        </p>
-        <div className='button_box'>
-          <button id='cancel-client-remove-button' onClick={this.toggleRemove}>
-            Cancel
-          </button>
-          <button onClick={this.removeClient}>Remove</button>
-        </div>
-      </div>
-    );
+
   };
 
   toggleThreeDots = () => {
@@ -91,6 +78,10 @@ class ClientCard extends React.Component {
       threeDotsActive: !this.state.threeDotsActive,
     });
   };
+
+  componentDidMount() {
+    Modal.setAppElement('.App');
+  }
 
   render() {
     const {
@@ -110,9 +101,25 @@ class ClientCard extends React.Component {
       reportPath = '/take-report'
     }
     return (
-      
+
       <div className='client-card'>
-        {this.state.confirmRemoveClient ? this.renderConfirmRemove() : ''}
+        {/* {this.state.confirmRemoveClient ? this.renderConfirmRemove() : ''} */}
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={(e) => this.setModalOpen(false)}>
+            <div className='confirm_remove_box'>
+              <p>
+                Are you sure you want to remove this client? If you do so, all reports
+                associated with this client will also be removed.
+              </p>
+              <div className='button_box'>
+                <button id='cancel-client-remove-button' onClick={(e) => this.setModalOpen(false)}>
+                  Cancel
+                </button>
+                <button onClick={this.removeClient}>Remove</button>
+              </div>
+            </div>
+        </Modal>
         <div className='company-logo'>
           <img src='https://via.placeholder.com/150' alt={name} />
         </div>
