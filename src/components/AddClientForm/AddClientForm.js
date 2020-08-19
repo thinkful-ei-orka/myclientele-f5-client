@@ -181,7 +181,6 @@ class AddClientForm extends React.Component {
   }
 
   render() {
-    console.log('state in ACF', this.state)
     return (
       <form className="add_client_form" onSubmit={(e) => this.handleSubmit(e)}>
         <h2 id="title">{this.state.header_text}</h2>

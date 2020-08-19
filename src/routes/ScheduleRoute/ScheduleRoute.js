@@ -20,7 +20,7 @@ export default class ScheduleRoute extends React.Component {
     };
   }
 
-  setCenter = (center) => {
+  syncCenter = (center) => {
     this.setState({
       center: center,
     });
@@ -89,7 +89,8 @@ export default class ScheduleRoute extends React.Component {
         <div className={`map-container ${this.state.mapClass}`}>
           <GoogleMap
             markers={clientsFilter}
-            setCenter={this.setCenter}></GoogleMap>
+            syncCenter={this.syncCenter}
+            centerOnCurrentLocation={false}></GoogleMap>
         </div>
         <div className={`schedule-page ${this.state.listClass}`}>
           <ScheduleDropDown today={this.state.todayOfWeek} />

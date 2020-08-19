@@ -100,7 +100,7 @@ export default class App extends React.Component {
     contextValue.updateContext = this.updateContext;
     contextValue.setScheduleFilter = this.setScheduleFilter;
     contextValue.setScheduleSearch = this.setScheduleSearch;
-    console.log('context value', contextValue);
+    // console.log('context value', contextValue);
     return (
       <div className='App'>
         <Switch>

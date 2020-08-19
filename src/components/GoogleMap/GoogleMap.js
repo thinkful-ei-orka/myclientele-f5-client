@@ -26,21 +26,33 @@ export default class GoogleMapComponent extends React.Component {
   };
 
   onLoad = (map) => {
-    const bounds = new window.google.maps.LatLngBounds();
-    console.log(this.props.markers)
-    if(this.props.markers && this.props.markers.length) {
+    const windowGoogleMaps = window.google.maps;
+    const bounds = new windowGoogleMaps.LatLngBounds();
+    // console.log(this.props.markers)
+    if(this.props.markers && this.props.markers.length && !this.props.centerOnCurrentLocation) {
       for (let i = 0; i < this.props.markers.length; i++) {
         bounds.extend({lat: Number(this.props.markers[i].lat), lng: Number(this.props.markers[i].lng)})
       }
     }
+    windowGoogleMaps.event.addListenerOnce(map, 'bounds_changed', (event) => {
+      console.log('bounds changed!')
+      if(this.props.centerOnCurrentLocation) {
+        this.setCenterOnCurrentLocation();
+      }
+      map.setZoom(10)
+    })
     map.fitBounds(bounds);
+    console.log('afterline 36', bounds)
+
     this.setState(
       {
         map: map,
       },
-      () => {
-        this.setCenter();
-      }
+      // () => { 
+      //   if(this.props.centerOnCurrentLocation) {
+      //     this.setCenterOnCurrentLocation();
+      //   }
+      // }
     );
 
     //mapSetCenter does not work necessarily when onLoad is called
@@ -51,7 +63,7 @@ export default class GoogleMapComponent extends React.Component {
     let lat = this.state.map.getCenter().lat();
     let lng = this.state.map.getCenter().lng();
 
-    this.props.setCenter([lat, lng]);
+    this.props.syncCenter([lat, lng]);
   };
 
   onClick = () => {
@@ -60,7 +72,8 @@ export default class GoogleMapComponent extends React.Component {
     });
   };
 
-  setCenter = () => {
+  setCenterOnCurrentLocation = () => {
+    // console.log('setCenterOnCurrentLocation called')
     let lat = 0;
     let lng = 0;
     if (navigator.geolocation) {
@@ -73,9 +86,10 @@ export default class GoogleMapComponent extends React.Component {
           if (lat !== 0 && lng !== 0) {
 
             //map.setCenter does not work necessarily when map is called to load
-            // setTimeout(() => this.state.map.setCenter({ lat, lng }), 1000);
-            setTimeout(() => this.state.map.setZoom(10), 1000);
-            // this.props.setCenter({lat, lng})
+            // this.state.map.setCenter({ lat, lng })
+            setTimeout(() => this.state.map.setCenter({ lat, lng }), 1000);
+            // setTimeout(() => this.state.map.setZoom(10), 1000);
+            // this.props.syncCenter({lat, lng})
             // console.log('center set', this.state.map.center.lat(), this.state.map.center.lng())
           }
         },
