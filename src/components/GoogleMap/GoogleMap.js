@@ -28,35 +28,24 @@ export default class GoogleMapComponent extends React.Component {
   onLoad = (map) => {
     const windowGoogleMaps = window.google.maps;
     const bounds = new windowGoogleMaps.LatLngBounds();
-    // console.log(this.props.markers)
     if(this.props.markers && this.props.markers.length && !this.props.centerOnCurrentLocation) {
       for (let i = 0; i < this.props.markers.length; i++) {
         bounds.extend({lat: Number(this.props.markers[i].lat), lng: Number(this.props.markers[i].lng)})
       }
     }
     windowGoogleMaps.event.addListenerOnce(map, 'bounds_changed', (event) => {
-      console.log('bounds changed!')
       if(this.props.centerOnCurrentLocation) {
         this.setCenterOnCurrentLocation();
       }
       map.setZoom(10)
     })
     map.fitBounds(bounds);
-    console.log('afterline 36', bounds)
 
     this.setState(
       {
         map: map,
-      },
-      // () => { 
-      //   if(this.props.centerOnCurrentLocation) {
-      //     this.setCenterOnCurrentLocation();
-      //   }
-      // }
+      }
     );
-
-    //mapSetCenter does not work necessarily when onLoad is called
-    // map.setCenter({lat: 27, lng: -81})
   };
 
   onIdle = () => {
@@ -73,7 +62,6 @@ export default class GoogleMapComponent extends React.Component {
   };
 
   setCenterOnCurrentLocation = () => {
-    // console.log('setCenterOnCurrentLocation called')
     let lat = 0;
     let lng = 0;
     if (navigator.geolocation) {
@@ -88,9 +76,6 @@ export default class GoogleMapComponent extends React.Component {
             //map.setCenter does not work necessarily when map is called to load
             // this.state.map.setCenter({ lat, lng })
             setTimeout(() => this.state.map.setCenter({ lat, lng }), 1000);
-            // setTimeout(() => this.state.map.setZoom(10), 1000);
-            // this.props.syncCenter({lat, lng})
-            // console.log('center set', this.state.map.center.lat(), this.state.map.center.lng())
           }
         },
         (err) => console.log(err),
@@ -132,7 +117,6 @@ export default class GoogleMapComponent extends React.Component {
   };
 
   render() {
-    // console.log('props in GM', this.props)
     let markers = [];
 
     // if searching results, populate the results
