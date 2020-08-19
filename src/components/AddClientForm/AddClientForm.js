@@ -4,12 +4,9 @@ import "./AddClientForm.scss";
 // import ScheduleDropDown from "../Dropdown/Dropdown";
 import ClientApiService from "../../services/client-api-service";
 import PrivateContext from "../../contexts/PrivateContext";
-<<<<<<< HEAD
 import TokenService from '../../services/token-service';
 import config from '../../config';
-=======
 import S3ApiService from "../../services/s3-api-service";
->>>>>>> 2d01fde3ddac937ba1e4141f229cc9b2f48e1ff9
 
 class AddClientForm extends React.Component {
   state = {
@@ -17,6 +14,7 @@ class AddClientForm extends React.Component {
     location: "",
     lat: 0,
     lng: 0,
+    googlePhoto: '',
     hours_of_operation: "",
     currently_closed: false,
     general_manager: "",
@@ -186,8 +184,14 @@ class AddClientForm extends React.Component {
         name,
         location,
         lat,
-        lng
+        lng,
+        photo_reference,
       } = this.props.location.state.client;
+
+      if (photo_reference) {
+        this.getGoogleImage(photo_reference);
+      }
+
       this.setState({
         name,
         location,
@@ -207,7 +211,8 @@ class AddClientForm extends React.Component {
         !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
       )
       .then((json) => {
-        console.log(json);
+        this.setState({googlePhoto: json});
+        console.log('this.state.googlePhoto should be:', json);
       });
   }
 
