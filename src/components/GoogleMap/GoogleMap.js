@@ -111,7 +111,7 @@ export default class GoogleMapComponent extends React.Component {
   };
 
   render() {
-    console.log('props in GM', this.props)
+    // console.log('props in GM', this.props)
     let markers = [];
 
     // if searching results, populate the results

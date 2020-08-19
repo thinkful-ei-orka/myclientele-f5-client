@@ -4,6 +4,8 @@ import "./AddClientForm.scss";
 // import ScheduleDropDown from "../Dropdown/Dropdown";
 import ClientApiService from "../../services/client-api-service";
 import PrivateContext from "../../contexts/PrivateContext";
+import TokenService from '../../services/token-service';
+import config from '../../config';
 
 class AddClientForm extends React.Component {
   state = {
@@ -120,6 +122,7 @@ class AddClientForm extends React.Component {
       </select>
     );
   };
+
   checkProps = () => {
     if (this.props.location.state) {
       const {
@@ -128,7 +131,13 @@ class AddClientForm extends React.Component {
         hours_of_operation,
         general_manager,
         notes,
+        photo_reference,
       } = this.props.location.state.data;
+
+      if (photo_reference) {
+        this.getGoogleImage(photo_reference);
+      }
+
       this.setState({
         name,
         location,
@@ -150,6 +159,20 @@ class AddClientForm extends React.Component {
       });
     }
   };
+
+  getGoogleImage = (photo_reference) => {
+    return fetch(`${config.API_ENDPOINT}/places/photo_reference?photo_reference=${photo_reference}&max_width=600`, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+      .then((res) =>
+        !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+      )
+      .then((json) => {
+        console.log(json);
+      });
+  }
 
   componentDidMount() {
     this.checkProps();
