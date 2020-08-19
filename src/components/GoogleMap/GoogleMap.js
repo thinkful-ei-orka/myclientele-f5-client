@@ -163,7 +163,7 @@ export default class GoogleMapComponent extends React.Component {
                   <Link className='btn select-button' to={{
                     pathname: "/add-client-form",
                     state: {
-                      data: marker
+                      client: marker
                     }
                   }}>Select</Link>
                 </div>

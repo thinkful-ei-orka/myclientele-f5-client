@@ -100,6 +100,10 @@ class ClientCard extends React.Component {
     } else {
       reportPath = '/take-report'
     }
+    let imgsrc = 'https://via.placeholder.com/150';
+    if(this.props.data.photo) {
+      imgsrc = this.props.data.photo;
+    }
     return (
 
       <div className='client-card'>
@@ -121,7 +125,7 @@ class ClientCard extends React.Component {
             </div>
         </Modal>
         <div className='company-logo'>
-          <img src='https://via.placeholder.com/150' alt={name} />
+          <img src={imgsrc} alt={name} />
         </div>
         <div className='information-area'>
           <h2>{name} </h2>
