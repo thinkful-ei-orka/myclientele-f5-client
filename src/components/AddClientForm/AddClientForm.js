@@ -152,52 +152,54 @@ class AddClientForm extends React.Component {
   };
 
   checkProps = () => {
-    if(this.props.location.state.data) {
-      const {
-        name,
-        location,
-        lat,
-        lng,
-        hours_of_operation,
-        general_manager,
-        notes,
-        photo_reference,
-      } = this.props.location.state.data;
-
-      if (photo_reference) {
-        this.getGoogleImage(photo_reference);
+    if (this.props.location.state) {
+      if(this.props.location.state.data) {
+        const {
+          name,
+          location,
+          lat,
+          lng,
+          hours_of_operation,
+          general_manager,
+          notes,
+          photo_reference,
+        } = this.props.location.state.data;
+  
+        if (photo_reference) {
+          this.getGoogleImage(photo_reference);
+        }
+  
+        this.setState({
+          name,
+          location,
+          lat,
+          lng,
+          hours_of_operation,
+          general_manager,
+          notes,
+          header_text: 'Edit Client',
+          button_text: 'Update Client'
+        });
+      } else if (this.props.location.state.client) {
+        const {
+          name,
+          location,
+          lat,
+          lng,
+          photo_reference,
+        } = this.props.location.state.client;
+  
+        if (photo_reference) {
+          this.getGoogleImage(photo_reference);
+        }
+  
+        this.setState({
+          name,
+          location,
+          lat,
+          lng
+        });
       }
-
-      this.setState({
-        name,
-        location,
-        lat,
-        lng,
-        hours_of_operation,
-        general_manager,
-        notes,
-        header_text: 'Edit Client',
-        button_text: 'Update Client'
-      });
-    } else if (this.props.location.state.client) {
-      const {
-        name,
-        location,
-        lat,
-        lng,
-        photo_reference,
-      } = this.props.location.state.client;
-
-      if (photo_reference) {
-        this.getGoogleImage(photo_reference);
-      }
-
-      this.setState({
-        name,
-        location,
-        lat,
-        lng
-      });
     }
   };
 
