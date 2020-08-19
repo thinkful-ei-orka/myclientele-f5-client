@@ -56,7 +56,7 @@ export default class ClientsMap extends React.Component {
       });
   };
 
-  setCenter = (center) => {
+  syncCenter = (center) => {
     this.setState({
       center: center,
     });
@@ -120,7 +120,7 @@ export default class ClientsMap extends React.Component {
             </ul>
           </div>
           <div className={`search-map-container ${this.state.mapClass}`}>
-            <GoogleMapComponent searchMarkers={this.state.formattedResults} setCenter={this.setCenter} onSearchMarkerClick={this.onSearchMarkerClick}></GoogleMapComponent>
+            <GoogleMapComponent searchMarkers={this.state.formattedResults} syncCenter={this.syncCenter} onSearchMarkerClick={this.onSearchMarkerClick} centerOnCurrentLocation={true}></GoogleMapComponent>
           </div>
         </div>
         <ListMapToggle listClick={this.listClick} mapClick={this.mapClick}></ListMapToggle>
