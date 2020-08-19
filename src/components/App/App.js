@@ -20,7 +20,6 @@ import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 // Routes
 import HomepageRoute from '../../routes/HomepageRoute/HomepageRoute';
-import ClientsRoute from '../../routes/ClientsRoute/ClientsRoute';
 import ClientRoute from '../../routes/ClientRoute/ClientRoute';
 import ClientReportsRoute from '../../routes/ClientReportsRoute/ClientReportsRoute.js';
 import AddClientRoute from '../../routes/AddClientRoute/AddClientRoute';
@@ -110,7 +109,6 @@ export default class App extends React.Component {
           <PrivateContext.Provider value={contextValue}>
             <Header />
             <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
-            <PrivateRoute path='/clients' exact component={ClientsRoute} />
             <PrivateRoute path='/clients/:id' exact component={ClientRoute} />
             <PrivateRoute
               path='/clients/:id/reports'
