@@ -117,6 +117,8 @@ export default class GoogleMapComponent extends React.Component {
   };
 
   render() {
+
+    console.log('centerOnCurrentLocation in Map', this.props.centerOnCurrentLocation)
     let markers = [];
 
     // if searching results, populate the results

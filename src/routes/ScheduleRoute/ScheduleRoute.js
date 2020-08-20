@@ -58,6 +58,7 @@ export default class ScheduleRoute extends React.Component {
   }
 
   render() {
+    let centerOnCurrentLocation = false;
     if (this.context.clients === null) {
       return <div>Loading...</div>;
     }
@@ -87,9 +88,11 @@ export default class ScheduleRoute extends React.Component {
 
     if (clientsFilter.length < 1) {
       console.log('into that if statement')
+      centerOnCurrentLocation = true
     }
     console.log('this.context', this.context)
     console.log('clientsFilter', clientsFilter)
+    console.log('centerOnCurrentLocation', centerOnCurrentLocation)
     return (
       <>
         <div className={`map-container ${this.state.mapClass}`}>
@@ -97,7 +100,7 @@ export default class ScheduleRoute extends React.Component {
           <GoogleMap
             markers={clientsFilter}
             syncCenter={this.syncCenter}
-            centerOnCurrentLocation={false}></GoogleMap>
+            centerOnCurrentLocation={centerOnCurrentLocation}></GoogleMap>
         </div>
         <div className={`schedule-page ${this.state.listClass}`}>
           <ScheduleDropDown today={this.state.todayOfWeek} />
