@@ -28,7 +28,7 @@ Sherry McCarty
 
 ### Screenshots
 
-![Image of Mobile View] (docs/MyClienteleMobileView.png)
+![Image of Mobile View](docs/MyClienteleMobileView.png)
 
 ![Image of Home Page](docs/MyClienteleHomePage.png)
 
