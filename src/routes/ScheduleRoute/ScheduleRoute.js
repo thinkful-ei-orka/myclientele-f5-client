@@ -61,6 +61,7 @@ export default class ScheduleRoute extends React.Component {
     if (this.context.clients === null) {
       return <div>Loading...</div>;
     }
+
     let clientsFilter = this.context.clients.filter(
       (client) => {
         return client.day_of_week === Number(this.state.todayOfWeek)
@@ -84,6 +85,11 @@ export default class ScheduleRoute extends React.Component {
       );
     }
 
+    if (clientsFilter.length < 1) {
+      console.log('into that if statement')
+    }
+    console.log('this.context', this.context)
+    console.log('clientsFilter', clientsFilter)
     return (
       <>
         <div className={`map-container ${this.state.mapClass}`}>
