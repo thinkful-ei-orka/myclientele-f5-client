@@ -99,7 +99,7 @@ export default class ScheduleRoute extends React.Component {
 
     return (
       <>
-        {noClients && <p className='no-client-message'>You have no clients today, {this.context.user.username}. <Link to='add-client' className='link'>Would you like to add one?</Link></p>}
+        {noClients && <p className='no-client-message'>You have no clients today. <Link to='add-client' className='link'>Would you like to add one?</Link></p>}
         <div className={`map-container ${this.state.mapClass}`}>
           <ScheduleDropDown today={this.state.todayOfWeek} />
           <GoogleMap
