@@ -20,10 +20,10 @@ Username: User<br />
 Password: Password12#
 
 ## Team Members
-Jacob Poteat
-Jonathan Clark
-Mandela Jones
-Taeil Kwak
+Jacob Poteat<br />
+Jonathan Clark<br />
+Mandela Jones<br />
+Taeil Kwak<br />
 Sherry McCarty
 
 ### Screenshots
