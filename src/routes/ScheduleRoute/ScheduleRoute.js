@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ScheduleDropDown from '../../components/ScheduleView/ScheduleDropDown/ScheduleDropDown';
 import ClientCard from '../../components/ClientCard/ClientCard';
 import PrivateContext from '../../contexts/PrivateContext';
@@ -17,6 +18,7 @@ export default class ScheduleRoute extends React.Component {
       center: null,
       listClass: '',
       mapClass: 'mobile-hidden',
+      // noClients: false,
     };
   }
 
@@ -40,6 +42,12 @@ export default class ScheduleRoute extends React.Component {
     });
   };
 
+//   setNoClients = () => {
+//     this.setState({
+//       noClients: true
+//     })
+//  }
+
   componentDidMount() {
     if (this.context.clients === null) {
       this.context
@@ -58,6 +66,7 @@ export default class ScheduleRoute extends React.Component {
   }
 
   render() {
+    let noClients = false;
     if (this.context.clients === null) {
       return <div>Loading...</div>;
     }
@@ -84,8 +93,13 @@ export default class ScheduleRoute extends React.Component {
       );
     }
 
+    if (clientsFilter.length < 1) {
+      noClients = true
+    }
+
     return (
       <>
+        {noClients && <p className='no-client-message'>You have no clients today. <Link to='add-client' className='link'>Would you like to add one?</Link></p>}
         <div className={`map-container ${this.state.mapClass}`}>
           <ScheduleDropDown today={this.state.todayOfWeek} />
           <GoogleMap
