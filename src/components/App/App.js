@@ -36,7 +36,6 @@ import TakeReport from '../../components/TakeReport/TakeReport';
 // import ClientsSearch from '../ClientsSearch/ClientsSearch';
 // import AddClientMap from '../AddClient/AddClient';
 import MobileNav from '../MobileNav/MobileNav';
-import Swiper from "../Swiper/Swiper";
 
 export default class App extends React.Component {
   static contextType = UserContext;
@@ -118,7 +117,6 @@ export default class App extends React.Component {
           <PublicRoute path='/' exact component={HomepageRoute} />
           <PublicRoute path='/login' exact component={HomepageRoute} />
           <PublicRoute path='/sign-up' exact component={HomepageRoute} />
-          <PublicRoute path='/swiper' exact component={Swiper} />
           <PrivateContext.Provider value={contextValue}>
             <Header />
             <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
