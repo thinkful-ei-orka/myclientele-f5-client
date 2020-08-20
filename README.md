@@ -19,6 +19,13 @@ To try the service, please use the credentials below to log in
 Username: User<br />
 Password: Password12#
 
+## Team Members
+Jacob Poteat<br />
+Jonathan Clark<br />
+Mandela Jones<br />
+Taeil Kwak<br />
+Sherry McCarty
+
 ### Screenshots
 
 ![Image of Home Page](docs/MyClienteleHomePage.png)
