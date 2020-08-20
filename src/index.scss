@@ -149,9 +149,11 @@ a.link {
 /*------------------
   Form
 ------------------*/
+
 label {
   display: inline-block;
   margin-bottom: 7px;
+  font-weight: bold;
 }
 input,
 select,
@@ -169,8 +171,16 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
   -webkit-appearance:none;
 }
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
 
 /*------------------
   Layout
 ------------------*/
 // If we want to put things like wrapper width, grid layouts, column styles, etc.
+.wrapper {
+  margin: 0 15px;
+}
