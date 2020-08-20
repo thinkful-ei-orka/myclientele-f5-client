@@ -142,7 +142,6 @@ class TakeReport extends React.Component {
               name="report-photo-input"
               id="report-photo-input"
               alt="alt_text"
-              required
             ></input>
             <button className="btn" disabled={this.state.submitting}>Submit</button>
           </form>
