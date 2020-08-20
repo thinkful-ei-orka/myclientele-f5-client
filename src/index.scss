@@ -184,17 +184,3 @@ fieldset {
 .wrapper {
   margin: 0 15px;
 }
-
-/*------------------
-  Modal
-------------------*/
-.ReactModal__Content--after-open {
-  width: 80%;
-  margin: auto;
-}
-
-@media only screen and (min-width: 600px) {
-  .ReactModal__Content--after-open {
-    width: 600px;
-  }
-}
