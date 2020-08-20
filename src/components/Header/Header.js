@@ -14,10 +14,14 @@ class Header extends React.Component {
     loginIsOpen: false,
     signUpIsOpen: false,
     menuOpen: false,
+    isMobile: false,
   };
 
   static contextType = UserContext;
 
+  handleWindowResize = () => {
+    this.setState({ isMobile: window.innerWidth < 750 });
+  };
   setLoginOpen = (bool) => {
     this.setState({ loginIsOpen: bool });
   };
@@ -39,9 +43,11 @@ class Header extends React.Component {
       this.setSignUpOpen(true);
     }
     document.addEventListener('mousedown', this.handleClick);
+    window.addEventListener('resize', this.handleWindowResize);
   }
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClick);
+    window.removeEventListener('resize', this.handleWindowResize);
   }
 
   handleStateChange(state) {
