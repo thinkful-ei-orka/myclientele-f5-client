@@ -1,15 +1,19 @@
-.account-title, .save-edit-buttons {
-    text-align: center;
+.update-account-form {
+    margin-top: 50px;
+    margin-right: 25%;
+    margin-left: 25%;
+    .save-button {
+        margin-top: 10px;
+        width: 100%;
+    }
 }
 
-.account-area {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 100px 100px 100px 100px 100px 100px;
-    justify-content: space-around;
-    align-content: center;
-}
-
-.account-area > * {
-    border: 1px solid grey;
+.company-code {
+    display: inline-block;
+    width: calc(100% - 76px);
+    margin-right: 10px;
+    & + .btn {
+        display: inline-block;
+        padding: 5px 12px;
+    }
 }

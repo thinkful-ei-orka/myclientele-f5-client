@@ -37,7 +37,7 @@ class MyAccountRoute extends React.Component {
             }
         })
         console.log(infoToUpdate)
-        
+
         UserApiService.updateUserContactInfo(infoToUpdate)
         .catch((res) => {
             this.setState({ error: res.error});
@@ -96,54 +96,33 @@ class MyAccountRoute extends React.Component {
         const userAccountInfo = this.context.user
         const userContactInfo = this.context.userContact
         return (
-            <div className='account-page'>
-                <div className='account-title'>My Account</div>
+            <div className='account-page wrapper'>
                 <form className='update-account-form' onSubmit={(e) => this.handleSave(e)}>
-                    <div className='account-area'>
-                        <label htmlFor="input-name" className='account-name'>Name</label>
-                        <div className='account-name-field'>
-                            {userAccountInfo.name}
-                            <input type='text' name='input-name' placeholder={'Enter new name'} onChange={this.setName}/>
-                        </div>
-                        <label htmlFor="input-username" className='account-username'>Username</label>
-                        <div className='account-username-field'>
-                            {userAccountInfo.username}
-                            <input type='text' name='input-username' placeholder='Enter new username' onChange={this.setUsername}/>
-                        </div>
-                        <label htmlFor="input-password" className='account-password'>Password</label>
-                        <div className='account-password-field'>
-                            <fieldset>
-                                <input type='password' name='input-password'placeholder='Enter new password'onChange={this.setPassword}/>
-                                <input type='password' name='input-repassword' placeholder='Re-enter password' onChange={this.setRepassword}/>
-                            </fieldset>
-                        </div>
-                        <label htmlFor="input-email" className='account-email'>Email</label>
-                        <div className='account-email-field'>
-                            {userContactInfo.email}
-                            <input type='text' name='input-email' placeholder='Enter new email address' onChange={this.setEmail}/>
-                        </div>
-                        <label htmlFor="name" className='account-phone'>Phone Number</label>
-                        <div htmlFor="input-phone" className='account-phone-field'>
-                            {userContactInfo.phone_number}
-                            <input type='text' name='input-phone' placeholder='Enter new phone number' onChange={this.setPhoneNumber}/>
-                        </div>
-                        <div className='account-companyid'>Company Code</div>
-                        <div className='account-companyid-field'>
-                            {this.context.user.company_id}
-                            <CopyToClipboard text={this.context.user.company_id}>
-                                <button>Copy</button>
-                            </CopyToClipboard>
-                        </div>
-                    </div>
-                    <div className='save-edit-buttons'>
-                        <button type='submit' className='save-button btn'>Save</button>
-                    </div>
+                    <h2 id="title">My Account</h2>
+                    <label htmlFor="input-name" className='account-name'>Name</label>
+                    <input type='text' name='input-name'
+                    value={userAccountInfo.name}
+                    placeholder='Enter new name' onChange={this.setName}/>
+                    <label htmlFor="input-username" className='account-username'>Username</label>
+                    <input type='text' name='input-username' value={userAccountInfo.username} placeholder='Enter new username' onChange={this.setUsername}/>
+                    <label htmlFor="input-password" className='account-password'>Password</label>
+                    <fieldset>
+                        <input type='password' name='input-password'placeholder='Enter new password'onChange={this.setPassword}/>
+                        <input type='password' name='input-repassword' placeholder='Re-enter password' onChange={this.setRepassword}/>
+                    </fieldset>
+                    <label htmlFor="input-email" className='account-email'>Email</label>
+                    <input type='text' name='input-email' value={userContactInfo.email} placeholder='Enter new email address' onChange={this.setEmail}/>
+                    <label htmlFor="name" className='account-phone'>Phone Number</label>
+                    <input type='text' name='input-phone' value={userContactInfo.phone_number} placeholder='Enter new phone number' onChange={this.setPhoneNumber}/>
+                    <label>Company Code</label>
+                    <input className="company-code" type="text" value={this.context.user.company_id} disabled></input>
+                    <CopyToClipboard text={this.context.user.company_id}>
+                        <button className="btn">Copy</button>
+                    </CopyToClipboard>
+                    <button type='submit' className='save-button btn'>Save</button>
                 </form>
                 {this.state.error? this.state.error : null}
             </div>
-            
-            
-            
         )
     };
 }
