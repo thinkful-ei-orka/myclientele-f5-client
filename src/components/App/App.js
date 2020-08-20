@@ -146,15 +146,11 @@ export default class App extends React.Component {
               path='/add-client-form'
               component={AddClientForm}
             />
-            <PrivateRoute exact path='/reports' component={ReportsView} />
             <PrivateRoute path='/reports/:report_id' component={ReportRoute} />
 
             <PrivateRoute path='/my-account' component={MyAccountRoute} />
 
             {/* <PrivateRoute path='/add-client-map' component={AddClientMap} /> */}
-
-             <PrivateRoute path='/take-report' component={TakeReport} />
-
 
             <MobileNav />
           </PrivateContext.Provider>
