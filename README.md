@@ -21,7 +21,6 @@ Password: Password12#
 
 ### Screenshots
 
-NEED TO ADD SCREENSHOTS IN THIS FORMAT (if the imgs are in a doc folder on client, otherwise it's the relative route)
 ![Image of Home Page](docs/MyClienteleHomePage.png)
 
 ![Image of My Schedule](docs/MyClienteleMySchedule.png)
@@ -30,7 +29,7 @@ NEED TO ADD SCREENSHOTS IN THIS FORMAT (if the imgs are in a doc folder on clien
 
 ![Image of Add Client](docs/MyClineteleAddClient.png)
 
-![Image of Reports](docs/MyClineteleReports.png)
+![Image of Reports](docs/MyClienteleReports.png)
 
 ## Server
 
