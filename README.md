@@ -28,6 +28,8 @@ Sherry McCarty
 
 ### Screenshots
 
+![Image of Mobile View] (docs/MyClienteleMobileView.png)
+
 ![Image of Home Page](docs/MyClienteleHomePage.png)
 
 ![Image of My Schedule](docs/MyClienteleMySchedule.png)
