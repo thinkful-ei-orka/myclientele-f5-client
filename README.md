@@ -44,6 +44,15 @@ PUT THE API DOCUMENTATION HERE
 
 REACT, JavaScript, CSS3, HTML5, SCSS, NodeJS, ExpressJS, PostgreSQL
 
+## To Run A Clean Start 
+
+1. Clone this repository to your local machine
+2. cd into the cloned repository
+3. Remove the git history with rm -rf .get && git init
+4. Install dependencies with npm install
+5. Move the example Environment file to .env that will be ignored by git and read by React with mv example.env .env
+6. Change project name in package.json to use whatever name you've given this project instead of "name": "myclientele-client"
+
 ## Available Scripts
 
 In the project directory, you can run:
