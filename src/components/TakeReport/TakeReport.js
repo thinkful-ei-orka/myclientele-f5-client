@@ -4,6 +4,7 @@ import { withRouter, Link } from 'react-router-dom';
 import './takereport.scss';
 import S3ApiService from '../../services/s3-api-service';
 import ReportsView from '../../components/ReportsView/ReportsView';
+import ClientApiService from '../../services/client-api-service';
 
 //What all operations do we want to give the user in terms of interacting with photos. After they do the initial upload, what all do we want to allow the user to do with photos.
 
@@ -71,8 +72,10 @@ class TakeReport extends React.Component {
     }
     if (this.state.reports.length === 0) {
       ReportsApiService.getReportsByClientId(this.client_id).then((res) => {
-        this.setState({ reports: res, isLoading: false });
-      });
+        this.setState({ reports: res })
+      }).then(() => ClientApiService.getClient(this.client_id)).then(res => {
+        this.setState({client: res, isLoading: false})
+      })
     }
   }
 
@@ -106,13 +109,16 @@ class TakeReport extends React.Component {
     if (this.state.isLoading) {
       return <div>Loading...</div>;
     }
-
+    let imgsrc = 'https://via.placeholder.com/150';
+    if(this.state.client.photo) {
+      imgsrc = this.state.client.photo;
+    }
     return (
       <div className='take-a-report'>
         <h1>Take a Report</h1>
         <div className='basic-client-card'>
           <div className='company-logo'>
-            <img src='https://via.placeholder.com/150' alt={this.data.name} />
+            <img src={imgsrc} alt={this.data.name} />
           </div>
           <div className='information-area'>
             <h2 id='store-name'>{this.data.name} </h2>

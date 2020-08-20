@@ -63,6 +63,11 @@ class Reports extends React.Component {
           {reports.map((report) => {
             const newDate = new Date(report.date);
             const clientData = this.matchReportToClient(report.client_id);
+            let imgsrc = 'https://via.placeholder.com/150';
+            console.log(report.photos);
+            if(report.photos !== []) {
+              imgsrc = report.photos[0];
+            }
             return (
               <Link
                 key={report.id}
@@ -72,8 +77,8 @@ class Reports extends React.Component {
                   <div className='main-info-area'>
                     <div className='company-logo'>
                       <img
-                        id='reports-img'
-                        src='https://via.placeholder.com/150'
+                        className='reports-img'
+                        src={imgsrc}
                         alt={report.name}
                       />
                     </div>

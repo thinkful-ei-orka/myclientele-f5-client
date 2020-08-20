@@ -5,11 +5,11 @@
   display: flex;
   flex-direction: column;
   margin: auto;
-  align-item: center;
   justify-content: center;
   text-align: center;
   border: 1px solid lightgray;
   border-radius: 10px;
+  margin-bottom: 25px;
   .info-block {
     display: flex;
     flex-direction: row;
@@ -43,6 +43,17 @@
   }
 }
 
-.each-photo {
-  margin: auto 5px;
+.slide_photo {
+  max-width: 275px;
+  height: auto;
+}
+
+.zoom_container {
+  position: relative;
+  z-index: 1;
+}
+
+.swiper-container {
+  z-index: 0 !important;
+  margin-bottom: 75px !important;
 }
