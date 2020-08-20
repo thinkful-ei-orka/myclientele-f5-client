@@ -23,18 +23,22 @@ export default class HomepageRoute extends React.Component {
     return (
       <>
         <Header />
-        <Modal
-          isOpen={this.state.signUpIsOpen}
-          onRequestClose={(e) => this.setSignUpOpen(false)}>
-          <SignUpForm closeModal={(e) => this.setSignUpOpen(false)} />
-        </Modal>
+        <div className='signup-modal'>
+          <Modal
+            isOpen={this.state.signUpIsOpen}
+            onRequestClose={(e) => this.setSignUpOpen(false)}>
+            <SignUpForm closeModal={(e) => this.setSignUpOpen(false)} />
+          </Modal>
+        </div>
         <section className='hero-banner'>
           <div className='hero-text'>
             <button className='btn' onClick={(e) => this.setSignUpOpen(true)}>
               Sign Up Now!
             </button>
             <p>
-            Keep track of clients, write reports, and organize your weekly schedule, all in one place! With MyClientele, you have access to all your information no matter where you are.
+              Keep track of clients, write reports, and organize your weekly
+              schedule, all in one place! With MyClientele, you have access to
+              all your information no matter where you are.
             </p>
           </div>
         </section>
