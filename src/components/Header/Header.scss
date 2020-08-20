@@ -115,3 +115,29 @@ Note: Beware of modifying this element as it can break the animations - you shou
   top: 0;
   right: 0;
 }
+
+.header-buttons {
+  margin: auto 10px auto auto;
+  button {
+    font-size: 15px;
+    padding: 10px;
+    margin: auto 3px;
+  }
+
+  @media only screen and (min-width: 600px) {
+    margin-left: auto;
+    margin-right: 10px;
+    button {
+      margin: 0 10px;
+      font-size: 20px;
+      padding: 10px;
+    }
+  }
+  @media only screen and (min-width: 1200px) {
+    button {
+      margin: 0 10px;
+      font-size: 25px;
+      padding: 10px;
+    }
+  }
+}
