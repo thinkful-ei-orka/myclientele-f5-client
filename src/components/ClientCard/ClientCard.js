@@ -102,6 +102,7 @@ class ClientCard extends React.Component {
       // general_manager,
       hours_of_operation,
       // notes,
+      // last_report,
     } = this.props.data;
     let reportPath;
     if(window.outerWidth < 600) {
@@ -124,6 +125,8 @@ class ClientCard extends React.Component {
             currently_closed={currently_closed}
             hours_of_operation={hours_of_operation}
           />
+          {/* Replace date with Last report date with {last_report} */}
+          {/* <div className='last-report'> Last Report: 12/12/1212</div> */}
         </div>
         {/* <Buttons
             threeDotsActive={this.state.threeDotsActive}

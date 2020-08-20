@@ -15,7 +15,7 @@ const UserApiService = {
 
         updateUserContactInfo(updatedUserFields) {
             console.log(updatedUserFields)
-            return fetch(`${config.API_ENDPOINT}/users/contact`, {
+            return fetch(`${config.API_ENDPOINT}/users`, {
                 method: 'PATCH',
                 headers: {
                     authorization: `bearer ${TokenService.getAuthToken()}`,
