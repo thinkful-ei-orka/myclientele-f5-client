@@ -18,9 +18,6 @@ class Header extends React.Component {
     signUpIsOpen: false,
     menuOpen: false,
   };
-  showSettings(event) {
-    event.preventDefault();
-  }
 
   static contextType = UserContext;
 
@@ -44,8 +41,18 @@ class Header extends React.Component {
     if (this.props.location.pathname === '/sign-up') {
       this.setSignUpOpen(true);
     }
+    document.addEventListener('mousedown', this.handleClick);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClick);
   }
 
+  handleStateChange(state) {
+    this.setState({ menuOpen: state.isOpen });
+  }
+  toggleMenu() {
+    this.setState((state) => ({ menuOpen: !state.menuOpen }));
+  }
   render() {
     if (this.context.user.id == null) {
       return (
@@ -55,12 +62,26 @@ class Header extends React.Component {
           </div>
 
           <div className='main-menu'>
-            <Menu right>
-              <button className='btn' onClick={(e) => this.setLoginOpen(true)}>
+            <Menu
+              width={'250px'}
+              right
+              isOpen={this.state.menuOpen}
+              onStateChange={(state) => this.handleStateChange(state)}>
+              <button
+                className='btn'
+                onClick={(e) => {
+                  this.toggleMenu();
+                  this.setLoginOpen(true);
+                }}>
                 Login
               </button>
 
-              <button className='btn' onClick={(e) => this.setSignUpOpen(true)}>
+              <button
+                className='btn'
+                onClick={(e) => {
+                  this.toggleMenu();
+                  this.setSignUpOpen(true);
+                }}>
                 Sign Up
               </button>
             </Menu>
@@ -89,15 +110,29 @@ class Header extends React.Component {
         </div>
 
         <div className='main-menu'>
-          <Menu right isOpen={this.state.menuOpen}>
+          <Menu
+            width={'250px'}
+            right
+            isOpen={this.state.menuOpen}
+            onStateChange={(state) => this.handleStateChange(state)}>
             <Link to='/add-client'>
-              <button className='add-client btn'>Add Client</button>
+              <button
+                onClick={() => this.toggleMenu()}
+                className='add-client btn'>
+                Add Client
+              </button>
             </Link>
             <Link to='/reports'>
-              <button className='reports btn'>Reports</button>
+              <button onClick={() => this.toggleMenu()} className='reports btn'>
+                Reports
+              </button>
             </Link>
             <Link to='/my-account'>
-              <button className='user-info btn'>My Account</button>
+              <button
+                onClick={() => this.toggleMenu()}
+                className='user-info btn'>
+                My Account
+              </button>
             </Link>
             <button
               className='logout-button btn'
