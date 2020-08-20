@@ -28,7 +28,7 @@ class MyAccountRoute extends React.Component {
         let infoToUpdate = {}
         if (this.state.password === this.state.rePassword) {
             passwordSame = this.state.password
-            infoToUpdate.password = passwordSame
+            infoToUpdate['passwords'] = passwordSame
         }
         Object.entries(this.state).forEach(entry => {
             const [key, value] = entry;
@@ -40,24 +40,22 @@ class MyAccountRoute extends React.Component {
 
         UserApiService.updateUserContactInfo(infoToUpdate)
         .catch((res) => {
-            this.setState({ error: res.error});
+            this.setState({ error: res.error})
         })
+        .then(
+            this.setState({
+                name: '',
+                username: '',
+                password:'',
+                rePassword:'',
+                phoneNumber: '',
+                email: '',
+                error:''})
+        );
     };
 
     componentDidMount = () => {
-    //     console.log('Saving...')
-    //     // this.setState({saving: !this.state.saving})
-    //     return fetch(`${config.API_ENDPOINT}/users/contact`, {
-    //         headers: {
-    //             authorization: `bearer ${TokenService.getAuthToken()}`,
-    //         }
-    //     })
-    //     .then((res) =>
-    //   !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json())
-    //     .then((data) => {
-    //         console.log('response here:',data)
-    //     });
-        this.setState({contactInfo: this.context.userContact})
+    this.context.fetchContext()
     };
 
     setName =(e) => {
@@ -93,7 +91,6 @@ class MyAccountRoute extends React.Component {
     };
 
     render() {
-        const userAccountInfo = this.context.user
         const userContactInfo = this.context.userContact
         return (
             <div className='account-page wrapper'>
@@ -101,10 +98,10 @@ class MyAccountRoute extends React.Component {
                     <h2 id="title">My Account</h2>
                     <label htmlFor="input-name" className='account-name'>Name</label>
                     <input type='text' name='input-name'
-                    value={userAccountInfo.name}
+                    value={userContactInfo.name}
                     placeholder='Enter new name' onChange={this.setName}/>
                     <label htmlFor="input-username" className='account-username'>Username</label>
-                    <input type='text' name='input-username' value={userAccountInfo.username} placeholder='Enter new username' onChange={this.setUsername}/>
+                    <input type='text' name='input-username' value={userContactInfo.username} placeholder='Enter new username' onChange={this.setUsername}/>
                     <label htmlFor="input-password" className='account-password'>Password</label>
                     <fieldset>
                         <input type='password' name='input-password'placeholder='Enter new password'onChange={this.setPassword}/>
