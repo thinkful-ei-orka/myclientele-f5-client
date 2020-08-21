@@ -1,17 +1,18 @@
 import React from 'react';
-import PrivateContext from '../../contexts/PrivateContext'; //will need later?
+import PrivateContext from '../../contexts/PrivateContext'; 
 import ReportsApiService from '../../services/reports-api-service';
 import { Link } from 'react-router-dom';
 import './ReportsView.scss';
 import ClientApiService from '../../services/client-api-service';
 
 class Reports extends React.Component {
-  static contextType = PrivateContext; //is needed?
+  static contextType = PrivateContext;
   constructor(props) {
     super(props);
     this.state = {
       reports: [],
       clients: [],
+      msg: 'Fetching reports',
     };
   }
 
@@ -30,6 +31,7 @@ class Reports extends React.Component {
       } 
       );
     }
+    setTimeout(this.changeMsg, 3000)
   }
   matchReportToClient = (reportId) => {
     const clientData = this.state.clients.find(
@@ -40,6 +42,13 @@ class Reports extends React.Component {
     }
     return clientData;
   };
+
+  changeMsg = () => {
+    clearTimeout()
+    return this.setState({
+      msg: 'No reports found'
+    })
+  }
 
   render() {
     let reports = this.state.reports;
@@ -52,10 +61,11 @@ class Reports extends React.Component {
         }
       });
     }
+
     if (this.state.reports.length === 0) {
-      return <section>Fetching Reports</section>;
+      return <section className='no-reports-section'>{this.state.msg}</section>;
     }
-    
+
     return (
       <section aria-label='Your reports' className='report-list'>
         <h1>Reports</h1>
