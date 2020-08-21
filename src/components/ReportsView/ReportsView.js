@@ -30,7 +30,8 @@ class Reports extends React.Component {
       } 
       );
     }
-  }
+  };
+  
   matchReportToClient = (reportId) => {
     const clientData = this.state.clients.find(
       (client) => client.id === reportId
@@ -64,7 +65,6 @@ class Reports extends React.Component {
             const newDate = new Date(report.date);
             const clientData = this.matchReportToClient(report.client_id);
             let imgsrc = 'https://via.placeholder.com/150';
-            console.log(report.photos);
             if(report.photos !== []) {
               imgsrc = report.photos[0];
             }
@@ -87,8 +87,6 @@ class Reports extends React.Component {
                       <h2>{clientData.name || `Not assigned`}</h2>
                       <p>{clientData.location}</p>
                       <p>{report.name}</p>
-
-                      {console.log(clientData)}
                     </div>
                   </div>
                   <div className='submitted-area'>

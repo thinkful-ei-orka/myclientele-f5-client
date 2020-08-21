@@ -13,7 +13,7 @@ export default class EmployeeReportsRoute extends React.Component {
     clients: null,
     reportSearch: "",
     loading: true,
-  };
+  }
 
   matchReportToClient = (reportId) => {
     const clientData = this.state.clients.find(
@@ -46,7 +46,6 @@ export default class EmployeeReportsRoute extends React.Component {
         let clients = await ClientApiService.getClientsByCompanyId(
           user.company_id
         );
-        console.log(clients, "clients!");
         this.setState({
           employee: employee_reports.employee,
           clients: clients.clients,
@@ -61,7 +60,7 @@ export default class EmployeeReportsRoute extends React.Component {
         loading: false,
       });
     }
-  }
+  };
 
   setReportSearch = (e) => {
     this.setState({
@@ -152,10 +151,10 @@ export default class EmployeeReportsRoute extends React.Component {
   };
 
   render() {
-    console.log(this.state.reports);
     if (this.state.loading) {
       return <p>Loading...</p>;
     }
+    
     return (
       <div className="employee_display_reports_box">
         {this.state.error ? (

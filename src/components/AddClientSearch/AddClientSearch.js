@@ -129,6 +129,6 @@ export default class ClientsMap extends React.Component {
         </div>
         <ListMapToggle listClick={this.listClick} mapClick={this.mapClick}></ListMapToggle>
       </>
-    )
+    );
   }
 }

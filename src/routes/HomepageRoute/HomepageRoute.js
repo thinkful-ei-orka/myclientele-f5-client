@@ -9,7 +9,7 @@ import SignUpForm from '../../components/SignUpForm/SignUpForm';
 export default class HomepageRoute extends React.Component {
   state = {
     signUpIsOpen: false,
-  };
+  }
 
   setSignUpOpen = (bool) => {
     this.setState({ signUpIsOpen: bool });
@@ -17,7 +17,7 @@ export default class HomepageRoute extends React.Component {
 
   componentDidMount() {
     Modal.setAppElement('.App');
-  }
+  };
 
   render() {
     return (

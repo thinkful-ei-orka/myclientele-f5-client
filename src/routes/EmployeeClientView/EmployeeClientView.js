@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import UserApiService from "../../services/user-api-service";
 import ClientApiService from "../../services/client-api-service";
 import "./EmployeeClientView.scss";
+
 export default class EmployeeClientView extends React.Component {
   state = {
     error: null,
     client: null,
     loading: true,
-  };
+  }
+
   async componentDidMount() {
     try {
       let user = await UserApiService.getUserContactInfo();
@@ -19,7 +21,6 @@ export default class EmployeeClientView extends React.Component {
       }
       let employee_id = window.location.pathname.split("/")[2];
       let client_id = window.location.pathname.split("/")[4];
-      console.log(client_id);
       let employee_client = await ClientApiService.getClient(client_id);
       if (Number(employee_client.sales_rep_id) !== Number(employee_id)) {
         this.setState({
@@ -39,7 +40,7 @@ export default class EmployeeClientView extends React.Component {
         loading: false,
       });
     }
-  }
+  };
 
   renderClient() {
     let { client } = this.state;
@@ -64,12 +65,13 @@ export default class EmployeeClientView extends React.Component {
             </Link>
       </div>
     );
-  }
+  };
+
   render() {
-    console.log(this.state.client);
     if (this.state.loading) {
       return <p>loading</p>;
     }
+    
     return (
       <div className="employee_client_box">
         <div className="employee_info"></div>

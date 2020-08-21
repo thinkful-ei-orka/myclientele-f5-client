@@ -25,7 +25,8 @@ export default class EmployeeReportView extends React.Component {
         report: null,
         client: null,
         loading: true,
-      };
+      }
+
       async componentDidMount() {
         try {
           let user = await UserApiService.getUserContactInfo();
@@ -58,11 +59,10 @@ export default class EmployeeReportView extends React.Component {
             loading: false,
           });
         }
-      }
+      };
     
       renderReport() {
         let { report } = this.state;
-        console.log(report);
         let imgsrc = "https://via.placeholder.com/150";
         if (report.photo) {
           imgsrc = report.photo;
@@ -87,7 +87,7 @@ export default class EmployeeReportView extends React.Component {
           {Object.keys(this.state.report).length !== 0 ? this.renderSwiper() : ''}
           </>
         );
-      }
+      };
 
       renderSwiper = () => {
         if (this.state.report.photos) {
@@ -118,6 +118,7 @@ export default class EmployeeReportView extends React.Component {
         if (this.state.loading) {
           return <p>loading</p>;
         }
+        
         return (
           <div className="employee_admin_report_box">
             <div className="employee_info"></div>

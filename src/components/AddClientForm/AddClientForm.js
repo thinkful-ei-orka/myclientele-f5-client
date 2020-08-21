@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import "./AddClientForm.scss";
-// import ScheduleDropDown from "../Dropdown/Dropdown";
 import ClientApiService from "../../services/client-api-service";
 import PrivateContext from "../../contexts/PrivateContext";
 import TokenService from "../../services/token-service";
@@ -54,7 +53,7 @@ class AddClientForm extends React.Component {
     } else if (typeof photo === "string") {
       photo_url = photo;
     }
-    console.log(photo_url)
+  
     let newClient = {
       name,
       location,
@@ -78,8 +77,6 @@ class AddClientForm extends React.Component {
           })
           .then(() => this.props.history.push("/schedule"));
       } else {
-        console.log("went into the else in the if props exists part");
-        console.log("newClient", newClient);
         ClientApiService.addClient(newClient)
           .then(() => {
             this.context.fetchClients();
@@ -94,36 +91,43 @@ class AddClientForm extends React.Component {
         .then(() => this.props.history.push("/schedule"));
     }
   };
+
   setName = (e) => {
     this.setState({
       name: e.target.value,
     });
   };
+
   setLocation = (e) => {
     this.setState({
       location: e.target.value,
     });
   };
+
   setHours = (e) => {
     this.setState({
       hours_of_operation: e.target.value,
     });
   };
+
   setCurrentlyClosed = (e) => {
     this.setState({
       currently_closed: !this.state.currently_closed,
     });
   };
+
   setGM = (e) => {
     this.setState({
       general_manager: e.target.value,
     });
   };
+
   setNotes = (e) => {
     this.setState({
       notes: e.target.value,
     });
   };
+
   setDayOfWeek = (e) => {
     this.setState({
       day_of_week: e.target.value,
@@ -236,9 +240,9 @@ class AddClientForm extends React.Component {
       )
       .then((json) => {
         this.setState({ googlePhoto: json });
-        console.log("this.state.googlePhoto should be:", json);
       });
   };
+  
   confirmGoogleImage = () => {
     this.setState({
       hasSelectedGooglePhoto: true,

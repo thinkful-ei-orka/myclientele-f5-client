@@ -11,8 +11,8 @@ const ClientApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
+
   addClient(client) {
-    // note: sales_rep_id and company_id are not set by the user
     return fetch(`${config.API_ENDPOINT}/clients`, {
       method: "POST",
       headers: {
@@ -24,6 +24,7 @@ const ClientApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
+
   getClient(client_id) {
     return fetch(`${config.API_ENDPOINT}/clients/${client_id}`, {
       headers: {
@@ -33,6 +34,7 @@ const ClientApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
+
   getClientsByCompanyId(company_id) {
     return fetch(`${config.API_ENDPOINT}/clients/company/${company_id}`, {
       headers: {
@@ -42,6 +44,7 @@ const ClientApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
+
   getClientsBySalesRepId(sales_rep_id) {
     return fetch(`${config.API_ENDPOINT}/clients/sales_rep_id/${sales_rep_id}`, {
       headers: {
@@ -53,7 +56,6 @@ const ClientApiService = {
   },
   
   updateClient(client_id, client) {
-    // note: sales_rep_id and company_id will not be changed by the user
     return fetch(`${config.API_ENDPOINT}/clients/${client_id}`, {
       method: "PATCH",
       headers: {
@@ -63,6 +65,7 @@ const ClientApiService = {
       body: JSON.stringify(client),
     }).then((res) => (!res.ok ? res.json().then((e) => Promise.reject(e)) : 0));
   },
+
   deleteClient(client_id) {
     return fetch(`${config.API_ENDPOINT}/clients/${client_id}`, {
       method: "DELETE",
@@ -70,7 +73,7 @@ const ClientApiService = {
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
     }).then((res) => (!res.ok ? res.json().then((e) => Promise.reject(e)) : 0));
-  },
+  }
 };
 
 export default ClientApiService;

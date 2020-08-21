@@ -17,7 +17,7 @@ export default class DashBoardRoute extends React.Component {
     invite_link: "",
     confirmCopy: false,
     employees: null,
-  };
+  }
 
   async componentDidMount() {
     let user = await UserApiService.getUserContactInfo();
@@ -35,9 +35,9 @@ export default class DashBoardRoute extends React.Component {
       invite_link,
       employees,
     });
-  }
+  };
+  
   renderEmployees = () => {
-    console.log(this.state.company);
     return this.state.employees.map((employee, index) => {
       return (
           <div className="employee_box" key={`employee ${index}`}>

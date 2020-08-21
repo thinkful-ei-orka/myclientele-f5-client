@@ -34,9 +34,10 @@ class LoginForm extends React.Component {
   };
 
   firstInput = React.createRef();
+  
   componentDidMount() {
     this.firstInput.current.focus();
-  }
+  };
 
   render() {
     const { error } = this.state;

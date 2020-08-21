@@ -3,14 +3,7 @@ import ReportsApiService from '../../services/reports-api-service';
 import { withRouter, Link } from 'react-router-dom';
 import './takereport.scss';
 import S3ApiService from '../../services/s3-api-service';
-import ReportsView from '../../components/ReportsView/ReportsView';
 import ClientApiService from '../../services/client-api-service';
-
-//What all operations do we want to give the user in terms of interacting with photos. After they do the initial upload, what all do we want to allow the user to do with photos.
-
-//How do we want to handle gathering photos? Do we want to have a specific photo route that we make API calls to or do we just want to have all the requests to get photos be handled by the Reports router? If we do the latter then we will only have to make one request instead of two (one for reports and one for photos).
-
-//How do we want to display multiple images?  Do we want to add that feature to the client card?
 
 class TakeReport extends React.Component {
   constructor(props) {
@@ -25,8 +18,8 @@ class TakeReport extends React.Component {
       mobile: false
     };
   }
+
   data = this.props.location.state.data;
-  // const { data } = this.props.location.state;
   client_id = this.data.id;
 
   onFormSubmit = async (e) => {
@@ -64,6 +57,7 @@ class TakeReport extends React.Component {
     }
     return photos;
   };
+
   componentDidMount() {
     if(window.location.pathname.includes('/clients')) {
       this.setState({
@@ -77,7 +71,7 @@ class TakeReport extends React.Component {
         this.setState({client: res, isLoading: false})
       })
     }
-  }
+  };
 
   renderPreviousReports = () => {
     return (
@@ -102,17 +96,19 @@ class TakeReport extends React.Component {
           </ul>
         </section>
     )
-  }
+  };
 
   render() {
-    console.log(this.state.mobile);
+
     if (this.state.isLoading) {
       return <div>Loading...</div>;
     }
+    
     let imgsrc = 'https://via.placeholder.com/150';
-    if(this.state.client.photo) {
+    if (this.state.client.photo) {
       imgsrc = this.state.client.photo;
     }
+
     return (
       <div className='take-a-report'>
         <h1>Take a Report</h1>

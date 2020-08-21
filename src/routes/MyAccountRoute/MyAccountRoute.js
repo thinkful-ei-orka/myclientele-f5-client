@@ -3,7 +3,7 @@ import PrivateContext from '../../contexts/PrivateContext';
 import './MyAccountRoute.scss';
 import TokenService from '../../services/token-service';
 import config from '../../config';
-import {CopyToClipboard, contextType} from 'react-copy-to-clipboard';
+import {CopyToClipboard } from 'react-copy-to-clipboard';
 import UserApiService from '../../services/user-api-service';
 import { info } from 'autoprefixer';
 
@@ -19,7 +19,7 @@ class MyAccountRoute extends React.Component {
             phoneNumber: '',
             email: '',
             error:''
-        };
+        }
     }
 
     handleSave = (e) => {
@@ -36,7 +36,6 @@ class MyAccountRoute extends React.Component {
                 infoToUpdate[key] = value
             }
         })
-        console.log(infoToUpdate)
 
         UserApiService.updateUserContactInfo(infoToUpdate)
         .catch((res) => {
@@ -63,28 +62,32 @@ class MyAccountRoute extends React.Component {
             name: e.target.value
         })
     };
+
     setUsername =(e) => {
         this.setState({
             username: e.target.value
         })
     };
+
     setPassword =(e) => {
         this.setState({
             password: e.target.value
         })
     };
+
     setRepassword =(e) => {
         this.setState({
             rePassword: e.target.value
         })
     };
+
     setPhoneNumber =(e) => {
         this.setState({
             phoneNumber: e.target.value
         })
     };
+
     setEmail =(e) => {
-        console.log(e.target.value)
         this.setState({
             email: e.target.value
         })
@@ -120,8 +123,8 @@ class MyAccountRoute extends React.Component {
                 </form>
                 {this.state.error? this.state.error : null}
             </div>
-        )
-    };
+        );
+    }
 }
 
 export default MyAccountRoute;

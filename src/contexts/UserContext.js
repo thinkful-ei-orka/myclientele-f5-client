@@ -41,25 +41,25 @@ export class UserProvider extends Component {
         this.fetchRefreshToken()
       })
     }
-  }
+  };
 
   componentWillUnmount() {
     IdleService.unRegisterIdleResets()
     TokenService.clearCallbackBeforeExpiry()
-  }
+  };
 
   setError = error => {
     console.error(error)
     this.setState({ error })
-  }
+  };
 
   clearError = () => {
     this.setState({ error: null })
-  }
+  };
 
   setUser = user => {
     this.setState({ user })
-  }
+  };
 
   processLogin = authToken => {
     TokenService.saveAuthToken(authToken)
@@ -74,21 +74,21 @@ export class UserProvider extends Component {
     TokenService.queueCallbackBeforeExpiry(() => {
       this.fetchRefreshToken()
     })
-  }
+  };
 
   processLogout = () => {
     TokenService.clearAuthToken()
     TokenService.clearCallbackBeforeExpiry()
     IdleService.unRegisterIdleResets()
     this.setUser({})
-  }
+  };
 
   logoutBecauseIdle = () => {
     TokenService.clearAuthToken()
     TokenService.clearCallbackBeforeExpiry()
     IdleService.unRegisterIdleResets()
     this.setUser({ idle: true })
-  }
+  };
 
   fetchRefreshToken = () => {
     AuthApiService.refreshToken()
@@ -101,7 +101,7 @@ export class UserProvider extends Component {
       .catch(err => {
         this.setError(err)
       })
-  }
+  };
 
   render() {
     const value = {
@@ -112,7 +112,7 @@ export class UserProvider extends Component {
       setUser: this.setUser,
       processLogin: this.processLogin,
       processLogout: this.processLogout,
-    }
+    };
 
     return (
       <UserContext.Provider value={value}>

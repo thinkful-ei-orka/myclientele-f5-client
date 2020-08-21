@@ -1,5 +1,4 @@
 import React from 'react';
-import { Rectangle } from '@react-google-maps/api';
 import PrivateContext from '../../contexts/PrivateContext';
 import ClientApiService from '../../services/client-api-service';
 import ReportsApiService from '../../services/reports-api-service';
@@ -24,11 +23,11 @@ export default class ClientReportsRoute extends React.Component {
            reports: reports
          })
        })
-  }
-  render() {
-    console.log(this.state.client, this.state.reports)
+  };
 
-    if(this.state.client === []) {
+  render() {
+
+    if (this.state.client === []) {
       return <h1>loading...</h1>;
     } else {
       return (
@@ -58,7 +57,7 @@ export default class ClientReportsRoute extends React.Component {
             })}
           </ul>
         </div>
-      )
+      );
     }
   }
 

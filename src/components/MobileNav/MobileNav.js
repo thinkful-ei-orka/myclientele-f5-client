@@ -16,13 +16,7 @@ class MobileNav extends React.Component {
     this.context.processLogout();
   };
 
-  componentDidMount() {
-
-  }
-
   render() {
-    // if (this.context.user.id == null) {
-    // }
 
     return (
       <footer className="mobile-nav">
@@ -33,12 +27,6 @@ class MobileNav extends React.Component {
         </nav>
       </footer>
     );
-
-    // <button
-    //   className='logout-button btn'
-    //   onClick={() => this.handleLogOut()}>
-    //   Logout
-    // </button>
   }
 }
 

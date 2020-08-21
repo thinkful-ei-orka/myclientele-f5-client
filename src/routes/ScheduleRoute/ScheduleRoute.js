@@ -19,7 +19,6 @@ export default class ScheduleRoute extends React.Component {
       center: null,
       listClass: '',
       mapClass: 'mobile-hidden',
-      // noClients: false,
     };
   }
 
@@ -43,12 +42,6 @@ export default class ScheduleRoute extends React.Component {
     });
   };
 
-//   setNoClients = () => {
-//     this.setState({
-//       noClients: true
-//     })
-//  }
-
   async componentDidMount () {
     let user = await UserApiService.getUserContactInfo();
     if(user.admin) {
@@ -56,20 +49,15 @@ export default class ScheduleRoute extends React.Component {
       history.push("/dashboard");
       window.location.reload();
     }
-    // let employees = await UserApiService.getUsersByCompanyId(user.company_id)
-      if (this.context.clients === null) {
-        this.context
-          .fetchClients()
-          .then(this.context.fetchUserInfo())
-          .then(() => this.setState({ isLoading: false }));
-      }
+
+    if (this.context.clients === null) {
+      this.context
+        .fetchClients()
+        .then(this.context.fetchUserInfo())
+        .then(() => this.setState({ isLoading: false }));
+    }
     let date = new Date();
     this.setState({ todayOfWeek: date.getDay() });
-
-    // if (this.context.scheduleFilter == null) {
-    //   this.context.setScheduleFilter(this.state.todayOfWeek)
-    //   console.log(this.context.scheduleFilter)
-    //}
   }
 
   render() {
@@ -77,6 +65,7 @@ export default class ScheduleRoute extends React.Component {
     if (this.context.clients === null) {
       return <div>Loading...</div>;
     }
+    
     let clientsFilter = this.context.clients.filter((client) => {
       return client.day_of_week === Number(this.state.todayOfWeek);
     });

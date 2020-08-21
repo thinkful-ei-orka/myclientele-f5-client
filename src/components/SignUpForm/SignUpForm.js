@@ -21,14 +21,14 @@ class SignUpForm extends React.Component {
     initialConfirm: true,
     existingCompany: false,
     renderSignupForm: false,
-  };
+  }
 
   handleRegistrationSuccess = () => {
-    console.log('handling registration')
     const { history } = this.props;
     history.push("/login");
     window.location.reload();
   };
+
   handleSubmit = (ev) => {
     ev.preventDefault();
     this.setState({ error: null, loading: true, login_success: false });
@@ -43,14 +43,17 @@ class SignUpForm extends React.Component {
       email,
       phone_number,
     } = ev.target;
+
     const name = `${first_name.value} ${last_name.value}`;
     const verifyMatchingPasswords = this.verifyPasswords(
       password.value,
       retype_password.value
     );
+
     let company = null;
     let admin_bool = false;
-    if(this.state.company) {
+
+    if (this.state.company) {
       company = this.state.company;
     } else {
       admin_bool = true;
@@ -59,6 +62,7 @@ class SignUpForm extends React.Component {
         location: company_location.value
       }
     }
+
     if (!verifyMatchingPasswords) {
       this.setState({
         loading: false,
@@ -75,16 +79,6 @@ class SignUpForm extends React.Component {
         phone_number: phone_number.value,
       })
         .then((res) => {
-          // first_name.value = "";
-          // last_name.value = "";
-          // email.value = "";
-          // phone_number.value = "";
-          // company_name.value = "";
-          // company_location.value = "";
-          // user_name.value = "";
-          // password.value = "";
-          // retype_password.value = "";
-          // this.context.processLogin(res.authToken);
           const { history } = this.props;
           history.push("/login");
           window.location.reload();
@@ -97,11 +91,12 @@ class SignUpForm extends React.Component {
 
   verifyPasswords(a, b) {
     return a === b;
-  }
+  };
 
   SignUpForm = () => {
     const { error } = this.state;
     const loading = this.state.loading;
+
     return (
       <form onSubmit={this.handleSubmit}>
         <div role="alert">{error && <p>{error}</p>}</div>
@@ -231,10 +226,10 @@ class SignUpForm extends React.Component {
     this.setState({
       code: code,
     });
-  }
+  };
 
   render() {
-    console.log(this.state.company);
+
     return (
       <div className="user-login">
         <h2>Sign Up</h2>

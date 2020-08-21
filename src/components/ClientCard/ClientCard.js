@@ -6,7 +6,6 @@ import OpenOrClosed from './OpenOrClosed';
 import './ClientCard.scss';
 import ClientApiService from '../../services/client-api-service';
 import PrivateContext from '../../contexts/PrivateContext';
-// import Buttons from './Buttons';
 import Modal from 'react-modal';
 
 class ClientCard extends React.Component {
@@ -21,17 +20,6 @@ class ClientCard extends React.Component {
     return (
       <div className='dropdown_box'>
         <ul className='dropdown'>
-          {/* <li className='dropdown_item'>
-            <Link
-              to={{
-                pathname: '/take-report',
-                state: {
-                  data: this.props.data,
-                },
-              }}>
-              Take a report
-            </Link>
-          </li> */}
           {window.outerWidth < 600 && <li className='dropdown_item'><Link
           to={{
             pathname: `/clients/${this.props.data.id}/reports`,
@@ -69,9 +57,6 @@ class ClientCard extends React.Component {
     ClientApiService.deleteClient(id).then(() => this.context.fetchClients());
   };
 
-  renderConfirmRemove = () => {
-
-  };
 
   toggleThreeDots = () => {
     this.setState({
@@ -86,29 +71,22 @@ class ClientCard extends React.Component {
   render() {
     const {
       name,
-      // id,
       location,
       currently_closed,
-      // day_of_week,
-      // general_manager,
       hours_of_operation,
-      // notes,
-      // last_report,
     } = this.props.data;
     let reportPath;
-    if(window.outerWidth < 600) {
+    if (window.outerWidth < 600) {
       reportPath = `/clients/${this.props.data.id}/add`
     } else {
       reportPath = '/take-report'
     }
     let imgsrc = 'https://via.placeholder.com/150';
-    if(this.props.data.photo) {
+    if (this.props.data.photo) {
       imgsrc = this.props.data.photo;
     }
     return (
-
       <div className='client-card'>
-        {/* {this.state.confirmRemoveClient ? this.renderConfirmRemove() : ''} */}
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={(e) => this.setModalOpen(false)}>
@@ -136,16 +114,7 @@ class ClientCard extends React.Component {
             currently_closed={currently_closed}
             hours_of_operation={hours_of_operation}
           />
-          {/* Replace date with Last report date with {last_report} */}
-          {/* <div className='last-report'> Last Report: 12/12/1212</div> */}
         </div>
-        {/* <Buttons
-            threeDotsActive={this.state.threeDotsActive}
-            // renderThreeDotsButton={() => this.renderThreeDotsButton()}
-            data={this.props.data}
-            // state={this.state}
-            toggleThreeDots={() => this.toggleThreeDots()}
-          /> */}
         <div className='button-area'>
           <button className='add-button  '>
             <Link

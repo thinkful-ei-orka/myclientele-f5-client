@@ -18,4 +18,5 @@ const handleHoursOfOperation = (props) => {
     );
   }
 };
+
 export default handleHoursOfOperation;

@@ -5,7 +5,7 @@ const S3ApiService = {
     return fetch(`${config.API_ENDPOINT}/presignedurl?name=${name}&type=${type}`).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
-  },
+  }
 };
 
 export default S3ApiService;

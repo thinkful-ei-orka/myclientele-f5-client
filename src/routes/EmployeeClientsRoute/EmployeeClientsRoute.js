@@ -11,7 +11,7 @@ export default class EmployeeClientsRoute extends React.Component {
     clients: null,
     clientSearch: "",
     loading: true,
-  };
+  }
 
   async componentDidMount() {
     try {
@@ -43,7 +43,7 @@ export default class EmployeeClientsRoute extends React.Component {
         loading: false,
       });
     }
-  }
+  };
 
   setClientSearch = (e) => {
     this.setState({
@@ -114,7 +114,6 @@ export default class EmployeeClientsRoute extends React.Component {
   };
 
   render() {
-    console.log(this.state.clients);
     if (this.state.loading) {
       return <p>Loading...</p>;
     }

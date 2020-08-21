@@ -11,8 +11,8 @@ const CompaniesApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
+  
   getCompanyByCode(code) {
-    console.log('fetching company with code ', code);
     return fetch(`${config.API_ENDPOINT}/companies?code=${code}`).then((res) =>
     !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json())   
   }

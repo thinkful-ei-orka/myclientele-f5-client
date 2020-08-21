@@ -13,7 +13,6 @@ const PhotoApiService = {
   },
 
   addPhoto(client_id, notes, photo_url) {
-    // note: sales_rep_id is self and date is now (handled by the back end)
     const report = { client_id, notes, photo_url };
 
     return fetch(`${config.API_ENDPOINT}/reports`, {
@@ -26,7 +25,7 @@ const PhotoApiService = {
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
-  },
+  }
 };
 
 

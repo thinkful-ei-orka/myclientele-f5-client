@@ -16,6 +16,7 @@ const AuthApiService = {
           : res.json()
       )
   },
+  
   postLogin({ user_name, password }) {
     return fetch(`${config.API_ENDPOINT}/auth/login`, {
       method: 'POST',
@@ -30,6 +31,7 @@ const AuthApiService = {
           : res.json()
       )
   },
+
   refreshToken() {
     return fetch(`${config.API_ENDPOINT}/auth/refresh`, {
       method: 'PUT',
@@ -42,7 +44,7 @@ const AuthApiService = {
           ? res.json().then(e => Promise.reject(e))
           : res.json()
       )
-  },
+  }
 }
 
-export default AuthApiService
+export default AuthApiService;

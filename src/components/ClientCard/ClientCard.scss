@@ -23,15 +23,12 @@
 
 .dropdown_item {
   width: 110px;
-  // border: 1px solid $lighter-gray;
-  // border-radius: 5px;
   background: #fff;
   border-top: 1px solid $lighter-gray;
   text-align: right;
   margin: 0;
   margin-top: -1px;
   text-align: center;
-  // width: 100%;
   a, span {
     display: block;
     padding: 5px;
@@ -73,13 +70,11 @@ a {
   height: auto;
   justify-content: space-between;
 }
+
 .company-logo img {
   width: 80px;
 }
-// .information-area * {
-//   padding: 5px;
-//   margin: 0 auto;
-// }
+
 h2 {
   text-transform: uppercase;
 }
@@ -90,14 +85,13 @@ h2 {
   text-transform: capitalize;
   padding: 0 5px;
 }
+
 .location {
   font-size: 1.2rem;
 }
 
 .confirm_remove_box {
   width: 100%;
-  // border: 1px solid #cc3737;
-  // background-color: #ffb7b7;
   border-radius: 10px;
   margin-right: 10px;
   padding: 5px;
@@ -143,12 +137,7 @@ h2 {
       width: 80%;
     }
   }
-  //   img {
-  //     padding: none;
-  //     width: 70%;
-  //     color: white;
-  //     margin: auto;
-  //   }
+
   .add-button {
     background-color: $green;
     a {
@@ -159,9 +148,11 @@ h2 {
     }
   }
 }
+
 .button-text {
   color: white;
 }
+
 @media only screen and (min-width: 600px) {
   .company-logo img {
     width: 150px;
@@ -231,7 +222,6 @@ h2 {
     border: 1px solid lightgray;
     border-radius: 10px;
     flex-direction: column;
-    // width: 30%;
     width: 288px;
 
     height: auto;
@@ -283,10 +273,6 @@ h2 {
   flex-direction: row;
   .company-logo img {
     display: none;
-  }
-  .location,
-  .client-hours {
-    // font-size: 16px;
   }
   .button-area {
     width: auto;

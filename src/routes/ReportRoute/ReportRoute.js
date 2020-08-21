@@ -2,7 +2,6 @@ import React from 'react';
 import ReportsApiService from '../../services/reports-api-service';
 import PrivateContext from '../../contexts/PrivateContext';
 import './reportroute.scss';
-// import { prototype } from 'react-modal';
 import ClientApiService from '../../services/client-api-service';
 
 // import Swiper core and required components
@@ -25,7 +24,7 @@ class ReportRoute extends React.Component {
     this.state = {
       report: null,
       client: [],
-    };
+    }
   }
 
   renderSwiper = () => {
@@ -52,6 +51,7 @@ class ReportRoute extends React.Component {
       console.log('no photos');
     }
   };
+
   renderPhotos = () => {
     return (
       <div className='photo_list'>
@@ -87,20 +87,14 @@ class ReportRoute extends React.Component {
         });
       }
     );
-  }
+  };
 
   render() {
-    // let photo_url = '';
-    // if (this.state.report) {
-    //   if (this.state.report.photo_url === '') {
-    //     photo_url = 'https://via.placeholder.com/150';
-    //   } else {
-    //     photo_url = this.state.report.photo_url;
-    //   }
-    // }
+
     if(!this.state.report) {
       return (<p>Loading...</p>)
     }
+
     const newDate = new Date(this.state.report.date);
     return (
       <>
@@ -112,8 +106,6 @@ class ReportRoute extends React.Component {
         <h2>{this.state.client.name}</h2>
         <h3>Notes:</h3>
         <div className='notes-area'>{this.state.report.notes}</div>
-
-        {/* <p>Sales Rep Name: {this.state.report.name}</p> */}
         <h3>Photos: </h3>
       </section>
         {Object.keys(this.state.report).length !== 0 ? this.renderSwiper() : ''}

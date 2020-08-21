@@ -22,6 +22,7 @@ class Header extends React.Component {
   handleWindowResize = () => {
     this.setState({ isMobile: window.innerWidth < 750 });
   };
+
   setLoginOpen = (bool) => {
     this.setState({ loginIsOpen: bool });
   };
@@ -44,18 +45,20 @@ class Header extends React.Component {
     }
     document.addEventListener('mousedown', this.handleClick);
     window.addEventListener('resize', this.handleWindowResize);
-  }
+  };
+
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClick);
     window.removeEventListener('resize', this.handleWindowResize);
-  }
+  };
 
   handleStateChange(state) {
     this.setState({ menuOpen: state.isOpen });
-  }
+  };
+
   toggleMenu() {
     this.setState((state) => ({ menuOpen: !state.menuOpen }));
-  }
+  };
 
   render() {
     if (window.innerWidth < 750) {
@@ -89,18 +92,6 @@ class Header extends React.Component {
                   }}>
                   Sign Up
                 </button>
-                {/* <div className='demo-account-info'>
-                <p>To try the service</p>
-                <p>
-                  Please use these credentials:
-                  <p>
-                    <b>Username:</b>User
-                  </p>
-                  <p>
-                    <b>Password: </b>Password12#
-                  </p>
-                </p>
-              </div> */}
               </Menu>
             </div>
 

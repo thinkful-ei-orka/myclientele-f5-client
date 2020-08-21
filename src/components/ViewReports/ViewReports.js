@@ -1,11 +1,11 @@
 import React from 'react';
-import PrivateContext from '../../contexts/PrivateContext'; //will need later?
+import PrivateContext from '../../contexts/PrivateContext';
 import ReportsApiService from '../../services/reports-api-service';
 import { Link } from 'react-router-dom';
 import './ReportsView.scss';
 
 class Reports extends React.Component {
-  static contextType = PrivateContext; //is needed?
+  static contextType = PrivateContext;
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +19,7 @@ class Reports extends React.Component {
         this.setState({ reports: res })
       );
     }
-  }
+  };
 
   render() {
     let reports = this.state.reports;
@@ -33,6 +33,7 @@ class Reports extends React.Component {
     if (this.state.reports.length === 0) {
       return <section>Fetching Reports</section>;
     }
+    
     return (
       <section aria-label='Your reports' className='report-list'>
         <h1>Reports</h1>

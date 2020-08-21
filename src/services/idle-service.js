@@ -1,4 +1,3 @@
-
 let _timeoutId
 let _idleCallback = null
 let _notIdleEvents = [
@@ -14,10 +13,12 @@ const IdleService = {
   setIdleCallback(idleCallback) {
     _idleCallback = idleCallback
   },
+
   resetIdleTimer(ev) {
     clearTimeout(_timeoutId)
     _timeoutId = setTimeout(_idleCallback, _FIVE_MINUTES_IN_MS)
   },
+
   regiserIdleTimerResets() {
     _notIdleEvents.forEach(event =>
       document.addEventListener(
@@ -27,6 +28,7 @@ const IdleService = {
       )
     )
   },
+
   unRegisterIdleResets() {
     clearTimeout(_timeoutId)
     _notIdleEvents.forEach(event =>
@@ -36,7 +38,7 @@ const IdleService = {
         true,
       )
     )
-  },
+  }
 }
 
-export default IdleService
+export default IdleService;

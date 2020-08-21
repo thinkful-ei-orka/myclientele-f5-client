@@ -6,12 +6,11 @@ class ScheduleSearch extends React.Component {
 
   handleSearchChange = (e) => {
     this.context.setScheduleSearch(e.target.value)
-  }
+  };
 
   render() {
     return (
       <div className='dropdown-search'>
-        {/* Search: */}
         <input type='search' placeholder='Search Here' onChange={this.handleSearchChange}></input>
       </div>
     );
