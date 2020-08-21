@@ -131,6 +131,15 @@ a.link {
     }
   }
 
+  &.dark {
+    background: $darker-gray;
+    border-color: $darker-gray;
+    &:hover {
+      background: darken($darker-gray, 10%);
+      border-color: darken($darker-gray, 10%);
+    }
+  }
+
   @media only screen and (min-width: 1200px) {
     font-size: 25px;
     padding: 5px;

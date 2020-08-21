@@ -33,6 +33,25 @@ const ClientApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
+  getClientsByCompanyId(company_id) {
+    return fetch(`${config.API_ENDPOINT}/clients/company/${company_id}`, {
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).then((res) =>
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+    );
+  },
+  getClientsBySalesRepId(sales_rep_id) {
+    return fetch(`${config.API_ENDPOINT}/clients/sales_rep_id/${sales_rep_id}`, {
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).then((res) =>
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+    );
+  },
+  
   updateClient(client_id, client) {
     // note: sales_rep_id and company_id will not be changed by the user
     return fetch(`${config.API_ENDPOINT}/clients/${client_id}`, {

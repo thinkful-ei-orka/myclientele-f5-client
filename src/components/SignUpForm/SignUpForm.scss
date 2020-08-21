@@ -1,0 +1,22 @@
+#initial_confirm_box {
+    align-items: center;
+}
+
+#welcome_confirm {
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+#initial_buttons {
+    display: flex;
+    justify-content: center;
+    button {
+        margin: 0 10px;
+    }
+}
+
+#error_statement {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}

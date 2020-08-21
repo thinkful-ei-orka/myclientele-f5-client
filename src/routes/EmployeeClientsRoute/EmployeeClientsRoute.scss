@@ -1,0 +1,65 @@
+@import '../../variables.scss';
+
+.client_img {
+    max-width: 175px;
+    height: auto;
+}
+
+#client_search_box {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.employee_info_box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+// .employee_view_client_button {
+//     background-color: $purple;
+//     color: white;
+//     padding: 5px 10px;
+//     border-radius: 5px;
+// }
+
+#no_clients_statement {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#no_clients_sentence {
+    text-align: center;
+}
+
+.employee_view_client_button:hover {
+    opacity: 0.7;
+}
+
+
+.clients_box {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.client_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $gray;
+    border-radius: 7px;
+    padding: 15px;
+    margin: 25px;
+}
