@@ -139,14 +139,6 @@ class Header extends React.Component {
                   Add Client
                 </button>
               </Link>
-              <Link to='/reports'>
-                <button
-                  onClick={() => this.toggleMenu()}
-                  className='reports btn'>
-                  Reports
-                </button>
-              </Link>
-
               <button
                 className='logout-button btn'
                 onClick={() => this.handleLogOut()}>
@@ -201,6 +193,13 @@ class Header extends React.Component {
           <Link to='/reports'>
             <button className='reports btn'>Reports</button>
           </Link>
+
+          <Link to='/my-account'>
+              <button
+                className='my-account btn'>
+                My Account
+              </button>
+              </Link>
           <button
             className='logout-button btn'
             onClick={() => this.handleLogOut()}>
