@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import UserApiService from "../../services/user-api-service";
 import PrivateContext from "../../contexts/PrivateContext";
 import CompaniesApiService from "../../services/companies-api-service";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInfoCircle, faFileAlt, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { CopyToClipboard, contextType } from "react-copy-to-clipboard";
 
 import "./DashBoardRoute.scss";
@@ -43,7 +43,7 @@ export default class DashBoardRoute extends React.Component {
         <div className="employee_box">
           <i className="fas fa-user fa-3x"></i>
           <h2 className="employee_name">{employee.name}</h2>
-          <p>User name: {employee.user_name}</p>
+          <p>Username: {employee.user_name}</p>
           <div className="employee_buttons">
             <Link
               to={{
@@ -53,7 +53,10 @@ export default class DashBoardRoute extends React.Component {
                 },
               }}
             >
-              <button className="employee_button employee_client_button">Clients</button>
+              <button className="employee_button employee_client_button btn">
+                <FontAwesomeIcon icon={faUsers} />
+                Clients
+              </button>
             </Link>
             <Link
               to={{
@@ -63,7 +66,10 @@ export default class DashBoardRoute extends React.Component {
                 },
               }}
             >
-              <button className="employee_button employee_report_button">Reports</button>
+              <button className="employee_button employee_report_button btn">
+                <FontAwesomeIcon icon={faFileAlt} />
+                Reports
+              </button>
             </Link>
           </div>
         </div>
@@ -90,15 +96,15 @@ export default class DashBoardRoute extends React.Component {
           <div className="tooltip_box">
             <p>Add New Employee! </p><div className="tooltip">
           <FontAwesomeIcon icon={faInfoCircle} id="help_icon" />
-          <span className="tooltiptext">
+          <p className="tooltiptext">
               Send this link to your new employees so they can make a new account!
-          </span>
+          </p>
         </div>
           </div>
           <div className="copy_link_box">
             <input id="invite_link" value={this.state.invite_link}></input>
             <CopyToClipboard text={this.state.invite_link}>
-              <button onClick={this.confirmCopy}>
+              <button onClick={this.confirmCopy} className="btn">
                 <i class="fas fa-clipboard"></i>
               </button>
             </CopyToClipboard>

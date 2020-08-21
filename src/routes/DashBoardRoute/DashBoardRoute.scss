@@ -21,16 +21,25 @@
   height: auto;
   padding: 15px;
   border: 1px solid grey;
-  border-radius: 3%;
+  border-radius: 5px;
 }
 
 .employee_report_button {
-    background-color: rgb(100, 100, 100);
-    color: white
+  background: $darker-gray;
+  border-color: $darker-gray;
+  color: white;
+  &:hover {
+    background: darken($darker-gray, 10%);
+    border-color: darken($darker-gray, 10%);
+  }
 }
 
 .employee_name {
   margin-top: 15px;
+}
+
+#employee_name {
+  margin-top: 25px;
 }
 
 .add_employee_box {
@@ -63,27 +72,29 @@
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
+  // border-bottom: 1px dotted black;
 }
 
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 170px;
-  background-color: purple;
+  background-color: $purple;
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 5px 0;
+  padding: 5px 10px;
   margin-right: 15%;
 
   /* Position the tooltip */
   position: absolute;
-  left: -140px;
+  left: 30px;
+  top: -17px;
   z-index: 1;
 }
 
 #help_icon {
-  margin-left: 25px;
+  margin-left: 10px;
+  color: $purple
 }
 
 .tooltip:hover .tooltiptext {
@@ -92,8 +103,8 @@
 
 .tooltip_box {
     display: flex;
-    width: 30%;
-    justify-content: space-evenly;
+    // width: 30%;
+    justify-content: center;
     align-items: center;
     margin-left: auto;
     margin-right: auto;
@@ -108,9 +119,14 @@
 
 .employee_button {
   margin-bottom: 15px;
-  width: 70px;
-  padding: 2px;
-  border-radius: 6%;
+  width: 100px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  svg {
+    margin-right: 7px;
+    font-size: 12px;
+    vertical-align: unset;
+  }
 }
 
 @media only screen and (min-width: 650px) {

@@ -50,7 +50,7 @@ export default class EmployeeClientsRoute extends React.Component {
                          {client.photo && <img src={client.photo} alt={client.name} className="client_img"/>}
                          <h1>{client.name}</h1>
                          <p>{client.location}</p>
-                         <button className="employee_view_client_button">View Client</button>
+                         <button className="employee_view_client_button btn">View Client</button>
                     </div>
                 })}
             </div>

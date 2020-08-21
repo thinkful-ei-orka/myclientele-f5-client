@@ -9,7 +9,10 @@
 
 #initial_buttons {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    button {
+        margin: 0 10px;
+    }
 }
 
 #error_statement {
