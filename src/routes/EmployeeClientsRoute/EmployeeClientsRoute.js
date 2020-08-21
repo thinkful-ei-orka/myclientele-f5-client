@@ -118,8 +118,6 @@ export default class EmployeeClientsRoute extends React.Component {
     if (this.state.loading) {
       return <p>Loading...</p>;
     }
-<<<<<<< HEAD
-=======
     return (
       <div className="employee_client_box">
         <div className="employee_info"></div>
@@ -144,5 +142,4 @@ export default class EmployeeClientsRoute extends React.Component {
       </div>
     );
   }
->>>>>>> d0f59aba3f8727e3a549dc49762df0db482a7552
 }
