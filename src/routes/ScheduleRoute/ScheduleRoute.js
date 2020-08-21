@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-import React from "react";
-import ScheduleDropDown from "../../components/ScheduleView/ScheduleDropDown/ScheduleDropDown";
-import ClientCard from "../../components/ClientCard/ClientCard";
-import PrivateContext from "../../contexts/PrivateContext";
-import "./scheduleroute.scss";
-=======
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ScheduleDropDown from '../../components/ScheduleView/ScheduleDropDown/ScheduleDropDown';
 import ClientCard from '../../components/ClientCard/ClientCard';
 import PrivateContext from '../../contexts/PrivateContext';
 import './scheduleroute.scss';
->>>>>>> a875de5d4b680763148faf863a66206b05ca0ebe
 
 import GoogleMap from "../../components/GoogleMap/GoogleMap";
 import ListMapToggle from "../../components/ListMapToggle/ListMapToggle";
@@ -25,14 +17,9 @@ export default class ScheduleRoute extends React.Component {
       isLoading: true,
       todayOfWeek: null,
       center: null,
-<<<<<<< HEAD
-      listClass: "",
-      mapClass: "mobile-hidden",
-=======
       listClass: '',
       mapClass: 'mobile-hidden',
       // noClients: false,
->>>>>>> a875de5d4b680763148faf863a66206b05ca0ebe
     };
   }
 
@@ -56,27 +43,26 @@ export default class ScheduleRoute extends React.Component {
     });
   };
 
-<<<<<<< HEAD
-
-=======
 //   setNoClients = () => {
 //     this.setState({
 //       noClients: true
 //     })
 //  }
->>>>>>> a875de5d4b680763148faf863a66206b05ca0ebe
 
-  componentDidMount() {
-    UserApiService.getUserContactInfo().then((user) => {
-      console.log(user);
+  async componentDidMount () {
+    let user = await UserApiService.getUserContactInfo();
+    if(user.admin) {
+      const { history } = this.props;
+      history.push("/dashboard");
+      window.location.reload();
+    }
+    // let employees = await UserApiService.getUsersByCompanyId(user.company_id)
       if (this.context.clients === null) {
         this.context
           .fetchClients()
           .then(this.context.fetchUserInfo())
           .then(() => this.setState({ isLoading: false }));
       }
-    });
-
     let date = new Date();
     this.setState({ todayOfWeek: date.getDay() });
 

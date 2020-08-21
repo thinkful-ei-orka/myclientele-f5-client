@@ -1,0 +1,37 @@
+.employee_report_box {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 15px;
+    border: 1px solid grey;
+    margin-bottom: 25px;
+    border-radius: 2%;
+}
+
+.employee_display_reports_box {
+    margin-top: 25px;
+}
+
+.employee-reports-img {
+    max-width: 150px;
+    height: auto;
+}
+
+.employee_info_box {
+    border: none !important;
+}
+.employee_reports_box {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.employee_information-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#employee_report_search_box {
+    width: 40%;
+}

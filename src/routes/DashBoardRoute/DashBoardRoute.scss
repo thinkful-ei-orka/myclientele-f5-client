@@ -1,0 +1,121 @@
+@import '../../variables.scss';
+.employees_box {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  height: auto;
+}
+
+.employee_client_button {
+    background-color: $purple;
+    color: white;
+}
+
+.employee_box {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  align-items: center;
+  max-width: 175px;
+  height: auto;
+  padding: 15px;
+  border: 1px solid grey;
+  border-radius: 3%;
+}
+
+.employee_report_button {
+    background-color: rgb(100, 100, 100);
+    color: white
+}
+
+.employee_name {
+  margin-top: 15px;
+}
+
+.add_employee_box {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.copy_link_box {
+  display: flex;
+  // flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  // align-items: center;
+}
+
+#copy_confirm {
+  text-align: center;
+}
+
+#invite_link {
+  margin-right: 15px !important;
+  border: 1px solid grey;
+  margin: 0px;
+  opacity: 0.5;
+  width: 200px;
+  word-wrap: none;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 170px;
+  background-color: purple;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  margin-right: 15%;
+
+  /* Position the tooltip */
+  position: absolute;
+  left: -140px;
+  z-index: 1;
+}
+
+#help_icon {
+  margin-left: 25px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip_box {
+    display: flex;
+    width: 30%;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.employee_buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.employee_button {
+  margin-bottom: 15px;
+  width: 70px;
+  padding: 2px;
+  border-radius: 6%;
+}
+
+@media only screen and (min-width: 650px) {
+    .tooltip .tooltiptext {
+        left: 35px;
+        top: 10px;
+    }
+}
