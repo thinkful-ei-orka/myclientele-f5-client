@@ -12,6 +12,11 @@
   box-sizing: border-box;
 }
 
+.App {
+  padding-bottom: 45px;
+}
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -127,8 +132,8 @@ a.link {
   }
 
   @media only screen and (min-width: 1200px) {
-    font-size: 30px;
-    padding: 10px;
+    font-size: 25px;
+    padding: 5px;
   }
 }
 
@@ -140,10 +145,12 @@ a.link {
   justify-content: center;
   align-items: center;
   padding: 40px;
+  z-index: 1000;
 }
 .ReactModal__Content {
   position: unset !important;
   max-width: 500px;
+  max-height: calc(100vh - 40px);
 }
 
 /*------------------
@@ -165,11 +172,11 @@ textarea {
   border: 1px solid $lighter-gray;
   border-radius: 7px;
 }
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration {
-  -webkit-appearance:none;
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
+  -webkit-appearance: none;
 }
 fieldset {
   border: 0;
