@@ -15,13 +15,16 @@ class SignUpForm extends React.Component {
   state = {
     error: null,
     code: null,
+    company: null,
     loading: false,
     confirmingCode: false,
     initialConfirm: true,
-    creatingNewCompany: false
+    existingCompany: false,
+    renderSignupForm: false,
   };
 
-  handleRegistrationSuccess = (user) => {
+  handleRegistrationSuccess = () => {
+    console.log('handling registration')
     const { history } = this.props;
     history.push("/login");
     window.location.reload();
@@ -45,6 +48,17 @@ class SignUpForm extends React.Component {
       password.value,
       retype_password.value
     );
+    let company = null;
+    let admin_bool = false;
+    if(this.state.company) {
+      company = this.state.company;
+    } else {
+      admin_bool = true;
+      company = {
+        name: company_name.value,
+        location: company_location.value
+      }
+    }
     if (!verifyMatchingPasswords) {
       this.setState({
         loading: false,
@@ -55,24 +69,25 @@ class SignUpForm extends React.Component {
         name: name,
         user_name: user_name.value,
         password: password.value,
-        company_name: company_name.value,
-        company_location: company_location.value,
-        admin: false,
+        company: company,
+        admin: admin_bool,
         email: email.value,
         phone_number: phone_number.value,
       })
         .then((res) => {
-          first_name.value = "";
-          last_name.value = "";
-          email.value = "";
-          phone_number.value = "";
-          company_name.value = "";
-          company_location.value = "";
-          user_name.value = "";
-          password.value = "";
-
+          // first_name.value = "";
+          // last_name.value = "";
+          // email.value = "";
+          // phone_number.value = "";
+          // company_name.value = "";
+          // company_location.value = "";
+          // user_name.value = "";
+          // password.value = "";
+          // retype_password.value = "";
           // this.context.processLogin(res.authToken);
-          this.handleRegistrationSuccess();
+          const { history } = this.props;
+          history.push("/login");
+          window.location.reload();
         })
         .catch((res) => {
           this.setState({ error: res.error, loading: false });
@@ -99,7 +114,6 @@ class SignUpForm extends React.Component {
           name="first_name"
           required
         ></input>
-
         <label htmlFor="last_name">Last Name</label>
         <input type="text" id="last_name" name="last_name" required></input>
 
@@ -114,24 +128,25 @@ class SignUpForm extends React.Component {
           required
         ></input>
 
-        <label htmlFor="company_name">Company</label>
-        <input
-          type="text"
-          id="company_name"
-          name="company_name"
-          required
-        ></input>
-
-        <label htmlFor="company_location">Company Address</label>
-        <textarea
-          id="company_location"
-          name="company_location"
-          required
-        ></textarea>
-
+        {!this.state.existingCompany && (
+          <>
+            <label htmlFor="company_name">Company</label>
+            <input
+              type="text"
+              id="company_name"
+              name="company_name"
+              required
+            ></input>
+            <label htmlFor="company_location">Company Address</label>
+            <textarea
+              id="company_location"
+              name="company_location"
+              required
+            ></textarea>
+          </>
+        )}
         <label htmlFor="user_name">Username</label>
         <input type="text" id="user_name" name="user_name" required></input>
-
         <label htmlFor="password">Password</label>
         <input type="password" id="password" name="password" required></input>
         <label htmlFor="retype_password">Retype Password</label>
@@ -162,30 +177,48 @@ class SignUpForm extends React.Component {
   };
 
   renderInitialConfirm = () => {
-    return ( 
+    return (
       <div id="initial_confirm_box">
-        <p id="welcome_confirm">Welcome! Are you registering under an existing company?</p>
+        <p id="welcome_confirm">
+          Welcome! Are you registering under an existing company?
+        </p>
         <section id="initial_buttons">
           <button onClick={this.confirmExistingCompany}>Yes</button>
           <button onClick={this.confirmCreateNewCompany}>No</button>
         </section>
       </div>
-    )
-  }
+    );
+  };
 
   confirmCreateNewCompany = () => {
     this.setState({
       initialConfirm: false,
-      creatingNewCompany: true
-    })
-  }
+      renderSignupForm: true,
+    });
+  };
 
   confirmExistingCompany = async () => {
     this.setState({
-      confirmingCode: true
-    })
-    let company = await CompaniesApiService.getCompanyByCode(this.state.code);
-  }
+      confirmingCode: true,
+      existingCompany: true,
+    });
+    CompaniesApiService.getCompanyByCode(this.state.code)
+      .then((company) => {
+        this.setState({
+          company,
+          confirmingCode: false,
+          renderSignupForm: true,
+          initialConfirm: false,
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          error: error.error,
+          confirmingCode: false,
+          initialConfirm: false,
+        });
+      });
+  };
 
   componentDidMount() {
     let query = window.location.search.substring(1).split("&");
@@ -201,14 +234,15 @@ class SignUpForm extends React.Component {
   }
 
   render() {
-    console.log(this.state.code);
+    console.log(this.state.company);
     return (
       <div className="user-login">
         <h2>Sign Up</h2>
+        {this.state.error && <p id="error_statement">{this.state.error}</p>}
         {this.state.confirmingCode && <p>Confirming invitation link...</p>}
         {this.state.initialConfirm && this.renderInitialConfirm()}
-        {this.state.creatingNewCompany && this.SignUpForm()}
-        {this.state.confirmExistingCompany }
+        {this.state.renderSignupForm && this.SignUpForm()}
+        {this.state.confirmExistingCompany}
       </div>
     );
   }
