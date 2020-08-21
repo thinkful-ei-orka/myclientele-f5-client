@@ -61,7 +61,7 @@ export default class EmployeeClientView extends React.Component {
                 pathname: `/employees/${this.state.client.sales_rep_id}/clients`,
               }}
             >
-              <button id="employee_back_button">Return</button>
+              <button className="btn dark">Return</button>
             </Link>
       </div>
     );
@@ -85,7 +85,7 @@ export default class EmployeeClientView extends React.Component {
                 pathname: "/dashboard",
               }}
             >
-              <button id="employee_back_button">Return</button>
+              <button className="btn dark">Return</button>
             </Link>
           </div>
         ) : this.state.client ? (

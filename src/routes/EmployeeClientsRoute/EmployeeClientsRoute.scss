@@ -124,7 +124,6 @@
     height: auto;
 }
 
-
 #client_search_box {
     width: 50%;
     margin-left: auto;
@@ -139,15 +138,15 @@
     align-items: center;
 }
 
-.employee_view_client_button {
-    background-color: $purple;
-    color: white;
-    padding: 5px;
-    border-radius: 6%;
-}
+// .employee_view_client_button {
+//     background-color: $purple;
+//     color: white;
+//     padding: 5px 10px;
+//     border-radius: 5px;
+// }
 
 #no_clients_statement {
-    width: 75%; 
+    width: 75%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -164,9 +163,6 @@
     opacity: 0.7;
 }
 
-#employee_name {
-    margin-top: 25px;
-}
 
 .clients_box {
     display: flex;
@@ -181,7 +177,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid grey;
+    border: 1px solid $gray;
+    border-radius: 7px;
     padding: 15px;
     margin: 25px;
 }

@@ -178,8 +178,8 @@ class SignUpForm extends React.Component {
           Welcome! Are you registering under an existing company?
         </p>
         <section id="initial_buttons">
-          <button onClick={this.confirmExistingCompany}>Yes</button>
-          <button onClick={this.confirmCreateNewCompany}>No</button>
+          <button onClick={this.confirmExistingCompany} className="btn">Yes</button>
+          <button onClick={this.confirmCreateNewCompany} className="btn">No</button>
         </section>
       </div>
     );
