@@ -66,7 +66,7 @@ export default class DashBoardRoute extends React.Component {
                 },
               }}
             >
-              <button className="employee_button employee_report_button btn">
+              <button className="employee_button dark btn">
                 <FontAwesomeIcon icon={faFileAlt} />
                 Reports
               </button>

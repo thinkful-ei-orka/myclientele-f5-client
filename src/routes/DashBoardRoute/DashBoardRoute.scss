@@ -24,16 +24,6 @@
   border-radius: 5px;
 }
 
-.employee_report_button {
-  background: $darker-gray;
-  border-color: $darker-gray;
-  color: white;
-  &:hover {
-    background: darken($darker-gray, 10%);
-    border-color: darken($darker-gray, 10%);
-  }
-}
-
 .employee_name {
   margin-top: 15px;
 }

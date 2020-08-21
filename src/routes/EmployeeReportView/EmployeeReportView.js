@@ -59,7 +59,7 @@ export default class EmployeeReportView extends React.Component {
           });
         }
       }
-    
+
       renderReport() {
         let { report } = this.state;
         console.log(report);
@@ -80,7 +80,7 @@ export default class EmployeeReportView extends React.Component {
                     pathname: `/employees/${this.state.report.sales_rep_id}/reports`,
                   }}
                 >
-                  <button id="employee_back_button">Return</button>
+                  <button className="btn dark">Return</button>
                 </Link>
             <h3>Photos: </h3>
           </div>
@@ -131,7 +131,7 @@ export default class EmployeeReportView extends React.Component {
                     pathname: "/dashboard",
                   }}
                 >
-                  <button id="employee_back_button">Return</button>
+                  <button className="btn dark">Return</button>
                 </Link>
               </div>
             ) : this.state.report ? (

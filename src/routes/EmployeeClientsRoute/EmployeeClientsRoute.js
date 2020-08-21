@@ -79,7 +79,7 @@ export default class EmployeeClientsRoute extends React.Component {
                 pathname: "/dashboard",
               }}
             >
-              <button id="employee_back_button">Back</button>
+              <button className="btn dark">Back</button>
             </Link>
           </div>
         ) : (
@@ -131,7 +131,7 @@ export default class EmployeeClientsRoute extends React.Component {
                 pathname: "/dashboard",
               }}
             >
-              <button id="employee_back_button">Return</button>
+              <button className="btn dark">Return</button>
             </Link>
           </div>
         ) : this.state.clients ? (
