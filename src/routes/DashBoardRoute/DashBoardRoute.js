@@ -38,9 +38,9 @@ export default class DashBoardRoute extends React.Component {
   }
   renderEmployees = () => {
     console.log(this.state.company);
-    return this.state.employees.map((employee) => {
+    return this.state.employees.map((employee, index) => {
       return (
-        <div className="employee_box">
+          <div className="employee_box" key={`employee ${index}`}>
           <i className="fas fa-user fa-3x"></i>
           <h2 className="employee_name">{employee.name}</h2>
           <p>User name: {employee.user_name}</p>
@@ -96,10 +96,10 @@ export default class DashBoardRoute extends React.Component {
         </div>
           </div>
           <div className="copy_link_box">
-            <input id="invite_link" value={this.state.invite_link}></input>
+            <input id="invite_link" value={this.state.invite_link} readOnly></input>
             <CopyToClipboard text={this.state.invite_link}>
               <button onClick={this.confirmCopy}>
-                <i class="fas fa-clipboard"></i>
+                <i className="fas fa-clipboard"></i>
               </button>
             </CopyToClipboard>
           </div>
