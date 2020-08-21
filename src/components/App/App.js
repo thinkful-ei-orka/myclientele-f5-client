@@ -38,8 +38,9 @@ import TakeReport from "../../components/TakeReport/TakeReport";
 import MobileNav from "../MobileNav/MobileNav";
 import DashBoardRoute from "../../routes/DashBoardRoute/DashBoardRoute";
 import EmployeeClientsRoute from "../../routes/EmployeeClientsRoute/EmployeeClientsRoute";
-import EmployeeReportsRoute from "../../routes/EmployeeReportsRoute/EmployeeReportsRoute"; 
-
+import EmployeeReportsRoute from "../../routes/EmployeeReportsRoute/EmployeeReportsRoute";
+import EmployeeClientView from "../../routes/EmployeeClientView/EmployeeClientView";
+import EmployeeReportView from "../../routes/EmployeeReportView/EmployeeReportView";
 export default class App extends React.Component {
   static contextType = UserContext;
 
@@ -132,6 +133,16 @@ export default class App extends React.Component {
               path="/employees/:id/clients"
               exact
               component={EmployeeClientsRoute}
+            />
+            <PrivateRoute
+              path="/employees/:id/clients/:id"
+              exact
+              component={EmployeeClientView}
+            />
+            <PrivateRoute
+              path="/employees/:id/reports/:id"
+              exact
+              component={EmployeeReportView}
             />
             <PrivateRoute
               path="/employees/:id/reports"

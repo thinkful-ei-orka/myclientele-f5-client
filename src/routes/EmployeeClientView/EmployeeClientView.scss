@@ -1,0 +1,11 @@
+#employee_client_info {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+#client_image {
+    max-width: 300px;
+    height: auto;
+}

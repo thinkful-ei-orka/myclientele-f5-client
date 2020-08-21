@@ -51,6 +51,7 @@ const ClientApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
+  
   updateClient(client_id, client) {
     // note: sales_rep_id and company_id will not be changed by the user
     return fetch(`${config.API_ENDPOINT}/clients/${client_id}`, {

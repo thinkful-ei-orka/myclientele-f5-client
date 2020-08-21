@@ -16,6 +16,34 @@
     height: auto;
 }
 
+#no_reports_statement {
+    width: 75%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#no_reports_sentence {
+    text-align: center;
+}
+
+#employee_back_button {
+    background-color: rgb(110, 110, 110);
+    color: white;
+    border-radius: 5%;
+    text-align: center;
+}
+
+.error_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .employee_info_box {
     border: none !important;
 }
