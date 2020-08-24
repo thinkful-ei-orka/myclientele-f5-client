@@ -7,24 +7,12 @@ import ClientApiService from '../../services/client-api-service';
 
 class Buttons extends React.Component {
   static contextType = PrivateContext;
-  //   state = { ...this.props.state };
   screenWidth = window.innerWidth;
 
   renderThreeDotsButton = () => {
     return (
       <div className='dropdown_box'>
         <ul className='dropdown'>
-          {/* <li className='dropdown_item'>
-            <Link
-              to={{
-                pathname: '/take-report',
-                state: {
-                  data: this.props.data,
-                },
-              }}>
-              Take a report
-            </Link>
-          </li> */}
           <li className='dropdown_item'>View reports</li>
           <li className='dropdown_item'>
             <Link

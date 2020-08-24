@@ -67,6 +67,8 @@ class AddClientForm extends React.Component {
       photo: photo_url,
       general_manager,
     };
+
+    // If client data is stored in the props, it is a new client (coming from add-client)
     if (this.props.location.state) {
       if (this.props.location.state.data) {
         ClientApiService.updateClient(
@@ -165,6 +167,7 @@ class AddClientForm extends React.Component {
     );
   };
 
+  // if client information is in the props, populate the form with this
   checkProps = () => {
     if(!this.props.location.state) {
       return;
@@ -222,6 +225,7 @@ class AddClientForm extends React.Component {
     }
   };
 
+  // get the google image from the photo reference id if available
   getGoogleImage = (photo_reference) => {
     return fetch(
       `${config.API_ENDPOINT}/places/photo_reference?photo_reference=${photo_reference}&max_width=600`,
@@ -239,6 +243,7 @@ class AddClientForm extends React.Component {
         console.log("this.state.googlePhoto should be:", json);
       });
   };
+
   confirmGoogleImage = () => {
     this.setState({
       hasSelectedGooglePhoto: true,

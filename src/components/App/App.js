@@ -1,9 +1,7 @@
 import React from "react";
-// import { Route, Switch } from 'react-router-dom';
 import { Switch } from "react-router-dom";
 import "./App.scss";
 
-// import { UserProvider } from '../../contexts/UserContext';
 import PrivateContext from "../../contexts/PrivateContext";
 import UserContext from "../../contexts/UserContext";
 
@@ -33,8 +31,6 @@ import Header from "../Header/Header";
 import AddClientForm from "../AddClientForm/AddClientForm";
 import ReportsView from "../../components/ReportsView/ReportsView";
 import TakeReport from "../../components/TakeReport/TakeReport";
-// import ClientsSearch from '../ClientsSearch/ClientsSearch';
-// import AddClientMap from '../AddClient/AddClient';
 import MobileNav from "../MobileNav/MobileNav";
 import DashBoardRoute from "../../routes/DashBoardRoute/DashBoardRoute";
 import EmployeeClientsRoute from "../../routes/EmployeeClientsRoute/EmployeeClientsRoute";
@@ -105,6 +101,7 @@ export default class App extends React.Component {
   };
 
   render() {
+    // set the context
     let contextValue = this.state;
     contextValue.fetchContext = this.fetchContext;
     contextValue.fetchClients = this.fetchClients;
@@ -114,7 +111,7 @@ export default class App extends React.Component {
     contextValue.updateContext = this.updateContext;
     contextValue.setScheduleFilter = this.setScheduleFilter;
     contextValue.setScheduleSearch = this.setScheduleSearch;
-    // console.log('context value', contextValue);
+
     return (
       <div className="App">
         <Switch>
@@ -174,9 +171,6 @@ export default class App extends React.Component {
             <PrivateRoute path="/reports/:report_id" component={ReportRoute} />
 
             <PrivateRoute path="/my-account" component={MyAccountRoute} />
-
-            {/* <PrivateRoute path='/add-client-map' component={AddClientMap} /> */}
-
             <MobileNav />
           </PrivateContext.Provider>
         </Switch>
