@@ -23,6 +23,7 @@ export default class ClientsMap extends React.Component {
     isSearchedClass: '',
   }
 
+  // get a list of places from search
   handleSearch = (e) => {
     e.preventDefault();
     this.setState({

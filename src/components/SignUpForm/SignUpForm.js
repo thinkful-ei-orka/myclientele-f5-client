@@ -29,6 +29,7 @@ class SignUpForm extends React.Component {
     history.push("/login");
     window.location.reload();
   };
+
   handleSubmit = (ev) => {
     ev.preventDefault();
     this.setState({ error: null, loading: true, login_success: false });
@@ -75,16 +76,6 @@ class SignUpForm extends React.Component {
         phone_number: phone_number.value,
       })
         .then((res) => {
-          // first_name.value = "";
-          // last_name.value = "";
-          // email.value = "";
-          // phone_number.value = "";
-          // company_name.value = "";
-          // company_location.value = "";
-          // user_name.value = "";
-          // password.value = "";
-          // retype_password.value = "";
-          // this.context.processLogin(res.authToken);
           const { history } = this.props;
           history.push("/login");
           window.location.reload();
@@ -99,6 +90,7 @@ class SignUpForm extends React.Component {
     return a === b;
   }
 
+  // Render the signup form
   SignUpForm = () => {
     const { error } = this.state;
     const loading = this.state.loading;
@@ -176,6 +168,7 @@ class SignUpForm extends React.Component {
     );
   };
 
+  // check if they are signing up for an existing company
   renderInitialConfirm = () => {
     return (
       <div id="initial_confirm_box">
@@ -196,6 +189,7 @@ class SignUpForm extends React.Component {
       renderSignupForm: true,
     });
   };
+
 
   confirmExistingCompany = async () => {
     this.setState({

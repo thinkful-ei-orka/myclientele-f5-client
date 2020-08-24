@@ -89,18 +89,6 @@ class Header extends React.Component {
                   }}>
                   Sign Up
                 </button>
-                {/* <div className='demo-account-info'>
-                <p>To try the service</p>
-                <p>
-                  Please use these credentials:
-                  <p>
-                    <b>Username:</b>User
-                  </p>
-                  <p>
-                    <b>Password: </b>Password12#
-                  </p>
-                </p>
-              </div> */}
               </Menu>
             </div>
 

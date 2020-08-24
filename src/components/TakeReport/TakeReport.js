@@ -3,7 +3,6 @@ import ReportsApiService from '../../services/reports-api-service';
 import { withRouter, Link } from 'react-router-dom';
 import './takereport.scss';
 import S3ApiService from '../../services/s3-api-service';
-import ReportsView from '../../components/ReportsView/ReportsView';
 import ClientApiService from '../../services/client-api-service';
 
 //What all operations do we want to give the user in terms of interacting with photos. After they do the initial upload, what all do we want to allow the user to do with photos.
@@ -26,9 +25,9 @@ class TakeReport extends React.Component {
     };
   }
   data = this.props.location.state.data;
-  // const { data } = this.props.location.state;
   client_id = this.data.id;
 
+  // add a report
   onFormSubmit = async (e) => {
     e.preventDefault();
     this.setState({
@@ -48,8 +47,9 @@ class TakeReport extends React.Component {
       })
       this.props.history.push("/schedule")
     }).catch((error) => console.log(error));
-  };
+  }
 
+  // upload image files to S3, and get URLs
   getPhotoUrlList = async (file) => {
     let photos = [];
     for (let key in file) {
@@ -63,7 +63,8 @@ class TakeReport extends React.Component {
       }
     }
     return photos;
-  };
+  }
+
   componentDidMount() {
     if(window.location.pathname.includes('/clients')) {
       this.setState({
@@ -145,13 +146,13 @@ class TakeReport extends React.Component {
             ></input>
             <button className="btn" disabled={this.state.submitting}>Submit</button>
           </form>
-          {this.state.submitting 
+          {this.state.submitting
           ? <p>submitting report...</p>
           : ""
            }
         </div>
 
-        {!this.state.mobile 
+        {!this.state.mobile
         ? this.renderPreviousReports()
         : ""
         }
