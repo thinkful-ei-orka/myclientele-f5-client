@@ -14,6 +14,17 @@
 
 .App {
   padding-bottom: 45px;
+  padding-top: 68px;
+}
+@media (min-width: 600px) {
+  .App {
+    padding-top: 77px;
+  }
+}
+@media (min-width: 1000px) {
+  .App {
+    padding-top: 96px;
+  }
 }
 
 

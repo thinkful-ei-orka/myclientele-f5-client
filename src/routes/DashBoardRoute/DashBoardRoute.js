@@ -105,7 +105,7 @@ export default class DashBoardRoute extends React.Component {
             <input id="invite_link" value={this.state.invite_link} readOnly></input>
             <CopyToClipboard text={this.state.invite_link}>
               <button onClick={this.confirmCopy} className="btn">
-                <i class="fas fa-clipboard"></i>
+                <i className="fas fa-clipboard"></i>
               </button>
             </CopyToClipboard>
           </div>

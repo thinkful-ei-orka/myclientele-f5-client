@@ -132,6 +132,7 @@ export default class EmployeeReportsRoute extends React.Component {
               >
                 <div className="employee_report_box">
                   <div className="employee-company-logo">
+                    <h1>HI</h1>
                     <img
                       className="employee-reports-img"
                       src={imgsrc}

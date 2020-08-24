@@ -7,6 +7,12 @@
         width: 100%;
     }
 }
+@media (max-width: 600px) {
+    .update-account-form {
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
 
 .company-code {
     display: inline-block;

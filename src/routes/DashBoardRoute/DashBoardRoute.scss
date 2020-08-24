@@ -125,3 +125,14 @@
         top: 10px;
     }
 }
+
+@media (min-width: 1200px) {
+  .employee_button {
+    width: 140px;
+    svg {
+      margin-right: 10px;
+      font-size: 18px;
+      vertical-align: unset;
+    }
+  }
+}
