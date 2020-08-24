@@ -18,8 +18,15 @@ The live site can be accessed at [https://myclientele-f5.vercel.app/](https://my
 
 To try the service, please use the credentials below to log in
 
-Username: User<br />
-Password: Password12#
+Demo admin account: 
+
+Username: refresh<br />
+Password: pass
+
+Demo employee account: 
+
+Username: refrush<br />
+Password: pass
 
 ## Team Members
 Jacob Poteat<br />
