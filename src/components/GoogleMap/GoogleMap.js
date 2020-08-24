@@ -72,7 +72,6 @@ export default class GoogleMapComponent extends React.Component {
           lng = position.coords.longitude;
 
           if (lat !== 0 && lng !== 0) {
-
             //map.setCenter does not work necessarily when map is called to load
             // this.state.map.setCenter({ lat, lng })
             setTimeout(() => this.state.map.setCenter({ lat, lng }), 1000);
@@ -110,7 +109,6 @@ export default class GoogleMapComponent extends React.Component {
         </InfoWindow>
     })
   }
-
 
   onInfoLoad = (infoWindow) => {
     // console.log('infoWindow: ', infoWindow)
