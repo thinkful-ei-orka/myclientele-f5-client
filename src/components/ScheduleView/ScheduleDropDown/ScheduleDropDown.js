@@ -1,5 +1,4 @@
 import React from 'react';
-// import arrow from '../../../images/arrow.svg';
 import PrivateContext from '../../../contexts/PrivateContext';
 import ScheduleSearch from '../ScheduleSearch/ScheduleSearch';
 
@@ -53,7 +52,6 @@ class ScheduleDropDown extends React.Component {
             ))}
             <option key={7} value={7}>All Clients</option>
           </select>
-          {/* <img src={arrow} alt='drop down arrow' /> */}
         </div>
         <ScheduleSearch />
       </div>

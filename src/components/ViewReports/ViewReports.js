@@ -14,6 +14,7 @@ class Reports extends React.Component {
   }
 
   componentDidMount() {
+    // get reports if there are none
     if (this.state.reports.length === 0) {
       ReportsApiService.getAllReports().then((res) =>
         this.setState({ reports: res })

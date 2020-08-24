@@ -1,5 +1,5 @@
 import React from 'react';
-import PrivateContext from '../../contexts/PrivateContext'; 
+import PrivateContext from '../../contexts/PrivateContext';
 import ReportsApiService from '../../services/reports-api-service';
 import { Link } from 'react-router-dom';
 import './ReportsView.scss';
@@ -17,22 +17,26 @@ class Reports extends React.Component {
   }
 
   componentDidMount() {
+    // if there are no reports, get reports
     if (this.context.reports === null || this.state.reports.length === 0) {
       ReportsApiService.getAllReports().then((res) =>
         this.setState({ reports: res })
       );
     }
+    // if there are no clients, get clients
     if (this.context.clients === null || this.state.clients.length === 0) {
       ClientApiService.getAllClients().then((res) => {
         this.context.updateContext({ clients: res })
         this.setState({
           clients: res
         })
-      } 
+      }
       );
     }
     setTimeout(this.changeMsg, 3000)
   }
+
+  // find a client for a given report
   matchReportToClient = (reportId) => {
     const clientData = this.state.clients.find(
       (client) => client.id === reportId

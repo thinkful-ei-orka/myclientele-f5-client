@@ -11,7 +11,6 @@ class ScheduleSearch extends React.Component {
   render() {
     return (
       <div className='dropdown-search'>
-        {/* Search: */}
         <input type='search' placeholder='Search Here' onChange={this.handleSearchChange}></input>
       </div>
     );
