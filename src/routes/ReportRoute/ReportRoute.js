@@ -1,21 +1,16 @@
-import React from 'react';
-import ReportsApiService from '../../services/reports-api-service';
-import PrivateContext from '../../contexts/PrivateContext';
-import './reportroute.scss';
-// import { prototype } from 'react-modal';
-import ClientApiService from '../../services/client-api-service';
-
+import React from "react";
+import ReportsApiService from "../../services/reports-api-service";
+import PrivateContext from "../../contexts/PrivateContext";
+import "./reportroute.scss";
+import ClientApiService from "../../services/client-api-service";
 // import Swiper core and required components
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y,  } from 'swiper';
-
-import { Swiper, SwiperSlide } from 'swiper/react';
-
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
-import 'swiper/swiper.scss';
-import 'swiper/components/navigation/navigation.scss';
-import 'swiper/components/pagination/pagination.scss';
-import 'swiper/components/scrollbar/scrollbar.scss';
-
+import "swiper/swiper.scss";
+import "swiper/components/navigation/navigation.scss";
+import "swiper/components/pagination/pagination.scss";
+import "swiper/components/scrollbar/scrollbar.scss";
 // install Swiper components
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 class ReportRoute extends React.Component {
@@ -29,12 +24,22 @@ class ReportRoute extends React.Component {
   }
 
   renderSwiper = () => {
+    //component that renders the photos for each report
     if (this.state.report.photos) {
       let slides = [];
       this.state.report.photos.forEach((photo, index) => {
-        slides.push(<SwiperSlide key={photo}><img src={photo} alt={index} className="slide_photo" key={`slide ${index}`}/></SwiperSlide>)
-      })
-      let center = window.outerWidth * 0.2
+        slides.push(
+          <SwiperSlide key={photo}>
+            <img
+              src={photo}
+              alt={index}
+              className="slide_photo"
+              key={`slide ${index}`}
+            />
+          </SwiperSlide>
+        );
+      });
+      let center = window.outerWidth * 0.2;
       return (
         <Swiper
           spaceBetween={50}
@@ -45,28 +50,12 @@ class ReportRoute extends React.Component {
           onSwiper={(swiper) => console.log(swiper)}
           onSlideChange={() => console.log("slide change")}
         >
-        {slides}
+          {slides}
         </Swiper>
       );
     } else {
-      console.log('no photos');
+      console.log("no photos");
     }
-  };
-  renderPhotos = () => {
-    return (
-      <div className='photo_list'>
-        {this.state.report.photos.map((photo) => {
-          return (
-            <img
-              src={photo}
-              className='report_photo'
-              alt='report_photo'
-              key={photo}
-            />
-          );
-        })}
-      </div>
-    );
   };
 
   componentDidMount() {
@@ -80,7 +69,6 @@ class ReportRoute extends React.Component {
         let client = this.context.clients.find(
           (client) => client.id === res[0].client_id
         );
-
         this.setState({
           report: res[0],
           client: client,
@@ -90,33 +78,25 @@ class ReportRoute extends React.Component {
   }
 
   render() {
-    // let photo_url = '';
-    // if (this.state.report) {
-    //   if (this.state.report.photo_url === '') {
-    //     photo_url = 'https://via.placeholder.com/150';
-    //   } else {
-    //     photo_url = this.state.report.photo_url;
-    //   }
-    // }
-    if(!this.state.report) {
-      return (<p>Loading...</p>)
+    if (!this.state.report) {
+      return <p>Loading...</p>;
     }
     const newDate = new Date(this.state.report.date);
     return (
       <>
-      <section className='single-report-section'>
-        <p id='report-date'>
-          <b>Report Date: </b>
-          {`${newDate.toLocaleDateString()} @ ${newDate.toLocaleTimeString()}`}
-        </p>
-        <h2>{this.state.client.name}</h2>
-        <h3>Notes:</h3>
-        <div className='notes-area'>{this.state.report.notes}</div>
+        <section className="single-report-section">
+          <p id="report-date">
+            <b>Report Date: </b>
+            {`${newDate.toLocaleDateString()} @ ${newDate.toLocaleTimeString()}`}
+          </p>
+          <h2>{this.state.client.name}</h2>
+          <h3>Notes:</h3>
+          <div className="notes-area">{this.state.report.notes}</div>
 
-        {/* <p>Sales Rep Name: {this.state.report.name}</p> */}
-        <h3>Photos: </h3>
-      </section>
-        {Object.keys(this.state.report).length !== 0 ? this.renderSwiper() : ''}
+          {/* <p>Sales Rep Name: {this.state.report.name}</p> */}
+          <h3>Photos: </h3>
+        </section>
+        {Object.keys(this.state.report).length !== 0 ? this.renderSwiper() : ""}
         <div className="zoom_container"></div>
       </>
     );

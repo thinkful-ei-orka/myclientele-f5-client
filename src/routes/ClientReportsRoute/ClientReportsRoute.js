@@ -1,5 +1,4 @@
 import React from 'react';
-import { Rectangle } from '@react-google-maps/api';
 import PrivateContext from '../../contexts/PrivateContext';
 import ClientApiService from '../../services/client-api-service';
 import ReportsApiService from '../../services/reports-api-service';
@@ -17,17 +16,18 @@ export default class ClientReportsRoute extends React.Component {
 
   componentDidMount () {
        let clientId = window.location.pathname.split('/')[2];
+       //get the client, then get all reports associated with the client
        ClientApiService.getClient(clientId).then(res => this.setState({
          client: res
        })).then(() => ReportsApiService.getReportsByClientId(clientId)).then(reports => {
          this.setState({
            reports: reports
          })
-       })
+       }).catch(error => this.setState({
+         error: 'Something went wrong, please try again'
+       }))
   }
   render() {
-    console.log(this.state.client, this.state.reports)
-
     if(this.state.client === []) {
       return <h1>loading...</h1>;
     } else {

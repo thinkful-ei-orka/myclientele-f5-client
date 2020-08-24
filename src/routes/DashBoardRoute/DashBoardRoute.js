@@ -5,11 +5,10 @@ import PrivateContext from "../../contexts/PrivateContext";
 import CompaniesApiService from "../../services/companies-api-service";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle, faFileAlt, faUsers } from "@fortawesome/free-solid-svg-icons";
-import { CopyToClipboard, contextType } from "react-copy-to-clipboard";
-
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import "./DashBoardRoute.scss";
-
 export default class DashBoardRoute extends React.Component {
+  //This route is only accessible to administrators.
   static contextType = PrivateContext;
   state = {
     user: null,
@@ -18,16 +17,18 @@ export default class DashBoardRoute extends React.Component {
     confirmCopy: false,
     employees: null,
   };
-
   async componentDidMount() {
     let user = await UserApiService.getUserContactInfo();
     if (!user.admin) {
+      //If user is not an admin, then send them back to the /schedule route
       const { history } = this.props;
       history.push("/schedule");
       window.location.reload();
     }
+    //Get company info and list of employees
     let company = await CompaniesApiService.getCompany(user.company_id);
     let employees = await UserApiService.getUsersByCompanyId(user.company_id);
+    //Invite link is what is used to invite new users to make an account
     let invite_link = `${window.location.origin}/sign-up?code=${company.company_code}`;
     this.setState({
       user,
@@ -37,7 +38,6 @@ export default class DashBoardRoute extends React.Component {
     });
   }
   renderEmployees = () => {
-    console.log(this.state.company);
     return this.state.employees.map((employee, index) => {
       return (
           <div className="employee_box" key={`employee ${index}`}>
@@ -78,6 +78,7 @@ export default class DashBoardRoute extends React.Component {
   };
 
   confirmCopy = () => {
+  //Sets the state to confirm that the user has copied the link to their clipboard
     if (!this.state.confirmCopy) {
       this.setState({
         confirmCopy: true,

@@ -5,6 +5,7 @@ import ClientApiService from "../../services/client-api-service";
 import "./EmployeeClientsRoute.scss";
 
 export default class EmployeeClientsRoute extends React.Component {
+  //Only accessed with administrator privileges
   state = {
     error: null,
     employee: null,
@@ -17,6 +18,7 @@ export default class EmployeeClientsRoute extends React.Component {
     try {
       let user = await UserApiService.getUserContactInfo();
       if (!user.admin) {
+        //If user is not an admin, redirect them to the /schedule route
         const { history } = this.props;
         history.push("/schedule");
         window.location.reload();
@@ -28,6 +30,7 @@ export default class EmployeeClientsRoute extends React.Component {
           loading: false
         });
       } else {
+        //Get list of clients by sales rep id
         let employee_clients = await ClientApiService.getClientsBySalesRepId(
           employee_id
         );
@@ -37,15 +40,16 @@ export default class EmployeeClientsRoute extends React.Component {
           loading: false,
         });
       }
-    } catch (error) {
+    } catch (res) {
       this.setState({
-        error: error.error,
+        error: res.error,
         loading: false,
       });
     }
   }
 
   setClientSearch = (e) => {
+    //Set the value in state of the client search bar 
     this.setState({
       clientSearch: e.target.value,
     });

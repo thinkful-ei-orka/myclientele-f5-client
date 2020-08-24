@@ -6,6 +6,7 @@ import ReportsApiService from "../../services/reports-api-service";
 import ClientApiService from "../../services/client-api-service";
 
 export default class EmployeeReportsRoute extends React.Component {
+  //Only accessible to administrators
   state = {
     error: null,
     employee: null,
@@ -29,6 +30,7 @@ export default class EmployeeReportsRoute extends React.Component {
     try {
       let user = await UserApiService.getUserContactInfo();
       if (!user.admin) {
+        //Redirect if user is not an admin
         const { history } = this.props;
         history.push("/schedule");
         window.location.reload();
@@ -40,13 +42,13 @@ export default class EmployeeReportsRoute extends React.Component {
           loading: false,
         });
       } else {
+        //Get reports by sales rep id, then get clients by company id
         let employee_reports = await ReportsApiService.getReportsBySalesRepId(
           employee_id
         );
         let clients = await ClientApiService.getClientsByCompanyId(
           user.company_id
         );
-        console.log(clients, "clients!");
         this.setState({
           employee: employee_reports.employee,
           clients: clients.clients,
@@ -54,10 +56,9 @@ export default class EmployeeReportsRoute extends React.Component {
           loading: false,
         });
       }
-    } catch (error) {
-      console.log(error);
+    } catch (res) {
       this.setState({
-        error: error.error,
+        error: res.error,
         loading: false,
       });
     }
@@ -89,6 +90,7 @@ export default class EmployeeReportsRoute extends React.Component {
   };
 
   renderReports = () => {
+    //Filter the reports by the search term, then render the reports
     let reports = this.filterReportsBySearch();
     return (
       <div className="employee_reports_box">
@@ -153,7 +155,6 @@ export default class EmployeeReportsRoute extends React.Component {
   };
 
   render() {
-    console.log(this.state.reports);
     if (this.state.loading) {
       return <p>Loading...</p>;
     }

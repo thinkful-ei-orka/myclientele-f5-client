@@ -10,6 +10,7 @@ import ListMapToggle from "../../components/ListMapToggle/ListMapToggle";
 import UserApiService from "../../services/user-api-service";
 
 export default class ScheduleRoute extends React.Component {
+  //Main route when the user initially logs into the app, and contains their daily schedule
   static contextType = PrivateContext;
   constructor(props) {
     super(props);
@@ -19,7 +20,6 @@ export default class ScheduleRoute extends React.Component {
       center: null,
       listClass: '',
       mapClass: 'mobile-hidden',
-      // noClients: false,
     };
   }
 
@@ -42,13 +42,6 @@ export default class ScheduleRoute extends React.Component {
       mapClass: "",
     });
   };
-
-//   setNoClients = () => {
-//     this.setState({
-//       noClients: true
-//     })
-//  }
-
   async componentDidMount () {
     let user = await UserApiService.getUserContactInfo();
     if(user.admin) {
@@ -56,7 +49,6 @@ export default class ScheduleRoute extends React.Component {
       history.push("/dashboard");
       window.location.reload();
     }
-    // let employees = await UserApiService.getUsersByCompanyId(user.company_id)
       if (this.context.clients === null) {
         this.context
           .fetchClients()
@@ -65,11 +57,6 @@ export default class ScheduleRoute extends React.Component {
       }
     let date = new Date();
     this.setState({ todayOfWeek: date.getDay() });
-
-    // if (this.context.scheduleFilter == null) {
-    //   this.context.setScheduleFilter(this.state.todayOfWeek)
-    //   console.log(this.context.scheduleFilter)
-    //}
   }
 
   render() {
@@ -78,20 +65,24 @@ export default class ScheduleRoute extends React.Component {
       return <div>Loading...</div>;
     }
     let clientsFilter = this.context.clients.filter((client) => {
+      //Filter list of clients by day of week by default
       return client.day_of_week === Number(this.state.todayOfWeek);
     });
 
     if (this.context.scheduleFilter) {
+      //filter list of clients by schedule filter, if user changes the schedule filter
       clientsFilter = this.context.clients.filter((client) => {
         return client.day_of_week === Number(this.context.scheduleFilter);
       });
     }
 
     if (Number(this.context.scheduleFilter) === 7) {
+      //Show all clients
       clientsFilter = this.context.clients;
     }
 
     if (this.context.scheduleSearch) {
+      //If search term, then also filter clients by search term
       const searchTerm = this.context.scheduleSearch.toLowerCase();
       clientsFilter = clientsFilter.filter((client) =>
         client.name.toLowerCase().includes(searchTerm)

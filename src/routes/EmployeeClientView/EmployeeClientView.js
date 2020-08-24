@@ -4,6 +4,7 @@ import UserApiService from "../../services/user-api-service";
 import ClientApiService from "../../services/client-api-service";
 import "./EmployeeClientView.scss";
 export default class EmployeeClientView extends React.Component {
+  //Only accessible as an adminstrator
   state = {
     error: null,
     client: null,
@@ -13,13 +14,13 @@ export default class EmployeeClientView extends React.Component {
     try {
       let user = await UserApiService.getUserContactInfo();
       if (!user.admin) {
+        //If the user is an admin then redirect the user to their schedule page
         const { history } = this.props;
         history.push("/schedule");
         window.location.reload();
       }
       let employee_id = window.location.pathname.split("/")[2];
       let client_id = window.location.pathname.split("/")[4];
-      console.log(client_id);
       let employee_client = await ClientApiService.getClient(client_id);
       if (Number(employee_client.sales_rep_id) !== Number(employee_id)) {
         this.setState({
@@ -32,18 +33,18 @@ export default class EmployeeClientView extends React.Component {
           loading: false,
         });
       }
-    } catch (error) {
-      console.log(error);
+    } catch (res) {
       this.setState({
-        error: error.error,
+        error: res.error,
         loading: false,
       });
     }
   }
-
   renderClient() {
+    //Component that renders the client information.
     let { client } = this.state;
     let imgsrc = "https://via.placeholder.com/150";
+    //imgsrc is set to default as a placeholder image
     if (client.photo) {
       imgsrc = client.photo;
     }
@@ -66,7 +67,6 @@ export default class EmployeeClientView extends React.Component {
     );
   }
   render() {
-    console.log(this.state.client);
     if (this.state.loading) {
       return <p>loading</p>;
     }
