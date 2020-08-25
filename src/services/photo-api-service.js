@@ -27,7 +27,19 @@ const PhotoApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
+  deletePhotoByUrl(photo_url) {
+    return fetch(`${config.API_ENDPOINT}/photos`, {
+      method: 'POST',
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({photo: photo_url})
+    }).then((res) =>
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : 0
+    );
+  },
 };
 
 
-module.exports = PhotoApiService;
+export default PhotoApiService;

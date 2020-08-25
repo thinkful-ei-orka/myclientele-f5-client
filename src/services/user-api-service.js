@@ -44,7 +44,22 @@ const UserApiService = {
       }).then((res) =>
         !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
       );
-  }
+  },
+  confirmPassword(password) {
+    return fetch(`${config.API_ENDPOINT}/auth/confirmpassword`, {
+      method: 'POST',
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(password),
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+  },
 };
 
 export default UserApiService;

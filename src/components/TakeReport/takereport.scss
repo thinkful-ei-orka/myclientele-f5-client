@@ -29,8 +29,52 @@
   height: 200px;
 }
 
+.current_photo_report {
+  width: 150px; 
+  height: auto;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+
+#current_photo_list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+}
+
+
 .report-input {
   width: 100%;
+  position: relative;
+}
+
+.delete_photo_buttons {
+  width: 100%;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.photo_to_delete {
+  width: 150px;
+  height: auto;
+}
+
+#confirm_delete_photo_box {
+  text-align: center;
+  max-width: 350px;
+  padding: 25px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  border: 1px solid grey;
+  border-radius: 10%;
+  background-color: lightsalmon;
 }
 .take-a-report-form {
   display: flex;
@@ -50,4 +94,12 @@
   text-align: center;
   align-self: center;
   width: 30%;
+}
+
+
+@media only screen and (min-width: 450px) {
+  #confirm_delete_photo_box {
+    margin-left: 25%;
+    margin-right: 25%;
+  }
 }

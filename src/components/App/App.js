@@ -1,10 +1,8 @@
 import React from "react";
 import { Switch } from "react-router-dom";
 import "./App.scss";
-
 import PrivateContext from "../../contexts/PrivateContext";
 import UserContext from "../../contexts/UserContext";
-
 // API Services
 import ClientApiService from "../../services/client-api-service";
 import ReportsApiService from "../../services/reports-api-service";
@@ -12,20 +10,16 @@ import CompaniesApiService from "../../services/companies-api-service";
 import UserApiService from "../../services/user-api-service";
 // This is a placeholder
 // import EventsApiService from '../../services/events-api-service';
-
 // Public and Private Routes
 import PublicRoute from "../PublicRoute/PublicRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
-
 // Routes
 import HomepageRoute from "../../routes/HomepageRoute/HomepageRoute";
-import ClientRoute from "../../routes/ClientRoute/ClientRoute";
 import ClientReportsRoute from "../../routes/ClientReportsRoute/ClientReportsRoute.js";
 import AddClientRoute from "../../routes/AddClientRoute/AddClientRoute";
 import ReportRoute from "../../routes/ReportRoute/ReportRoute";
 import ScheduleRoute from "../../routes/ScheduleRoute/ScheduleRoute";
 import MyAccountRoute from "../../routes/MyAccountRoute/MyAccountRoute";
-
 // Components
 import Header from "../Header/Header";
 import AddClientForm from "../AddClientForm/AddClientForm";
@@ -124,7 +118,6 @@ export default class App extends React.Component {
             <PrivateRoute path="/form" exact component={AddClientForm} />
             <PrivateRoute path="/reports" exact component={ReportsView} />
             <PrivateRoute path="/take-report" component={TakeReport} />
-            <PrivateRoute path="/clients/:id" exact component={ClientRoute} />
             <PrivateRoute path="/dashboard" exact component={DashBoardRoute} />
             <PrivateRoute
               path="/employees/:id/clients"

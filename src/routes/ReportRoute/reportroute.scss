@@ -1,4 +1,4 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
 .single-report-section {
   width: 80%;
@@ -10,6 +10,7 @@
   border: 1px solid lightgray;
   border-radius: 10px;
   margin-bottom: 25px;
+  position: relative;
   .info-block {
     display: flex;
     flex-direction: row;
@@ -56,4 +57,37 @@
 .swiper-container {
   z-index: 0 !important;
   margin-bottom: 75px !important;
+}
+
+.swiper-wrapper {
+  align-items: center;
+}
+
+.report_header {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+#confirm_delete_box {
+  position: absolute;
+  z-index: 2;
+  border: 1px solid black;
+  padding: 15px;
+  background: lightsalmon;
+  border-radius: 5%;
+}
+
+#no_photos_statement {
+  text-align: center;
+}
+
+#delete_box_buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#confirm_delete_report, #cancel_delete_report {
+  border-radius: 10%;
 }
