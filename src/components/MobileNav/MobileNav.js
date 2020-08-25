@@ -16,10 +16,6 @@ class MobileNav extends React.Component {
     this.context.processLogout();
   };
 
-  componentDidMount() {
-
-  }
-
   render() {
     return (
       <footer className="mobile-nav">

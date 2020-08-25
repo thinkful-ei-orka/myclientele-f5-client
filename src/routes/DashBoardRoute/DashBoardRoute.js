@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle, faFileAlt, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import "./DashBoardRoute.scss";
+
 export default class DashBoardRoute extends React.Component {
   //This route is only accessible to administrators.
   static contextType = PrivateContext;
@@ -17,6 +18,7 @@ export default class DashBoardRoute extends React.Component {
     confirmCopy: false,
     employees: null,
   };
+
   async componentDidMount() {
     let user = await UserApiService.getUserContactInfo();
     if (!user.admin) {
@@ -36,7 +38,8 @@ export default class DashBoardRoute extends React.Component {
       invite_link,
       employees,
     });
-  }
+  };
+  
   renderEmployees = () => {
     return this.state.employees.map((employee, index) => {
       return (

@@ -34,7 +34,7 @@ class Reports extends React.Component {
       );
     }
     setTimeout(this.changeMsg, 3000)
-  }
+  };
 
   // find a client for a given report
   matchReportToClient = (reportId) => {
@@ -48,11 +48,12 @@ class Reports extends React.Component {
   };
 
   changeMsg = () => {
+    //if user has no reports, changes message to 'No reports found' instead of staying on 'Fetching reports'
     clearTimeout()
     return this.setState({
       msg: 'No reports found'
     })
-  }
+  };
 
   render() {
     let reports = this.state.reports;

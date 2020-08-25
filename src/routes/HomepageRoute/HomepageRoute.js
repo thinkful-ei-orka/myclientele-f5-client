@@ -18,7 +18,7 @@ export default class HomepageRoute extends React.Component {
 
   componentDidMount() {
     Modal.setAppElement(".App");
-  }
+  };
 
   render() {
     return (

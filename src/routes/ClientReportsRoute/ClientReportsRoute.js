@@ -58,7 +58,7 @@ export default class ClientReportsRoute extends React.Component {
             })}
           </ul>
         </div>
-      )
+      );
     }
   }
 

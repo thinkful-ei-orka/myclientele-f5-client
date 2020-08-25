@@ -38,7 +38,6 @@ class MyAccountRoute extends React.Component {
                 infoToUpdate[key] = value
             }
         })
-        console.log(infoToUpdate)
 
         // Makes patch request to API
         UserApiService.updateUserContactInfo(infoToUpdate)
@@ -51,7 +50,6 @@ class MyAccountRoute extends React.Component {
                 phoneNumber: '',
                 email: '',
                 error:''})
-                // error: res.message,})
         )
         .catch((res) => {
             this.setState({ error: res.error})
@@ -67,26 +65,31 @@ class MyAccountRoute extends React.Component {
             name: e.target.value
         })
     };
+
     setUsername =(e) => {
         this.setState({
             username: e.target.value
         })
     };
+
     setPassword =(e) => {
         this.setState({
             password: e.target.value
         })
     };
+
     setRepassword =(e) => {
         this.setState({
             rePassword: e.target.value
         })
     };
+
     setPhoneNumber =(e) => {
         this.setState({
             phoneNumber: e.target.value
         })
     };
+
     setEmail =(e) => {
         console.log(e.target.value)
         this.setState({
@@ -124,8 +127,8 @@ class MyAccountRoute extends React.Component {
                 </form>
                 {this.state.error? this.state.error : null}
             </div>
-        )
-    };
+        );
+    }
 }
 
 export default MyAccountRoute;

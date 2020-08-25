@@ -88,7 +88,7 @@ class SignUpForm extends React.Component {
 
   verifyPasswords(a, b) {
     return a === b;
-  }
+  };
 
   // Render the signup form
   SignUpForm = () => {
@@ -225,10 +225,9 @@ class SignUpForm extends React.Component {
     this.setState({
       code: code,
     });
-  }
+  };
 
   render() {
-    console.log(this.state.company);
     return (
       <div className="user-login">
         <h2>Sign Up</h2>

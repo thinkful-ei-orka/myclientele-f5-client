@@ -6,11 +6,13 @@ import ReportApiService from "../../services/reports-api-service";
 import ClientApiService from "../../services/client-api-service";
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+
 // Import Swiper styles
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 import "swiper/components/scrollbar/scrollbar.scss";
+
 // install Swiper components
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
@@ -23,6 +25,7 @@ export default class EmployeeReportView extends React.Component {
     client: null,
     loading: true,
   };
+
   async componentDidMount() {
     try {
       let user = await UserApiService.getUserContactInfo();
@@ -62,7 +65,7 @@ export default class EmployeeReportView extends React.Component {
         loading: false,
       });
     }
-  }
+  };
 
   renderReport() {
     let { report } = this.state;
@@ -90,7 +93,7 @@ export default class EmployeeReportView extends React.Component {
         {Object.keys(this.state.report).length !== 0 ? this.renderSwiper() : ""}
       </>
     );
-  }
+  };
 
   renderSwiper = () => {
     if (this.state.report.photos) {
