@@ -2,7 +2,7 @@ import React from 'react';
 import PrivateContext from '../../contexts/PrivateContext'; //will need later?
 import ReportsApiService from '../../services/reports-api-service';
 import { Link } from 'react-router-dom';
-import './ReportsView.scss';
+import '../ReportsView/ReportsView.scss';
 
 class Reports extends React.Component {
   static contextType = PrivateContext; //is needed?
