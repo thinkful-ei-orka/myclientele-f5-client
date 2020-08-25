@@ -21,15 +21,17 @@ class MyAccountRoute extends React.Component {
             error:'',
         };
     }
-
+    
     handleSave = (e) => {
         e.preventDefault();
         let passwordSame = true
         let infoToUpdate = {}
+        // checks password fields to be the same, adds to password or empty password to object for request body
         if (this.state.password === this.state.rePassword) {
             passwordSame = this.state.password
             infoToUpdate['passwords'] = passwordSame
         }
+        // adds every completed input field except for password and error from state to object for request body
         Object.entries(this.state).forEach(entry => {
             const [key, value] = entry;
             if(value !== this.state.password || value !== this.state.rePassword || value !== this.state.error){
@@ -38,6 +40,7 @@ class MyAccountRoute extends React.Component {
         })
         console.log(infoToUpdate)
 
+        // Makes patch request to API
         UserApiService.updateUserContactInfo(infoToUpdate)
         .then((res) =>
             this.setState({
