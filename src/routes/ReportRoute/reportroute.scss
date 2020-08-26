@@ -4,12 +4,13 @@
   width: 80%;
   display: flex;
   flex-direction: column;
-  margin: auto;
+  margin: 20px auto;
   justify-content: center;
   text-align: center;
   border: 1px solid lightgray;
   border-radius: 10px;
-  margin-bottom: 25px;
+
+  position: relative;
   .info-block {
     display: flex;
     flex-direction: row;
@@ -56,4 +57,50 @@
 .swiper-container {
   z-index: 0 !important;
   margin-bottom: 75px !important;
+  width: 80%;
+}
+
+.swiper-wrapper {
+  align-items: center;
+}
+
+.report_header {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+#confirm_delete_box {
+  position: absolute;
+  left: 25%;
+  z-index: 2;
+  width: 50%;
+  border: 1px solid black;
+  padding: 15px;
+  background: lightsalmon;
+  border-radius: 20px;
+}
+
+#no_photos_statement {
+  text-align: center;
+}
+
+#delete_box_buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#confirm_delete_report,
+#cancel_delete_report {
+  border-radius: 10%;
+}
+
+@media only screen and (min-width: 1000px) {
+  .single-report-section {
+    width: 900px;
+  }
+  .swiper-container {
+    width: 900px;
+  }
 }

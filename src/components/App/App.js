@@ -1,38 +1,33 @@
-import React from "react";
-import { Switch } from "react-router-dom";
-
-import PrivateContext from "../../contexts/PrivateContext";
-import UserContext from "../../contexts/UserContext";
-
+import React from 'react';
+import { Switch } from 'react-router-dom';
+import PrivateContext from '../../contexts/PrivateContext';
+import UserContext from '../../contexts/UserContext';
 // API Services
-import ClientApiService from "../../services/client-api-service";
-import ReportsApiService from "../../services/reports-api-service";
-import CompaniesApiService from "../../services/companies-api-service";
-import UserApiService from "../../services/user-api-service";
-
+import ClientApiService from '../../services/client-api-service';
+import ReportsApiService from '../../services/reports-api-service';
+import CompaniesApiService from '../../services/companies-api-service';
+import UserApiService from '../../services/user-api-service';
 // Public and Private Routes
-import PublicRoute from "../PublicRoute/PublicRoute";
-import PrivateRoute from "../PrivateRoute/PrivateRoute";
-
+import PublicRoute from '../PublicRoute/PublicRoute';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 // Routes
-import HomepageRoute from "../../routes/HomepageRoute/HomepageRoute";
-import ClientReportsRoute from "../../routes/ClientReportsRoute/ClientReportsRoute.js";
-import AddClientRoute from "../../routes/AddClientRoute/AddClientRoute";
-import ReportRoute from "../../routes/ReportRoute/ReportRoute";
-import ScheduleRoute from "../../routes/ScheduleRoute/ScheduleRoute";
-import MyAccountRoute from "../../routes/MyAccountRoute/MyAccountRoute";
-
+import HomepageRoute from '../../routes/HomepageRoute/HomepageRoute';
+import ClientReportsRoute from '../../routes/ClientReportsRoute/ClientReportsRoute.js';
+import AddClientRoute from '../../routes/AddClientRoute/AddClientRoute';
+import ReportRoute from '../../routes/ReportRoute/ReportRoute';
+import ScheduleRoute from '../../routes/ScheduleRoute/ScheduleRoute';
+import MyAccountRoute from '../../routes/MyAccountRoute/MyAccountRoute';
 // Components
-import Header from "../Header/Header";
-import AddClientForm from "../AddClientForm/AddClientForm";
-import ReportsView from "../../components/ReportsView/ReportsView";
-import TakeReport from "../../components/TakeReport/TakeReport";
-import MobileNav from "../MobileNav/MobileNav";
-import DashBoardRoute from "../../routes/DashBoardRoute/DashBoardRoute";
-import EmployeeClientsRoute from "../../routes/EmployeeClientsRoute/EmployeeClientsRoute";
-import EmployeeReportsRoute from "../../routes/EmployeeReportsRoute/EmployeeReportsRoute";
-import EmployeeClientView from "../../routes/EmployeeClientView/EmployeeClientView";
-import EmployeeReportView from "../../routes/EmployeeReportView/EmployeeReportView";
+import Header from '../Header/Header';
+import AddClientForm from '../AddClientForm/AddClientForm';
+import ReportsView from '../../components/ReportsView/ReportsView';
+import TakeReport from '../../components/TakeReport/TakeReport';
+import MobileNav from '../MobileNav/MobileNav';
+import DashBoardRoute from '../../routes/DashBoardRoute/DashBoardRoute';
+import EmployeeClientsRoute from '../../routes/EmployeeClientsRoute/EmployeeClientsRoute';
+import EmployeeReportsRoute from '../../routes/EmployeeReportsRoute/EmployeeReportsRoute';
+import EmployeeClientView from '../../routes/EmployeeClientView/EmployeeClientView';
+import EmployeeReportView from '../../routes/EmployeeReportView/EmployeeReportView';
 
 export default class App extends React.Component {
   static contextType = UserContext;
@@ -78,7 +73,7 @@ export default class App extends React.Component {
 
   fetchUserInfo = () => {
     UserApiService.getUserContactInfo().then((result) => {
-      console.log("got user contact", result);
+      console.log('got user contact', result);
       this.setState({ userContact: result });
     });
   };
@@ -110,33 +105,64 @@ export default class App extends React.Component {
     contextValue.setScheduleSearch = this.setScheduleSearch;
 
     return (
-      <div className="App">
+      <div className='App'>
         <Switch>
-          <PublicRoute path="/" exact component={HomepageRoute} />
-          <PublicRoute path="/login" exact component={HomepageRoute} />
-          <PublicRoute path="/sign-up" exact component={HomepageRoute} />
+          <PublicRoute path='/' exact component={HomepageRoute} />
+          <PublicRoute path='/login' exact component={HomepageRoute} />
+          <PublicRoute path='/sign-up' exact component={HomepageRoute} />
 
           <PrivateContext.Provider value={contextValue}>
             <Header />
-            <PrivateRoute path="/schedule" exact component={ScheduleRoute} />
-            <PrivateRoute path="/form" exact component={AddClientForm} />
-            <PrivateRoute path="/reports" exact component={ReportsView} />
-            <PrivateRoute path="/take-report" component={TakeReport} />
-            <PrivateRoute path="/dashboard" exact component={DashBoardRoute} />
-            <PrivateRoute path="/employees/:id/clients" exact component={EmployeeClientsRoute} />
-            <PrivateRoute path="/employees/:id/clients/:id" exact component={EmployeeClientView} />
-            <PrivateRoute path="/employees/:id/reports/:id" exact component={EmployeeReportView} />
-            <PrivateRoute path="/employees/:id/reports" exact component={EmployeeReportsRoute} />
-            <PrivateRoute path="/clients/:id/reports" exact component={ClientReportsRoute} />
-            <PrivateRoute path="/clients/:id/add" exact component={TakeReport} />
-            <PrivateRoute path="/clients/:id/edit" exact component={AddClientForm} />
-            <PrivateRoute path="/add-client" component={AddClientRoute} />
-            <PrivateRoute exact path="/add-client-form" component={AddClientForm} />
-            <PrivateRoute path="/reports/:report_id" component={ReportRoute} />
-            <PrivateRoute path="/my-account" component={MyAccountRoute} />
+            <PrivateRoute path='/schedule' exact component={ScheduleRoute} />
+            <PrivateRoute path='/form' exact component={AddClientForm} />
+            <PrivateRoute path='/reports' exact component={ReportsView} />
+            <PrivateRoute path='/take-report' component={TakeReport} />
+            <PrivateRoute path='/dashboard' exact component={DashBoardRoute} />
+            <PrivateRoute
+              path='/employees/:id/clients'
+              exact
+              component={EmployeeClientsRoute}
+            />
+            <PrivateRoute
+              path='/employees/:id/clients/:id'
+              exact
+              component={EmployeeClientView}
+            />
+            <PrivateRoute
+              path='/employees/:id/reports/:id'
+              exact
+              component={EmployeeReportView}
+            />
+            <PrivateRoute
+              path='/employees/:id/reports'
+              exact
+              component={EmployeeReportsRoute}
+            />
+            <PrivateRoute
+              path='/clients/:id/reports'
+              exact
+              component={ClientReportsRoute}
+            />
+            <PrivateRoute
+              path='/clients/:id/add'
+              exact
+              component={TakeReport}
+            />
+            <PrivateRoute
+              path='/clients/:id/edit'
+              exact
+              component={AddClientForm}
+            />
+            <PrivateRoute path='/add-client' component={AddClientRoute} />
+            <PrivateRoute
+              exact
+              path='/add-client-form'
+              component={AddClientForm}
+            />
+            <PrivateRoute path='/reports/:report_id' component={ReportRoute} />
+            <PrivateRoute path='/my-account' component={MyAccountRoute} />
             <MobileNav />
           </PrivateContext.Provider>
-
         </Switch>
       </div>
     );

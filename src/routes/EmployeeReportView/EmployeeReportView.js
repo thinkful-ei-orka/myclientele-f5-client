@@ -69,10 +69,6 @@ export default class EmployeeReportView extends React.Component {
 
   renderReport() {
     let { report } = this.state;
-    let imgsrc = "https://via.placeholder.com/150";
-    if (report.photo) {
-      imgsrc = report.photo;
-    }
     return (
       <>
         <div id="employee_report_info">

@@ -1,11 +1,8 @@
 import React from 'react';
 import PrivateContext from '../../contexts/PrivateContext';
 import './MyAccountRoute.scss';
-import TokenService from '../../services/token-service';
-import config from '../../config';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import UserApiService from '../../services/user-api-service';
-import { info } from 'autoprefixer';
 
 class MyAccountRoute extends React.Component {
     static contextType = PrivateContext;
