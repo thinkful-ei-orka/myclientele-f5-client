@@ -19,7 +19,6 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 // Routes
 import HomepageRoute from "../../routes/HomepageRoute/HomepageRoute";
-import ClientRoute from "../../routes/ClientRoute/ClientRoute";
 import ClientReportsRoute from "../../routes/ClientReportsRoute/ClientReportsRoute.js";
 import AddClientRoute from "../../routes/AddClientRoute/AddClientRoute";
 import ReportRoute from "../../routes/ReportRoute/ReportRoute";
@@ -124,7 +123,6 @@ export default class App extends React.Component {
             <PrivateRoute path="/form" exact component={AddClientForm} />
             <PrivateRoute path="/reports" exact component={ReportsView} />
             <PrivateRoute path="/take-report" component={TakeReport} />
-            <PrivateRoute path="/clients/:id" exact component={ClientRoute} />
             <PrivateRoute path="/dashboard" exact component={DashBoardRoute} />
             <PrivateRoute
               path="/employees/:id/clients"

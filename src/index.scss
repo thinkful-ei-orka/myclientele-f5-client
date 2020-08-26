@@ -155,6 +155,11 @@ a.link {
     font-size: 25px;
     padding: 5px;
   }
+
+  &.small {
+    font-size: 12px;
+    padding: 7px;
+  }
 }
 
 /*------------------
@@ -171,6 +176,12 @@ a.link {
   position: unset !important;
   max-width: 500px;
   max-height: calc(100vh - 40px);
+}
+.modal-buttons {
+  text-align: center;
+  .btn {
+    margin: 0 10px;
+  }
 }
 
 /*------------------

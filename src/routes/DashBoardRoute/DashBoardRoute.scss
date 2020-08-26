@@ -1,4 +1,10 @@
 @import '../../variables.scss';
+
+.search_and_disabled_container {
+  text-align: right;
+  margin-top: 20px;
+}
+
 .employees_box {
   margin-top: 50px;
   display: flex;
@@ -15,22 +21,84 @@
 .employee_box {
   display: flex;
   flex-direction: column;
+  margin: 0 20px;
   margin-bottom: 15px;
   align-items: center;
-  max-width: 175px;
+  max-width: 250px;
   height: auto;
-  padding: 15px;
-  border: 1px solid grey;
+  padding: 20px;
+  border: 1px solid $gray;
   border-radius: 5px;
+  position: relative;
+  .remove_employee {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border: 0;
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: $lighter-gray;
+    &:hover {
+      color: $gray;
+    }
+  }
+  .employee_profile {
+    border: 1px solid $gray;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    border-radius: 50%;
+    overflow: hidden;
+    .fa-user {
+      margin-top: 9px;
+      font-size: 54px;
+      color: $darker-gray;
+    }
+  }
+  h2 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  p {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  .employee_buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .employee_button {
+    margin-top: 15px;
+    width: 100px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    svg {
+      margin-right: 7px;
+      font-size: 12px;
+      vertical-align: unset;
+    }
+  }
 }
 
-.employee_name {
-  margin-top: 15px;
+@media (min-width: 1200px) {
+  .employee_box {
+    .employee_button {
+      width: 140px;
+      svg {
+        margin-right: 10px;
+        font-size: 18px;
+        vertical-align: unset;
+      }
+    }
+  }
 }
 
-#employee_name {
-  margin-top: 25px;
-}
+
+
 
 .add_employee_box {
   margin-top: 25px;
@@ -100,39 +168,9 @@
     margin-right: auto;
 }
 
-.employee_buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.employee_button {
-  margin-bottom: 15px;
-  width: 100px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  svg {
-    margin-right: 7px;
-    font-size: 12px;
-    vertical-align: unset;
-  }
-}
-
 @media only screen and (min-width: 650px) {
     .tooltip .tooltiptext {
         left: 35px;
         top: 10px;
     }
-}
-
-@media (min-width: 1200px) {
-  .employee_button {
-    width: 140px;
-    svg {
-      margin-right: 10px;
-      font-size: 18px;
-      vertical-align: unset;
-    }
-  }
 }
