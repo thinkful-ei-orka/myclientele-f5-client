@@ -17,7 +17,7 @@ export default class EmployeeBox extends React.Component {
   };
 
   componentDidMount() {
-    Modal.setAppElement('.App');
+    if (process.env.NODE_ENV !== 'test') Modal.setAppElement('.App');
   }
 
   render() {
