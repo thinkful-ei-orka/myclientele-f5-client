@@ -37,7 +37,7 @@ export default class EmployeeBox extends React.Component {
               </div>
             </div>
         </Modal>
-        <button className="remove_employee" onClick={(e) => this.setModalOpen(true)}><FontAwesomeIcon icon={faTimes} /></button>
+        {/* <button className="remove_employee" onClick={(e) => this.setModalOpen(true)}><FontAwesomeIcon icon={faTimes} /></button> */}
         <div className="employee_profile">
           <i className="fas fa-user fa-3x"></i>
         </div>

@@ -65,9 +65,9 @@ export default class DashBoardRoute extends React.Component {
     }
     return (
       <>
-        <div className="search_and_disabled_container wrapper">
+        {/* <div className="search_and_disabled_container wrapper">
           <button className="btn outline small">Show inactive employees</button>
-        </div>
+        </div> */}
         <div className="employees_box wrapper">{this.renderEmployees()}</div>
         <div className="add_employee_box">
           <div className="tooltip_box">
