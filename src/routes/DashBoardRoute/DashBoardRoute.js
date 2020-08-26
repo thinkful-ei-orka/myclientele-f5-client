@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import "./DashBoardRoute.scss";
-import Modal from 'react-modal';
 
 export default class DashBoardRoute extends React.Component {
   // This route is only accessible to administrators.

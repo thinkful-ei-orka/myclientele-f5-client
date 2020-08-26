@@ -3,16 +3,20 @@ import ReportsApiService from "../../services/reports-api-service";
 import PrivateContext from "../../contexts/PrivateContext";
 import "./reportroute.scss";
 import ClientApiService from "../../services/client-api-service";
+
 // import Swiper core and required components
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+
 // Import Swiper styles
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 import "swiper/components/scrollbar/scrollbar.scss";
+
 // install Swiper components
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
+
 class ReportRoute extends React.Component {
   static contextType = PrivateContext;
   constructor(props) {
@@ -75,7 +79,7 @@ class ReportRoute extends React.Component {
         });
       }
     );
-  }
+  };
 
   render() {
     if (!this.state.report) {
@@ -92,8 +96,6 @@ class ReportRoute extends React.Component {
           <h2>{this.state.client.name}</h2>
           <h3>Notes:</h3>
           <div className="notes-area">{this.state.report.notes}</div>
-
-          {/* <p>Sales Rep Name: {this.state.report.name}</p> */}
           <h3>Photos: </h3>
         </section>
         {Object.keys(this.state.report).length !== 0 ? this.renderSwiper() : ""}

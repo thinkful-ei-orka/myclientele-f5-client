@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { MemoryRouter} from 'react-router-dom';
+import Modal from 'react-modal';
 
 import ClientCard from './ClientCard';
 
+Modal.setAppElement(document.createElement('div'))
 it('renders without crashing', () => {
 
   const data = {

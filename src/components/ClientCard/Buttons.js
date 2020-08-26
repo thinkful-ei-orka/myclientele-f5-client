@@ -32,6 +32,7 @@ class Buttons extends React.Component {
       </div>
     );
   };
+
   toggleRemove = () => {
     this.setState({
       confirmRemoveClient: !this.state.confirmRemoveClient,
@@ -58,11 +59,6 @@ class Buttons extends React.Component {
     );
   };
 
-  //   toggleThreeDots = () => {
-  //     this.setState({
-  //       threeDotsActive: !this.state.threeDotsActive,
-  //     });
-  //   };
   render() {
     if (this.screenWidth < 600) {
       return (

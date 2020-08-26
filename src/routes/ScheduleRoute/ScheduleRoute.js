@@ -42,6 +42,7 @@ export default class ScheduleRoute extends React.Component {
       mapClass: "",
     });
   };
+
   async componentDidMount () {
     let user = await UserApiService.getUserContactInfo();
     if(user.admin) {
@@ -57,7 +58,7 @@ export default class ScheduleRoute extends React.Component {
       }
     let date = new Date();
     this.setState({ todayOfWeek: date.getDay() });
-  }
+  };
 
   render() {
     let noClients = false;

@@ -62,7 +62,7 @@ export default class EmployeeReportsRoute extends React.Component {
         loading: false,
       });
     }
-  }
+  };
 
   setReportSearch = (e) => {
     this.setState({

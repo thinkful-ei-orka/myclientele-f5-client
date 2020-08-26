@@ -78,19 +78,19 @@ export default class ClientsMap extends React.Component {
     this.setState({
       listClass: '',
       mapClass: 'mobile-hidden',
-    })
-  }
+    });
+  };
 
   mapClick = () => {
     this.setState({
       listClass: 'mobile-hidden',
       mapClass: '',
-    })
-  }
+    });
+  };
 
   componentDidMount() {
     this.context.fetchClients();
-  }
+  };
 
   render() {
     let resultList;
@@ -130,6 +130,6 @@ export default class ClientsMap extends React.Component {
         </div>
         <ListMapToggle listClick={this.listClick} mapClick={this.mapClick}></ListMapToggle>
       </>
-    )
+    );
   }
 }

@@ -33,7 +33,6 @@ header {
 
 /* Position and sizing of burger button */
 .bm-burger-button {
-  // position: fixed;
   position: absolute;
   width: 18px;
   height: 15px;
@@ -143,6 +142,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
       padding: 10px;
     }
   }
+  
   @media only screen and (min-width: 1200px) {
     button {
       margin: 0 10px;

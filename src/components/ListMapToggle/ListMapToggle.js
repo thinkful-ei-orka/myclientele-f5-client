@@ -16,9 +16,9 @@ export default class MobileNav extends React.Component {
       listClass: '',
       mapClass: 'outline',
     })
-
+    
     this.props.listClick();
-  }
+  };
 
   handleMapClick = () => {
     this.setState({
@@ -27,7 +27,7 @@ export default class MobileNav extends React.Component {
     })
 
     this.props.mapClick();
-  }
+  };
 
   render() {
     return (

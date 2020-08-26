@@ -57,10 +57,6 @@ class ClientCard extends React.Component {
     ClientApiService.deleteClient(id).then(() => this.context.fetchClients());
   };
 
-  renderConfirmRemove = () => {
-
-  };
-
   toggleThreeDots = () => {
     this.setState({
       threeDotsActive: !this.state.threeDotsActive,
@@ -68,33 +64,30 @@ class ClientCard extends React.Component {
   };
 
   componentDidMount() {
-    Modal.setAppElement('.App');
+    if (process.env.NODE_ENV !== 'test') Modal.setAppElement('.App');
   }
 
   render() {
     const {
       name,
-      // id,
       location,
       currently_closed,
-      // day_of_week,
-      // general_manager,
       hours_of_operation,
-      // notes,
-      // last_report,
     } = this.props.data;
+
     let reportPath;
     if(window.outerWidth < 600) {
       reportPath = `/clients/${this.props.data.id}/add`
     } else {
       reportPath = '/take-report'
     }
+
     let imgsrc = 'https://via.placeholder.com/150';
     if(this.props.data.photo) {
       imgsrc = this.props.data.photo;
     }
+    
     return (
-
       <div className='client-card'>
         <Modal
           isOpen={this.state.modalIsOpen}

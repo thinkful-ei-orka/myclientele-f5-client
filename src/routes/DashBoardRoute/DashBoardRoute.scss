@@ -108,10 +108,8 @@
 
 .copy_link_box {
   display: flex;
-  // flex-direction: column;
   justify-content: center;
   flex-wrap: wrap;
-  // align-items: center;
 }
 
 #copy_confirm {
@@ -130,7 +128,6 @@
 .tooltip {
   position: relative;
   display: inline-block;
-  // border-bottom: 1px dotted black;
 }
 
 .tooltip .tooltiptext {
@@ -161,7 +158,6 @@
 
 .tooltip_box {
     display: flex;
-    // width: 30%;
     justify-content: center;
     align-items: center;
     margin-left: auto;

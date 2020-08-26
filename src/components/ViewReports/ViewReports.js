@@ -1,11 +1,11 @@
 import React from 'react';
-import PrivateContext from '../../contexts/PrivateContext'; //will need later?
+import PrivateContext from '../../contexts/PrivateContext';
 import ReportsApiService from '../../services/reports-api-service';
 import { Link } from 'react-router-dom';
 import '../ReportsView/ReportsView.scss';
 
 class Reports extends React.Component {
-  static contextType = PrivateContext; //is needed?
+  static contextType = PrivateContext;
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +20,7 @@ class Reports extends React.Component {
         this.setState({ reports: res })
       );
     }
-  }
+  };
 
   render() {
     let reports = this.state.reports;

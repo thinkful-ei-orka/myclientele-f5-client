@@ -46,14 +46,14 @@ export default class EmployeeClientsRoute extends React.Component {
         loading: false,
       });
     }
-  }
+  };
 
   setClientSearch = (e) => {
     //Set the value in state of the client search bar 
     this.setState({
       clientSearch: e.target.value,
     });
-  }
+  };
 
   renderClients = () => {
     let clients = this.state.clients.filter((client) =>
@@ -118,7 +118,6 @@ export default class EmployeeClientsRoute extends React.Component {
   };
 
   render() {
-    console.log(this.state.clients);
     if (this.state.loading) {
       return <p>Loading...</p>;
     }

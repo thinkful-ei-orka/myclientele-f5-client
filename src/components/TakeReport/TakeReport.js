@@ -5,12 +5,6 @@ import './takereport.scss';
 import S3ApiService from '../../services/s3-api-service';
 import ClientApiService from '../../services/client-api-service';
 
-//What all operations do we want to give the user in terms of interacting with photos. After they do the initial upload, what all do we want to allow the user to do with photos.
-
-//How do we want to handle gathering photos? Do we want to have a specific photo route that we make API calls to or do we just want to have all the requests to get photos be handled by the Reports router? If we do the latter then we will only have to make one request instead of two (one for reports and one for photos).
-
-//How do we want to display multiple images?  Do we want to add that feature to the client card?
-
 class TakeReport extends React.Component {
   constructor(props) {
     super(props);
@@ -47,7 +41,7 @@ class TakeReport extends React.Component {
       })
       this.props.history.push("/schedule")
     }).catch((error) => console.log(error));
-  }
+  };
 
   // upload image files to S3, and get URLs
   getPhotoUrlList = async (file) => {
@@ -63,7 +57,7 @@ class TakeReport extends React.Component {
       }
     }
     return photos;
-  }
+  };
 
   componentDidMount() {
     if(window.location.pathname.includes('/clients')) {
@@ -78,7 +72,7 @@ class TakeReport extends React.Component {
         this.setState({client: res, isLoading: false})
       })
     }
-  }
+  };
 
   renderPreviousReports = () => {
     return (
@@ -103,10 +97,9 @@ class TakeReport extends React.Component {
           </ul>
         </section>
     )
-  }
+  };
 
   render() {
-    console.log(this.state.mobile);
     if (this.state.isLoading) {
       return <div>Loading...</div>;
     }

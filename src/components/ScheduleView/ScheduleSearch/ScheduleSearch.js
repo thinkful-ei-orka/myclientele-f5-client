@@ -6,7 +6,7 @@ class ScheduleSearch extends React.Component {
 
   handleSearchChange = (e) => {
     this.context.setScheduleSearch(e.target.value)
-  }
+  };
 
   render() {
     return (

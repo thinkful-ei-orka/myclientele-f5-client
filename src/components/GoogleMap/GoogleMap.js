@@ -73,7 +73,7 @@ export default class GoogleMapComponent extends React.Component {
 
           if (lat !== 0 && lng !== 0) {
             //map.setCenter does not work necessarily when map is called to load
-            // this.state.map.setCenter({ lat, lng })
+            //set timeout to give the map time to load properly before trying to find the center
             setTimeout(() => this.state.map.setCenter({ lat, lng }), 1000);
           }
         },
@@ -110,15 +110,11 @@ export default class GoogleMapComponent extends React.Component {
     })
   }
 
-  onInfoLoad = (infoWindow) => {
-    // console.log('infoWindow: ', infoWindow)
-  };
-
   render() {
     let markers = [];
 
     // if searching results, populate the results
-    if (this.props.markers) {
+    if (this.props.markers) { //for clients already in database
       this.props.markers.forEach((marker) => {
         let lat = Number(marker.lat);
         let lng = Number(marker.lng);
@@ -142,7 +138,7 @@ export default class GoogleMapComponent extends React.Component {
           ></Marker>
         );
       });
-    } else if (this.props.searchMarkers) {
+    } else if (this.props.searchMarkers) { //for teh search results
       this.props.searchMarkers.forEach((marker) => {
         let lat = Number(marker.lat);
         let lng = Number(marker.lng);
