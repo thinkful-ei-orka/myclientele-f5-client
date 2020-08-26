@@ -114,7 +114,7 @@ class TakeReport extends React.Component {
       let client_id = this.props.location.state.data.id;
       ReportsApiService.getReportsByClientId(client_id)
         .then((res) => {
-          this.setState({ reports: res, data: this.props.location.state.data });
+          this.setState({ reports: res, data: this.props.location.state.data, client_id });
         })
         .then(() => ClientApiService.getClient(client_id))
         .then((res) => {
@@ -163,6 +163,7 @@ class TakeReport extends React.Component {
 
   deletePhoto = () => {
     let photo_url = this.state.photoToDelete;
+    console.log(photo_url);
     PhotoApiService.deletePhotoByUrl(photo_url)
       .then(() => {
         return ReportsApiService.getReport(this.state.report_id);
@@ -234,6 +235,7 @@ class TakeReport extends React.Component {
   };
 
   render() {
+    console.log(this.state.client_id);
     if (this.state.isLoading) {
       return <div>Loading...</div>;
     }
