@@ -20,9 +20,10 @@ export default class EmployeeBox extends React.Component {
 
   setUserDisabled = (bool) => {
     // Makes patch request to API
-    UserApiService.updateUserContactInfo(
-      { user_disabled: bool }
-    )
+    UserApiService.updateUserContactInfo({
+      userId: this.props.employee.id,
+      user_disabled: bool,
+    })
     .then((res) => {
       // console.log(res);
       this.props.updateEmployees();
@@ -41,6 +42,8 @@ export default class EmployeeBox extends React.Component {
     let modalContents;
     let removeButton;
     let reactivateButton;
+
+    console.log(this.props.employee);
 
     // if the user is disabled, set the modal contents and reactivate buttons
     if (this.props.employee.user_disabled) {
