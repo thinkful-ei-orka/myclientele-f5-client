@@ -18,7 +18,9 @@ export default class DashBoardRoute extends React.Component {
     invite_link: "",
     confirmCopy: false,
     employees: null,
-    modalIsOpen: false,
+    activeEmployees: null,
+    inactiveEmployees: null,
+    showingActiveEmployees: true,
   };
 
   async componentDidMount() {
@@ -32,23 +34,57 @@ export default class DashBoardRoute extends React.Component {
     // Get company info and list of employees
     let company = await CompaniesApiService.getCompany(user.company_id);
     let employees = await UserApiService.getUsersByCompanyId(user.company_id);
+    let activeEmployees = employees.filter(employee => employee.user_disabled === false);
+    let inactiveEmployees = employees.filter(employee => employee.user_disabled === true);
+
     // Invite link is what is used to invite new users to make an account
     let invite_link = `${window.location.origin}/sign-up?code=${company.company_code}`;
+
     this.setState({
       user,
       company,
       invite_link,
       employees,
+      activeEmployees,
+      inactiveEmployees
+    });
+  }
+
+  updateEmployees = async () => {
+    let user = await UserApiService.getUserContactInfo();
+    let employees = await UserApiService.getUsersByCompanyId(user.company_id);
+    let activeEmployees = employees.filter(employee => employee.user_disabled === false);
+    let inactiveEmployees = employees.filter(employee => employee.user_disabled === true);
+
+    this.setState({
+      employees,
+      activeEmployees,
+      inactiveEmployees
     });
   }
 
   renderEmployees = () => {
-    return this.state.employees.map((employee, index) => {
-      return (
-        <EmployeeBox employee={employee} key={index} />
-      );
-    });
+    if (this.state.showingActiveEmployees) {
+      return this.state.activeEmployees.map((employee, index) => {
+        return (
+          <EmployeeBox employee={employee} key={index} updateEmployees={this.updateEmployees} />
+        );
+      });
+    } else {
+      return this.state.inactiveEmployees.map((employee, index) => {
+        return (
+          <EmployeeBox employee={employee} key={index} updateEmployees={this.updateEmployees}/>
+        );
+      });
+    }
+
   };
+
+  toggleActiveEmployees = (bool) => {
+    this.setState({
+      showingActiveEmployees: bool
+    })
+  }
 
   confirmCopy = () => {
   // Sets the state to confirm that the user has copied the link to their clipboard
@@ -63,11 +99,24 @@ export default class DashBoardRoute extends React.Component {
     if (!this.state.employees) {
       return <p>Loading...</p>;
     }
+
+    let toggleActiveButton
+    if (this.state.showingActiveEmployees) {
+      if (this.state.inactiveEmployees.length) { // show the toggle inactive employees button if showing active employees and there are inactive employees
+        toggleActiveButton = <button className="btn outline small" onClick={(e) => this.toggleActiveEmployees(false)}>Show inactive employees</button>;
+      }
+    } else { // show the toggle active employees button if viewing inactive employees
+      if (this.state.inactiveEmployees.length === 0) { // if there are no inactive employees, switch back to showing active employees
+        this.setState({ showingActiveEmployees: true });
+      }
+      toggleActiveButton = <button className="btn small" onClick={(e) => this.toggleActiveEmployees(true)}>Show active employees</button>;
+    }
+
     return (
       <>
-        {/* <div className="search_and_disabled_container wrapper">
-          <button className="btn outline small">Show inactive employees</button>
-        </div> */}
+        <div className="search_and_disabled_container wrapper">
+          {toggleActiveButton}
+        </div>
         <div className="employees_box wrapper">{this.renderEmployees()}</div>
         <div className="add_employee_box">
           <div className="tooltip_box">
