@@ -1,10 +1,12 @@
-import React from 'react';
-import AuthApiService from '../../services/auth-api-service';
-import UserContext from '../../contexts/UserContext';
-import { withRouter } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import './loginform.scss';
+import React from "react";
+import AuthApiService from "../../services/auth-api-service";
+import UserContext from "../../contexts/UserContext";
+import { withRouter } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import "./loginform.scss";
 
 class LoginForm extends React.Component {
   static contextType = UserContext;
@@ -22,11 +24,11 @@ class LoginForm extends React.Component {
       password: password.value,
     })
       .then((res) => {
-        user_name.value = '';
-        password.value = '';
+        user_name.value = "";
+        password.value = "";
 
         this.context.processLogin(res.authToken);
-        this.props.history.push('/schedule');
+        this.props.history.push("/schedule");
       })
       .catch((res) => {
         this.setState({ error: res.error, loading: false });
@@ -37,45 +39,55 @@ class LoginForm extends React.Component {
 
   componentDidMount() {
     this.firstInput.current.focus();
-  };
+  }
 
   render() {
     const { error } = this.state;
     const loading = this.state.loading;
 
     return (
-      <div className='user-login'>
-        <h2>Login</h2>
+      <div className="user-login">
+        <div id="login_header">
+          <h2>Login</h2>
+          <div className="tooltip">
+            <FontAwesomeIcon icon={faInfoCircle} id="help_icon" />
+            <p className="tooltiptext" id="login_tooltip_text">
+              Demo Admin <br />
+              Username: refresh <br />
+              password: pass <br /> <br />
+              Demo Employee <br />
+              Username: refrush <br />
+              password: pass <br /> <br />
+            </p>
+          </div>
+        </div>
         <form onSubmit={this.handleSubmit}>
-          <div role='alert'>{error && <p>{error}</p>}</div>
+          <div role="alert">{error && <p>{error}</p>}</div>
 
-          <label htmlFor='user_name'>Username</label>
+          <label htmlFor="user_name">Username</label>
           <input
-            type='text'
+            type="text"
             ref={this.firstInput}
-            id='user_name'
-            name='user_name'
-            required></input>
+            id="user_name"
+            name="user_name"
+            required
+          ></input>
 
-          <label htmlFor='password'>Password</label>
-          <input
-            type='password'
-            id='password'
-            name='password'
-            required></input>
+          <label htmlFor="password">Password</label>
+          <input type="password" id="password" name="password" required></input>
 
-          <div className='buttons-on-login'>
+          <div className="buttons-on-login">
             {!loading && (
-              <button className='btn' type='submit'>
+              <button className="btn" type="submit">
                 Login
               </button>
             )}
             {loading && (
-              <button className='btn' type='submit' disabled>
+              <button className="btn" type="submit" disabled>
                 <FontAwesomeIcon icon={faSpinner}></FontAwesomeIcon>
               </button>
             )}
-            <button className='outline btn' onClick={this.props.closeModal}>
+            <button className="outline btn" onClick={this.props.closeModal}>
               Cancel
             </button>
           </div>

@@ -24,3 +24,13 @@
   flex-direction: row;
   justify-content: space-evenly;
 }
+
+#login_header {
+  display: flex;
+}
+
+#login_tooltip_text {
+  font-size: 14px;
+  left: -155px !important;
+  top: 5px !important;
+}
